@@ -48,6 +48,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 
 /* ===== HERO ===== */
 .hero{padding:80px 24px 40px;text-align:center;background:linear-gradient(180deg,var(--green-light) 0%,var(--bg) 100%);position:relative;overflow:hidden}
+body{padding-bottom:72px}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,199,60,.08) 0%,transparent 70%)}
 .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%)}
 .hero-img{width:100%;max-width:360px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.1);margin-bottom:28px}
@@ -152,18 +153,43 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
   .char-grid{grid-template-columns:repeat(4,1fr)}
   .goods-grid{grid-template-columns:repeat(5,1fr)}
 }
+
+/* ===== APP HEADER ===== */
+.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(250,246,238,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:640px;margin:0 auto}
+@media(min-width:641px){.app-header{left:50%;transform:translateX(-50%)}}
+.ah-back{display:flex;align-items:center;color:#333;text-decoration:none;padding:4px}
+.ah-logo{display:flex;align-items:center}
+.ah-actions{display:flex;gap:8px}
+.ah-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;color:#333;text-decoration:none;transition:background .2s}
+.ah-btn:hover{background:rgba(0,0,0,.05)}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #EEE;padding:6px 0 env(safe-area-inset-bottom,6px);max-width:640px;margin:0 auto}
+@media(min-width:641px){.bottom-nav{left:50%;transform:translateX(-50%)}}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#999;font-size:10px;font-weight:500}
+.bnav-item svg{stroke:#999}
+.bnav-label{font-family:'GmarketSans',sans-serif}
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav style="position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,246,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)">
-  <a href="index.html" style="font-size:13px;font-weight:700;color:var(--garlic-dark-green);text-decoration:none">&larr; 갤러리로 돌아가기</a>
-  <div style="display:flex;gap:14px">
-    <a href="garlic_tamagotchi.html" style="font-size:12px;font-weight:500;color:var(--garlic-green);text-decoration:none">마늘 키우기</a>
-    <a href="event_toemacon.html" style="font-size:12px;font-weight:500;color:var(--garlic-green);text-decoration:none">퇴마콘</a>
+<!-- APP HEADER -->
+<header class="app-header">
+  <a href="01_home.html" class="ah-back" aria-label="홈으로">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </a>
+  <a href="01_home.html" class="ah-logo">
+    <img src="../reference/로고_심플.jpg" alt="Garlic" height="26" style="border-radius:6px">
+  </a>
+  <div class="ah-actions">
+    <a href="03_challenge.html" class="ah-btn" aria-label="알림">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </a>
+    <a href="04_mypage.html" class="ah-btn" aria-label="마이갈릭">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
   </div>
-</nav>
+</header>
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
@@ -516,5 +542,29 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="bnav-item" style="text-decoration:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/></svg>
+    <span class="bnav-label">홈</span>
+  </a>
+  <a href="#" class="bnav-item" style="text-decoration:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="bnav-label">카테고리</span>
+  </a>
+  <a href="#" class="bnav-item" style="text-decoration:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    <span class="bnav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="bnav-item" style="text-decoration:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+    <span class="bnav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="bnav-item" style="text-decoration:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z"/></svg>
+    <span class="bnav-label">마이갈릭</span>
+  </a>
+</nav>
 </body>
 </html>
