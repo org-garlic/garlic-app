@@ -1,0 +1,866 @@
+<!--
+  Design 8: 글로벌 → 갈릭크로 진화 — Global Expansion Vision
+  컨셉: Garlic's global expansion strategy. "Rooted in Korea, Growing Global."
+  Mood: Dark premium corporate + visionary — Night bg + Electric green + Gold
+  Fonts: GmarketSans + Noto Serif KR
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic - 나마늘 위한 마켓 | 글로벌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --garlic-green:#00C73C;
+  --garlic-dark-green:#1B4332;
+  --garlic-gold:#D4A843;
+  --garlic-coral:#FF7F6B;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
+  --border:#EEEEEE;
+  --night:#080C10;
+  --night-2:#0C1018;
+  --night-3:#111820;
+  --night-4:#161E28;
+  --border-subtle:rgba(0,0,0,.06);
+  --text-muted:var(--text-light);
+  --text-dim:rgba(0,0,0,.28);
+}
+html{scroll-behavior:smooth}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Noto Serif KR',serif}
+
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 80px;
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--garlic-dark-green) 0%,#2a6b4a 50%,#1B4332 100%);
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,199,60,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,199,60,.055) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+}
+.hero-glow-1{
+  position:absolute;width:800px;height:500px;
+  background:radial-gradient(ellipse,rgba(0,199,60,.11) 0%,transparent 65%);
+  top:20%;left:50%;transform:translateX(-50%);pointer-events:none;
+}
+.hero-glow-2{
+  position:absolute;width:450px;height:450px;
+  background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 60%);
+  top:5%;right:-8%;pointer-events:none;
+}
+
+/* Orbit decoration */
+.orbit-wrap{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;pointer-events:none;
+}
+.orbit{
+  position:absolute;top:50%;left:50%;
+  border:1px solid rgba(0,199,60,.07);
+  border-radius:50%;transform:translate(-50%,-50%);
+}
+.orbit-1{width:280px;height:280px}
+.orbit-2{width:460px;height:460px;animation:rotateOrbit 32s linear infinite}
+.orbit-3{width:600px;height:600px;animation:rotateOrbit 55s linear infinite reverse}
+.orbit-dot{
+  position:absolute;width:5px;height:5px;border-radius:50%;
+  background:var(--garlic-green);top:-2.5px;left:50%;transform:translateX(-50%);
+  box-shadow:0 0 8px var(--garlic-green);
+}
+@keyframes rotateOrbit{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* World map outline */
+.world-map-bg{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:.055;
+}
+.world-svg{width:min(860px,95vw);height:auto}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,199,60,.11);border:1px solid rgba(0,199,60,.3);
+  color:var(--garlic-green);border-radius:30px;padding:7px 18px;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:28px;
+  opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hero-overtitle{
+  font-size:clamp(11px,2vw,13px);font-weight:300;
+  color:rgba(255,255,255,.3);letter-spacing:5px;text-transform:uppercase;
+  margin-bottom:18px;
+  opacity:0;animation:fadeUp .8s .5s forwards;
+}
+.hero-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(36px,9.5vw,86px);font-weight:900;
+  line-height:1.1;margin-bottom:0;
+  opacity:0;animation:fadeUp .9s .7s forwards;
+}
+.hero-title .line-1{display:block;color:#fff}
+.hero-title .accent{color:var(--garlic-green)}
+.hero-title .line-2{
+  display:block;
+  font-size:clamp(13px,3vw,30px);font-weight:400;
+  color:rgba(255,255,255,.45);margin-top:14px;letter-spacing:1px;
+}
+.hero-subtitle{
+  font-size:clamp(13px,2.5vw,16px);font-weight:300;
+  color:rgba(255,255,255,.5);max-width:480px;line-height:1.9;
+  margin:26px auto 48px;
+  opacity:0;animation:fadeUp .8s 1s forwards;
+}
+.hero-subtitle em{font-style:normal;color:var(--garlic-green)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== SHARED ===== */
+.section-wrap{max-width:960px;margin:0 auto}
+.sec-label{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--garlic-green);margin-bottom:10px;
+}
+.sec-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(22px,5vw,36px);font-weight:900;
+  color:var(--garlic-dark-green);margin-bottom:8px;line-height:1.3;
+}
+.sec-desc{
+  font-size:14px;font-weight:300;color:var(--text-light);
+  line-height:1.85;margin-bottom:36px;
+}
+
+/* ===== K-CULTURE INFOGRAPHIC ===== */
+.kculture-section{
+  padding:90px 24px;
+  background:var(--bg-alt);
+  border-top:1px solid var(--border);
+}
+.kr-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,rgba(0,199,60,.18),rgba(0,199,60,.07));
+  border:1px solid rgba(0,199,60,.32);
+  border-radius:12px;padding:12px 22px;
+  font-size:13px;font-weight:700;color:var(--garlic-green);
+  text-align:center;
+}
+.kr-badge strong{font-size:15px;display:block;margin-bottom:3px}
+.bar-chart{display:flex;flex-direction:column;gap:11px;max-width:620px;margin:36px auto 0}
+.bar-row{display:grid;grid-template-columns:84px 1fr 58px;gap:12px;align-items:center}
+.bar-country{font-size:12px;font-weight:500;color:var(--text-light);text-align:right}
+.bar-track{height:26px;background:rgba(0,0,0,.04);border-radius:6px;overflow:hidden}
+.bar-fill{
+  height:100%;border-radius:6px;
+  display:flex;align-items:center;
+  width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1);
+}
+.bar-fill.animate{width:var(--w)}
+.bar-fill span{font-size:10px;font-weight:700;color:#fff;padding-left:10px;white-space:nowrap}
+.bar-val{font-size:12px;font-weight:700;color:var(--text)}
+.b-kr .bar-country{color:var(--garlic-green);font-weight:700}
+.b-kr .bar-fill{background:linear-gradient(90deg,var(--garlic-green),#00A030)}
+.b-cn .bar-fill{background:linear-gradient(90deg,#4A8A5A,#3A6A48)}
+.b-in .bar-fill{background:linear-gradient(90deg,#3A7A4A,#2A5A38)}
+.b-us .bar-fill{background:linear-gradient(90deg,#2A6A3E,#1E4E2E)}
+.b-jp .bar-fill{background:linear-gradient(90deg,#225E36,#183E26)}
+.b-id .bar-fill{background:linear-gradient(90deg,#1C5030,#122A1E)}
+.b-bd .bar-fill{background:linear-gradient(90deg,#184028,#0E2A1A)}
+.b-br .bar-fill{background:linear-gradient(90deg,#123018,#0A2010)}
+.b-eg .bar-fill{background:linear-gradient(90deg,#0E2814,#08180C)}
+.b-ro .bar-fill{background:linear-gradient(90deg,#0A2010,#06160A)}
+
+/* ===== GARLICRO ===== */
+.garlicro-section{
+  padding:90px 24px;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.garlicro-section::before{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,199,60,.06) 0%,transparent 70%);
+  top:-120px;right:-100px;pointer-events:none;
+}
+.brand-eq{
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;flex-wrap:wrap;margin-bottom:36px;
+}
+.eq-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:16px 22px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.eq-box .el{font-size:9px;font-weight:300;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.eq-box .ev{font-size:19px;font-weight:700;color:var(--text)}
+.eq-sym{font-size:22px;color:var(--text-light);font-weight:300}
+.eq-result{
+  background:linear-gradient(135deg,rgba(0,199,60,.14),rgba(0,199,60,.05));
+  border-color:rgba(0,199,60,.28);
+}
+.eq-result .ev{color:var(--garlic-green)}
+.garlicro-desc{
+  text-align:center;font-size:15px;font-weight:300;
+  color:var(--text-light);max-width:540px;margin:0 auto 48px;
+  line-height:1.9;
+}
+.garlicro-desc strong{color:var(--text);font-weight:700}
+
+.market-flow{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;flex-wrap:wrap;
+}
+.m-node{
+  display:flex;flex-direction:column;align-items:center;
+  padding:14px 18px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;min-width:86px;text-align:center;
+  transition:border-color .3s,background .3s;box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.m-node:hover{border-color:rgba(0,199,60,.38);background:var(--green-light)}
+.m-node.origin{background:var(--green-light);border-color:rgba(0,199,60,.38)}
+.m-node .mf{font-size:20px;margin-bottom:5px}
+.m-node .mn{font-size:11px;font-weight:700;color:var(--text)}
+.m-node .mp{font-size:9px;font-weight:300;color:var(--text-light);margin-top:2px}
+.m-arr{font-size:14px;color:var(--garlic-green);padding:0 5px;opacity:.55;flex-shrink:0}
+@media(max-width:600px){.m-arr{display:none}.market-flow{gap:8px}}
+
+/* ===== ALIBABA JV ===== */
+.alibaba-section{
+  padding:90px 24px;
+  background:var(--bg-alt);
+  border-top:1px solid var(--border);
+}
+.jv-card{
+  max-width:760px;margin:0 auto;
+  background:var(--card);
+  border:1px solid rgba(212,168,67,.25);
+  border-radius:28px;padding:46px 38px;
+  position:relative;overflow:hidden;text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+}
+.jv-card::before{
+  content:'';position:absolute;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,67,.07) 0%,transparent 60%);
+  top:-100px;right:-80px;pointer-events:none;
+}
+.jv-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,168,67,.14);border:1px solid rgba(212,168,67,.28);
+  color:var(--garlic-gold);border-radius:20px;padding:6px 16px;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.jv-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(20px,4vw,30px);font-weight:900;
+  color:var(--text);margin-bottom:8px;line-height:1.35;
+}
+.jv-title .hl{color:var(--garlic-gold)}
+.jv-desc{
+  font-size:14px;font-weight:300;color:var(--text-light);
+  line-height:1.85;margin-bottom:34px;max-width:500px;margin-left:auto;margin-right:auto;
+}
+.jv-caps{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center;
+}
+@media(max-width:500px){.jv-caps{grid-template-columns:1fr}}
+.jv-cap{
+  background:var(--bg-alt);border:1px solid var(--border);
+  border-radius:14px;padding:18px 12px;
+}
+.jv-cap .cc-icon{font-size:22px;margin-bottom:8px}
+.jv-cap .cc-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
+.jv-cap .cc-desc{font-size:11px;font-weight:300;color:var(--text-light);line-height:1.5}
+
+/* ===== SELLER STORIES ===== */
+.sellers-section{
+  padding:90px 24px;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+}
+.seller-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;
+}
+@media(max-width:960px){.seller-grid{grid-template-columns:1fr}}
+.s-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;padding:26px 20px;
+  transition:border-color .3s,transform .3s;
+  position:relative;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.s-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  opacity:0;transition:opacity .3s;
+}
+.s-beauty::before{background:linear-gradient(90deg,var(--garlic-coral),#FFB0A0)}
+.s-food::before{background:linear-gradient(90deg,var(--garlic-green),#00A030)}
+.s-fashion::before{background:linear-gradient(90deg,var(--garlic-gold),#E8BC50)}
+.s-card:hover{border-color:rgba(0,199,60,.2);transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.s-card:hover::before{opacity:1}
+.s-cat{
+  display:inline-block;border-radius:10px;padding:3px 9px;
+  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.cat-b{background:rgba(255,127,107,.14);color:var(--garlic-coral)}
+.cat-f{background:rgba(0,199,60,.11);color:var(--garlic-green)}
+.cat-fs{background:rgba(212,168,67,.14);color:var(--garlic-gold)}
+.s-brand{font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px}
+.s-route{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:300;color:var(--text-light);margin-bottom:14px;
+}
+.s-route .arr{color:var(--garlic-green);font-size:9px}
+.s-metric{display:flex;align-items:baseline;gap:5px;margin-bottom:4px}
+.s-metric .mv{font-size:22px;font-weight:700;color:var(--text)}
+.s-metric .mu{font-size:12px;font-weight:300;color:var(--text-light)}
+.s-meta{font-size:11px;font-weight:300;color:var(--text-light);line-height:1.65}
+
+/* ===== ROADMAP ===== */
+.roadmap-section{
+  padding:90px 24px;
+  background:var(--bg-alt);
+  border-top:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.roadmap-section::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(0,199,60,.045) 0%,transparent 48%),
+    radial-gradient(ellipse at 80% 50%,rgba(212,168,67,.035) 0%,transparent 48%);
+  pointer-events:none;
+}
+.roadmap-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.roadmap-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;position:relative;margin-top:8px;
+}
+.roadmap-grid::before{
+  content:'';position:absolute;
+  top:32px;left:calc(100%/6);right:calc(100%/6);height:1px;
+  background:linear-gradient(90deg,var(--garlic-green),rgba(212,168,67,.55),rgba(255,255,255,.1));
+  z-index:0;
+}
+@media(max-width:960px){
+  .roadmap-grid{grid-template-columns:1fr}
+  .roadmap-grid::before{display:none}
+}
+.rm-phase{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:0 14px;position:relative;z-index:1;
+}
+.rm-node{
+  width:62px;height:62px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;margin-bottom:18px;border:2px solid;
+  position:relative;
+}
+.rm-node::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid;opacity:.22;
+}
+.rm-p1 .rm-node{background:rgba(0,199,60,.11);border-color:rgba(0,199,60,.48)}
+.rm-p1 .rm-node::after{border-color:var(--garlic-green)}
+.rm-p2 .rm-node{background:rgba(212,168,67,.09);border-color:rgba(212,168,67,.38)}
+.rm-p2 .rm-node::after{border-color:var(--garlic-gold)}
+.rm-p3 .rm-node{background:rgba(255,127,107,.08);border-color:rgba(255,127,107,.28)}
+.rm-p3 .rm-node::after{border-color:var(--garlic-coral)}
+.rm-pl{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;
+}
+.rm-p1 .rm-pl{color:var(--garlic-green)}
+.rm-p2 .rm-pl{color:var(--garlic-gold)}
+.rm-p3 .rm-pl{color:var(--garlic-coral)}
+.rm-year{
+  font-family:'Noto Serif KR',serif;
+  font-size:19px;font-weight:900;color:var(--text);margin-bottom:7px;
+}
+.rm-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px}
+.rm-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.rm-list li{
+  font-size:11px;font-weight:300;color:var(--text-light);
+  padding-left:13px;position:relative;
+}
+.rm-list li::before{content:'·';position:absolute;left:4px;color:rgba(0,0,0,.25)}
+
+/* ===== CTA ===== */
+.cta-section{
+  padding:100px 24px;
+  background:linear-gradient(160deg,var(--garlic-dark-green) 0%,#2a6b4a 100%);
+  border-top:1px solid var(--border);
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;
+  width:600px;height:400px;
+  background:radial-gradient(ellipse,rgba(0,199,60,.09) 0%,transparent 62%);
+  top:0;left:50%;transform:translateX(-50%);pointer-events:none;
+}
+.cta-section::after{
+  content:'';position:absolute;
+  width:380px;height:380px;
+  background:radial-gradient(circle,rgba(212,168,67,.055) 0%,transparent 62%);
+  bottom:-80px;right:-40px;pointer-events:none;
+}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,199,60,.09);border:1px solid rgba(0,199,60,.22);
+  color:var(--garlic-green);border-radius:20px;padding:6px 16px;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.cta-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(24px,6vw,48px);font-weight:900;
+  color:#fff;line-height:1.25;margin-bottom:14px;
+}
+.cta-title .g{color:var(--garlic-green)}
+.cta-desc{
+  font-size:15px;font-weight:300;color:rgba(255,255,255,.6);
+  line-height:1.85;margin-bottom:42px;
+}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-green{
+  display:inline-block;
+  background:var(--garlic-green);color:#000;
+  padding:16px 40px;border-radius:50px;
+  font-size:14px;font-weight:700;text-decoration:none;
+  box-shadow:0 6px 30px rgba(0,199,60,.28);
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-green:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,199,60,.42)}
+.btn-outline{
+  display:inline-block;
+  background:transparent;color:rgba(255,255,255,.72);
+  border:1.5px solid rgba(255,255,255,.22);
+  padding:16px 34px;border-radius:50px;
+  font-size:14px;font-weight:500;text-decoration:none;
+  transition:all .3s;
+}
+.btn-outline:hover{background:rgba(255,255,255,.07);color:#fff}
+
+
+/* ===== BLOG HEADER ===== */
+.blog-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 20px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:960px;margin:0 auto}
+@media(min-width:961px){.blog-header{left:50%;transform:translateX(-50%)}}
+.bh-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.bh-nav{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bh-nav::-webkit-scrollbar{display:none}
+.bh-nav a{font-size:13px;font-weight:500;color:#888;text-decoration:none;white-space:nowrap;transition:color .2s}
+.bh-nav a:hover,.bh-nav a.active{color:#00C73C;font-weight:700}
+@media(max-width:600px){.bh-nav{gap:12px}.bh-nav a{font-size:12px}}
+
+/* ===== BLOG FOOTER ===== */
+.blog-footer{background:#1B4332;padding:40px 20px;text-align:center;margin-top:40px}
+.bf-inner{max-width:600px;margin:0 auto}
+.bf-logo{display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.bf-slogan{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.bf-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.bf-links a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none}
+.bf-links a:hover{color:#00C73C}
+.bf-copy{font-size:11px;color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+
+<!-- BLOG HEADER -->
+<header class="blog-header">
+  <a href="index.html" class="bh-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+    <span style="font-size:12px;color:#888;margin-left:8px;font-weight:400">Blog</span>
+  </a>
+  <nav class="bh-nav">
+    <a href="event_toemacon.html">퇴마콘</a>
+    <a href="garlic_tamagotchi.html">마늘키우기</a>
+    <a href="event_uiseong_festival.html">의성축제</a>
+    <a href="garlic_global.html" class="active">글로벌</a>
+    <a href="garlic_ip.html">마늘IP</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <!-- World map outline SVG -->
+  <div class="world-map-bg">
+    <svg class="world-svg" viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M80 120 L145 88 L205 98 L225 132 L205 172 L162 202 L128 192 L98 160 Z" stroke="#00C73C" stroke-width="1.5" fill="none" opacity=".65"/>
+      <path d="M180 232 L222 220 L242 262 L232 322 L210 362 L182 342 L160 292 Z" stroke="#00C73C" stroke-width="1.5" fill="none" opacity=".45"/>
+      <path d="M418 88 L482 78 L502 100 L492 132 L452 142 L418 122 Z" stroke="#00C73C" stroke-width="1.5" fill="none" opacity=".52"/>
+      <path d="M440 162 L492 150 L512 202 L502 282 L460 302 L430 262 L420 202 Z" stroke="#00C73C" stroke-width="1.5" fill="none" opacity=".42"/>
+      <path d="M678 98 L782 78 L842 112 L862 162 L822 202 L750 212 L700 182 L668 142 Z" stroke="#00C73C" stroke-width="2" fill="rgba(0,199,60,.07)" opacity=".85"/>
+      <ellipse cx="800" cy="165" rx="17" ry="21" stroke="#00C73C" stroke-width="2.5" fill="rgba(0,199,60,.14)"/>
+      <path d="M844 128 L858 123 L866 144 L856 160 L842 150 Z" stroke="#00C73C" stroke-width="1.5" fill="none" opacity=".7"/>
+      <path d="M758 220 L802 214 L822 252 L802 282 L770 272 L748 246 Z" stroke="#00C73C" stroke-width="1" fill="none" opacity=".5"/>
+      <path d="M790 342 L862 330 L892 372 L870 412 L820 422 L790 392 Z" stroke="#00C73C" stroke-width="1.5" fill="none" opacity=".38"/>
+      <line x1="800" y1="165" x2="844" y2="142" stroke="#00C73C" stroke-width="1" stroke-dasharray="4 3" opacity=".42"/>
+      <line x1="800" y1="165" x2="780" y2="246" stroke="#00C73C" stroke-width="1" stroke-dasharray="4 3" opacity=".32"/>
+      <line x1="800" y1="165" x2="462" y2="100" stroke="#00C73C" stroke-width=".8" stroke-dasharray="6 4" opacity=".2"/>
+      <line x1="800" y1="165" x2="148" y2="140" stroke="#00C73C" stroke-width=".8" stroke-dasharray="6 4" opacity=".14"/>
+    </svg>
+  </div>
+
+  <!-- Orbit lines -->
+  <div class="orbit-wrap">
+    <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+    <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+    <div class="orbit orbit-3"></div>
+  </div>
+
+  <div class="hero-eyebrow">✦ Global Expansion Vision</div>
+  <div class="hero-overtitle">Rooted in Korea · Growing Global</div>
+  <h1 class="hero-title">
+    <span class="line-1">GARLIC: <span class="accent">Rooted</span><br>in Korea</span>
+    <span class="line-2">Growing Global</span>
+  </h1>
+  <p class="hero-subtitle">
+    <em>마늘의 민족 DNA</em>로 세계를 연결하다<br>
+    한국 셀러의 상품을 전 세계 소비자에게
+  </p>
+</section>
+
+<!-- K-CULTURE × 마늘 -->
+<section class="kculture-section" id="kculture">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-label">K-Culture × 마늘</div>
+      <h2 class="sec-title">전세계 마늘 소비량 Top 10</h2>
+      <p class="sec-desc" style="max-width:500px;margin:0 auto 32px">한국은 세계에서 1인당 마늘 소비량이 가장 많은 나라.<br>이 DNA가 갈릭 글로벌 경쟁력의 원천입니다.</p>
+      <div class="kr-badge">
+        <strong>🇰🇷 한국 = 1인당 마늘 소비 세계 1위</strong>
+        연간 약 7.5kg/인 · 일반 국가 대비 5배 이상
+      </div>
+    </div>
+    <div class="bar-chart reveal">
+      <div class="bar-row b-kr">
+        <div class="bar-country">🇰🇷 한국</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:100%"><span>7.5 kg</span></div></div>
+        <div class="bar-val" style="color:var(--garlic-green)">7.5kg</div>
+      </div>
+      <div class="bar-row b-cn">
+        <div class="bar-country">🇨🇳 중국</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:72%"><span>5.4 kg</span></div></div>
+        <div class="bar-val">5.4kg</div>
+      </div>
+      <div class="bar-row b-in">
+        <div class="bar-country">🇮🇳 인도</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:53%"><span>4.0 kg</span></div></div>
+        <div class="bar-val">4.0kg</div>
+      </div>
+      <div class="bar-row b-us">
+        <div class="bar-country">🇺🇸 미국</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:28%"><span>2.1 kg</span></div></div>
+        <div class="bar-val">2.1kg</div>
+      </div>
+      <div class="bar-row b-jp">
+        <div class="bar-country">🇯🇵 일본</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:21%"><span>1.6 kg</span></div></div>
+        <div class="bar-val">1.6kg</div>
+      </div>
+      <div class="bar-row b-id">
+        <div class="bar-country">🇮🇩 인도네</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:18%"><span>1.4 kg</span></div></div>
+        <div class="bar-val">1.4kg</div>
+      </div>
+      <div class="bar-row b-bd">
+        <div class="bar-country">🇧🇩 방글라</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:14%"><span>1.1 kg</span></div></div>
+        <div class="bar-val">1.1kg</div>
+      </div>
+      <div class="bar-row b-br">
+        <div class="bar-country">🇧🇷 브라질</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:12%"><span>0.9 kg</span></div></div>
+        <div class="bar-val">0.9kg</div>
+      </div>
+      <div class="bar-row b-eg">
+        <div class="bar-country">🇪🇬 이집트</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:9%"><span>0.7 kg</span></div></div>
+        <div class="bar-val">0.7kg</div>
+      </div>
+      <div class="bar-row b-ro">
+        <div class="bar-country">🇷🇴 루마니</div>
+        <div class="bar-track"><div class="bar-fill" style="--w:8%"><span>0.6 kg</span></div></div>
+        <div class="bar-val">0.6kg</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARLICRO BRAND -->
+<section class="garlicro-section" id="garlicro">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-label">Brand Introduction</div>
+      <h2 class="sec-title">갈릭크로 <span style="color:var(--garlic-green)">(Garlicro)</span></h2>
+      <p class="sec-desc" style="max-width:520px;margin:0 auto 36px">한국 셀러 상품의 글로벌 마켓플레이스</p>
+    </div>
+
+    <div class="brand-eq reveal">
+      <div class="eq-box">
+        <div class="el">Brand</div>
+        <div class="ev">Garlic</div>
+      </div>
+      <div class="eq-sym">+</div>
+      <div class="eq-box">
+        <div class="el">Mission</div>
+        <div class="ev">Global</div>
+      </div>
+      <div class="eq-sym">=</div>
+      <div class="eq-box eq-result">
+        <div class="el">Platform</div>
+        <div class="ev">갈릭크로</div>
+      </div>
+    </div>
+
+    <p class="garlicro-desc reveal">
+      <strong>갈릭크로(Garlicro)</strong>는 한국의 우수한 셀러와 브랜드 상품을 전 세계 소비자에게 연결하는 글로벌 마켓플레이스입니다. K-Commerce DNA로 세계 시장을 공략합니다.
+    </p>
+
+    <div class="market-flow reveal">
+      <div class="m-node origin">
+        <div class="mf">🇰🇷</div>
+        <div class="mn">한국</div>
+        <div class="mp">Origin</div>
+      </div>
+      <div class="m-arr">→</div>
+      <div class="m-node">
+        <div class="mf">🇯🇵</div>
+        <div class="mn">일본</div>
+        <div class="mp">Phase 1</div>
+      </div>
+      <div class="m-arr">→</div>
+      <div class="m-node">
+        <div class="mf">🌏</div>
+        <div class="mn">동남아</div>
+        <div class="mp">Phase 1</div>
+      </div>
+      <div class="m-arr">→</div>
+      <div class="m-node">
+        <div class="mf">🇺🇸</div>
+        <div class="mn">미국</div>
+        <div class="mp">Phase 2</div>
+      </div>
+      <div class="m-arr">→</div>
+      <div class="m-node">
+        <div class="mf">🌍</div>
+        <div class="mn">유럽</div>
+        <div class="mp">Phase 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALIBABA JV -->
+<section class="alibaba-section" id="alibaba">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center;margin-bottom:38px">
+      <div class="sec-label">Strategic Partnership</div>
+      <h2 class="sec-title">알리바바 JV 파트너십</h2>
+      <p class="sec-desc" style="max-width:480px;margin:0 auto">세계 최대 이커머스 그룹과의 전략적 합작으로<br>글로벌 진출의 속도와 규모를 동시에 확보</p>
+    </div>
+    <div class="jv-card reveal">
+      <div class="jv-badge">✦ Strategic Joint Venture</div>
+      <h3 class="jv-title">26년 이커머스 DNA<br>× <span class="hl">알리바바 AI 기술</span></h3>
+      <p class="jv-desc">갈릭의 26년 한국 이커머스 운영 노하우와 알리바바 그룹의 AI 기반 글로벌 인프라를 결합. 한국 셀러의 글로벌 진출 장벽을 획기적으로 낮춥니다.</p>
+      <div class="jv-caps">
+        <div class="jv-cap">
+          <div class="cc-icon">🚚</div>
+          <div class="cc-name">글로벌 물류</div>
+          <div class="cc-desc">알리바바 물류 네트워크로 200개국 배송</div>
+        </div>
+        <div class="jv-cap">
+          <div class="cc-icon">🤖</div>
+          <div class="cc-name">AI 추천</div>
+          <div class="cc-desc">개인화 추천으로 구매 전환율 최대 3배</div>
+        </div>
+        <div class="jv-cap">
+          <div class="cc-icon">💳</div>
+          <div class="cc-name">결제 인프라</div>
+          <div class="cc-desc">Alipay + 현지 결제수단 통합 지원</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELLER STORIES -->
+<section class="sellers-section" id="sellers">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="sec-label">Success Stories</div>
+      <h2 class="sec-title">한국 셀러 글로벌 진출</h2>
+      <p class="sec-desc">갈릭크로와 함께 세계 시장에 진출한 K-브랜드 성공 사례</p>
+    </div>
+    <div class="seller-grid">
+      <div class="s-card s-beauty reveal">
+        <div class="s-cat cat-b">K-Beauty</div>
+        <div class="s-brand">K-Beauty 브랜드 A</div>
+        <div class="s-route"><span>🇰🇷 한국</span><span class="arr">→</span><span>🇯🇵 일본</span></div>
+        <div class="s-metric"><span class="mv">3억</span><span class="mu">월 매출</span></div>
+        <div class="s-meta">갈릭크로 입점 6개월 만에 일본 K-뷰티 카테고리 Top 10 진입. 스킨케어 라인 전 품목 완판.</div>
+      </div>
+      <div class="s-card s-food reveal" style="transition-delay:.12s">
+        <div class="s-cat cat-f">K-Food</div>
+        <div class="s-brand">마늘 가공품</div>
+        <div class="s-route"><span>🇰🇷 한국</span><span class="arr">→</span><span>🇺🇸 미국</span></div>
+        <div class="s-metric"><span class="mv">+420%</span><span class="mu">매출 성장</span></div>
+        <div class="s-meta">의성산 흑마늘 제품, 미국 한인 커뮤니티에서 입소문. 아마존 K-Food 카테고리 1위.</div>
+      </div>
+      <div class="s-card s-fashion reveal" style="transition-delay:.24s">
+        <div class="s-cat cat-fs">K-Fashion</div>
+        <div class="s-brand">K-Fashion 브랜드 C</div>
+        <div class="s-route"><span>🇰🇷 한국</span><span class="arr">→</span><span>🌏 동남아</span></div>
+        <div class="s-metric"><span class="mv">12만</span><span class="mu">팬덤</span></div>
+        <div class="s-meta">태국·베트남·인도네시아 K-Fashion 팬덤 공략. 틱톡 라이브커머스 연동으로 판매 급증.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="roadmap-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-label">Global Roadmap</div>
+      <h2 class="sec-title">글로벌 로드맵</h2>
+      <p class="sec-desc" style="max-width:480px;margin:0 auto 52px">단계별 글로벌 시장 진출로 K-Commerce 플랫폼 도약</p>
+    </div>
+    <div class="roadmap-grid">
+      <div class="rm-phase rm-p1 reveal">
+        <div class="rm-node">🌏</div>
+        <div class="rm-pl">Phase 1</div>
+        <div class="rm-year">2027</div>
+        <div class="rm-title">일본 / 동남아 론칭</div>
+        <ul class="rm-list">
+          <li>갈릭크로 정식 오픈</li>
+          <li>일본 K-커머스 진입</li>
+          <li>동남아 5개국 론칭</li>
+          <li>알리바바 JV 가동</li>
+        </ul>
+      </div>
+      <div class="rm-phase rm-p2 reveal" style="transition-delay:.15s">
+        <div class="rm-node">🌎</div>
+        <div class="rm-pl">Phase 2</div>
+        <div class="rm-year">2028</div>
+        <div class="rm-title">미국 / 유럽 확장</div>
+        <ul class="rm-list">
+          <li>미국 K-Commerce 론칭</li>
+          <li>유럽 주요 5개국</li>
+          <li>글로벌 물류 허브</li>
+          <li>AI 추천 고도화</li>
+        </ul>
+      </div>
+      <div class="rm-phase rm-p3 reveal" style="transition-delay:.3s">
+        <div class="rm-node">🌐</div>
+        <div class="rm-pl">Phase 3</div>
+        <div class="rm-year">2029~</div>
+        <div class="rm-title">글로벌 K-Commerce 플랫폼</div>
+        <ul class="rm-list">
+          <li>200개국 서비스</li>
+          <li>K-브랜드 글로벌 허브</li>
+          <li>현지화 AI 자동화</li>
+          <li>연간 GMV 10조</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner reveal">
+    <div class="cta-badge">셀러 모집 중</div>
+    <h2 class="cta-title">
+      지금 바로<br>
+      <span class="g">갈릭크로</span>와 함께<br>
+      세계로 나가세요
+    </h2>
+    <p class="cta-desc">
+      한국 최고의 상품을 세계 소비자에게. 갈릭크로 셀러로 입점해 글로벌 시장의 문을 여세요.<br>
+      알리바바 AI 기술과 갈릭의 26년 노하우가 여러분의 성공을 함께 만들어 갑니다.
+    </p>
+    <div class="cta-btns">
+      <a href="#" class="btn-green">갈릭크로 셀러 입점 문의</a>
+      <a href="#" class="btn-outline">글로벌 전략 자료 받기</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- BLOG FOOTER -->
+<footer class="blog-footer">
+  <div class="bf-inner">
+    <div class="bf-logo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+      <span style="font-family:'GmarketSans';font-weight:700;font-size:16px;color:#1B4332;margin-left:4px">Garlic Blog</span>
+    </div>
+    <p class="bf-slogan">나마늘 위한 마켓</p>
+    <div class="bf-links">
+      <a href="event_toemacon.html">퇴마콘</a>
+      <a href="garlic_tamagotchi.html">마늘키우기</a>
+      <a href="event_uiseong_festival.html">의성축제</a>
+      <a href="garlic_global.html">글로벌</a>
+      <a href="garlic_ip.html">마늘IP</a>
+    </div>
+    <p class="bf-copy">&copy; 2026 Garlic. 불사조기사단.</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const allReveals = document.querySelectorAll('.reveal');
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+allReveals.forEach(r => revealIO.observe(r));
+
+// Bar chart animate on scroll
+const bars = document.querySelectorAll('.bar-fill');
+const barIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) setTimeout(() => e.target.classList.add('animate'), 200);
+  });
+}, {threshold: 0.3});
+bars.forEach(b => barIO.observe(b));
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic - 나마늘 위한 마켓 | Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --garlic-green:#00C73C;
+  --garlic-dark-green:#1B4332;
+  --garlic-gold:#D4A843;
+  --garlic-coral:#FF7F6B;
+  --garlic-neon:#00FF88;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
+  --border:#EEEEEE;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;padding-bottom:0}
+.serif{font-family:'Noto Serif KR',serif}
+
+/* ===== BLOG HEADER ===== */
+.blog-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 20px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:960px;margin:0 auto}
+@media(min-width:961px){.blog-header{left:50%;transform:translateX(-50%)}}
+.bh-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.bh-nav{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bh-nav::-webkit-scrollbar{display:none}
+.bh-nav a{font-size:13px;font-weight:500;color:#888;text-decoration:none;white-space:nowrap;transition:color .2s}
+.bh-nav a:hover,.bh-nav a.active{color:#00C73C;font-weight:700}
+@media(max-width:600px){.bh-nav{gap:12px}.bh-nav a{font-size:12px}}
+
+/* ===== HERO ===== */
+.hero{padding:100px 24px 60px;text-align:center;background:linear-gradient(180deg,#FFF8F0 0%,#FAF6EE 40%,#F5ECD7 100%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(0,199,60,.06) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.06) 0%,transparent 70%)}
+.hero-badge{display:inline-block;background:rgba(0,199,60,.1);color:var(--garlic-dark-green);font-size:11px;font-weight:700;letter-spacing:2px;padding:6px 16px;border-radius:20px;margin-bottom:16px;text-transform:uppercase}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:clamp(28px,7vw,48px);font-weight:900;line-height:1.3;color:var(--garlic-dark-green);margin-bottom:12px}
+.hero h1 .accent{color:var(--garlic-green)}
+.hero p{font-size:clamp(13px,2.5vw,16px);color:var(--text-light);max-width:440px;margin:0 auto;font-weight:300;line-height:1.8}
+
+/* ===== BLOG GRID ===== */
+.blog-grid-section{padding:60px 24px 40px;max-width:960px;margin:0 auto}
+.blog-grid-section h2{font-family:'Noto Serif KR',serif;font-size:clamp(20px,4vw,28px);font-weight:900;color:var(--garlic-dark-green);margin-bottom:32px;text-align:center}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+@media(min-width:700px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
+
+.blog-card{background:var(--card);border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;text-decoration:none;color:inherit;display:block}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.blog-card-thumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.blog-card-thumb img{width:100%;height:100%;object-fit:cover}
+.blog-card-thumb .gradient-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.blog-card-thumb .thumb-icon{font-size:48px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15))}
+.blog-card-body{padding:20px}
+.blog-card-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:10px;margin-bottom:10px}
+.tag-event{background:rgba(255,127,107,.12);color:var(--garlic-coral)}
+.tag-game{background:rgba(0,199,60,.1);color:var(--garlic-green)}
+.tag-festival{background:rgba(212,168,67,.14);color:#B8922E}
+.tag-global{background:rgba(27,67,50,.1);color:var(--garlic-dark-green)}
+.tag-ip{background:rgba(212,168,67,.14);color:var(--garlic-gold)}
+.blog-card-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.4}
+.blog-card-desc{font-size:13px;color:var(--text-light);line-height:1.6;margin-bottom:14px;font-weight:300}
+.blog-card-link{font-size:13px;font-weight:700;color:var(--garlic-green);display:inline-flex;align-items:center;gap:4px;transition:gap .2s}
+.blog-card:hover .blog-card-link{gap:8px}
+
+/* ===== BLOG FOOTER ===== */
+.blog-footer{background:#1B4332;padding:40px 20px;text-align:center;margin-top:40px}
+.bf-inner{max-width:600px;margin:0 auto}
+.bf-logo{display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.bf-slogan{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.bf-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.bf-links a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none}
+.bf-links a:hover{color:#00C73C}
+.bf-copy{font-size:11px;color:rgba(255,255,255,.2)}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- BLOG HEADER -->
+<header class="blog-header">
+  <a href="index.html" class="bh-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+    <span style="font-size:12px;color:#888;margin-left:8px;font-weight:400">Blog</span>
+  </a>
+  <nav class="bh-nav">
+    <a href="event_toemacon.html">퇴마콘</a>
+    <a href="garlic_tamagotchi.html">마늘키우기</a>
+    <a href="event_uiseong_festival.html">의성축제</a>
+    <a href="garlic_global.html">글로벌</a>
+    <a href="garlic_ip.html">마늘IP</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-badge reveal">Garlic Blog</span>
+  <h1 class="serif reveal"><span class="accent">Garlic</span> Blog<br>마늘의 이야기</h1>
+  <p class="reveal">나마늘 위한 마켓, 갈릭의 세계를 탐험하세요.<br>이벤트, 캐릭터, 글로벌 비전까지 모두 담았습니다.</p>
+</section>
+
+<!-- BLOG GRID -->
+<section class="blog-grid-section">
+  <h2 class="serif reveal">이야기 모음</h2>
+  <div class="blog-grid">
+
+    <!-- Card 1: 퇴마콘 -->
+    <a href="event_toemacon.html" class="blog-card reveal">
+      <div class="blog-card-thumb">
+        <img src="../reference/퇴마콘1.png" alt="퇴마콘서트" loading="lazy">
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-event">Event</span>
+        <div class="blog-card-title">퇴마콘서트 — The Rise of Garlic</div>
+        <div class="blog-card-desc">26년간의 낡은 관성에 작별을 고하는 퇴마콘서트. G마켓의 악귀를 몰아내고 Garlic으로 다시 태어납니다.</div>
+        <span class="blog-card-link">자세히 보기 →</span>
+      </div>
+    </a>
+
+    <!-- Card 2: 마늘키우기 -->
+    <a href="garlic_tamagotchi.html" class="blog-card reveal">
+      <div class="blog-card-thumb">
+        <div class="gradient-bg" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9,#A5D6A7)">
+          <svg viewBox="0 0 100 100" width="100" height="100" fill="none">
+            <ellipse cx="50" cy="55" rx="25" ry="30" fill="#F5ECD7"/>
+            <path d="M43 28c-2-10 7-16 7-16s9 6 7 16" fill="#00C73C"/>
+            <circle cx="42" cy="52" r="3.5" fill="#2D2D2D"/><circle cx="43" cy="51" r="1.5" fill="#fff"/>
+            <circle cx="58" cy="52" r="3.5" fill="#2D2D2D"/><circle cx="59" cy="51" r="1.5" fill="#fff"/>
+            <path d="M45 60c2 3 8 3 10 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <ellipse cx="36" cy="57" rx="5" ry="2.5" fill="#FF7F6B" opacity=".2"/>
+            <ellipse cx="64" cy="57" rx="5" ry="2.5" fill="#FF7F6B" opacity=".2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-game">Game</span>
+        <div class="blog-card-title">너마늘 키우기 — 100일의 여정</div>
+        <div class="blog-card-desc">단군 신화의 100일 시련을 현대적으로 재해석. 마늘을 키워 마늘요정으로 진화시키는 디지털 펫 경험.</div>
+        <span class="blog-card-link">자세히 보기 →</span>
+      </div>
+    </a>
+
+    <!-- Card 3: 의성축제 -->
+    <a href="event_uiseong_festival.html" class="blog-card reveal">
+      <div class="blog-card-thumb">
+        <div class="gradient-bg" style="background:linear-gradient(135deg,#2A4A2E,#3D6B3A,#6B9E70)">
+          <span class="thumb-icon">🧄</span>
+        </div>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-festival">Festival</span>
+        <div class="blog-card-title">의성 마늘 축제 2027</div>
+        <div class="blog-card-desc">한국 마늘의 성지에서 펼쳐지는 축제. 수확 체험부터 갈릭 불꽃놀이까지, 온 가족이 함께하는 특별한 하루.</div>
+        <span class="blog-card-link">자세히 보기 →</span>
+      </div>
+    </a>
+
+    <!-- Card 4: 글로벌 -->
+    <a href="garlic_global.html" class="blog-card reveal">
+      <div class="blog-card-thumb">
+        <div class="gradient-bg" style="background:linear-gradient(135deg,#1B4332,#2a6b4a,#00C73C)">
+          <span class="thumb-icon">🌏</span>
+        </div>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-global">Global</span>
+        <div class="blog-card-title">글로벌 — 갈릭크로 진화</div>
+        <div class="blog-card-desc">마늘의 민족 DNA로 세계를 연결하다. 한국 셀러의 상품을 전 세계 소비자에게, 갈릭크로의 비전.</div>
+        <span class="blog-card-link">자세히 보기 →</span>
+      </div>
+    </a>
+
+    <!-- Card 5: 마늘IP -->
+    <a href="garlic_ip.html" class="blog-card reveal">
+      <div class="blog-card-thumb">
+        <img src="../reference/갈릭_귀여운_이미지.png" alt="갈릭 프렌즈" loading="lazy">
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-tag tag-ip">IP</span>
+        <div class="blog-card-title">마늘 IP 종합 — 갈릭 프렌즈</div>
+        <div class="blog-card-desc">캐릭터 IP, 출석 시스템, 마늘 키우기, 앱 리브랜딩까지. 갈릭이 만드는 새로운 쇼핑 생태계.</div>
+        <span class="blog-card-link">자세히 보기 →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- BLOG FOOTER -->
+<footer class="blog-footer">
+  <div class="bf-inner">
+    <div class="bf-logo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+      <span style="font-family:'GmarketSans';font-weight:700;font-size:16px;color:#1B4332;margin-left:4px">Garlic Blog</span>
+    </div>
+    <p class="bf-slogan">나마늘 위한 마켓</p>
+    <div class="bf-links">
+      <a href="event_toemacon.html">퇴마콘</a>
+      <a href="garlic_tamagotchi.html">마늘키우기</a>
+      <a href="event_uiseong_festival.html">의성축제</a>
+      <a href="garlic_global.html">글로벌</a>
+      <a href="garlic_ip.html">마늘IP</a>
+    </div>
+    <p class="bf-copy">&copy; 2026 Garlic. 불사조기사단.</p>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

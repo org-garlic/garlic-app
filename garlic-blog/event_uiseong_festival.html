@@ -1,0 +1,785 @@
+<!--
+  Event 7: 의성 마늘 축제 2027 — Uiseong Garlic Festival
+  컨셉: Annual garlic festival celebrating K-Culture + Garlic Park teaser
+  Mood: Warm, festive, agricultural — Sage green + Terracotta + Gold + Cream
+  Fonts: GmarketSans + Noto Serif KR
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic - 나마늘 위한 마켓 | 의성마늘축제</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --garlic-green:#00C73C;
+  --garlic-dark-green:#1B4332;
+  --garlic-gold:#D4A843;
+  --garlic-coral:#FF7F6B;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
+  --border:#EEEEEE;
+  --cream:#FBF6ED;
+  --oat:#F5ECD7;
+  --terracotta:#C4623E;
+  --sage:#6B9E70;
+  --sage-pale:#D6E8D0;
+  --charcoal:#2E2E2E;
+  --warm-white:#FFFDF8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Noto Serif KR',serif}
+
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 24px 60px;
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#2A4A2E 0%,#3D6B3A 28%,#7A5020 65%,#4A3010 100%);
+}
+.hero-noise{
+  position:absolute;inset:0;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+.hero-glow{
+  position:absolute;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(212,168,67,.22) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(196,98,62,.18) 0%,transparent 70%);
+  bottom:0;right:0;pointer-events:none;
+}
+
+/* Floating garlic decorations */
+.g-deco{position:absolute;opacity:.10;animation:floatDeco 7s ease-in-out infinite}
+.g-deco:nth-child(1){top:8%;left:6%;animation-delay:0s}
+.g-deco:nth-child(2){top:14%;right:10%;animation-delay:2s;transform:scale(.7)}
+.g-deco:nth-child(3){bottom:18%;left:12%;animation-delay:4s;transform:scale(.85)}
+.g-deco:nth-child(4){bottom:10%;right:7%;animation-delay:1s;transform:scale(.6)}
+@keyframes floatDeco{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-14px) rotate(3deg)}}
+.g-deco:nth-child(2){animation:floatDeco2 7s ease-in-out infinite 2s}
+.g-deco:nth-child(4){animation:floatDeco2 7s ease-in-out infinite 1s}
+@keyframes floatDeco2{0%,100%{transform:translateY(0) rotate(3deg) scale(.7)}50%{transform:translateY(-14px) rotate(-3deg) scale(.7)}}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,168,67,.18);border:1px solid rgba(212,168,67,.45);
+  color:var(--garlic-gold);border-radius:30px;padding:7px 18px;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:24px;
+  opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hero-year-tag{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(12px,2.5vw,14px);font-weight:400;
+  color:rgba(255,255,255,.45);letter-spacing:7px;text-transform:uppercase;
+  margin-bottom:14px;
+  opacity:0;animation:fadeUp .8s .5s forwards;
+}
+.hero-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(38px,10vw,82px);font-weight:900;
+  line-height:1.15;margin-bottom:6px;color:#fff;
+  opacity:0;animation:fadeUp .9s .7s forwards;
+}
+.hero-title em{font-style:normal;color:var(--garlic-gold)}
+.hero-subtitle{
+  font-size:clamp(13px,2.5vw,17px);font-weight:300;
+  color:rgba(255,255,255,.6);max-width:460px;line-height:1.85;
+  margin:18px auto 44px;
+  opacity:0;animation:fadeUp .8s 1s forwards;
+}
+.hero-stats{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:44px;
+  opacity:0;animation:fadeUp .8s 1.2s forwards;
+}
+.stat-pill{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  border-radius:14px;padding:12px 22px;text-align:center;backdrop-filter:blur(8px);
+}
+.stat-pill .s-label{font-size:9px;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
+.stat-pill .s-val{font-size:14px;font-weight:700;color:#fff}
+.hero-cta{
+  display:inline-block;
+  background:var(--garlic-gold);color:#1a0e00;
+  padding:16px 46px;border-radius:50px;
+  font-size:15px;font-weight:700;text-decoration:none;
+  box-shadow:0 6px 28px rgba(212,168,67,.38);
+  transition:transform .3s,box-shadow .3s;
+  opacity:0;animation:fadeUp .8s 1.4s forwards;
+}
+.hero-cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 40px rgba(212,168,67,.52)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== SHARED SECTION ===== */
+.section-label{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--sage);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(22px,5vw,36px);font-weight:900;
+  color:var(--garlic-dark-green);margin-bottom:6px;line-height:1.3;
+}
+.section-desc{
+  font-size:14px;font-weight:300;color:var(--text-light);line-height:1.85;margin-bottom:36px;
+}
+
+/* ===== PROGRAM TIMELINE ===== */
+.timeline-section{background:var(--bg-alt);padding:80px 24px}
+.tl-wrap{max-width:660px;margin:0 auto}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{
+  display:grid;grid-template-columns:76px 1fr;gap:0;
+  position:relative;
+}
+.tl-item:not(:last-child)::after{
+  content:'';position:absolute;left:37px;top:50px;
+  width:2px;height:calc(100% - 10px);
+  background:linear-gradient(180deg,var(--garlic-gold) 0%,rgba(212,168,67,.15) 100%);
+}
+.tl-time{
+  display:flex;flex-direction:column;align-items:center;padding-top:2px;
+}
+.tl-dot{
+  width:16px;height:16px;border-radius:50%;
+  background:var(--garlic-gold);
+  border:3px solid var(--bg-alt);
+  box-shadow:0 0 0 3px rgba(212,168,67,.28);
+  flex-shrink:0;
+}
+.tl-hour{
+  font-size:11px;font-weight:700;color:var(--garlic-gold);
+  margin-top:6px;white-space:nowrap;
+}
+.tl-content{padding:0 0 36px 20px}
+.tl-content h3{font-size:16px;font-weight:700;color:var(--charcoal);margin-bottom:4px}
+.tl-content p{font-size:13px;font-weight:300;color:#999;line-height:1.65}
+.tl-tag{
+  display:inline-block;margin-top:8px;
+  border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;
+}
+.tag-green{background:var(--sage-pale);color:var(--sage)}
+.tag-gold{background:rgba(212,168,67,.14);color:#B8922E}
+.tag-coral{background:rgba(255,127,107,.14);color:#D45A3E}
+
+/* ===== HARVEST ===== */
+.harvest-section{
+  padding:80px 24px;
+  background:linear-gradient(155deg,var(--garlic-dark-green) 0%,#2E5E35 55%,#4A3820 100%);
+  position:relative;overflow:hidden;
+}
+.harvest-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 25% 50%,rgba(212,168,67,.1) 0%,transparent 55%);
+}
+.harvest-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.harvest-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+@media(max-width:960px){.harvest-grid{grid-template-columns:1fr}}
+
+/* CSS garlic field illustration */
+.field-art{
+  border-radius:22px;overflow:hidden;height:290px;
+  background:linear-gradient(180deg,#7AC8E3 0%,#B0DEA8 30%,#5E9E5A 55%,#3A6A28 100%);
+  position:relative;
+}
+.f-sun{
+  position:absolute;top:18px;right:28px;
+  width:52px;height:52px;border-radius:50%;
+  background:radial-gradient(circle,#FFE566,#FFB830);
+  box-shadow:0 0 40px rgba(255,210,50,.5);
+}
+.f-cloud{
+  position:absolute;top:22px;left:18px;
+  width:70px;height:22px;
+  background:rgba(255,255,255,.75);
+  border-radius:20px;
+}
+.f-cloud::after{
+  content:'';position:absolute;top:-10px;left:14px;
+  width:36px;height:28px;
+  background:rgba(255,255,255,.75);
+  border-radius:50%;
+}
+.f-ground{
+  position:absolute;bottom:0;left:0;right:0;height:52%;
+  background:linear-gradient(180deg,#5A8840 0%,#3E6228 50%,#2E4A1E 100%);
+}
+.f-plants{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-around;align-items:flex-end;
+  padding:0 16px 14px;
+}
+.f-plant{
+  display:flex;flex-direction:column;align-items:center;
+  animation:sway 3.5s ease-in-out infinite;
+  transform-origin:bottom center;
+}
+.f-plant:nth-child(even){animation-delay:1.75s}
+.f-stem{width:3px;border-radius:2px;background:linear-gradient(180deg,#60A050,#3A6A28)}
+.f-bulb{
+  width:24px;height:28px;border-radius:52% 52% 44% 44%;
+  background:radial-gradient(circle at 38% 32%,#FAF2E0,#D8CCA0);
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  position:relative;
+}
+.f-bulb::after{
+  content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);
+  width:11px;height:9px;
+  background:linear-gradient(180deg,#C8B880,#A89858);
+  border-radius:0 0 5px 5px;
+}
+.f-leaf{
+  position:absolute;width:16px;height:28px;
+  background:linear-gradient(135deg,#62A040,#3E7828);
+  border-radius:0 80% 0 0;
+}
+.f-leaf.l{top:6px;left:-14px;transform:rotate(-22deg)}
+.f-leaf.r{top:6px;right:-14px;transform:rotate(22deg) scaleX(-1)}
+@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+
+.harvest-text .section-label{color:rgba(212,168,67,.75)}
+.harvest-text .section-title{color:#fff}
+.harvest-text .section-desc{color:rgba(255,255,255,.55)}
+.harvest-slogan{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(17px,3vw,21px);font-weight:700;
+  color:var(--garlic-gold);
+  border-left:3px solid var(--garlic-gold);
+  padding-left:16px;line-height:1.65;margin-bottom:28px;
+}
+.capacity-row{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;padding:12px 18px;margin-bottom:26px;
+  backdrop-filter:blur(6px);
+}
+.capacity-row .cap-icon{font-size:20px}
+.capacity-row .cap-text{font-size:13px;font-weight:300;color:rgba(255,255,255,.65)}
+.capacity-row .cap-text strong{color:#fff;font-weight:700}
+.btn-gold{
+  display:inline-block;
+  background:var(--garlic-gold);color:#1a0e00;
+  padding:14px 36px;border-radius:40px;
+  font-size:14px;font-weight:700;text-decoration:none;
+  box-shadow:0 4px 22px rgba(212,168,67,.33);
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,168,67,.5)}
+.btn-ghost{
+  display:inline-block;margin-left:14px;
+  background:transparent;color:rgba(255,255,255,.75);
+  border:1.5px solid rgba(255,255,255,.35);
+  padding:14px 26px;border-radius:40px;
+  font-size:14px;font-weight:500;text-decoration:none;
+  transition:all .3s;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* ===== GARLIC PARK TEASER ===== */
+.park-section{background:var(--bg-alt);padding:80px 24px}
+.park-inner{max-width:900px;margin:0 auto;text-align:center}
+.park-coming-badge{
+  display:inline-block;
+  background:var(--garlic-dark-green);color:var(--garlic-gold);
+  border-radius:20px;padding:6px 18px;
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:18px;
+}
+.park-headline{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(30px,8vw,60px);font-weight:900;
+  color:var(--garlic-dark-green);line-height:1.15;margin-bottom:6px;
+}
+.park-headline span{color:var(--garlic-gold)}
+.park-sub{font-size:14px;font-weight:300;color:#888;margin-bottom:48px}
+
+.park-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px;
+}
+@media(max-width:600px){.park-cards{grid-template-columns:1fr}}
+.pc-card{
+  border-radius:20px;padding:30px 20px;text-align:center;
+  transition:transform .3s;overflow:hidden;position:relative;
+}
+.pc-card:hover{transform:translateY(-5px)}
+.pc-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.12) 0%,transparent 60%);
+}
+.pcc-a{background:linear-gradient(145deg,#2A5C34,#3E8A48)}
+.pcc-b{background:linear-gradient(145deg,#6A3C1C,#A05E2A)}
+.pcc-c{background:linear-gradient(145deg,#1E3A5C,#2E5C8A)}
+.pc-card .pc-icon{font-size:34px;margin-bottom:14px}
+.pc-card h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:7px}
+.pc-card p{font-size:12px;font-weight:300;color:rgba(255,255,255,.62);line-height:1.65}
+
+.park-visual{
+  border-radius:24px;overflow:hidden;height:230px;
+  background:linear-gradient(135deg,#1B4332 0%,#2E6B3A 45%,#D4A843 100%);
+  margin-bottom:30px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.park-visual::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 65% 35%,rgba(212,168,67,.3) 0%,transparent 55%),
+    radial-gradient(ellipse at 20% 65%,rgba(0,199,60,.18) 0%,transparent 50%);
+}
+.pv-inner{text-align:center;position:relative;z-index:1}
+.pv-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(18px,4vw,30px);font-weight:900;
+  color:#fff;margin-bottom:6px;
+}
+.pv-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.55)}
+.pv-badge{
+  position:absolute;bottom:14px;right:14px;
+  background:rgba(255,255,255,.14);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;padding:6px 12px;
+  font-size:10px;font-weight:700;color:#fff;letter-spacing:1px;
+}
+
+.park-partnership{
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  background:#fff;border-radius:16px;padding:18px 26px;
+  box-shadow:0 2px 14px rgba(0,0,0,.05);
+}
+.pp-tag{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--charcoal)}
+.pp-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--garlic-green)}
+.pp-x{font-size:16px;font-weight:300;color:#ccc}
+.pp-note{font-size:12px;font-weight:300;color:#aaa}
+
+/* ===== PRODUCTS ===== */
+.products-section{background:var(--bg);padding:80px 24px}
+.products-inner{max-width:900px;margin:0 auto}
+.products-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  margin-top:8px;
+}
+@media(min-width:640px){.products-grid{grid-template-columns:repeat(4,1fr)}}
+.prod-card{
+  background:var(--card);border-radius:18px;overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 2px 10px rgba(0,0,0,.055);
+  transition:transform .3s,box-shadow .3s;
+}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 8px 26px rgba(0,0,0,.1)}
+.prod-img{
+  height:136px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.prod-badge{
+  position:absolute;top:9px;left:9px;
+  background:var(--garlic-coral);color:#fff;
+  border-radius:7px;padding:3px 7px;
+  font-size:9px;font-weight:700;
+}
+.prod-direct{
+  position:absolute;top:9px;right:9px;
+  background:var(--garlic-dark-green);color:#fff;
+  border-radius:7px;padding:3px 7px;
+  font-size:8px;font-weight:700;letter-spacing:.5px;
+}
+.prod-emoji{font-size:38px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.15))}
+.pi-a{background:linear-gradient(135deg,#ECF4E0,#CDE0B8)}
+.pi-b{background:linear-gradient(135deg,#2C2C2C,#484848)}
+.pi-c{background:linear-gradient(135deg,#EEE0A0,#D8B860)}
+.pi-d{background:linear-gradient(135deg,#F2EAD2,#DECE88)}
+.prod-info{padding:12px 12px 14px}
+.prod-name{font-size:12px;font-weight:700;color:var(--charcoal);margin-bottom:3px;line-height:1.4}
+.prod-weight{font-size:10px;font-weight:300;color:#bbb;margin-bottom:7px}
+.prod-price-row{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.prod-price{font-size:15px;font-weight:700;color:var(--garlic-coral)}
+.prod-orig{font-size:10px;color:#ccc;text-decoration:line-through}
+.prod-discount{font-size:10px;font-weight:700;color:var(--garlic-gold);width:100%;margin-top:1px}
+
+
+/* ===== BLOG HEADER ===== */
+.blog-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 20px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:960px;margin:0 auto}
+@media(min-width:961px){.blog-header{left:50%;transform:translateX(-50%)}}
+.bh-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.bh-nav{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bh-nav::-webkit-scrollbar{display:none}
+.bh-nav a{font-size:13px;font-weight:500;color:#888;text-decoration:none;white-space:nowrap;transition:color .2s}
+.bh-nav a:hover,.bh-nav a.active{color:#00C73C;font-weight:700}
+@media(max-width:600px){.bh-nav{gap:12px}.bh-nav a{font-size:12px}}
+
+/* ===== BLOG FOOTER ===== */
+.blog-footer{background:#1B4332;padding:40px 20px;text-align:center;margin-top:40px}
+.bf-inner{max-width:600px;margin:0 auto}
+.bf-logo{display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.bf-slogan{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.bf-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.bf-links a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none}
+.bf-links a:hover{color:#00C73C}
+.bf-copy{font-size:11px;color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+
+<!-- BLOG HEADER -->
+<header class="blog-header">
+  <a href="index.html" class="bh-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+    <span style="font-size:12px;color:#888;margin-left:8px;font-weight:400">Blog</span>
+  </a>
+  <nav class="bh-nav">
+    <a href="event_toemacon.html">퇴마콘</a>
+    <a href="garlic_tamagotchi.html">마늘키우기</a>
+    <a href="event_uiseong_festival.html" class="active">의성축제</a>
+    <a href="garlic_global.html">글로벌</a>
+    <a href="garlic_ip.html">마늘IP</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <svg class="g-deco" width="72" height="84" viewBox="0 0 72 84" fill="none">
+    <ellipse cx="36" cy="56" rx="26" ry="28" fill="#F5ECD7"/>
+    <ellipse cx="36" cy="54" rx="21" ry="23" fill="#EDE0C0" opacity=".6"/>
+    <rect x="33" y="18" width="6" height="30" rx="3" fill="#5A8A40"/>
+    <ellipse cx="26" cy="32" rx="4.5" ry="14" fill="#6A9E50" transform="rotate(-20 26 32)"/>
+    <ellipse cx="46" cy="32" rx="4.5" ry="14" fill="#6A9E50" transform="rotate(20 46 32)"/>
+  </svg>
+  <svg class="g-deco" width="60" height="70" viewBox="0 0 60 70" fill="none">
+    <ellipse cx="30" cy="46" rx="22" ry="24" fill="#F5ECD7"/>
+    <rect x="27" y="14" width="6" height="28" rx="3" fill="#5A8A40"/>
+    <ellipse cx="22" cy="26" rx="4" ry="12" fill="#6A9E50" transform="rotate(-20 22 26)"/>
+  </svg>
+  <svg class="g-deco" width="66" height="78" viewBox="0 0 66 78" fill="none">
+    <ellipse cx="33" cy="50" rx="24" ry="26" fill="#F5ECD7"/>
+    <rect x="30" y="16" width="6" height="30" rx="3" fill="#5A8A40"/>
+    <ellipse cx="44" cy="30" rx="4.5" ry="13" fill="#6A9E50" transform="rotate(20 44 30)"/>
+  </svg>
+  <svg class="g-deco" width="54" height="62" viewBox="0 0 54 62" fill="none">
+    <ellipse cx="27" cy="40" rx="20" ry="22" fill="#F5ECD7"/>
+    <rect x="24" y="12" width="6" height="24" rx="3" fill="#5A8A40"/>
+    <ellipse cx="20" cy="24" rx="4" ry="11" fill="#6A9E50" transform="rotate(-18 20 24)"/>
+    <ellipse cx="34" cy="24" rx="4" ry="11" fill="#6A9E50" transform="rotate(18 34 24)"/>
+  </svg>
+
+  <div class="hero-eyebrow">✦ Uiseong Garlic Festival</div>
+  <div class="hero-year-tag">2027 · 06 · 14 — 06 · 22</div>
+  <h1 class="hero-title">의성 마늘 축제 <em>2027</em></h1>
+  <p class="hero-subtitle">한국 마늘의 성지에서<br>갈릭의 시작을 축하합니다</p>
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <div class="s-label">Location</div>
+      <div class="s-val">경북 의성군</div>
+    </div>
+    <div class="stat-pill">
+      <div class="s-label">기간</div>
+      <div class="s-val">9일간</div>
+    </div>
+    <div class="stat-pill">
+      <div class="s-label">예상 방문</div>
+      <div class="s-val">10만 명</div>
+    </div>
+  </div>
+  <a href="#program" class="hero-cta">축제 프로그램 보기</a>
+</section>
+
+<!-- PROGRAM TIMELINE -->
+<section class="timeline-section" id="program">
+  <div class="tl-wrap">
+    <div class="reveal">
+      <div class="section-label">Festival Schedule</div>
+      <h2 class="section-title">축제 프로그램</h2>
+      <p class="section-desc">하루 가득한 마늘 축제 — 온 가족이 함께하는 특별한 하루</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-time"><div class="tl-dot"></div><div class="tl-hour">10:00</div></div>
+        <div class="tl-content">
+          <h3>개장식 — 마늘밭 체험 오픈</h3>
+          <p>의성 마늘 축제 2027 공식 개막. 의성군수 환영사 및 테이프 커팅식. 마늘밭 체험 구역 전면 개방.</p>
+          <span class="tl-tag tag-green">오프닝</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time"><div class="tl-dot"></div><div class="tl-hour">11:00</div></div>
+        <div class="tl-content">
+          <h3>마늘 수확 체험</h3>
+          <p>직접 캐보는 의성 마늘. 밭에서 바로 캔 신선한 마늘을 가족이 함께 수확하고 가져가세요.</p>
+          <span class="tl-tag tag-green">가족 체험</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time"><div class="tl-dot"></div><div class="tl-hour">13:00</div></div>
+        <div class="tl-content">
+          <h3>마늘 요리 대회</h3>
+          <p>전국 셰프와 일반인이 함께하는 마늘 음식 경연. 마늘을 주재료로 한 창의적인 요리를 겨루세요.</p>
+          <span class="tl-tag tag-gold">경연</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time"><div class="tl-dot"></div><div class="tl-hour">15:00</div></div>
+        <div class="tl-content">
+          <h3>갈릭 프렌즈 미트 &amp; 그릿</h3>
+          <p>마누리, 곰두리 등 갈릭 마스코트 캐릭터 총출동. 어린이 팬 사진 촬영 및 사인회 진행.</p>
+          <span class="tl-tag tag-coral">캐릭터</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time"><div class="tl-dot"></div><div class="tl-hour">17:00</div></div>
+        <div class="tl-content">
+          <h3>마늘 콘서트</h3>
+          <p>의성 출신 아티스트와 특별 게스트의 라이브 공연. 야외 대형 무대에서 펼쳐지는 감동의 시간.</p>
+          <span class="tl-tag tag-green">라이브</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">
+          <div class="tl-dot" style="background:var(--garlic-coral);box-shadow:0 0 0 3px rgba(255,127,107,.28)"></div>
+          <div class="tl-hour" style="color:var(--garlic-coral)">19:00</div>
+        </div>
+        <div class="tl-content">
+          <h3>갈릭 불꽃놀이</h3>
+          <p>마늘 모양 불꽃이 의성의 밤하늘을 수놓는 특별한 피날레. 15분 연속 대형 불꽃 쇼.</p>
+          <span class="tl-tag tag-coral">피날레</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HARVEST EXPERIENCE -->
+<section class="harvest-section" id="harvest">
+  <div class="harvest-inner">
+    <div class="harvest-grid">
+      <div class="reveal">
+        <div class="field-art">
+          <div class="f-sun"></div>
+          <div class="f-cloud"></div>
+          <div class="f-ground"></div>
+          <div class="f-plants">
+            <div class="f-plant">
+              <div class="f-stem" style="height:44px"></div>
+              <div class="f-bulb"><div class="f-leaf l"></div><div class="f-leaf r"></div></div>
+            </div>
+            <div class="f-plant">
+              <div class="f-stem" style="height:52px"></div>
+              <div class="f-bulb"><div class="f-leaf l"></div><div class="f-leaf r"></div></div>
+            </div>
+            <div class="f-plant">
+              <div class="f-stem" style="height:60px"></div>
+              <div class="f-bulb"><div class="f-leaf l"></div><div class="f-leaf r"></div></div>
+            </div>
+            <div class="f-plant">
+              <div class="f-stem" style="height:48px"></div>
+              <div class="f-bulb"><div class="f-leaf l"></div><div class="f-leaf r"></div></div>
+            </div>
+            <div class="f-plant">
+              <div class="f-stem" style="height:40px"></div>
+              <div class="f-bulb"><div class="f-leaf l"></div><div class="f-leaf r"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="harvest-text reveal">
+        <div class="section-label">Farm Experience</div>
+        <h2 class="section-title">마늘 수확 체험</h2>
+        <div class="harvest-slogan">직접 캐고,<br>직접 먹고,<br>직접 느끼세요</div>
+        <p class="section-desc">의성 마늘밭에서 온 가족이 함께 마늘을 수확하는 특별한 경험. 수확한 마늘은 그 자리에서 구워 먹거나 집으로 가져가실 수 있습니다.</p>
+        <div class="capacity-row">
+          <div class="cap-icon">👨‍👩‍👧‍👦</div>
+          <div class="cap-text">선착순 <strong>500가족</strong> 체험 가능 · 사전 예약 필수</div>
+        </div>
+        <div>
+          <a href="#" class="btn-gold">체험 신청하기</a>
+          <a href="#" class="btn-ghost">자세히 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARLIC PARK TEASER -->
+<section class="park-section" id="park">
+  <div class="park-inner">
+    <div class="reveal">
+      <div class="park-coming-badge">Coming 2028</div>
+      <h2 class="park-headline">Garlic <span>Park</span></h2>
+      <p class="park-sub">의성군 × Garlic 파트너십 — K-Culture + Shopping + Entertainment 테마파크</p>
+    </div>
+
+    <div class="park-cards reveal">
+      <div class="pc-card pcc-a">
+        <div class="pc-icon">🌿</div>
+        <h4>K-Culture Zone</h4>
+        <p>한국 문화와 마늘의 역사를 체험하는 몰입형 전시 공간</p>
+      </div>
+      <div class="pc-card pcc-b">
+        <div class="pc-icon">🛍️</div>
+        <h4>Shopping District</h4>
+        <p>의성 마늘 특산품부터 갈릭 브랜드 굿즈까지</p>
+      </div>
+      <div class="pc-card pcc-c">
+        <div class="pc-icon">🎭</div>
+        <h4>Entertainment</h4>
+        <p>갈릭 캐릭터 퍼레이드와 사계절 상설 공연 무대</p>
+      </div>
+    </div>
+
+    <div class="park-visual reveal">
+      <div class="pv-inner">
+        <div class="pv-title">Garlic Park 2028</div>
+        <div class="pv-sub">경북 의성 — 마늘의 성지에서 탄생하는 K-컬처 테마파크</div>
+      </div>
+      <div class="pv-badge">Concept Art</div>
+    </div>
+
+    <div class="park-partnership reveal">
+      <div class="pp-tag"><div class="dot"></div>의성군</div>
+      <div class="pp-x">×</div>
+      <div class="pp-tag"><div class="dot"></div>Garlic</div>
+      <div class="pp-x">—</div>
+      <div class="pp-note">의성군 × Garlic 파트너십</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="products-inner">
+    <div class="reveal">
+      <div class="section-label">산지 직송 특판</div>
+      <h2 class="section-title">축제 한정 특가</h2>
+      <p class="section-desc">의성 마늘 생산자가 직접 내놓는 축제 한정 특가. 산지직송으로 신선하게 당일 출고.</p>
+    </div>
+    <div class="products-grid reveal">
+      <div class="prod-card">
+        <div class="prod-img pi-a">
+          <div class="prod-badge">30% OFF</div>
+          <div class="prod-direct">산지직송</div>
+          <div class="prod-emoji">🧄</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-name">의성 마늘 1kg</div>
+          <div class="prod-weight">햇마늘 · 당일 수확</div>
+          <div class="prod-price-row">
+            <span class="prod-price">9,900원</span>
+            <span class="prod-orig">14,000원</span>
+          </div>
+          <div class="prod-discount">30% 축제 특가</div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img pi-b">
+          <div class="prod-badge">인기</div>
+          <div class="prod-direct">산지직송</div>
+          <div class="prod-emoji">🫙</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-name">흑마늘 세트</div>
+          <div class="prod-weight">숙성 흑마늘 · 30구</div>
+          <div class="prod-price-row">
+            <span class="prod-price">34,900원</span>
+            <span class="prod-orig">42,000원</span>
+          </div>
+          <div class="prod-discount">17% 특가</div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img pi-c">
+          <div class="prod-badge">한정</div>
+          <div class="prod-direct">산지직송</div>
+          <div class="prod-emoji">🥢</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-name">마늘 장아찌</div>
+          <div class="prod-weight">전통 방식 · 500g</div>
+          <div class="prod-price-row">
+            <span class="prod-price">12,900원</span>
+            <span class="prod-orig">16,000원</span>
+          </div>
+          <div class="prod-discount">19% 특가</div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img pi-d">
+          <div class="prod-badge">신상</div>
+          <div class="prod-direct">산지직송</div>
+          <div class="prod-emoji">🫒</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-name">의성 마늘 오일</div>
+          <div class="prod-weight">올리브 베이스 · 250ml</div>
+          <div class="prod-price-row">
+            <span class="prod-price">18,900원</span>
+            <span class="prod-orig">24,000원</span>
+          </div>
+          <div class="prod-discount">21% 특가</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- BLOG FOOTER -->
+<footer class="blog-footer">
+  <div class="bf-inner">
+    <div class="bf-logo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+      <span style="font-family:'GmarketSans';font-weight:700;font-size:16px;color:#1B4332;margin-left:4px">Garlic Blog</span>
+    </div>
+    <p class="bf-slogan">나마늘 위한 마켓</p>
+    <div class="bf-links">
+      <a href="event_toemacon.html">퇴마콘</a>
+      <a href="garlic_tamagotchi.html">마늘키우기</a>
+      <a href="event_uiseong_festival.html">의성축제</a>
+      <a href="garlic_global.html">글로벌</a>
+      <a href="garlic_ip.html">마늘IP</a>
+    </div>
+    <p class="bf-copy">&copy; 2026 Garlic. 불사조기사단.</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+reveals.forEach(r => io.observe(r));
+
+</script>
+
+
+</body>
+</html>

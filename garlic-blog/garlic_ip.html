@@ -1,0 +1,561 @@
+<!--
+  ============================================================
+  ⑨ 마늘 IP 종합 — Garlic IP & Ecosystem Overview
+  ============================================================
+  Concept: Comprehensive overview of Garlic IP ecosystem
+  Sections: Characters, attendance, growing game, app rebrand
+  Aesthetic: Clean, informative, showcase style, light cream
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic - 나마늘 위한 마켓 | 마늘IP</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --garlic-green:#00C73C;
+  --garlic-dark-green:#1B4332;
+  --garlic-gold:#D4A843;
+  --garlic-coral:#FF7F6B;
+  --garlic-neon:#00FF88;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
+  --garlic-bg:#F7F7F7;
+  --cream:#FFFAF3;
+  --warm:#FFF5E6;
+  --text:#333333;
+  --text-mid:#444;
+  --text-light:#888888;
+  --border:#EEEEEE;
+  --card-shadow:0 2px 16px rgba(0,0,0,.05);
+  --card-shadow-hover:0 8px 30px rgba(0,0,0,.1);
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.7}
+.serif{font-family:'Noto Serif KR',serif}
+
+/* ===== HERO ===== */
+.hero{padding:80px 24px 40px;text-align:center;background:linear-gradient(180deg,var(--green-light) 0%,var(--bg) 100%);position:relative;overflow:hidden}
+body{padding-bottom:0}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,199,60,.08) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%)}
+.hero-img{width:100%;max-width:360px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.1);margin-bottom:28px}
+.hero-badge{display:inline-block;background:rgba(0,199,60,.1);color:var(--garlic-dark-green);font-size:11px;font-weight:700;letter-spacing:2px;padding:6px 16px;border-radius:20px;margin-bottom:16px;text-transform:uppercase}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:clamp(24px,6vw,40px);font-weight:900;line-height:1.3;color:var(--garlic-dark-green);margin-bottom:12px}
+.hero h1 .accent{color:var(--garlic-green)}
+.hero p{font-size:clamp(13px,2.5vw,16px);color:var(--text-mid);max-width:440px;margin:0 auto;font-weight:300}
+
+/* ===== SECTION COMMON ===== */
+.section{padding:60px 24px}
+.section-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--garlic-green);margin-bottom:8px}
+.section-title{font-family:'Noto Serif KR',serif;font-size:clamp(22px,5vw,32px);font-weight:900;color:var(--garlic-dark-green);margin-bottom:8px}
+.section-desc{font-size:14px;color:var(--text-light);max-width:480px;margin-bottom:32px;font-weight:300}
+.section.alt{background:var(--bg-alt)}
+.section.green-bg{background:linear-gradient(135deg,var(--garlic-dark-green),#2a6b4a);color:#fff}
+.section.green-bg .section-label{color:var(--garlic-neon)}
+.section.green-bg .section-title{color:#fff}
+.section.green-bg .section-desc{color:rgba(255,255,255,.6)}
+.center{text-align:center}
+.container{max-width:680px;margin:0 auto}
+
+/* ===== ATTENDANCE SYSTEM ===== */
+.jar-visual{display:flex;justify-content:center;margin-bottom:32px}
+.jar{position:relative;width:160px;height:200px}
+.jar svg{width:100%;height:100%}
+
+.att-rules{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto}
+.att-rule{display:flex;align-items:center;gap:14px;background:var(--card);padding:16px;border-radius:16px;box-shadow:var(--card-shadow);border:1px solid var(--border)}
+.att-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.att-icon.daily{background:linear-gradient(135deg,#E8F5E9,#C8E6C9)}
+.att-icon.chunk{background:linear-gradient(135deg,#FFF3E0,#FFE0B2)}
+.att-icon.transform{background:linear-gradient(135deg,#F3E5F5,#E1BEE7)}
+.att-text{flex:1}
+.att-text strong{font-size:14px;display:block;margin-bottom:2px}
+.att-text span{font-size:12px;color:var(--text-light)}
+
+.att-cta{display:inline-block;background:var(--garlic-green);color:#fff;padding:14px 32px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;margin-top:24px;transition:all .3s;border:none;cursor:pointer;font-family:'GmarketSans'}
+.att-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,199,60,.25)}
+
+/* ===== EVOLUTION STAGES ===== */
+.evo-row{display:flex;justify-content:center;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+.evo-stage{text-align:center;flex:1;min-width:120px;max-width:160px}
+.evo-stage svg{width:100%;max-width:120px;height:120px;margin:0 auto 8px;display:block}
+.evo-name{font-size:14px;font-weight:700;margin-bottom:2px}
+.evo-range{font-size:11px;color:var(--text-light)}
+.evo-connector{font-size:24px;color:var(--garlic-green);font-weight:700;align-self:center;margin-bottom:40px}
+
+/* ===== BEFORE/AFTER APP ===== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px;margin:0 auto}
+.compare-card{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--card-shadow)}
+.compare-card img{width:100%;display:block;aspect-ratio:9/16;object-fit:cover}
+.compare-label{position:absolute;top:12px;left:12px;padding:6px 14px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:1px}
+.compare-label.before{background:rgba(255,0,0,.8);color:#fff}
+.compare-label.after{background:rgba(0,199,60,.9);color:#fff}
+.compare-caption{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(0deg,rgba(0,0,0,.7),transparent);color:#fff}
+.compare-caption strong{font-size:14px;display:block;margin-bottom:2px}
+.compare-caption span{font-size:11px;opacity:.7}
+
+/* ===== CHARACTER LINEUP ===== */
+.char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;max-width:560px;margin:0 auto}
+.char-card{background:var(--card);border-radius:20px;padding:20px 12px;text-align:center;box-shadow:var(--card-shadow);border:1px solid var(--border);transition:transform .3s,box-shadow .3s}
+.char-card:hover{transform:translateY(-4px);box-shadow:var(--card-shadow-hover)}
+.char-card svg{width:80px;height:80px;margin:0 auto 8px;display:block}
+.char-card .char-name{font-size:14px;font-weight:700;margin-bottom:2px}
+.char-card .char-type{font-size:11px;color:var(--text-light)}
+
+/* ===== GOODS GALLERY ===== */
+.goods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:560px;margin:0 auto}
+.goods-card{background:var(--card);border-radius:16px;padding:16px;text-align:center;box-shadow:var(--card-shadow);border:1px solid var(--border);transition:transform .3s}
+.goods-card:hover{transform:translateY(-3px)}
+.goods-icon{width:64px;height:64px;margin:0 auto 10px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.goods-icon.sticker{background:linear-gradient(135deg,#FFF3E0,#FFE0B2)}
+.goods-icon.doll{background:linear-gradient(135deg,#F3E5F5,#E1BEE7)}
+.goods-icon.keyring{background:linear-gradient(135deg,#E3F2FD,#BBDEFB)}
+.goods-icon.bag{background:linear-gradient(135deg,#E8F5E9,#C8E6C9)}
+.goods-icon.wand{background:linear-gradient(135deg,#FFF9C4,#FFE082)}
+.goods-name{font-size:13px;font-weight:700;margin-bottom:2px}
+.goods-price{font-size:11px;color:var(--text-light)}
+
+/* ===== SNS MEME CULTURE ===== */
+.meme-grid{display:flex;flex-direction:column;gap:16px;max-width:400px;margin:0 auto}
+.meme-bubble{padding:16px 20px;border-radius:20px;position:relative;font-size:14px;font-weight:500;line-height:1.6}
+.meme-bubble.left{background:var(--card);border-bottom-left-radius:4px;box-shadow:var(--card-shadow);border:1px solid var(--border);align-self:flex-start;max-width:85%}
+.meme-bubble.right{background:var(--garlic-green);color:#fff;border-bottom-right-radius:4px;align-self:flex-end;max-width:85%}
+.meme-bubble .meme-user{font-size:11px;font-weight:700;opacity:.6;margin-bottom:4px;display:block}
+.meme-bubble .meme-time{font-size:10px;opacity:.4;margin-top:4px;display:block;text-align:right}
+.meme-hashtag{text-align:center;font-size:13px;color:var(--garlic-green);font-weight:700;padding:8px 0}
+
+
+/* ===== UTILITIES ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(min-width:768px){
+  .hero-img{max-width:440px}
+  .compare{max-width:680px;gap:24px}
+  .evo-stage svg{max-width:140px;height:140px}
+  .char-grid{grid-template-columns:repeat(4,1fr)}
+  .goods-grid{grid-template-columns:repeat(5,1fr)}
+}
+
+
+/* ===== BLOG HEADER ===== */
+.blog-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 20px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:960px;margin:0 auto}
+@media(min-width:961px){.blog-header{left:50%;transform:translateX(-50%)}}
+.bh-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.bh-nav{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bh-nav::-webkit-scrollbar{display:none}
+.bh-nav a{font-size:13px;font-weight:500;color:#888;text-decoration:none;white-space:nowrap;transition:color .2s}
+.bh-nav a:hover,.bh-nav a.active{color:#00C73C;font-weight:700}
+@media(max-width:600px){.bh-nav{gap:12px}.bh-nav a{font-size:12px}}
+
+/* ===== BLOG FOOTER ===== */
+.blog-footer{background:#1B4332;padding:40px 20px;text-align:center;margin-top:40px}
+.bf-inner{max-width:600px;margin:0 auto}
+.bf-logo{display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.bf-slogan{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:16px}
+.bf-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.bf-links a{font-size:12px;color:rgba(255,255,255,.4);text-decoration:none}
+.bf-links a:hover{color:#00C73C}
+.bf-copy{font-size:11px;color:rgba(255,255,255,.2)}
+</style>
+</head>
+<body>
+
+<!-- BLOG HEADER -->
+<header class="blog-header">
+  <a href="index.html" class="bh-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+    <span style="font-size:12px;color:#888;margin-left:8px;font-weight:400">Blog</span>
+  </a>
+  <nav class="bh-nav">
+    <a href="event_toemacon.html">퇴마콘</a>
+    <a href="garlic_tamagotchi.html">마늘키우기</a>
+    <a href="event_uiseong_festival.html">의성축제</a>
+    <a href="garlic_global.html">글로벌</a>
+    <a href="garlic_ip.html" class="active">마늘IP</a>
+  </nav>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <img class="hero-img reveal" src="../reference/갈릭_귀여운_이미지.png" alt="갈릭 프렌즈 캐릭터들" loading="eager">
+  <span class="hero-badge reveal">GARLIC IP ECOSYSTEM</span>
+  <h1 class="reveal"><span class="accent">갈릭 프렌즈</span>와 함께하는<br>새로운 쇼핑 세상</h1>
+  <p class="reveal">캐릭터 IP, 출석 시스템, 마늘 키우기, 앱 리브랜딩까지.<br>갈릭이 만드는 새로운 쇼핑 생태계를 소개합니다.</p>
+</section>
+
+<!-- ==================== ATTENDANCE SYSTEM ==================== -->
+<section class="section alt center">
+  <div class="container">
+    <span class="section-label reveal">ATTENDANCE SYSTEM</span>
+    <h2 class="section-title reveal">마늘 출석 시스템</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">매일 출석하면 마늘 1알! 모으면 쿠폰, 100알이면 특별 변신!</p>
+
+    <!-- Garlic Jar SVG -->
+    <div class="jar-visual reveal">
+      <div class="jar">
+        <svg viewBox="0 0 160 200" fill="none">
+          <!-- Jar body -->
+          <path d="M30 50h100v120c0 16-14 28-30 28H60c-16 0-30-12-30-28V50z" fill="#fff" stroke="#E0D5C0" stroke-width="2"/>
+          <!-- Jar fill -->
+          <path d="M32 170V110c0 0 20-10 48-10s48 10 48 10v60c0 14-13 26-28 26H60c-15 0-28-12-28-26z" fill="url(#jarFill)"/>
+          <!-- Garlic cloves inside -->
+          <ellipse cx="60" cy="155" rx="12" ry="10" fill="#F5ECD7" stroke="#E8DCC8" stroke-width="1"/>
+          <ellipse cx="85" cy="150" rx="14" ry="11" fill="#F5ECD7" stroke="#E8DCC8" stroke-width="1"/>
+          <ellipse cx="110" cy="158" rx="11" ry="9" fill="#F5ECD7" stroke="#E8DCC8" stroke-width="1"/>
+          <ellipse cx="72" cy="138" rx="13" ry="10" fill="#F5ECD7" stroke="#E8DCC8" stroke-width="1"/>
+          <ellipse cx="98" cy="135" rx="12" ry="10" fill="#F5ECD7" stroke="#E8DCC8" stroke-width="1"/>
+          <ellipse cx="80" cy="125" rx="11" ry="9" fill="#F5ECD7" stroke="#E8DCC8" stroke-width="1"/>
+          <!-- Jar lid -->
+          <rect x="24" y="42" width="112" height="14" rx="7" fill="var(--garlic-dark-green)"/>
+          <rect x="40" y="36" width="80" height="10" rx="5" fill="var(--garlic-dark-green)"/>
+          <!-- Label -->
+          <rect x="50" y="80" width="60" height="24" rx="6" fill="var(--garlic-green)" opacity=".9"/>
+          <text x="80" y="96" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="GmarketSans">42 / 100</text>
+          <!-- Sparkle -->
+          <circle cx="125" cy="35" r="4" fill="var(--garlic-gold)" opacity=".5">
+            <animate attributeName="opacity" values=".5;.1;.5" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <defs>
+            <linearGradient id="jarFill" x1="80" y1="100" x2="80" y2="200" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="var(--garlic-green)" stop-opacity=".08"/>
+              <stop offset="100%" stop-color="var(--garlic-green)" stop-opacity=".2"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="att-rules">
+      <div class="att-rule reveal">
+        <div class="att-icon daily">&#129476;</div>
+        <div class="att-text">
+          <strong>매일 1알 적립</strong>
+          <span>출석 체크만 하면 마늘 1알이 항아리에 쏙!</span>
+        </div>
+      </div>
+      <div class="att-rule reveal">
+        <div class="att-icon chunk">&#127915;</div>
+        <div class="att-text">
+          <strong>10알 = 한 쪽 (쿠폰)</strong>
+          <span>마늘 10알이 모이면 한 쪽이 되어 할인 쿠폰 지급!</span>
+        </div>
+      </div>
+      <div class="att-rule reveal">
+        <div class="att-icon transform">&#10024;</div>
+        <div class="att-text">
+          <strong>100알 = 변신 (특별 보상)</strong>
+          <span>100일 개근하면 마늘요정으로 변신! 특별 보상 패키지!</span>
+        </div>
+      </div>
+    </div>
+    <div style="height:24px"></div>
+    <button class="att-cta reveal" onclick="this.textContent='갈릭 앱에서 만나요!'">마늘 모으러 갈릭 가야지!</button>
+    <p class="reveal" style="font-size:13px;color:var(--text-light);margin-top:12px">"나 오늘 마늘 몇 알이야?"</p>
+  </div>
+</section>
+
+<!-- ==================== GROWING GAME INTRO ==================== -->
+<section class="section center">
+  <div class="container">
+    <span class="section-label reveal">GARLIC GROWING GAME</span>
+    <h2 class="section-title reveal">너마늘 키우기</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">100일간 마늘을 키워 마늘요정으로 진화시키자! 단군 신화의 100일 시련을 현대적으로 재해석한 디지털 펫 경험.</p>
+
+    <div class="evo-row reveal">
+      <div class="evo-stage">
+        <svg viewBox="0 0 120 120" fill="none">
+          <!-- 꼬마마늘 -->
+          <ellipse cx="60" cy="68" rx="30" ry="36" fill="#F5ECD7"/>
+          <path d="M52 36c-3-12 8-20 8-20s11 8 8 20" fill="#00C73C"/>
+          <circle cx="50" cy="64" r="4" fill="#2D2D2D"/><circle cx="51" cy="63" r="1.5" fill="#fff"/>
+          <circle cx="70" cy="64" r="4" fill="#2D2D2D"/><circle cx="71" cy="63" r="1.5" fill="#fff"/>
+          <path d="M54 74c3 4 10 4 13 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="42" cy="70" rx="6" ry="3" fill="#FF7F6B" opacity=".2"/>
+          <ellipse cx="78" cy="70" rx="6" ry="3" fill="#FF7F6B" opacity=".2"/>
+        </svg>
+        <div class="evo-name">꼬마마늘</div>
+        <div class="evo-range">Day 1-33</div>
+      </div>
+      <div class="evo-connector">&#8594;</div>
+      <div class="evo-stage">
+        <svg viewBox="0 0 120 120" fill="none">
+          <!-- 갈릭프렌즈 -->
+          <ellipse cx="60" cy="68" rx="34" ry="40" fill="#F5ECD7"/>
+          <path d="M48 32c-4-16 12-26 12-26s16 10 12 26" fill="#00C73C"/>
+          <ellipse cx="84" cy="46" rx="7" ry="3.5" fill="#66BB6A" transform="rotate(-30 84 46)"/>
+          <ellipse cx="48" cy="62" rx="6" ry="7" fill="#2D2D2D"/>
+          <ellipse cx="50" cy="61" rx="2.5" ry="2.5" fill="#fff"/>
+          <ellipse cx="72" cy="62" rx="6" ry="7" fill="#2D2D2D"/>
+          <ellipse cx="74" cy="61" rx="2.5" ry="2.5" fill="#fff"/>
+          <path d="M52 76c5 6 16 6 21 0" stroke="#FF7F6B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="38" cy="72" rx="8" ry="4" fill="#FF7F6B" opacity=".2"/>
+          <ellipse cx="82" cy="72" rx="8" ry="4" fill="#FF7F6B" opacity=".2"/>
+        </svg>
+        <div class="evo-name">갈릭프렌즈</div>
+        <div class="evo-range">Day 34-66</div>
+      </div>
+      <div class="evo-connector">&#8594;</div>
+      <div class="evo-stage">
+        <svg viewBox="0 0 120 120" fill="none">
+          <!-- 마늘요정 -->
+          <ellipse cx="60" cy="68" rx="32" ry="38" fill="#F5ECD7"/>
+          <path d="M48 34c-4-16 12-26 12-26s16 10 12 26" fill="#00C73C"/>
+          <!-- Wings -->
+          <path d="M28 58c-12-6-18-22-10-26 5 10 16 16 26 14" fill="#E3F2FD" opacity=".7"/>
+          <path d="M92 58c12-6 18-22 10-26-5 10-16 16-26 14" fill="#E3F2FD" opacity=".7"/>
+          <!-- Crown -->
+          <path d="M42 36l5-12 6 8 6-10 6 10 6-8 5 12z" fill="#D4A843"/>
+          <circle cx="60" cy="24" r="2.5" fill="#FF7F6B"/>
+          <!-- Face -->
+          <ellipse cx="48" cy="62" rx="5" ry="6" fill="#2D2D2D"/>
+          <ellipse cx="50" cy="61" rx="2" ry="2" fill="#fff"/>
+          <ellipse cx="72" cy="62" rx="5" ry="6" fill="#2D2D2D"/>
+          <ellipse cx="74" cy="61" rx="2" ry="2" fill="#fff"/>
+          <path d="M52 76c5 6 16 6 21 0" stroke="#FF7F6B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="38" cy="71" rx="8" ry="3.5" fill="#FF7F6B" opacity=".2"/>
+          <ellipse cx="82" cy="71" rx="8" ry="3.5" fill="#FF7F6B" opacity=".2"/>
+          <!-- Sparkles -->
+          <circle cx="18" cy="48" r="2.5" fill="#D4A843" opacity=".5"><animate attributeName="opacity" values=".5;0;.5" dur="1.5s" repeatCount="indefinite"/></circle>
+          <circle cx="102" cy="42" r="2" fill="#D4A843" opacity=".4"><animate attributeName="opacity" values=".4;0;.4" dur="2s" repeatCount="indefinite"/></circle>
+        </svg>
+        <div class="evo-name">마늘요정</div>
+        <div class="evo-range">Day 67-100</div>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:13px;color:var(--text-light)">"마늘 먹고 사람 될게요" -- 단군 신화의 100일을 현대적으로 재해석</p>
+  </div>
+</section>
+
+<!-- ==================== BEFORE/AFTER APP ==================== -->
+<section class="section alt center">
+  <div class="container">
+    <span class="section-label reveal">APP REBRAND</span>
+    <h2 class="section-title reveal">앱 개편 Before &#8594; After</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">광고 범벅이었던 쇼핑앱을 나만의 마늘밭으로 탈바꿈</p>
+
+    <div class="compare reveal">
+      <div class="compare-card">
+        <img src="../reference/광고범벅_쇼핑앱_화면.png" alt="Before - 광고 범벅 쇼핑앱" loading="lazy">
+        <span class="compare-label before">BEFORE</span>
+        <div class="compare-caption">
+          <strong>광고 범벅</strong>
+          <span>배너, 팝업, 쿠폰... 고객은 뒷전</span>
+        </div>
+      </div>
+      <div class="compare-card">
+        <img src="../reference/지마켓_리브랜딩_홈개편_목업.png" alt="After - 나만의 마늘밭" loading="lazy">
+        <span class="compare-label after">AFTER</span>
+        <div class="compare-caption">
+          <strong>나만의 마늘밭</strong>
+          <span>초개인화 피드 + 마늘 키우기 통합</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CHARACTER LINEUP ==================== -->
+<section class="section center">
+  <div class="container">
+    <span class="section-label reveal">GARLIC FRIENDS</span>
+    <h2 class="section-title reveal">갈릭 프렌즈 캐릭터</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">마늘에서 태어난 친구들이 갈릭 세상을 함께 만들어갑니다</p>
+
+    <div class="char-grid">
+      <div class="char-card reveal">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- 마누리 (마늘) -->
+          <ellipse cx="40" cy="45" rx="22" ry="26" fill="#F5ECD7"/>
+          <path d="M34 22c-2-10 6-16 6-16s8 6 6 16" fill="#00C73C"/>
+          <circle cx="33" cy="42" r="3" fill="#2D2D2D"/><circle cx="34" cy="41" r="1.2" fill="#fff"/>
+          <circle cx="47" cy="42" r="3" fill="#2D2D2D"/><circle cx="48" cy="41" r="1.2" fill="#fff"/>
+          <path d="M36 50c2 3 7 3 9 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="27" cy="47" rx="4" ry="2" fill="#FF7F6B" opacity=".2"/>
+          <ellipse cx="53" cy="47" rx="4" ry="2" fill="#FF7F6B" opacity=".2"/>
+        </svg>
+        <div class="char-name">마누리</div>
+        <div class="char-type">마늘 캐릭터</div>
+      </div>
+      <div class="char-card reveal">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- 곰두리 (곰) -->
+          <ellipse cx="40" cy="46" rx="22" ry="24" fill="#8D6E63"/>
+          <circle cx="22" cy="28" r="8" fill="#8D6E63"/>
+          <circle cx="22" cy="28" r="5" fill="#A1887F"/>
+          <circle cx="58" cy="28" r="8" fill="#8D6E63"/>
+          <circle cx="58" cy="28" r="5" fill="#A1887F"/>
+          <ellipse cx="40" cy="44" rx="14" ry="12" fill="#D7CCC8"/>
+          <circle cx="34" cy="40" r="3" fill="#2D2D2D"/><circle cx="35" cy="39" r="1.2" fill="#fff"/>
+          <circle cx="46" cy="40" r="3" fill="#2D2D2D"/><circle cx="47" cy="39" r="1.2" fill="#fff"/>
+          <ellipse cx="40" cy="48" rx="3" ry="2" fill="#2D2D2D"/>
+          <path d="M36 52c2 2 6 2 8 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="char-name">곰두리</div>
+        <div class="char-type">곰 캐릭터</div>
+      </div>
+      <div class="char-card reveal">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- 호두리 (호랑이) -->
+          <ellipse cx="40" cy="46" rx="22" ry="24" fill="#FFB74D"/>
+          <circle cx="24" cy="28" r="7" fill="#FFB74D"/>
+          <circle cx="24" cy="28" r="4" fill="#FFF8E1"/>
+          <circle cx="56" cy="28" r="7" fill="#FFB74D"/>
+          <circle cx="56" cy="28" r="4" fill="#FFF8E1"/>
+          <!-- Stripes -->
+          <path d="M30 34l-4 6" stroke="#E65100" stroke-width="2" stroke-linecap="round"/>
+          <path d="M50 34l4 6" stroke="#E65100" stroke-width="2" stroke-linecap="round"/>
+          <path d="M40 30v5" stroke="#E65100" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="34" cy="42" r="3" fill="#2D2D2D"/><circle cx="35" cy="41" r="1.2" fill="#fff"/>
+          <circle cx="46" cy="42" r="3" fill="#2D2D2D"/><circle cx="47" cy="41" r="1.2" fill="#fff"/>
+          <path d="M36 50c2 2 6 2 8 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="char-name">호두리</div>
+        <div class="char-type">호랑이 캐릭터</div>
+      </div>
+      <div class="char-card reveal">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- 쑥이 (쑥) -->
+          <ellipse cx="40" cy="46" rx="20" ry="24" fill="#A5D6A7"/>
+          <path d="M32 24c-3-8 3-16 8-18 5 2 11 10 8 18" fill="#66BB6A"/>
+          <path d="M38 24c-1-6 2-12 2-12" stroke="#4CAF50" stroke-width="1" fill="none"/>
+          <circle cx="34" cy="42" r="3" fill="#2D2D2D"/><circle cx="35" cy="41" r="1.2" fill="#fff"/>
+          <circle cx="46" cy="42" r="3" fill="#2D2D2D"/><circle cx="47" cy="41" r="1.2" fill="#fff"/>
+          <path d="M36 50c2 2 6 2 8 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="28" cy="47" rx="4" ry="2" fill="#FF7F6B" opacity=".15"/>
+          <ellipse cx="52" cy="47" rx="4" ry="2" fill="#FF7F6B" opacity=".15"/>
+        </svg>
+        <div class="char-name">쑥이</div>
+        <div class="char-type">쑥 캐릭터</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GOODS GALLERY ==================== -->
+<section class="section alt center">
+  <div class="container">
+    <span class="section-label reveal">GOODS & MERCH</span>
+    <h2 class="section-title reveal">갈릭 굿즈 컬렉션</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">갈릭 프렌즈를 일상에서 만나는 방법</p>
+
+    <div class="goods-grid">
+      <div class="goods-card reveal">
+        <div class="goods-icon sticker">&#127915;</div>
+        <div class="goods-name">스티커팩</div>
+        <div class="goods-price">3,900원</div>
+      </div>
+      <div class="goods-card reveal">
+        <div class="goods-icon doll">&#129528;</div>
+        <div class="goods-name">마늘 인형</div>
+        <div class="goods-price">19,900원</div>
+      </div>
+      <div class="goods-card reveal">
+        <div class="goods-icon keyring">&#128273;</div>
+        <div class="goods-name">키링</div>
+        <div class="goods-price">8,900원</div>
+      </div>
+      <div class="goods-card reveal">
+        <div class="goods-icon bag">&#128092;</div>
+        <div class="goods-name">에코백</div>
+        <div class="goods-price">15,900원</div>
+      </div>
+      <div class="goods-card reveal">
+        <div class="goods-icon wand">&#10024;</div>
+        <div class="goods-name">마늘봉</div>
+        <div class="goods-price">비매품 (이벤트)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SNS MEME CULTURE ==================== -->
+<section class="section center">
+  <div class="container">
+    <span class="section-label reveal">SNS MEME CULTURE</span>
+    <h2 class="section-title reveal">갈릭 밈 문화</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">자연스럽게 퍼지는 마늘 밈, SNS에서 만나는 갈릭</p>
+
+    <div class="meme-grid">
+      <div class="meme-bubble left reveal">
+        <span class="meme-user">마늘러버_2026</span>
+        나 오늘 마늘 몇 알이야?? 42알 모았다 ㅋㅋㅋ
+        <span class="meme-time">오후 3:24</span>
+      </div>
+      <div class="meme-bubble right reveal">
+        <span class="meme-user">쇼핑요정</span>
+        헐 나 아직 28알인데... 마늘 키우러 갈릭 가야지!
+        <span class="meme-time">오후 3:25</span>
+      </div>
+      <div class="meme-bubble left reveal">
+        <span class="meme-user">마늘러버_2026</span>
+        ㅋㅋㅋ 빨리 키워! 66알 되면 마늘요정 된다!
+        <span class="meme-time">오후 3:26</span>
+      </div>
+      <div class="meme-bubble right reveal">
+        <span class="meme-user">쇼핑요정</span>
+        마늘 먹고 사람 될게요 &#129476;&#129476;&#129476;
+        <span class="meme-time">오후 3:26</span>
+      </div>
+      <div class="meme-hashtag reveal">#갈릭 #마늘키우기 #너마늘 #마늘먹고사람될게요 #갈릭프렌즈</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="section green-bg center">
+  <div class="container">
+    <span class="section-label reveal">JOIN THE GARLIC UNIVERSE</span>
+    <h2 class="section-title reveal" style="margin-bottom:12px">갈릭 세상에<br>합류하세요</h2>
+    <p class="section-desc reveal" style="margin-left:auto;margin-right:auto">마늘 모으고, 마늘 키우고, 갈릭 프렌즈와 함께<br>새로운 쇼핑 경험을 시작하세요.</p>
+    <button class="att-cta reveal" style="background:#fff;color:var(--garlic-dark-green)" onclick="this.textContent='갈릭 앱에서 만나요!'">갈릭 시작하기</button>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<!-- BLOG FOOTER -->
+<footer class="blog-footer">
+  <div class="bf-inner">
+    <div class="bf-logo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+      <span style="font-family:'GmarketSans';font-weight:700;font-size:16px;color:#1B4332;margin-left:4px">Garlic Blog</span>
+    </div>
+    <p class="bf-slogan">나마늘 위한 마켓</p>
+    <div class="bf-links">
+      <a href="event_toemacon.html">퇴마콘</a>
+      <a href="garlic_tamagotchi.html">마늘키우기</a>
+      <a href="event_uiseong_festival.html">의성축제</a>
+      <a href="garlic_global.html">글로벌</a>
+      <a href="garlic_ip.html">마늘IP</a>
+    </div>
+    <p class="bf-copy">&copy; 2026 Garlic. 불사조기사단.</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+
+</body>
+</html>
