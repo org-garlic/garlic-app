@@ -1,0 +1,24 @@
+{
+  "name": "Garlic - 나마늘 위한 마켓",
+  "short_name": "Garlic",
+  "description": "나마늘 위한 마켓 — Project Garlic",
+  "start_url": "./01_home.html",
+  "display": "standalone",
+  "background_color": "#FAF6EE",
+  "theme_color": "#00C73C",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "../reference/G_Logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "../reference/G_Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

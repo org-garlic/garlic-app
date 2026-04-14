@@ -2,8 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00C73C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
-<link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Garlic - 나마늘 위한 마켓 | 검색</title>
 <style>
@@ -356,5 +360,6 @@ button{border:none;background:none;cursor:pointer;font-family:var(--font)}
   </a>
 </nav>
 
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js")}</script>
 </body>
 </html>
