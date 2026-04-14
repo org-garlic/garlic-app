@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic - 나마늘 위한 마켓 | 마늘밭</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#FAF6EE;--card:#fff;--green:#00C73C;--green-light:#E8F8ED;--coral:#FF7F6B;--gold:#D4A843;--gold-light:#FFF3D6;--text:#333;--text-light:#888;--border:#EEE}
+body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-top:52px;padding-bottom:130px}
+
+/* Header */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);max-width:640px;margin:0 auto}
+@media(min-width:641px){.header{left:50%;transform:translateX(-50%)}}
+.h-logo{display:flex;align-items:center;flex-shrink:0;text-decoration:none}
+.h-search{flex:1;position:relative}
+.h-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--border);border-radius:8px;background:#F7F7F7;font-size:13px;font-family:'Pretendard';color:var(--text);outline:none;cursor:pointer}
+.h-search input::placeholder{color:#999;font-weight:300}
+.h-search .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#999}
+.h-actions{display:flex;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;position:relative}
+.h-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:#FF4444;border-radius:50%;border:1.5px solid #fff}
+
+/* Cart Header */
+.cart-head{padding:20px 16px 12px;display:flex;justify-content:space-between;align-items:center}
+.cart-title{font-size:20px;font-weight:700}
+.cart-title span{color:var(--green);font-size:14px;font-weight:500;margin-left:6px}
+.cart-actions{display:flex;align-items:center;gap:12px}
+.select-all{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-light);cursor:pointer}
+.select-all input[type=checkbox]{width:18px;height:18px;accent-color:var(--green);cursor:pointer}
+.delete-btn{font-size:12px;color:var(--coral);background:none;border:none;cursor:pointer;font-family:'Pretendard'}
+
+/* Cart Items */
+.cart-list{padding:0 16px}
+.cart-item{background:var(--card);border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid var(--border);position:relative;transition:all .3s}
+.cart-item.removing{opacity:0;transform:translateX(-100%);max-height:0;padding:0;margin:0;overflow:hidden}
+.ci-top{display:flex;gap:12px;align-items:flex-start}
+.ci-check{margin-top:4px}
+.ci-check input{width:18px;height:18px;accent-color:var(--green);cursor:pointer}
+.ci-img{width:90px;height:90px;border-radius:10px;overflow:hidden;flex-shrink:0}
+.ci-img img{width:100%;height:100%;object-fit:cover}
+.ci-info{flex:1;min-width:0}
+.ci-brand{font-size:11px;color:var(--text-light);margin-bottom:2px}
+.ci-name{font-size:14px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-option{font-size:11px;color:var(--text-light);margin-bottom:6px}
+.ci-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-bottom:6px}
+.ci-badge.dna{background:rgba(124,92,252,.1);color:#7C5CFC}
+.ci-badge.free{background:var(--green-light);color:var(--green)}
+.ci-badge.rec{background:rgba(255,127,107,.1);color:var(--coral)}
+.ci-price{display:flex;align-items:baseline;gap:6px}
+.ci-discount{font-size:15px;font-weight:700;color:var(--coral)}
+.ci-final{font-size:16px;font-weight:700;color:var(--text)}
+.ci-original{font-size:12px;color:#bbb;text-decoration:line-through}
+.ci-delete{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,.04);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#999;transition:background .2s}
+.ci-delete:hover{background:rgba(0,0,0,.08)}
+.ci-qty{display:flex;align-items:center;gap:0;margin-top:10px}
+.ci-qty button{width:30px;height:30px;border:1px solid var(--border);background:var(--card);border-radius:8px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);transition:background .2s}
+.ci-qty button:active{background:var(--green-light)}
+.ci-qty .qty-num{width:36px;text-align:center;font-size:14px;font-weight:600}
+
+/* Benefit Banner */
+.benefit{margin:12px 16px;background:linear-gradient(135deg,var(--gold),#E8C060);border-radius:14px;padding:16px 20px;color:#fff}
+.benefit-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.benefit-sub{font-size:12px;opacity:.85}
+.benefit-cta{display:inline-block;margin-top:10px;background:rgba(255,255,255,.25);color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.3)}
+
+/* Recommend */
+.rec-section{padding:20px 16px 12px}
+.rec-title{font-size:16px;font-weight:700;margin-bottom:12px}
+.rec-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.rec-scroll::-webkit-scrollbar{display:none}
+.rec-card{min-width:140px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.rec-card img{width:100%;height:140px;object-fit:cover}
+.rec-info{padding:10px}
+.rec-name{font-size:12px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-price{font-size:14px;font-weight:700;margin-bottom:8px}
+.rec-add{width:100%;padding:8px;background:var(--green-light);color:var(--green);border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Pretendard';transition:background .2s}
+.rec-add:active{background:#C8F0D4}
+
+/* Checkout Bar */
+.checkout{position:fixed;bottom:56px;left:0;right:0;z-index:99;background:var(--card);border-top:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;max-width:640px;margin:0 auto;box-shadow:0 -4px 20px rgba(0,0,0,.06)}
+@media(min-width:641px){.checkout{left:50%;transform:translateX(-50%)}}
+.ck-info{flex:1}
+.ck-count{font-size:12px;color:var(--text-light);margin-bottom:2px}
+.ck-price{font-size:20px;font-weight:700;color:var(--text)}
+.ck-saved{font-size:11px;color:var(--coral);font-weight:500}
+.ck-btn{background:var(--green);color:#fff;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Pretendard';transition:transform .2s;flex-shrink:0}
+.ck-btn:active{transform:scale(.96)}
+
+/* Empty State */
+.empty{display:none;text-align:center;padding:80px 24px}
+.empty svg{width:120px;height:120px;margin-bottom:16px}
+.empty-title{font-size:18px;font-weight:700;margin-bottom:6px}
+.empty-sub{font-size:14px;color:var(--text-light);margin-bottom:24px}
+.empty-cta{display:inline-block;background:var(--green);color:#fff;padding:12px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none}
+
+/* Toast */
+.toast{position:fixed;bottom:140px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:12px 24px;border-radius:30px;font-size:13px;font-weight:500;z-index:200;opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Bottom Nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:6px 0 env(safe-area-inset-bottom,6px);max-width:640px;margin:0 auto}
+@media(min-width:641px){.bnav{left:50%;transform:translateX(-50%)}}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#999;font-size:10px;font-weight:500;text-decoration:none}
+.bn svg{stroke:#999}
+.bn.active{color:var(--green)}
+.bn.active svg{stroke:var(--green)}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a href="01_home.html" class="h-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans';font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </a>
+  <div class="h-search">
+    <svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly onclick="location.href='11_search.html'">
+  </div>
+  <div class="h-actions">
+    <a href="10_notifications.html" class="h-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="h-dot"></span></a>
+    <a href="04_mypage.html" class="h-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+  </div>
+</header>
+
+<!-- Cart Header -->
+<div class="cart-head" id="cartHead">
+  <div class="cart-title">나의 마늘밭 🧄 <span id="cartCount">3개의 마늘이 자라고 있어요</span></div>
+</div>
+<div style="padding:0 16px 8px;display:flex;justify-content:space-between;align-items:center">
+  <label class="select-all"><input type="checkbox" id="selectAll" checked onchange="toggleAll(this.checked)"> 전체 선택</label>
+  <button class="delete-btn" onclick="deleteSelected()">선택 삭제</button>
+</div>
+
+<!-- Cart Items -->
+<div class="cart-list" id="cartList">
+  <div class="cart-item" data-id="1" data-price="29900" data-qty="1">
+    <button class="ci-delete" onclick="removeItem(this)" aria-label="삭제">&times;</button>
+    <div class="ci-top">
+      <div class="ci-check"><input type="checkbox" class="item-check" checked></div>
+      <div class="ci-img"><img src="https://picsum.photos/seed/cart1/120/120" alt="상품"></div>
+      <div class="ci-info">
+        <div class="ci-brand">MANURI</div>
+        <div class="ci-name">오버핏 린넨 셔츠</div>
+        <div class="ci-option">베이지 · M</div>
+        <span class="ci-badge dna">갈릭 DNA 92%</span>
+        <div class="ci-price"><span class="ci-discount">34%</span><span class="ci-final">29,900원</span><span class="ci-original">45,000원</span></div>
+      </div>
+    </div>
+    <div class="ci-qty"><button onclick="changeQty(this,-1)">−</button><span class="qty-num">1</span><button onclick="changeQty(this,1)">+</button></div>
+  </div>
+
+  <div class="cart-item" data-id="2" data-price="24900" data-qty="1">
+    <button class="ci-delete" onclick="removeItem(this)" aria-label="삭제">&times;</button>
+    <div class="ci-top">
+      <div class="ci-check"><input type="checkbox" class="item-check" checked></div>
+      <div class="ci-img"><img src="https://picsum.photos/seed/cart2/120/120" alt="상품"></div>
+      <div class="ci-info">
+        <div class="ci-brand">의성농장</div>
+        <div class="ci-name">흑마늘 진액 30포</div>
+        <div class="ci-option">30포 × 1세트</div>
+        <span class="ci-badge free">무료배송</span>
+        <div class="ci-price"><span class="ci-discount">50%</span><span class="ci-final">24,900원</span><span class="ci-original">49,800원</span></div>
+      </div>
+    </div>
+    <div class="ci-qty"><button onclick="changeQty(this,-1)">−</button><span class="qty-num">1</span><button onclick="changeQty(this,1)">+</button></div>
+  </div>
+
+  <div class="cart-item" data-id="3" data-price="21600" data-qty="1">
+    <button class="ci-delete" onclick="removeItem(this)" aria-label="삭제">&times;</button>
+    <div class="ci-top">
+      <div class="ci-check"><input type="checkbox" class="item-check" checked></div>
+      <div class="ci-img"><img src="https://picsum.photos/seed/cart3/120/120" alt="상품"></div>
+      <div class="ci-info">
+        <div class="ci-brand">GARLIC BEAUTY</div>
+        <div class="ci-name">세라마이드 수분 토너</div>
+        <div class="ci-option">200ml</div>
+        <span class="ci-badge rec">마누리 추천 ❤️</span>
+        <div class="ci-price"><span class="ci-discount">28%</span><span class="ci-final">21,600원</span><span class="ci-original">30,000원</span></div>
+      </div>
+    </div>
+    <div class="ci-qty"><button onclick="changeQty(this,-1)">−</button><span class="qty-num">1</span><button onclick="changeQty(this,1)">+</button></div>
+  </div>
+</div>
+
+<!-- Benefit -->
+<div class="benefit">
+  <div class="benefit-title">🧄 꼭 멤버십이면 전 상품 무료배송!</div>
+  <div class="benefit-sub">지금 가입하면 3,000원 추가 할인 쿠폰까지</div>
+  <a href="#" class="benefit-cta">멤버십 가입하기</a>
+</div>
+
+<!-- Recommend -->
+<div class="rec-section">
+  <div class="rec-title">함께 심으면 좋은 마늘 🌱</div>
+  <div class="rec-scroll">
+    <div class="rec-card"><img src="https://picsum.photos/seed/rec1/300/300" alt="추천"><div class="rec-info"><div class="rec-name">마늘 에센스 오일</div><div class="rec-price">18,000원</div><button class="rec-add" onclick="showToast()">마늘밭에 담기</button></div></div>
+    <div class="rec-card"><img src="https://picsum.photos/seed/rec2/300/300" alt="추천"><div class="rec-info"><div class="rec-name">오가닉 캔들 세트</div><div class="rec-price">15,900원</div><button class="rec-add" onclick="showToast()">마늘밭에 담기</button></div></div>
+    <div class="rec-card"><img src="https://picsum.photos/seed/rec3/300/300" alt="추천"><div class="rec-info"><div class="rec-name">마누리 키링 굿즈</div><div class="rec-price">8,000원</div><button class="rec-add" onclick="showToast()">마늘밭에 담기</button></div></div>
+    <div class="rec-card"><img src="https://picsum.photos/seed/rec4/300/300" alt="추천"><div class="rec-info"><div class="rec-name">흑마늘 장아찌</div><div class="rec-price">12,900원</div><button class="rec-add" onclick="showToast()">마늘밭에 담기</button></div></div>
+  </div>
+</div>
+
+<!-- Empty State -->
+<div class="empty" id="emptyState">
+  <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="var(--green-light)"/><ellipse cx="60" cy="65" rx="22" ry="26" fill="#F5ECD7"/><path d="M52 42c-2-12 8-20 8-20s10 8 8 20" fill="#00C73C"/><circle cx="52" cy="60" r="3.5" fill="#333"/><circle cx="68" cy="60" r="3.5" fill="#333"/><path d="M54 72c3 3 9 3 12 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round" transform="rotate(180 60 72)"/><circle cx="46" cy="66" r="3" fill="#FFD4CC" opacity=".4"/><circle cx="74" cy="66" r="3" fill="#FFD4CC" opacity=".4"/></svg>
+  <div class="empty-title">마늘밭이 비어있어요 😢</div>
+  <div class="empty-sub">마늘을 심으러 갈까요?</div>
+  <a href="01_home.html" class="empty-cta">쇼핑하러 가기 →</a>
+</div>
+
+<!-- Checkout Bar -->
+<div class="checkout" id="checkoutBar">
+  <div class="ck-info">
+    <div class="ck-count" id="ckCount">총 3개 상품</div>
+    <div class="ck-price" id="ckPrice">76,400원</div>
+    <div class="ck-saved" id="ckSaved">48,400원 할인 적용</div>
+  </div>
+  <button class="ck-btn" onclick="alert('주문이 완료되었습니다! 🧄')">주문하기</button>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">마늘밭에 담았어요! 🧄</div>
+
+<!-- Bottom Nav -->
+<nav class="bnav">
+  <a href="01_home.html" class="bn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/></svg><span>홈</span></a>
+  <a href="12_category.html" class="bn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>카테고리</span></a>
+  <a href="13_cart.html" class="bn active"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg><span>마늘밭</span></a>
+  <a href="garlic_tamagotchi.html" class="bn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>마늘키우기</span></a>
+  <a href="04_mypage.html" class="bn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z"/></svg><span>마이갈릭</span></a>
+</nav>
+
+<script>
+function updateTotal(){
+  var items=document.querySelectorAll('.cart-item:not(.removing)');
+  var total=0,count=0,original=0;
+  items.forEach(function(item){
+    var cb=item.querySelector('.item-check');
+    if(cb&&cb.checked){
+      var p=parseInt(item.dataset.price)||0;
+      var q=parseInt(item.dataset.qty)||1;
+      total+=p*q;count+=q;
+      var disc=item.querySelector('.ci-discount');
+      if(disc){var rate=parseInt(disc.textContent)/100;original+=Math.round(p*q/(1-rate));}
+      else{original+=p*q;}
+    }
+  });
+  document.getElementById('ckCount').textContent='총 '+count+'개 상품';
+  document.getElementById('ckPrice').textContent=total.toLocaleString()+'원';
+  document.getElementById('ckSaved').textContent=(original-total>0?(original-total).toLocaleString()+'원 할인 적용':'');
+  document.getElementById('cartCount').textContent=items.length+'개의 마늘이 자라고 있어요';
+  if(items.length===0){
+    document.getElementById('emptyState').style.display='block';
+    document.getElementById('checkoutBar').style.display='none';
+    document.getElementById('cartHead').style.display='none';
+  }
+}
+function changeQty(btn,delta){
+  var item=btn.closest('.cart-item');
+  var num=item.querySelector('.qty-num');
+  var q=Math.max(1,parseInt(num.textContent)+delta);
+  num.textContent=q;item.dataset.qty=q;
+  var price=parseInt(item.dataset.price)*q;
+  item.querySelector('.ci-final').textContent=price.toLocaleString()+'원';
+  updateTotal();
+}
+function removeItem(btn){
+  var item=btn.closest('.cart-item');
+  item.classList.add('removing');
+  setTimeout(function(){item.remove();updateTotal();},300);
+}
+function toggleAll(checked){
+  document.querySelectorAll('.item-check').forEach(function(cb){cb.checked=checked;});
+  updateTotal();
+}
+function deleteSelected(){
+  document.querySelectorAll('.item-check:checked').forEach(function(cb){
+    var item=cb.closest('.cart-item');
+    item.classList.add('removing');
+    setTimeout(function(){item.remove();updateTotal();},300);
+  });
+}
+function showToast(){
+  var t=document.getElementById('toast');t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},2000);
+}
+document.querySelectorAll('.item-check').forEach(function(cb){cb.addEventListener('change',updateTotal);});
+updateTotal();
+</script>
+</body>
+</html>
