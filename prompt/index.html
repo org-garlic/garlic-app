@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧄 Project Garlic — 디자인 목업 갤러리</title>
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'GmarketSans',sans-serif;background:#0d1117;color:#fff;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 24px}
+.header{text-align:center;margin-bottom:48px}
+.logo{font-size:48px;margin-bottom:8px}
+.title{font-size:clamp(28px,5vw,42px);font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#4CAF50,#D4A843);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.badge{display:inline-block;background:rgba(76,175,80,.15);border:1px solid rgba(76,175,80,.3);color:#4CAF50;border-radius:20px;padding:4px 14px;font-size:12px;margin-top:12px}
+h2.section-title{font-size:18px;font-weight:700;color:#D4A843;margin:32px 0 16px;padding-left:12px;border-left:3px solid #D4A843}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+a.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;transition:all .3s}
+a.card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+.card-num{font-size:28px;font-weight:700;color:rgba(255,255,255,.1);min-width:40px;text-align:center}
+.card-info{flex:1}
+.card-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.card-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.5}
+.card-arrow{font-size:20px;color:rgba(255,255,255,.2)}
+.card.main .card-num{color:rgba(76,175,80,.3)}
+.card.event .card-num{color:rgba(212,168,67,.3)}
+.footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.footer p{font-size:12px;color:rgba(255,255,255,.3)}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">🧄</div>
+    <h1 class="title">Project Garlic</h1>
+    <p class="subtitle">G마켓 → Garlic 리브랜딩 디자인 목업</p>
+    <p class="subtitle">진짜 '나마늘' 위한 쇼핑의 시작</p>
+    <span class="badge">PP1K 피치 · 불사조기사단</span>
+  </div>
+
+  <h2 class="section-title">메인 디자인 5종</h2>
+  <div class="grid">
+    <a href="01_garlic_myscene.html" class="card main">
+      <div class="card-num">01</div>
+      <div class="card-info"><div class="card-title">갈릭 마이씬 (MySCENE)</div><div class="card-desc">초개인화 피드 중심 — "나만의 쇼핑몰이 열린다"<br>TikTok/Instagram 피드형 · Garlic Green + Warm Cream</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="02_garlic_heritage.html" class="card main">
+      <div class="card-num">02</div>
+      <div class="card-info"><div class="card-title">갈릭 헤리티지 (Heritage)</div><div class="card-desc">26년 역사 + 새로운 시작 — "전통의 현대적 재해석"<br>에디토리얼 매거진 · Deep Forest + Gold</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="03_garlic_playground.html" class="card main">
+      <div class="card-num">03</div>
+      <div class="card-info"><div class="card-title">갈릭 플레이그라운드 (Playground)</div><div class="card-desc">쇼핑은 놀이다 — "갈릭파크에 놀러와!"<br>카드 그리드 + 인터랙티브 · Coral + Mint + Purple</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="04_garlic_future.html" class="card main">
+      <div class="card-num">04</div>
+      <div class="card-info"><div class="card-title">갈릭 퓨처 (Future)</div><div class="card-desc">AI Ego-Sync 기술력 강조 — "쇼핑의 미래가 온다"<br>다크모드 글래스모피즘 · Night + Electric Green</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="05_garlic_marketday.html" class="card main">
+      <div class="card-num">05</div>
+      <div class="card-info"><div class="card-title">갈릭 마켓데이 (MarketDay)</div><div class="card-desc">따뜻한 동네 시장 감성 — "사람 냄새 나는 마켓"<br>메이슨리 그리드 · Terracotta + Sage + Oat</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+
+  <h2 class="section-title">3단계 액션플랜 이벤트</h2>
+  <div class="grid">
+    <a href="event_01_toemacon.html" class="card event">
+      <div class="card-num">E1</div>
+      <div class="card-info"><div class="card-title">G마켓 퇴마 선포</div><div class="card-desc">1단계 (2026.06~2027.08) — 퇴마콘서트 + 마늘봉<br>"1999~2026, G마켓 퇴마 선포"</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="event_02_100days.html" class="card event">
+      <div class="card-num">E2</div>
+      <div class="card-info"><div class="card-title">100일 프로모션</div><div class="card-desc">2단계 (2027.09~11) — 꼭 멤버십 + 100일 챌린지<br>"마늘 먹고 사람 되기까지 100일"</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a href="event_03_grand_launch.html" class="card event">
+      <div class="card-num">E3</div>
+      <div class="card-info"><div class="card-title">Garlic 공식 런칭</div><div class="card-desc">3단계 (2027.12~) — 갈릭데이 + 갈릭파크 + 생태계<br>"드디어 사람이 됐다"</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 Project Garlic · 불사조기사단 · Claude Code</p>
+  </div>
+</div>
+</body>
+</html>

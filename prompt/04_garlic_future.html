@@ -1,0 +1,2278 @@
+<!--
+  ============================================================
+  GARLIC FUTURE (갈릭 퓨처) — Design Concept 04
+  ============================================================
+  Concept: AI Ego-Sync 기술력 강조 — "쇼핑의 미래가 온다"
+  Layout:  Dark mode dashboard. Glassmorphism cards + data viz
+  Brand:   G.A.R.L.I.C = Global · Authentic · Rooted · Lifestyle · Identity · Commerce
+  Target:  2030 MZ Generation
+  Colors:  Night #0D1117 · Electric Green #00FF88 · Glass White rgba(255,255,255,0.08)
+  Fonts:   Space Grotesk (titles) + Pretendard (body)
+  Mood:    "테크 기업이 만든 커머스" — AI가 진짜 나를 안다는 신뢰
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic Future — 갈릭 퓨처</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --night: #0D1117;
+  --night-surface: #161B22;
+  --night-elevated: #1C2129;
+  --night-border: #30363D;
+  --electric: #00FF88;
+  --electric-dim: #00CC6E;
+  --electric-glow: rgba(0, 255, 136, 0.15);
+  --electric-glow-strong: rgba(0, 255, 136, 0.3);
+  --electric-glow-subtle: rgba(0, 255, 136, 0.06);
+  --glass-white: rgba(255, 255, 255, 0.08);
+  --glass-white-strong: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-tertiary: #6E7681;
+  --accent-blue: #58A6FF;
+  --accent-purple: #BC8CFF;
+  --accent-orange: #FFA657;
+  --accent-pink: #FF7EB6;
+  --danger: #FF4757;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --header-h: 56px;
+  --nav-h: 68px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--night);
+  color: var(--text-primary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding-top: calc(var(--header-h) + var(--safe-top));
+  padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 16px);
+}
+
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; cursor: pointer; font-family: inherit; color: inherit; }
+ul { list-style: none; }
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--night-border); border-radius: 4px; }
+
+/* ========== NOISE OVERLAY ========== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ========== BACKGROUND GRID ========== */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(var(--electric) 1px, transparent 1px),
+    linear-gradient(90deg, var(--electric) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ========== PARTICLE CANVAS ========== */
+#particleCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+main { position: relative; z-index: 1; }
+
+/* ========== GLASSMORPHISM UTILITIES ========== */
+.glass {
+  background: var(--glass-white);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.glass-strong {
+  background: var(--glass-white-strong);
+  backdrop-filter: blur(30px) saturate(1.6);
+  -webkit-backdrop-filter: blur(30px) saturate(1.6);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+}
+
+/* ========== GLOW EFFECTS ========== */
+.glow-text {
+  text-shadow: 0 0 20px var(--electric-glow-strong), 0 0 40px var(--electric-glow);
+}
+
+.glow-border {
+  box-shadow: 0 0 15px var(--electric-glow), inset 0 0 15px var(--electric-glow-subtle);
+}
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: calc(var(--header-h) + var(--safe-top));
+  padding-top: var(--safe-top);
+  background: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 12px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.header-logo svg { width: 22px; height: 22px; }
+
+.header-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--electric);
+  letter-spacing: -0.02em;
+}
+
+.header-search {
+  flex: 1;
+  height: 36px;
+  background: var(--glass-white);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.header-search:focus-within {
+  border-color: var(--electric);
+  box-shadow: 0 0 12px var(--electric-glow);
+}
+
+.header-search svg {
+  width: 16px; height: 16px;
+  stroke: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.header-search input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+.header-search input::placeholder { color: var(--text-tertiary); }
+
+.header-actions { display: flex; gap: 4px; flex-shrink: 0; align-items: center; }
+
+.header-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.header-btn:hover { background: var(--glass-white); }
+
+.header-btn svg {
+  width: 20px; height: 20px;
+  stroke: var(--text-secondary);
+  stroke-width: 1.8;
+  fill: none;
+}
+
+.header-btn .notif-dot {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 6px; height: 6px;
+  background: var(--electric);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--electric-glow-strong);
+}
+
+.header-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--electric), var(--accent-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--night);
+}
+
+/* ========== DNA ANALYSIS HERO ========== */
+.dna-hero {
+  padding: 20px 16px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.dna-hero-card {
+  position: relative;
+  padding: 28px 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0,255,136,0.08) 0%, rgba(88,166,255,0.06) 50%, rgba(188,140,255,0.06) 100%);
+  border: 1px solid rgba(0,255,136,0.15);
+  border-radius: 20px;
+}
+
+.dna-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, var(--electric-glow), transparent, rgba(88,166,255,0.1), transparent);
+  animation: heroRotate 8s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes heroRotate {
+  to { transform: rotate(360deg); }
+}
+
+.dna-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.dna-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(0,255,136,0.1);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 20px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--electric);
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.dna-status .pulse-dot {
+  width: 6px; height: 6px;
+  background: var(--electric);
+  border-radius: 50%;
+  animation: pulseDot 1.5s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--electric-glow-strong);
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+
+.dna-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+
+.dna-title .electric { color: var(--electric); }
+
+.dna-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* DNA Loading Bar */
+.dna-loading {
+  margin-bottom: 16px;
+}
+
+.dna-loading-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.dna-loading-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dna-loading-percent {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--electric);
+}
+
+.dna-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dna-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--electric), var(--accent-blue));
+  border-radius: 4px;
+  box-shadow: 0 0 12px var(--electric-glow-strong);
+  animation: progressFill 2.5s var(--ease-out-expo) 0.5s forwards;
+}
+
+@keyframes progressFill {
+  to { width: 94%; }
+}
+
+.dna-progress-track::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 60px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-60px); }
+  100% { transform: translateX(calc(100vw)); }
+}
+
+/* DNA Stats Row */
+.dna-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.dna-stat {
+  text-align: center;
+  padding: 10px 4px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.dna-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--electric);
+  margin-bottom: 2px;
+}
+
+.dna-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+/* ========== RADAR CHART (DNA VISUALIZATION) ========== */
+.radar-section {
+  padding: 24px 16px;
+}
+
+.radar-card {
+  padding: 24px 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title .icon {
+  width: 20px; height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--electric-glow);
+  border-radius: 6px;
+  font-size: 0.7rem;
+}
+
+.section-badge {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--electric);
+  padding: 3px 10px;
+  background: rgba(0,255,136,0.1);
+  border: 1px solid rgba(0,255,136,0.15);
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+}
+
+.radar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.radar-svg {
+  width: 240px;
+  height: 240px;
+}
+
+.radar-grid-line {
+  fill: none;
+  stroke: var(--glass-border);
+  stroke-width: 0.5;
+}
+
+.radar-axis {
+  stroke: var(--glass-border);
+  stroke-width: 0.5;
+}
+
+.radar-area {
+  fill: rgba(0, 255, 136, 0.12);
+  stroke: var(--electric);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px rgba(0,255,136,0.3));
+  animation: radarDraw 1.5s var(--ease-out-expo) 0.8s both;
+}
+
+@keyframes radarDraw {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    transform-origin: center;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+.radar-dot {
+  fill: var(--electric);
+  filter: drop-shadow(0 0 4px rgba(0,255,136,0.5));
+  animation: radarDraw 1.5s var(--ease-out-expo) 1s both;
+}
+
+.radar-label {
+  fill: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.radar-value {
+  fill: var(--electric);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.radar-legend {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+}
+
+.radar-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.radar-legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.radar-legend-text {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+.radar-legend-text strong {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+/* ========== CATEGORIES ========== */
+.categories-section {
+  padding: 0 16px 8px;
+}
+
+.categories-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 8px 0 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.categories-scroll::-webkit-scrollbar { display: none; }
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+.category-icon {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+}
+
+.category-item:hover .category-icon {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.category-icon.fashion { background: linear-gradient(135deg, rgba(255,126,182,0.2), rgba(188,140,255,0.2)); border: 1px solid rgba(255,126,182,0.15); }
+.category-icon.beauty { background: linear-gradient(135deg, rgba(188,140,255,0.2), rgba(255,166,87,0.2)); border: 1px solid rgba(188,140,255,0.15); }
+.category-icon.digital { background: linear-gradient(135deg, rgba(88,166,255,0.2), rgba(0,255,136,0.2)); border: 1px solid rgba(88,166,255,0.15); }
+.category-icon.food { background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(255,166,87,0.2)); border: 1px solid rgba(0,255,136,0.15); }
+.category-icon.living { background: linear-gradient(135deg, rgba(255,166,87,0.2), rgba(255,126,182,0.2)); border: 1px solid rgba(255,166,87,0.15); }
+.category-icon.sports { background: linear-gradient(135deg, rgba(88,166,255,0.2), rgba(188,140,255,0.2)); border: 1px solid rgba(88,166,255,0.15); }
+
+.category-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ========== AI RECOMMENDATION FEED ========== */
+.feed-section {
+  padding: 8px 16px 0;
+}
+
+.feed-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.feed-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.feed-title .sub {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  letter-spacing: 0;
+}
+
+.feed-more {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.feed-more:hover { color: var(--electric); }
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.product-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--glass-white);
+  border: 1px solid var(--glass-border);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+  animation: cardIn 0.6s var(--ease-out-expo) both;
+  position: relative;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.15s; }
+.product-card:nth-child(3) { animation-delay: 0.2s; }
+.product-card:nth-child(4) { animation-delay: 0.25s; }
+.product-card:nth-child(5) { animation-delay: 0.3s; }
+.product-card:nth-child(6) { animation-delay: 0.35s; }
+.product-card:nth-child(7) { animation-delay: 0.4s; }
+.product-card:nth-child(8) { animation-delay: 0.45s; }
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 20px var(--electric-glow-subtle);
+}
+
+.product-image {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.img-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.grad-1 { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); }
+.grad-2 { background: linear-gradient(135deg, #1a1a2e, #2d1b3d, #44164b); }
+.grad-3 { background: linear-gradient(135deg, #0d1117, #162447, #1f4068); }
+.grad-4 { background: linear-gradient(135deg, #1a1a2e, #0d3320, #1a4a2e); }
+.grad-5 { background: linear-gradient(135deg, #2d1b12, #1a1a2e, #16213e); }
+.grad-6 { background: linear-gradient(135deg, #1a1a2e, #2d2b1b, #3d3316); }
+.grad-7 { background: linear-gradient(135deg, #0d1117, #1b2d2d, #164444); }
+.grad-8 { background: linear-gradient(135deg, #1a1a2e, #2d1b2d, #3d164b); }
+
+/* AI Confidence Badge */
+.ai-badge {
+  position: absolute;
+  top: 8px; left: 8px;
+  padding: 3px 8px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--electric);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ai-badge .confidence {
+  display: inline-block;
+  min-width: 26px;
+  text-align: right;
+}
+
+.product-like-btn {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s var(--ease-spring), background 0.2s;
+}
+
+.product-like-btn svg {
+  width: 16px; height: 16px;
+  stroke: rgba(255,255,255,0.6);
+  stroke-width: 2;
+  fill: none;
+  transition: stroke 0.2s, fill 0.2s;
+}
+
+.product-like-btn.liked svg {
+  stroke: var(--accent-pink);
+  fill: var(--accent-pink);
+}
+
+.product-like-btn:active { transform: scale(0.85); }
+
+.product-info {
+  padding: 10px 12px 14px;
+}
+
+.product-brand {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.product-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.product-discount {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--electric);
+}
+
+.product-price {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.product-original {
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+/* ========== TREND GRAPH ========== */
+.trend-section {
+  padding: 20px 16px;
+}
+
+.trend-card {
+  padding: 20px 16px;
+}
+
+.trend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.trend-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+.trend-chart {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.trend-svg {
+  width: 100%;
+  height: 120px;
+}
+
+.trend-line {
+  fill: none;
+  stroke: var(--electric);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(0,255,136,0.4));
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawLine 2s var(--ease-out-expo) 0.5s forwards;
+}
+
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+
+.trend-area {
+  fill: url(#trendGradient);
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.trend-dot {
+  fill: var(--electric);
+  filter: drop-shadow(0 0 4px rgba(0,255,136,0.5));
+  opacity: 0;
+  animation: fadeIn 0.5s ease 2s forwards;
+}
+
+.trend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.trend-item:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(0,255,136,0.1);
+}
+
+.trend-rank {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--electric);
+  width: 22px;
+  text-align: center;
+}
+
+.trend-item-image {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.trend-item-info { flex: 1; min-width: 0; }
+
+.trend-item-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trend-item-meta {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+
+.trend-item-change {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.trend-item-change.up {
+  color: var(--electric);
+  background: rgba(0,255,136,0.1);
+}
+
+.trend-item-change.hot {
+  color: var(--accent-orange);
+  background: rgba(255,166,87,0.1);
+}
+
+/* ========== MASCOT (마누리) SECTION ========== */
+.mascot-section {
+  padding: 0 16px;
+  margin-bottom: 8px;
+}
+
+.mascot-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+}
+
+.mascot-avatar {
+  width: 64px; height: 64px;
+  flex-shrink: 0;
+  animation: mascotFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(0,255,136,0.2));
+}
+
+@keyframes mascotFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.mascot-speech {
+  flex: 1;
+  min-width: 0;
+}
+
+.mascot-name {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--electric);
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+
+.mascot-msg {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.mascot-msg strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ========== GARLIC DAY PROMO ========== */
+.promo-section {
+  padding: 8px 16px 16px;
+}
+
+.promo-card {
+  position: relative;
+  padding: 24px 20px;
+  overflow: hidden;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(0,255,136,0.12) 0%, rgba(0,204,110,0.06) 100%);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 18px;
+}
+
+.promo-card::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border-radius: 20px;
+  background: conic-gradient(from 0deg, var(--electric), transparent 30%, transparent 70%, var(--electric));
+  opacity: 0.15;
+  animation: promoSpin 4s linear infinite;
+  z-index: 0;
+}
+
+@keyframes promoSpin {
+  to { transform: rotate(360deg); }
+}
+
+.promo-content {
+  position: relative;
+  z-index: 1;
+}
+
+.promo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--electric);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  padding: 4px 14px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+  border: 1px solid rgba(0,255,136,0.2);
+}
+
+.promo-main-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.promo-price {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--electric);
+  text-shadow: 0 0 30px var(--electric-glow-strong), 0 0 60px var(--electric-glow);
+}
+
+.promo-desc {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  margin: 6px 0 16px;
+}
+
+.promo-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.timer-block {
+  width: 52px;
+  padding: 8px 0;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,255,136,0.15);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.timer-num {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--electric);
+  line-height: 1;
+}
+
+.timer-label {
+  font-size: 0.58rem;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.timer-sep {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--electric);
+  opacity: 0.5;
+  animation: timerBlink 1s step-end infinite;
+}
+
+@keyframes timerBlink {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0; }
+}
+
+/* ========== SLOGAN ========== */
+.slogan-section {
+  text-align: center;
+  padding: 28px 16px 12px;
+}
+
+.slogan-text {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.slogan-text .highlight {
+  color: var(--electric);
+  font-weight: 700;
+}
+
+/* ========== FOOTER ========== */
+.footer-section {
+  padding: 28px 16px 16px;
+  text-align: center;
+}
+
+.footer-characters {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-mascot {
+  width: 50px; height: 50px;
+  animation: mascotFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(0,255,136,0.15));
+}
+
+.footer-mascot:nth-child(2) {
+  width: 36px; height: 36px;
+  animation-delay: -1s;
+}
+
+.footer-mascot:nth-child(3) {
+  width: 30px; height: 30px;
+  animation-delay: -2s;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--electric);
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  margin-bottom: 16px;
+}
+
+.footer-links a {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--electric); }
+
+.footer-copy {
+  font-size: 0.62rem;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-item .nav-icon {
+  width: 24px; height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-item .nav-icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--text-tertiary);
+  stroke-width: 1.8;
+  fill: none;
+  transition: stroke 0.2s;
+}
+
+.nav-item .nav-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  transition: color 0.2s;
+}
+
+.nav-item.active .nav-icon svg { stroke: var(--electric); }
+.nav-item.active .nav-label { color: var(--electric); font-weight: 600; }
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px; height: 2px;
+  background: var(--electric);
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 0 8px var(--electric-glow-strong);
+}
+
+.nav-cart-badge {
+  position: absolute;
+  top: -3px; right: -6px;
+  min-width: 14px; height: 14px;
+  padding: 0 4px;
+  background: var(--electric);
+  color: var(--night);
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  font-weight: 700;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ========== GARLIC PARTICLE BURST ========== */
+#particleBurstContainer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.garlic-particle {
+  position: absolute;
+  pointer-events: none;
+  animation: particleBurst 0.8s var(--ease-out-expo) forwards;
+}
+
+@keyframes particleBurst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--tr));
+  }
+}
+
+/* ========== COUNT-UP ANIMATION ========== */
+.count-up {
+  display: inline-block;
+}
+
+/* ========== SCROLL REVEAL ========== */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE: TABLET ========== */
+@media (min-width: 768px) {
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .radar-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .radar-svg {
+    width: 280px;
+    height: 280px;
+  }
+
+  .radar-legend {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 240px;
+  }
+
+  .dna-stats {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 400px;
+  }
+
+  .trend-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========== RESPONSIVE: DESKTOP ========== */
+@media (min-width: 1024px) {
+  main {
+    max-width: 960px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .dna-hero-card {
+    padding: 40px 32px;
+  }
+
+  .dna-title {
+    font-size: 2rem;
+  }
+
+  .trend-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  main {
+    max-width: 1120px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="particleBurstContainer"></div>
+
+<!-- ========== PARTICLE BACKGROUND ========== -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ========== HEADER ========== -->
+<header class="header">
+  <div class="header-logo">
+    <!-- Garlic leaf motif icon -->
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 3C12 3 7 7 7 13C7 17 9 20 12 21C15 20 17 17 17 13C17 7 12 3 12 3Z" fill="none" stroke="#00FF88" stroke-width="1.8"/>
+      <path d="M12 6C10 9 10 13 12 18" stroke="#00FF88" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+      <path d="M12 3C12 3 9 1 7 3" stroke="#00FF88" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M12 3C12 3 15 1 17 3" stroke="#00FF88" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+    </svg>
+    <span class="header-logo-text">Garlic</span>
+  </div>
+
+  <div class="header-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+      <circle cx="11" cy="11" r="7"/>
+      <path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input type="text" placeholder="마늘밭에서 찾기" aria-label="상품 검색">
+  </div>
+
+  <div class="header-actions">
+    <button class="header-btn" aria-label="알림">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 01-3.46 0"/>
+      </svg>
+      <span class="notif-dot"></span>
+    </button>
+    <div class="header-avatar">JE</div>
+  </div>
+</header>
+
+<!-- ========== MAIN ========== -->
+<main>
+
+  <!-- DNA ANALYSIS HERO -->
+  <section class="dna-hero reveal-up">
+    <div class="dna-hero-card">
+      <div class="dna-hero-content">
+        <div class="dna-status">
+          <span class="pulse-dot"></span>
+          AI EGO-SYNC ACTIVE
+        </div>
+
+        <h1 class="dna-title">
+          <span class="electric">갈릭 DNA</span> 분석 완료<br>
+          지은님의 취향 지도
+        </h1>
+        <p class="dna-subtitle">AI Ego-Sync 엔진이 12,847개 데이터 포인트를 분석했습니다</p>
+
+        <div class="dna-loading">
+          <div class="dna-loading-header">
+            <span class="dna-loading-label">Taste Profile Sync</span>
+            <span class="dna-loading-percent"><span class="count-up" data-target="94">0</span>%</span>
+          </div>
+          <div class="dna-progress-track">
+            <div class="dna-progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="dna-stats">
+          <div class="dna-stat">
+            <div class="dna-stat-value"><span class="count-up" data-target="2847">0</span></div>
+            <div class="dna-stat-label">분석된 취향</div>
+          </div>
+          <div class="dna-stat">
+            <div class="dna-stat-value"><span class="count-up" data-target="156">0</span></div>
+            <div class="dna-stat-label">맞춤 추천</div>
+          </div>
+          <div class="dna-stat">
+            <div class="dna-stat-value"><span class="count-up" data-target="94">0</span>%</div>
+            <div class="dna-stat-label">매칭 정확도</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RADAR CHART: MY GARLIC DNA -->
+  <section class="radar-section reveal-up">
+    <div class="radar-card glass">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon">&#x1F9EC;</span>
+          나의 갈릭 DNA
+        </h2>
+        <span class="section-badge">LIVE</span>
+      </div>
+
+      <div class="radar-container">
+        <svg class="radar-svg" viewBox="0 0 300 300">
+          <defs>
+            <filter id="radarGlow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- Grid rings -->
+          <polygon class="radar-grid-line" points="150,50 231,90 231,210 150,250 69,210 69,90"/>
+          <polygon class="radar-grid-line" points="150,83 205,110 205,190 150,217 95,190 95,110"/>
+          <polygon class="radar-grid-line" points="150,117 178,130 178,170 150,183 122,170 122,130"/>
+
+          <!-- Axis lines -->
+          <line class="radar-axis" x1="150" y1="50" x2="150" y2="250"/>
+          <line class="radar-axis" x1="69" y1="90" x2="231" y2="210"/>
+          <line class="radar-axis" x1="231" y1="90" x2="69" y2="210"/>
+
+          <!-- Data area -->
+          <polygon class="radar-area" points="150,62 220,102 224,198 150,235 82,185 88,95" filter="url(#radarGlow)"/>
+
+          <!-- Data dots -->
+          <circle class="radar-dot" cx="150" cy="62" r="4"/>
+          <circle class="radar-dot" cx="220" cy="102" r="4"/>
+          <circle class="radar-dot" cx="224" cy="198" r="4"/>
+          <circle class="radar-dot" cx="150" cy="235" r="4"/>
+          <circle class="radar-dot" cx="82" cy="185" r="4"/>
+          <circle class="radar-dot" cx="88" cy="95" r="4"/>
+
+          <!-- Labels -->
+          <text class="radar-label" x="150" y="36">패션</text>
+          <text class="radar-label" x="248" y="88">디지털</text>
+          <text class="radar-label" x="248" y="220">식품</text>
+          <text class="radar-label" x="150" y="270">리빙</text>
+          <text class="radar-label" x="52" y="220">스포츠</text>
+          <text class="radar-label" x="52" y="88">뷰티</text>
+
+          <!-- Value labels -->
+          <text class="radar-value" x="150" y="54">92</text>
+          <text class="radar-value" x="228" y="98">87</text>
+          <text class="radar-value" x="232" y="206">78</text>
+          <text class="radar-value" x="150" y="248">45</text>
+          <text class="radar-value" x="74" y="192">68</text>
+          <text class="radar-value" x="80" y="88">83</text>
+        </svg>
+
+        <div class="radar-legend">
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background:var(--accent-pink)"></div>
+            <div class="radar-legend-text"><strong>92</strong>패션</div>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background:var(--accent-blue)"></div>
+            <div class="radar-legend-text"><strong>87</strong>디지털</div>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background:var(--electric)"></div>
+            <div class="radar-legend-text"><strong>83</strong>뷰티</div>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background:var(--accent-orange)"></div>
+            <div class="radar-legend-text"><strong>78</strong>식품</div>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background:var(--accent-purple)"></div>
+            <div class="radar-legend-text"><strong>68</strong>스포츠</div>
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background:var(--text-tertiary)"></div>
+            <div class="radar-legend-text"><strong>45</strong>리빙</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories-section reveal-up">
+    <div class="categories-scroll">
+      <div class="category-item">
+        <div class="category-icon fashion glass">&#x1F457;</div>
+        <span class="category-label">패션</span>
+      </div>
+      <div class="category-item">
+        <div class="category-icon beauty glass">&#x1F484;</div>
+        <span class="category-label">뷰티</span>
+      </div>
+      <div class="category-item">
+        <div class="category-icon digital glass">&#x1F4F1;</div>
+        <span class="category-label">디지털</span>
+      </div>
+      <div class="category-item">
+        <div class="category-icon food glass">&#x1F96C;</div>
+        <span class="category-label">식품</span>
+      </div>
+      <div class="category-item">
+        <div class="category-icon living glass">&#x1F3E0;</div>
+        <span class="category-label">리빙</span>
+      </div>
+      <div class="category-item">
+        <div class="category-icon sports glass">&#x26BD;</div>
+        <span class="category-label">스포츠</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마누리 MASCOT -->
+  <section class="mascot-section reveal-up">
+    <div class="mascot-card glass">
+      <div class="mascot-avatar">
+        <!-- 마누리 Tech/Holographic Style SVG -->
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Holographic ring -->
+          <circle cx="40" cy="42" r="36" fill="none" stroke="url(#holoGrad)" stroke-width="0.5" opacity="0.4" stroke-dasharray="4 3">
+            <animateTransform attributeName="transform" type="rotate" values="0 40 42;360 40 42" dur="12s" repeatCount="indefinite"/>
+          </circle>
+          <defs>
+            <linearGradient id="holoGrad" x1="0" y1="0" x2="80" y2="80">
+              <stop offset="0%" stop-color="#00FF88"/>
+              <stop offset="50%" stop-color="#58A6FF"/>
+              <stop offset="100%" stop-color="#BC8CFF"/>
+            </linearGradient>
+          </defs>
+          <!-- Garlic body (dark theme) -->
+          <ellipse cx="40" cy="48" rx="22" ry="24" fill="#1C2129" stroke="#00FF88" stroke-width="0.8" opacity="0.9"/>
+          <!-- Clove lines (circuit-like) -->
+          <path d="M28 38C28 38 32 58 28 68" stroke="#00FF88" stroke-width="0.6" fill="none" stroke-linecap="round" opacity="0.3" stroke-dasharray="2 2"/>
+          <path d="M40 32C40 32 40 58 40 70" stroke="#00FF88" stroke-width="0.6" fill="none" stroke-linecap="round" opacity="0.3" stroke-dasharray="2 2"/>
+          <path d="M52 38C52 38 48 58 52 68" stroke="#00FF88" stroke-width="0.6" fill="none" stroke-linecap="round" opacity="0.3" stroke-dasharray="2 2"/>
+          <!-- Top stem -->
+          <path d="M40 24C40 24 36 14 32 8" stroke="#00FF88" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M40 24C40 24 44 14 48 10" stroke="#00CC6E" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <!-- Leaves -->
+          <path d="M30 10C30 10 28 4 32 2C36 0 34 6 32 8" fill="#00FF88" opacity="0.8"/>
+          <path d="M46 12C46 12 48 6 52 5C56 4 52 10 48 10" fill="#00CC6E" opacity="0.6"/>
+          <!-- Eyes (glowing) -->
+          <ellipse cx="33" cy="44" rx="3" ry="3.5" fill="#00FF88">
+            <animate attributeName="opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="47" cy="44" rx="3" ry="3.5" fill="#00FF88">
+            <animate attributeName="opacity" values="1;0.6;1" dur="3s" repeatCount="indefinite" begin="0.2s"/>
+          </ellipse>
+          <!-- Eye highlights -->
+          <circle cx="34.5" cy="42.5" r="1.2" fill="white" opacity="0.9"/>
+          <circle cx="48.5" cy="42.5" r="1.2" fill="white" opacity="0.9"/>
+          <!-- Blush (electric glow) -->
+          <ellipse cx="27" cy="50" rx="4" ry="2.5" fill="#00FF88" opacity="0.1"/>
+          <ellipse cx="53" cy="50" rx="4" ry="2.5" fill="#00FF88" opacity="0.1"/>
+          <!-- Mouth -->
+          <path d="M36 53C36 53 38 57 40 57C42 57 44 53 44 53" stroke="#00FF88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <!-- Scan line effect -->
+          <line x1="18" y1="42" x2="62" y2="42" stroke="#00FF88" stroke-width="0.5" opacity="0.15">
+            <animate attributeName="y1" values="24;70;24" dur="4s" repeatCount="indefinite"/>
+            <animate attributeName="y2" values="24;70;24" dur="4s" repeatCount="indefinite"/>
+          </line>
+        </svg>
+      </div>
+      <div class="mascot-speech">
+        <p class="mascot-name">&#x1F9C4; 마누리 AI</p>
+        <p class="mascot-msg">지은님, AI 분석 결과 <strong>봄 신상 니트</strong>가 취향 매칭률 <strong>94%</strong>로 딱이에요! 지금 바로 확인해보세요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI RECOMMENDATION FEED -->
+  <section class="feed-section reveal-up">
+    <div class="feed-header">
+      <h2 class="feed-title">
+        나만을 위한 AI 추천
+        <span class="sub">Ego-Sync 엔진이 선별한 맞춤 상품</span>
+      </h2>
+      <a href="#" class="feed-more">더보기 &rarr;</a>
+    </div>
+
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-1">&#x1F9E5;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">94%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">MARDI MERCREDI</p>
+          <p class="product-name">플라워 자수 오버핏 스웻셔츠 크림</p>
+          <div class="product-price-row">
+            <span class="product-discount">42%</span>
+            <span class="product-price">58,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 2 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-2">&#x1F460;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">91%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">ADIDAS</p>
+          <p class="product-name">삼바 OG 화이트 그린 B75806</p>
+          <div class="product-price-row">
+            <span class="product-discount">15%</span>
+            <span class="product-price">119,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 3 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-3">&#x1F4BB;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">88%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">APPLE</p>
+          <p class="product-name">맥북 에어 M3 15인치 미드나이트</p>
+          <div class="product-price-row">
+            <span class="product-discount">8%</span>
+            <span class="product-price">1,690,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 4 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-4">&#x1F96C;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">96%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">의성마늘농장</p>
+          <p class="product-name">국내산 유기농 마늘 1kg 산지직송</p>
+          <div class="product-price-row">
+            <span class="product-discount">35%</span>
+            <span class="product-price">12,900원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 5 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-5">&#x1F484;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">89%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">HERA</p>
+          <p class="product-name">블랙쿠션 파운데이션 SPF34 21호</p>
+          <div class="product-price-row">
+            <span class="product-discount">20%</span>
+            <span class="product-price">44,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 6 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-6">&#x1FA91;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">85%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">MUJI</p>
+          <p class="product-name">벽걸이 CD플레이어 블루투스 화이트</p>
+          <div class="product-price-row">
+            <span class="product-discount">10%</span>
+            <span class="product-price">89,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 7 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-7">&#x1F3BD;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">82%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">NIKE</p>
+          <p class="product-name">드라이핏 ADV 런닝 탱크탑 블랙</p>
+          <div class="product-price-row">
+            <span class="product-discount">25%</span>
+            <span class="product-price">52,000원</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Product 8 -->
+      <article class="product-card">
+        <div class="product-image">
+          <div class="img-placeholder grad-8">&#x1F452;</div>
+          <div class="ai-badge">AI 추천 신뢰도 <span class="confidence">87%</span></div>
+          <button class="product-like-btn" aria-label="좋아요" onclick="toggleLike(this,event)">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">KANGOL</p>
+          <p class="product-name">버뮤다 캐주얼 버킷햇 크림</p>
+          <div class="product-price-row">
+            <span class="product-discount">30%</span>
+            <span class="product-price">69,000원</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TREND GRAPH -->
+  <section class="trend-section reveal-up">
+    <div class="trend-card glass">
+      <div class="trend-header">
+        <h2 class="section-title">
+          <span class="icon">&#x1F4C8;</span>
+          지금 마늘밭에서 뜨는 상품
+        </h2>
+        <span class="section-badge">REAL-TIME</span>
+      </div>
+      <p class="trend-subtitle">최근 1시간 검색 트렌드 기반</p>
+
+      <div class="trend-chart">
+        <svg class="trend-svg" viewBox="0 0 340 120" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00FF88" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#00FF88" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="30" x2="340" y2="30" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="0" y1="60" x2="340" y2="60" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="0" y1="90" x2="340" y2="90" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <!-- Area fill -->
+          <path class="trend-area" d="M0,90 L28,85 56,78 84,70 112,55 140,48 168,30 196,35 224,25 252,15 280,20 308,18 340,10 340,120 0,120Z"/>
+          <!-- Line -->
+          <polyline class="trend-line" points="0,90 28,85 56,78 84,70 112,55 140,48 168,30 196,35 224,25 252,15 280,20 308,18 340,10"/>
+          <!-- Current point -->
+          <circle class="trend-dot" cx="340" cy="10" r="4"/>
+          <circle class="trend-dot" cx="340" cy="10" r="8" opacity="0.2">
+            <animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.2;0;0.2" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+
+      <div class="trend-items">
+        <div class="trend-item">
+          <span class="trend-rank">1</span>
+          <div class="trend-item-image grad-1">&#x1F9E5;</div>
+          <div class="trend-item-info">
+            <p class="trend-item-name">봄 크롭 가디건</p>
+            <p class="trend-item-meta">패션 &middot; 검색 +340%</p>
+          </div>
+          <span class="trend-item-change hot">HOT</span>
+        </div>
+        <div class="trend-item">
+          <span class="trend-rank">2</span>
+          <div class="trend-item-image grad-3">&#x1F4F1;</div>
+          <div class="trend-item-info">
+            <p class="trend-item-name">갤럭시 S26 울트라</p>
+            <p class="trend-item-meta">디지털 &middot; 검색 +210%</p>
+          </div>
+          <span class="trend-item-change up">&uarr;2</span>
+        </div>
+        <div class="trend-item">
+          <span class="trend-rank">3</span>
+          <div class="trend-item-image grad-4">&#x1F96C;</div>
+          <div class="trend-item-info">
+            <p class="trend-item-name">제주 유기농 마늘</p>
+            <p class="trend-item-meta">식품 &middot; 검색 +185%</p>
+          </div>
+          <span class="trend-item-change up">&uarr;5</span>
+        </div>
+        <div class="trend-item">
+          <span class="trend-rank">4</span>
+          <div class="trend-item-image grad-5">&#x1F484;</div>
+          <div class="trend-item-info">
+            <p class="trend-item-name">글로우 세럼 파운데이션</p>
+            <p class="trend-item-meta">뷰티 &middot; 검색 +156%</p>
+          </div>
+          <span class="trend-item-change up">&uarr;3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GARLIC DAY PROMO -->
+  <section class="promo-section reveal-up">
+    <div class="promo-card">
+      <div class="promo-content">
+        <div class="promo-label">&#x1F9C4; GARLIC DAY</div>
+        <div class="promo-main-title">마늘 500g</div>
+        <div class="promo-price">100원</div>
+        <p class="promo-desc">매일 오전 10시 한정 수량 오픈 | 오늘의 시그니처 딜</p>
+        <div class="promo-timer">
+          <div class="timer-block">
+            <div class="timer-num" id="timerH">07</div>
+            <div class="timer-label">시간</div>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-block">
+            <div class="timer-num" id="timerM">23</div>
+            <div class="timer-label">분</div>
+          </div>
+          <span class="timer-sep">:</span>
+          <div class="timer-block">
+            <div class="timer-num" id="timerS">45</div>
+            <div class="timer-label">초</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLOGAN -->
+  <section class="slogan-section">
+    <p class="slogan-text">진짜 <span class="highlight">'나마늘'</span> 위한 쇼핑의 시작</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="footer-characters">
+      <!-- Main mascot (tech) -->
+      <svg class="footer-mascot" viewBox="0 0 80 80" fill="none">
+        <ellipse cx="40" cy="48" rx="22" ry="24" fill="#1C2129" stroke="#00FF88" stroke-width="0.6"/>
+        <path d="M28 38C28 38 32 58 28 68" stroke="#00FF88" stroke-width="0.5" fill="none" stroke-linecap="round" opacity="0.3"/>
+        <path d="M40 32C40 32 40 58 40 70" stroke="#00FF88" stroke-width="0.5" fill="none" stroke-linecap="round" opacity="0.3"/>
+        <path d="M52 38C52 38 48 58 52 68" stroke="#00FF88" stroke-width="0.5" fill="none" stroke-linecap="round" opacity="0.3"/>
+        <path d="M40 24C40 24 36 14 32 8" stroke="#00FF88" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M40 24C40 24 44 14 48 10" stroke="#00CC6E" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M30 10C30 10 28 4 32 2C36 0 34 6 32 8" fill="#00FF88"/>
+        <path d="M46 12C46 12 48 6 52 5C56 4 52 10 48 10" fill="#00CC6E"/>
+        <ellipse cx="33" cy="44" rx="2.5" ry="3" fill="#00FF88"/>
+        <ellipse cx="47" cy="44" rx="2.5" ry="3" fill="#00FF88"/>
+        <circle cx="34" cy="42.5" r="1" fill="white"/>
+        <circle cx="48" cy="42.5" r="1" fill="white"/>
+        <path d="M36 52C36 52 38 56 40 56C42 56 44 52 44 52" stroke="#00FF88" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <!-- Baby garlic 1 -->
+      <svg class="footer-mascot" viewBox="0 0 60 60" fill="none">
+        <ellipse cx="30" cy="36" rx="16" ry="18" fill="#1C2129" stroke="#00FF88" stroke-width="0.5"/>
+        <path d="M30 18C30 18 27 10 24 6" stroke="#00FF88" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M22 7C22 7 21 3 24 2C27 1 25.5 5 24 6" fill="#00FF88"/>
+        <ellipse cx="25" cy="34" rx="2" ry="2.5" fill="#00FF88"/>
+        <ellipse cx="35" cy="34" rx="2" ry="2.5" fill="#00FF88"/>
+        <circle cx="26" cy="33" r="0.8" fill="white"/>
+        <circle cx="36" cy="33" r="0.8" fill="white"/>
+        <path d="M28 40C28 40 30 42 32 40" stroke="#00FF88" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <!-- Baby garlic 2 -->
+      <svg class="footer-mascot" viewBox="0 0 50 50" fill="none">
+        <ellipse cx="25" cy="30" rx="13" ry="15" fill="#1C2129" stroke="#00FF88" stroke-width="0.5"/>
+        <path d="M25 15C25 15 22 8 20 5" stroke="#00CC6E" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        <path d="M18 6C18 6 17 3 20 2C23 1 21 5 20 5" fill="#00CC6E"/>
+        <circle cx="21" cy="28" r="1.8" fill="#00FF88"/>
+        <circle cx="29" cy="28" r="1.8" fill="#00FF88"/>
+        <circle cx="21.8" cy="27.2" r="0.6" fill="white"/>
+        <circle cx="29.8" cy="27.2" r="0.6" fill="white"/>
+        <path d="M23 34C23 34 25 35 27 34" stroke="#00FF88" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+    </div>
+    <p class="footer-brand">Garlic Friends</p>
+    <nav class="footer-links" aria-label="푸터 링크">
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">입점문의</a>
+      <a href="#">고객센터</a>
+      <a href="#">Garlic 소개</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Garlic Inc. All rights reserved.<br>G.A.R.L.I.C = Global &middot; Authentic &middot; Rooted &middot; Lifestyle &middot; Identity &middot; Commerce</p>
+  </footer>
+
+</main>
+
+<!-- ========== BOTTOM NAV (Glassmorphism) ========== -->
+<nav class="bottom-nav" aria-label="메인 네비게이션">
+  <a class="nav-item active" href="#">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1"/>
+      </svg>
+    </span>
+    <span class="nav-label">홈</span>
+  </a>
+  <a class="nav-item" href="#">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="M21 21l-4.35-4.35"/>
+      </svg>
+    </span>
+    <span class="nav-label">발견</span>
+  </a>
+  <a class="nav-item" href="#">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3C12 3 7 6 7 12C7 16 9 19 12 20C15 19 17 16 17 12C17 6 12 3 12 3Z"/>
+        <path d="M10 10H14M12 8V14" stroke-width="1.5"/>
+      </svg>
+      <span class="nav-cart-badge">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a class="nav-item" href="#">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </span>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+<script>
+// ========== PARTICLE BACKGROUND ==========
+(function() {
+  var canvas = document.getElementById('particleCanvas');
+  var ctx = canvas.getContext('2d');
+  var particles = [];
+  var PARTICLE_COUNT = 40;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function Particle() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.size = Math.random() * 2 + 0.5;
+    this.alpha = Math.random() * 0.3 + 0.05;
+  }
+
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 255, 136, ' + p.alpha + ')';
+      ctx.fill();
+
+      // Draw connections
+      for (var j = i + 1; j < particles.length; j++) {
+        var p2 = particles[j];
+        var dx = p.x - p2.x;
+        var dy = p.y - p2.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = 'rgba(0, 255, 136, ' + (0.06 * (1 - dist / 120)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+
+// ========== COUNT-UP ANIMATION ==========
+(function() {
+  var countElements = document.querySelectorAll('.count-up');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var duration = 2000;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          // Ease out quart
+          var eased = 1 - Math.pow(1 - progress, 4);
+          var current = Math.floor(eased * target);
+          el.textContent = current.toLocaleString();
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toLocaleString();
+          }
+        }
+
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  countElements.forEach(function(el) { observer.observe(el); });
+})();
+
+// ========== COUNTDOWN TIMER ==========
+(function() {
+  var hEl = document.getElementById('timerH');
+  var mEl = document.getElementById('timerM');
+  var sEl = document.getElementById('timerS');
+  var totalSeconds = 7 * 3600 + 23 * 60 + 45;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function updateTimer() {
+    if (totalSeconds <= 0) totalSeconds = 24 * 3600;
+    totalSeconds--;
+    hEl.textContent = pad(Math.floor(totalSeconds / 3600));
+    mEl.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+    sEl.textContent = pad(totalSeconds % 60);
+  }
+
+  setInterval(updateTimer, 1000);
+})();
+
+// ========== LIKE BUTTON + PARTICLE BURST ==========
+function toggleLike(btn, event) {
+  event.stopPropagation();
+  btn.classList.toggle('liked');
+  if (btn.classList.contains('liked')) {
+    createParticleBurst(event.clientX, event.clientY);
+  }
+}
+
+function createParticleBurst(x, y) {
+  var container = document.getElementById('particleBurstContainer');
+  var emojis = ['\u{1F9C4}', '\u{1F49A}', '\u{2728}', '\u{1F33F}', '\u{1F9C4}'];
+  var count = 8;
+
+  for (var i = 0; i < count; i++) {
+    var particle = document.createElement('span');
+    particle.className = 'garlic-particle';
+    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+    var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+    var distance = 40 + Math.random() * 60;
+    var tx = Math.cos(angle) * distance;
+    var ty = Math.sin(angle) * distance - 20;
+    var tr = (Math.random() - 0.5) * 360;
+
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    particle.style.setProperty('--tx', tx + 'px');
+    particle.style.setProperty('--ty', ty + 'px');
+    particle.style.setProperty('--tr', tr + 'deg');
+    particle.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+
+    container.appendChild(particle);
+    (function(p) {
+      setTimeout(function() { p.remove(); }, 1000);
+    })(particle);
+  }
+}
+
+// ========== SCROLL REVEAL ==========
+(function() {
+  var elements = document.querySelectorAll('.reveal-up');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  elements.forEach(function(el) { observer.observe(el); });
+})();
+
+// ========== HEADER SCROLL EFFECT ==========
+(function() {
+  var header = document.querySelector('.header');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 60) {
+      header.style.background = 'rgba(13, 17, 23, 0.95)';
+      header.style.boxShadow = '0 1px 20px rgba(0,0,0,0.3), 0 0 20px rgba(0,255,136,0.03)';
+    } else {
+      header.style.background = 'rgba(13, 17, 23, 0.8)';
+      header.style.boxShadow = 'none';
+    }
+  }, { passive: true });
+})();
+
+// ========== BOTTOM NAV ACTIVE STATE ==========
+document.querySelectorAll('.nav-item').forEach(function(item) {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

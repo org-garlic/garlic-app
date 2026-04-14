@@ -1,0 +1,2067 @@
+<!--
+  ============================================================
+  GARLIC MARKETDAY (갈릭 마켓데이) — Design Concept 05
+  ============================================================
+  Concept: 따뜻한 동네 시장 감성 — "사람 냄새 나는 마켓"
+  Layout:  Natural masonry grid, handwritten elements, photo-centric
+  Brand:   G.A.R.L.I.C = Global · Authentic · Rooted · Lifestyle · Identity · Commerce
+  Target:  2030 MZ Generation
+  Colors:  Terracotta #D4724E · Sage #8FB996 · Oat #F5ECD7 · Charcoal #3A3A3A
+  Fonts:   Gowun Batang (Korean titles) + Pretendard (body)
+  Mood:    "어디서 샀냐구? 갈릭했어~" — friendly, human commerce
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic MarketDay — 갈릭 마켓데이</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+/* ========== RESET & VARIABLES ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --terracotta: #D4724E;
+  --terracotta-dark: #B85A3A;
+  --terracotta-light: #E8956F;
+  --terracotta-pale: #F5C8B4;
+  --terracotta-glow: rgba(212, 114, 78, 0.18);
+  --sage: #8FB996;
+  --sage-dark: #6A9E73;
+  --sage-light: #B5D4BB;
+  --sage-pale: #D9EADC;
+  --oat: #F5ECD7;
+  --oat-warm: #EDE3C9;
+  --oat-light: #FAF6ED;
+  --oat-dark: #D9CEB4;
+  --charcoal: #3A3A3A;
+  --charcoal-light: #5C5C5C;
+  --charcoal-muted: #7A7A7A;
+  --text-secondary: #8A8275;
+  --text-tertiary: #B0A898;
+  --card-bg: #FFFDF8;
+  --card-bg-warm: #FFF9EF;
+  --border-light: rgba(58, 58, 58, 0.08);
+  --border-warm: rgba(212, 114, 78, 0.15);
+  --shadow-soft: 0 2px 12px rgba(58, 58, 58, 0.06);
+  --shadow-card: 0 4px 20px rgba(58, 58, 58, 0.08);
+  --shadow-elevated: 0 8px 32px rgba(58, 58, 58, 0.12);
+  --shadow-warm: 0 4px 20px rgba(212, 114, 78, 0.10);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --font-display: 'Gowun Batang', Georgia, serif;
+  --font-body: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --header-h: 56px;
+  --nav-h: 68px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--oat);
+  color: var(--charcoal);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding-top: calc(var(--header-h) + var(--safe-top));
+  padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 16px);
+  line-height: 1.6;
+}
+
+/* ========== PAPER TEXTURE OVERLAY ========== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--terracotta-pale); border-radius: 4px; }
+
+/* ========== SCROLL ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+.reveal-d5 { transition-delay: 0.4s; }
+.reveal-d6 { transition-delay: 0.48s; }
+.reveal-d7 { transition-delay: 0.56s; }
+.reveal-d8 { transition-delay: 0.64s; }
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: calc(var(--header-h) + var(--safe-top));
+  padding-top: var(--safe-top);
+  background: rgba(245, 236, 215, 0.88);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(245, 236, 215, 0.95);
+  box-shadow: 0 1px 8px rgba(58, 58, 58, 0.06);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.header-logo .logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--terracotta);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.header-logo .logo-leaf {
+  display: inline-flex;
+  align-items: flex-start;
+  margin-left: -2px;
+  margin-top: -4px;
+}
+
+.header-logo .logo-leaf svg {
+  width: 14px;
+  height: 14px;
+  animation: leafSway 4s ease-in-out infinite;
+}
+
+@keyframes leafSway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(8deg); }
+}
+
+.header-search {
+  flex: 1;
+  margin: 0 12px;
+  position: relative;
+}
+
+.header-search input {
+  width: 100%;
+  height: 36px;
+  border: 1.5px solid var(--oat-dark);
+  border-radius: 20px;
+  padding: 0 14px 0 36px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  background: var(--card-bg);
+  color: var(--charcoal);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.header-search input::placeholder {
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+}
+
+.header-search input:focus {
+  border-color: var(--terracotta-light);
+  box-shadow: 0 0 0 3px var(--terracotta-glow);
+}
+
+.header-search .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.header-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charcoal-light);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+.header-btn:hover { background: rgba(212, 114, 78, 0.08); color: var(--terracotta); }
+
+.header-btn .badge {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 8px; height: 8px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  border: 1.5px solid var(--oat);
+}
+
+/* ========== MAIN CONTENT ========== */
+.main { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+/* ========== SECTION TITLES ========== */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--charcoal);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title .accent {
+  color: var(--terracotta);
+}
+
+.section-title .handwritten {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--terracotta-light);
+  opacity: 0.8;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+/* ========== GARLIC FIELD (오늘의 갈릭밭) ========== */
+.garlic-field {
+  margin: 20px 0 28px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--sage-pale) 0%, var(--oat-light) 60%, var(--terracotta-pale) 100%);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.garlic-field::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(212, 114, 78, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.garlic-field::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: -20px;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(143, 185, 150, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.field-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--charcoal);
+}
+
+.field-time {
+  font-size: 0.75rem;
+  color: var(--sage-dark);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.field-items {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.field-items::-webkit-scrollbar { display: none; }
+
+.field-item {
+  flex: 0 0 130px;
+  scroll-snap-align: start;
+  text-align: center;
+  cursor: pointer;
+}
+
+.field-item-img {
+  width: 130px;
+  height: 130px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 8px;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+}
+
+.field-item:hover .field-item-img {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-warm);
+}
+
+.field-item-img .img-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+/* Warm dummy image gradients for items */
+.img-morning-1 { background: linear-gradient(145deg, #F5D0C5 0%, #E8B5A0 40%, #D4A080 100%); }
+.img-morning-2 { background: linear-gradient(145deg, #E6D5B8 0%, #D4C4A0 40%, #C2B088 100%); }
+.img-morning-3 { background: linear-gradient(145deg, #C5D8C8 0%, #A8C4AC 40%, #8FB996 100%); }
+.img-morning-4 { background: linear-gradient(145deg, #F5E6D0 0%, #E8D4B8 40%, #D4BC9A 100%); }
+.img-morning-5 { background: linear-gradient(145deg, #DBC4B0 0%, #C9AD96 40%, #B89878 100%); }
+
+.field-item-label {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 2px;
+}
+
+.field-item-price {
+  font-size: 0.78rem;
+  color: var(--terracotta);
+  font-weight: 600;
+}
+
+.field-item-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  background: var(--terracotta);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  position: absolute;
+  top: 8px; left: 8px;
+  font-weight: 600;
+}
+
+/* ========== SLOGAN BANNER ========== */
+.slogan-strip {
+  text-align: center;
+  padding: 16px 20px;
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: var(--charcoal-muted);
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  position: relative;
+}
+
+.slogan-strip em {
+  color: var(--terracotta);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.slogan-strip::before,
+.slogan-strip::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--oat-dark);
+  margin: 0 auto;
+}
+
+.slogan-strip::before { margin-bottom: 14px; }
+.slogan-strip::after { margin-top: 14px; }
+
+/* ========== CATEGORIES ========== */
+.categories {
+  margin-bottom: 28px;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.cat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cat-item:hover {
+  background: rgba(212, 114, 78, 0.06);
+  transform: translateY(-2px);
+}
+
+.cat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  position: relative;
+}
+
+.cat-icon::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--oat-dark);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cat-item:hover .cat-icon::after { opacity: 1; }
+
+.cat-icon.fashion { background: linear-gradient(135deg, #F5D0C5, #E8B5A0); }
+.cat-icon.beauty { background: linear-gradient(135deg, #F0D4E8, #E0B8D0); }
+.cat-icon.digital { background: linear-gradient(135deg, #C5D8E8, #A0C0D4); }
+.cat-icon.food { background: linear-gradient(135deg, #D9EADC, #B5D4BB); }
+.cat-icon.living { background: linear-gradient(135deg, #F5E6D0, #E8D4B8); }
+.cat-icon.sports { background: linear-gradient(135deg, #D0E0F0, #B0C8E0); }
+
+.cat-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--charcoal-light);
+  white-space: nowrap;
+}
+
+/* ========== SELLER STORY ========== */
+.seller-story {
+  margin-bottom: 28px;
+  padding: 20px;
+  background: var(--card-bg-warm);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-warm);
+  position: relative;
+  overflow: hidden;
+}
+
+.seller-story::before {
+  content: '\201C';
+  position: absolute;
+  top: 8px; left: 16px;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--terracotta-pale);
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.seller-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.seller-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--terracotta-pale);
+}
+
+.seller-avatar .avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--terracotta-pale), var(--oat-warm));
+}
+
+.seller-info .seller-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--charcoal);
+}
+
+.seller-info .seller-badge {
+  font-size: 0.7rem;
+  color: var(--sage-dark);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.seller-quote {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--charcoal);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+}
+
+.seller-products {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: relative;
+  z-index: 1;
+}
+
+.seller-products::-webkit-scrollbar { display: none; }
+
+.seller-product {
+  flex: 0 0 100px;
+  cursor: pointer;
+}
+
+.seller-product-img {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  transition: transform 0.2s ease;
+}
+
+.seller-product:hover .seller-product-img { transform: scale(1.04); }
+
+.seller-product-name {
+  font-size: 0.72rem;
+  color: var(--charcoal-light);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.seller-product-price {
+  font-size: 0.75rem;
+  color: var(--terracotta);
+  font-weight: 700;
+}
+
+/* Seller product dummy images */
+.img-seller-1 { background: linear-gradient(145deg, #E8D4B8, #D4BC9A); }
+.img-seller-2 { background: linear-gradient(145deg, #C5D8C8, #A8C4AC); }
+.img-seller-3 { background: linear-gradient(145deg, #F5D0C5, #E0B0A0); }
+
+/* ========== PERSONALIZED FEED SECTION ========== */
+.feed-section {
+  margin-bottom: 28px;
+}
+
+.feed-section .section-title .ai-badge {
+  font-size: 0.65rem;
+  background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+  color: white;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+/* ========== MASONRY PRODUCT GRID ========== */
+.masonry-grid {
+  columns: 2;
+  column-gap: 12px;
+  margin-bottom: 28px;
+}
+
+.product-card {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  border: 1px solid var(--border-light);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.product-card-img {
+  width: 100%;
+  position: relative;
+}
+
+.product-card-img .img-placeholder {
+  width: 100%;
+  display: block;
+}
+
+/* Varying heights for masonry effect */
+.product-card:nth-child(odd) .product-card-img .img-placeholder { height: 180px; }
+.product-card:nth-child(even) .product-card-img .img-placeholder { height: 150px; }
+.product-card:nth-child(3n) .product-card-img .img-placeholder { height: 200px; }
+.product-card:nth-child(4n) .product-card-img .img-placeholder { height: 160px; }
+
+.product-card-img .match-badge {
+  position: absolute;
+  top: 8px; left: 8px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.match-badge.dna {
+  background: rgba(212, 114, 78, 0.85);
+  color: white;
+}
+
+.match-badge.ai {
+  background: rgba(143, 185, 150, 0.85);
+  color: white;
+}
+
+.match-badge.hot {
+  background: rgba(58, 58, 58, 0.75);
+  color: white;
+}
+
+.product-card-img .heart-btn {
+  position: absolute;
+  bottom: 8px; right: 8px;
+  width: 30px; height: 30px;
+  background: rgba(255, 253, 248, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-spring), background 0.2s ease;
+}
+
+.product-card-img .heart-btn:hover {
+  transform: scale(1.15);
+  background: rgba(212, 114, 78, 0.12);
+}
+
+.product-card-img .heart-btn svg { width: 16px; height: 16px; color: var(--terracotta-light); }
+
+.product-card-body {
+  padding: 10px 12px 14px;
+}
+
+.product-card-seller {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.product-card-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  line-height: 1.35;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.product-card-price .discount {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--terracotta);
+}
+
+.product-card-price .price {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.product-card-price .original {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.product-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.product-card-meta .stars {
+  font-size: 0.68rem;
+  color: var(--terracotta-light);
+}
+
+.product-card-meta .review-count {
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+}
+
+/* Dummy product image gradients */
+.img-product-1 { background: linear-gradient(145deg, #F0D4C0, #E0B8A0, #D09880); }
+.img-product-2 { background: linear-gradient(145deg, #D9EADC, #B5D4BB, #8FB996); }
+.img-product-3 { background: linear-gradient(145deg, #E8D8C8, #D4C4B0, #C0AC94); }
+.img-product-4 { background: linear-gradient(145deg, #F5E0D0, #E8CCB8, #D4B49C); }
+.img-product-5 { background: linear-gradient(145deg, #C5D0DC, #AAB8C8, #8FA0B4); }
+.img-product-6 { background: linear-gradient(145deg, #E8E0D4, #D8CCB8, #C4B49C); }
+.img-product-7 { background: linear-gradient(145deg, #F0D0D0, #E0B0B4, #D09098); }
+.img-product-8 { background: linear-gradient(145deg, #D0DCD0, #B8C8B8, #9CB09C); }
+
+/* ========== REVIEW CAROUSEL ========== */
+.review-section {
+  margin-bottom: 28px;
+}
+
+.review-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.review-carousel::-webkit-scrollbar { display: none; }
+
+.review-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  border: 1px solid var(--border-light);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.review-card .review-text {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  min-height: 60px;
+}
+
+.review-card .review-product {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-card .review-product-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.review-card .review-product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.review-card .review-product-name {
+  font-size: 0.7rem;
+  color: var(--charcoal-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-card .review-author {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+}
+
+.review-card .review-stars {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.65rem;
+  color: var(--terracotta-light);
+}
+
+/* ========== GARLIC DAY PROMO BANNER ========== */
+.promo-banner {
+  margin-bottom: 28px;
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  /* Watercolor texture effect */
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(212, 114, 78, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(143, 185, 150, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(212, 114, 78, 0.08) 0%, transparent 80%),
+    linear-gradient(135deg, var(--terracotta-pale) 0%, var(--oat) 40%, var(--sage-pale) 100%);
+  border: 1px solid rgba(212, 114, 78, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.promo-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-warm);
+}
+
+/* Watercolor blotch decorations */
+.promo-banner::before {
+  content: '';
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(212, 114, 78, 0.15) 0%, rgba(212, 114, 78, 0.05) 40%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.promo-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -15px; left: -15px;
+  width: 110px; height: 110px;
+  background: radial-gradient(circle, rgba(143, 185, 150, 0.18) 0%, rgba(143, 185, 150, 0.05) 40%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+.promo-date {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  color: var(--terracotta);
+  font-weight: 700;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.35;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-deal {
+  font-size: 0.85rem;
+  color: var(--charcoal-light);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-deal strong {
+  color: var(--terracotta);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.promo-countdown {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.countdown-unit {
+  background: rgba(255, 253, 248, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  text-align: center;
+  min-width: 52px;
+  border: 1px solid rgba(212, 114, 78, 0.12);
+}
+
+.countdown-unit .num {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--terracotta);
+  line-height: 1;
+  display: block;
+}
+
+.countdown-unit .label {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.promo-mascot {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+/* ========== SECOND SELLER STORY ========== */
+.seller-story-alt {
+  margin-bottom: 28px;
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.seller-story-alt:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.seller-story-alt .alt-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 2px solid var(--sage-pale);
+}
+
+.seller-story-alt .alt-avatar .avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, var(--sage-pale), var(--oat-warm));
+}
+
+.seller-story-alt .alt-body { flex: 1; min-width: 0; }
+
+.seller-story-alt .alt-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  margin-bottom: 2px;
+}
+
+.seller-story-alt .alt-badge {
+  font-size: 0.68rem;
+  color: var(--sage-dark);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.seller-story-alt .alt-quote {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--charcoal-light);
+  line-height: 1.5;
+}
+
+/* ========== GARLIC FRIENDS (Footer) ========== */
+.garlic-friends {
+  margin-top: 36px;
+  padding: 28px 20px;
+  background: var(--card-bg-warm);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  border: 1px solid var(--border-light);
+}
+
+.friends-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.friends-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.friends-characters {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.friend-char {
+  text-align: center;
+}
+
+.friend-char .char-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin: 0 auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.friend-char:hover .char-circle { transform: scale(1.1) rotate(-5deg); }
+
+.friend-char .char-name {
+  font-size: 0.68rem;
+  color: var(--charcoal-light);
+  font-weight: 500;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.footer-links a {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover { color: var(--terracotta); }
+
+.footer-copyright {
+  margin-top: 12px;
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+}
+
+/* ========== FLOATING ACTION BUTTON (마누리) ========== */
+.fab {
+  position: fixed;
+  bottom: calc(var(--nav-h) + var(--safe-bottom) + 20px);
+  right: 16px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+  box-shadow: 0 4px 20px rgba(212, 114, 78, 0.35);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  animation: fabPulse 3s ease-in-out infinite;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(212, 114, 78, 0.45);
+}
+
+.fab:active { transform: scale(0.95); }
+
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(212, 114, 78, 0.35); }
+  50% { box-shadow: 0 4px 28px rgba(212, 114, 78, 0.5); }
+}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: rgba(255, 253, 248, 0.92);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-item:hover { transform: translateY(-1px); }
+
+.nav-item svg { width: 22px; height: 22px; color: var(--charcoal-muted); transition: color 0.2s ease; }
+.nav-item.active svg { color: var(--terracotta); }
+
+.nav-item .nav-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--charcoal-muted);
+  transition: color 0.2s ease;
+}
+
+.nav-item.active .nav-label {
+  color: var(--terracotta);
+  font-weight: 700;
+}
+
+.nav-item .nav-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  margin-top: -1px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.nav-item.active .nav-dot { opacity: 1; }
+
+/* ========== WARM GLOW HOVER EFFECT ========== */
+.warm-glow {
+  position: relative;
+}
+.warm-glow::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, var(--terracotta-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.warm-glow:hover::after { opacity: 1; }
+
+/* ========== HANDWRITTEN UNDERLINE ========== */
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+.hand-underline::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  height: 6px;
+  background: var(--terracotta-pale);
+  border-radius: 3px;
+  transform: rotate(-0.5deg);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* ========== RESPONSIVE: TABLET (768px+) ========== */
+@media (min-width: 768px) {
+  .main { max-width: 680px; padding: 0 24px; }
+
+  .masonry-grid { column-gap: 16px; }
+
+  .product-card-body { padding: 12px 14px 16px; }
+
+  .garlic-field { padding: 24px; }
+
+  .field-item { flex: 0 0 150px; }
+  .field-item-img { width: 150px; height: 150px; }
+
+  .review-card { flex: 0 0 290px; padding: 22px 20px; }
+
+  .promo-banner { padding: 34px 30px; }
+  .promo-title { font-size: 1.6rem; }
+
+  .cat-grid { gap: 12px; }
+  .cat-icon { width: 52px; height: 52px; font-size: 1.5rem; }
+
+  .fab { width: 62px; height: 62px; right: 24px; }
+}
+
+/* ========== RESPONSIVE: DESKTOP (1024px+) ========== */
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 64px;
+    --nav-h: 0px;
+  }
+
+  body { padding-bottom: 40px; }
+
+  .main { max-width: 960px; padding: 0 40px; }
+
+  .bottom-nav { display: none; }
+
+  .header { padding-left: 40px; padding-right: 40px; }
+
+  .header-search input { height: 40px; font-size: 0.88rem; }
+
+  .masonry-grid { columns: 3; column-gap: 18px; }
+
+  .garlic-field { padding: 28px; }
+  .field-item { flex: 0 0 160px; }
+  .field-item-img { width: 160px; height: 160px; }
+
+  .review-card { flex: 0 0 320px; }
+
+  .promo-banner { padding: 40px 36px; }
+  .promo-title { font-size: 1.8rem; }
+
+  .fab { bottom: 32px; right: 32px; width: 64px; height: 64px; }
+
+  .seller-story { padding: 28px; }
+
+  .garlic-friends { padding: 36px 28px; }
+
+  .cat-grid { gap: 16px; }
+  .cat-icon { width: 56px; height: 56px; }
+}
+
+/* ========== RESPONSIVE: WIDE DESKTOP (1440px+) ========== */
+@media (min-width: 1440px) {
+  .main { max-width: 1100px; padding: 0 60px; }
+  .masonry-grid { columns: 4; column-gap: 20px; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="header" id="header">
+  <div class="header-logo">
+    <span class="logo-leaf">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1C5 3 3 6 3.5 9.5C4 11 5.5 12 7 12.5C8.5 12 10 11 10.5 9.5C11 6 9 3 7 1Z" fill="#8FB996" stroke="#6A9E73" stroke-width="0.5"/>
+        <path d="M7 3C6.5 5 6.2 7 6.5 9.5" stroke="#6A9E73" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="logo-text">Garlic</span>
+  </div>
+
+  <div class="header-search">
+    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+    </svg>
+    <input type="text" placeholder="마늘밭에서 찾기" aria-label="검색">
+  </div>
+
+  <div class="header-actions">
+    <button class="header-btn" aria-label="알림">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+      </svg>
+      <span class="badge"></span>
+    </button>
+    <button class="header-btn" aria-label="프로필">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- ==================== GARLIC FIELD (오늘의 갈릭밭) ==================== -->
+  <section class="garlic-field reveal" aria-label="오늘의 갈릭밭">
+    <div class="field-header">
+      <h2 class="field-title"><span class="hand-underline">오늘의 갈릭밭</span></h2>
+      <span class="field-time" id="fieldTime">오전 큐레이션</span>
+    </div>
+    <div class="field-items">
+      <div class="field-item reveal reveal-d1">
+        <div class="field-item-img">
+          <div class="img-placeholder img-morning-1"></div>
+          <span class="field-item-tag">오늘만</span>
+        </div>
+        <div class="field-item-label">유기농 꿀</div>
+        <div class="field-item-price">12,900원</div>
+      </div>
+      <div class="field-item reveal reveal-d2">
+        <div class="field-item-img">
+          <div class="img-placeholder img-morning-2"></div>
+        </div>
+        <div class="field-item-label">수제 그래놀라</div>
+        <div class="field-item-price">8,500원</div>
+      </div>
+      <div class="field-item reveal reveal-d3">
+        <div class="field-item-img">
+          <div class="img-placeholder img-morning-3"></div>
+          <span class="field-item-tag">인기</span>
+        </div>
+        <div class="field-item-label">제주 녹차</div>
+        <div class="field-item-price">15,000원</div>
+      </div>
+      <div class="field-item reveal reveal-d4">
+        <div class="field-item-img">
+          <div class="img-placeholder img-morning-4"></div>
+        </div>
+        <div class="field-item-label">홈카페 세트</div>
+        <div class="field-item-price">23,800원</div>
+      </div>
+      <div class="field-item reveal reveal-d5">
+        <div class="field-item-img">
+          <div class="img-placeholder img-morning-5"></div>
+        </div>
+        <div class="field-item-label">통밀 식빵</div>
+        <div class="field-item-price">6,900원</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SLOGAN ==================== -->
+  <div class="slogan-strip reveal">
+    진짜 '<em>나마늘</em>' 위한 쇼핑의 시작
+  </div>
+
+  <!-- ==================== CATEGORIES ==================== -->
+  <section class="categories reveal" aria-label="카테고리">
+    <div class="cat-grid">
+      <div class="cat-item">
+        <div class="cat-icon fashion" role="img" aria-label="패션">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B85A3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4c0-1 .5-2 2-2h2l4 4 4-4h2c1.5 0 2 1 2 2v18"/><path d="M2 22h20"/></svg>
+        </div>
+        <span class="cat-label">패션</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon beauty" role="img" aria-label="뷰티">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B85A88" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v3a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"/><path d="M12 13v9"/><path d="M9 22h6"/></svg>
+        </div>
+        <span class="cat-label">뷰티</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon digital" role="img" aria-label="디지털">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5A8AB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <span class="cat-label">디지털</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon food" role="img" aria-label="식품">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6A9E73" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><path d="M12 6v4"/><path d="M10 8h4"/></svg>
+        </div>
+        <span class="cat-label">식품</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon living" role="img" aria-label="리빙">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8925A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="cat-label">리빙</span>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon sports" role="img" aria-label="스포츠">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5A7EB8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+        </div>
+        <span class="cat-label">스포츠</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SELLER STORY 1 ==================== -->
+  <section class="seller-story reveal" aria-label="셀러 스토리">
+    <div class="seller-header">
+      <div class="seller-avatar">
+        <div class="avatar-placeholder">&#x1F468;&#x200D;&#x1F33E;</div>
+      </div>
+      <div class="seller-info">
+        <div class="seller-name">홍길동 님의 마켓</div>
+        <div class="seller-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#6A9E73" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          갈릭 파워셀러 &#183; 3년째 함께
+        </div>
+      </div>
+    </div>
+    <p class="seller-quote">
+      "이 마늘은 제가 직접 골라본 상품이에요. 저도 두 아이 아빠인데, 우리 아이들 간식은 이걸로 해결해요. 진심으로 추천합니다."
+    </p>
+    <div class="seller-products">
+      <div class="seller-product">
+        <div class="seller-product-img img-seller-1"></div>
+        <div class="seller-product-name">유기농 사과즙</div>
+        <div class="seller-product-price">18,900원</div>
+      </div>
+      <div class="seller-product">
+        <div class="seller-product-img img-seller-2"></div>
+        <div class="seller-product-name">수제 과일칩</div>
+        <div class="seller-product-price">9,500원</div>
+      </div>
+      <div class="seller-product">
+        <div class="seller-product-img img-seller-3"></div>
+        <div class="seller-product-name">곤약 젤리 세트</div>
+        <div class="seller-product-price">12,800원</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PERSONALIZED FEED ==================== -->
+  <section class="feed-section" aria-label="맞춤 추천">
+    <h2 class="section-title reveal">
+      <span class="accent">나만을 위한</span> 마늘밭
+      <span class="ai-badge">AI 추천</span>
+    </h2>
+    <p class="section-subtitle reveal">갈릭 DNA가 분석한 당신의 취향</p>
+
+    <!-- ==================== MASONRY PRODUCT GRID ==================== -->
+    <div class="masonry-grid">
+      <!-- Product 1 -->
+      <div class="product-card reveal reveal-d1 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-1"></div>
+          <span class="match-badge dna">DNA 94%</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">온더테이블</div>
+          <div class="product-card-name">핸드메이드 세라믹 머그컵 세트</div>
+          <div class="product-card-price">
+            <span class="discount">32%</span>
+            <span class="price">24,900원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="review-count">(2,341)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card reveal reveal-d2 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-2"></div>
+          <span class="match-badge ai">AI 추천</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">그린가든</div>
+          <div class="product-card-name">미니 실내 화분 키트</div>
+          <div class="product-card-price">
+            <span class="discount">15%</span>
+            <span class="price">19,800원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="review-count">(856)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card reveal reveal-d3 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-3"></div>
+          <span class="match-badge dna">DNA 88%</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">라이프메이커</div>
+          <div class="product-card-name">천연 소이 캔들 3종 세트</div>
+          <div class="product-card-price">
+            <span class="discount">25%</span>
+            <span class="price">16,500원</span>
+            <span class="original">22,000원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="review-count">(1,203)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card reveal reveal-d4 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-4"></div>
+          <span class="match-badge hot">HOT</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">에코리빙</div>
+          <div class="product-card-name">오가닉 코튼 파자마</div>
+          <div class="product-card-price">
+            <span class="discount">40%</span>
+            <span class="price">29,900원</span>
+            <span class="original">49,900원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="review-count">(3,891)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card reveal reveal-d5 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-5"></div>
+          <span class="match-badge ai">AI 추천</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">테크하우스</div>
+          <div class="product-card-name">미니 블루투스 스피커</div>
+          <div class="product-card-price">
+            <span class="discount">20%</span>
+            <span class="price">35,200원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="review-count">(567)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card reveal reveal-d6 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-6"></div>
+          <span class="match-badge dna">DNA 91%</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">정직한 농부</div>
+          <div class="product-card-name">의성 마늘 선물세트 1kg</div>
+          <div class="product-card-price">
+            <span class="discount">18%</span>
+            <span class="price">21,000원</span>
+            <span class="original">25,600원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="review-count">(4,102)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product-card reveal reveal-d7 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-7"></div>
+          <span class="match-badge ai">AI 추천</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">핑크블룸</div>
+          <div class="product-card-name">데일리 립밤 세트 4종</div>
+          <div class="product-card-price">
+            <span class="discount">28%</span>
+            <span class="price">11,200원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <span class="review-count">(1,778)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product-card reveal reveal-d8 warm-glow">
+        <div class="product-card-img">
+          <div class="img-placeholder img-product-8"></div>
+          <span class="match-badge dna">DNA 86%</span>
+          <button class="heart-btn" aria-label="찜하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-seller">스포츠밸리</div>
+          <div class="product-card-name">경량 요가매트 6mm</div>
+          <div class="product-card-price">
+            <span class="discount">35%</span>
+            <span class="price">22,100원</span>
+            <span class="original">34,000원</span>
+          </div>
+          <div class="product-card-meta">
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            <span class="review-count">(982)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== REVIEW CAROUSEL ==================== -->
+  <section class="review-section reveal" aria-label="리뷰 하이라이트">
+    <h2 class="section-title">
+      <span class="accent">따끈따끈</span> 리얼 후기
+      <span class="handwritten">from 갈릭 이웃</span>
+    </h2>
+    <div class="review-carousel">
+      <div class="review-card">
+        <span class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="review-text">"포장도 예쁘고 머그컵 질감이 손에 착 감겨요. 매일 아침이 행복해졌어요."</p>
+        <div class="review-product">
+          <div class="review-product-thumb img-product-1"></div>
+          <div class="review-product-info">
+            <div class="review-product-name">세라믹 머그컵 세트</div>
+            <div class="review-author">김마늘 님 &#183; 3일 전</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="review-text">"우리 아이가 과일칩 너무 좋아해요! 첨가물 없어서 안심하고 줄 수 있어요."</p>
+        <div class="review-product">
+          <div class="review-product-thumb img-seller-2"></div>
+          <div class="review-product-info">
+            <div class="review-product-name">수제 과일칩</div>
+            <div class="review-author">박이웃 님 &#183; 1일 전</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+        <p class="review-text">"소이 캔들 향이 은은해서 자기 전에 켜두면 잠이 솔솔 와요. 재구매 예정!"</p>
+        <div class="review-product">
+          <div class="review-product-thumb img-product-3"></div>
+          <div class="review-product-info">
+            <div class="review-product-name">천연 소이 캔들</div>
+            <div class="review-author">이촌사람 님 &#183; 5일 전</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <span class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="review-text">"요가매트 쿠션감 진짜 좋고 미끄럼 없어요. 이 가격에 이 퀄리티 말이 돼요?"</p>
+        <div class="review-product">
+          <div class="review-product-thumb img-product-8"></div>
+          <div class="review-product-info">
+            <div class="review-product-name">경량 요가매트</div>
+            <div class="review-author">운동하는갈릭 님 &#183; 2일 전</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GARLIC DAY PROMO ==================== -->
+  <section class="promo-banner reveal" aria-label="갈릭데이 프로모션">
+    <div class="promo-date">10월 3일 갈릭데이</div>
+    <h2 class="promo-title">마늘 500g<br>단 <span style="color: var(--terracotta);">100원</span></h2>
+    <p class="promo-deal">갈릭데이 한정 <strong>99% 할인</strong> 선착순 1,000명</p>
+    <div class="promo-countdown" id="promoCountdown">
+      <div class="countdown-unit">
+        <span class="num" id="cdDays">12</span>
+        <span class="label">일</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="num" id="cdHours">08</span>
+        <span class="label">시간</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="num" id="cdMins">34</span>
+        <span class="label">분</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="num" id="cdSecs">56</span>
+        <span class="label">초</span>
+      </div>
+    </div>
+    <!-- Small 마누리 mascot in the promo banner -->
+    <div class="promo-mascot">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Garlic body -->
+        <ellipse cx="32" cy="38" rx="16" ry="18" fill="#FFF8E7" stroke="#D4BC9A" stroke-width="1.2"/>
+        <!-- Garlic clove lines -->
+        <path d="M24 30c2-4 4-8 8-10" stroke="#E8D4B8" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <path d="M32 28c2-3 5-6 8-7" stroke="#E8D4B8" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <path d="M28 28c1-3 2-6 4-9" stroke="#E8D4B8" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <!-- Stem/leaf -->
+        <path d="M30 20c-1-4-3-8 0-14c3 5 2 10 1 14" fill="#8FB996" stroke="#6A9E73" stroke-width="0.8"/>
+        <path d="M34 20c1-3 4-7 2-13c-3 4-3 9-2 13" fill="#B5D4BB" stroke="#6A9E73" stroke-width="0.6"/>
+        <!-- Face -->
+        <circle cx="27" cy="37" r="1.5" fill="#3A3A3A"/>
+        <circle cx="37" cy="37" r="1.5" fill="#3A3A3A"/>
+        <path d="M28 42c1.5 2 4.5 2 6 0" stroke="#D4724E" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <!-- Blush -->
+        <ellipse cx="24" cy="40" rx="2.5" ry="1.5" fill="#F5C8B4" opacity="0.6"/>
+        <ellipse cx="40" cy="40" rx="2.5" ry="1.5" fill="#F5C8B4" opacity="0.6"/>
+        <!-- Shopping bag (right hand) -->
+        <rect x="42" y="40" width="12" height="14" rx="2" fill="#D4724E" opacity="0.85"/>
+        <path d="M45 40v-3a3 3 0 0 1 6 0v3" stroke="#B85A3A" stroke-width="1" fill="none" stroke-linecap="round"/>
+        <path d="M45 46h6" stroke="white" stroke-width="0.8" opacity="0.5"/>
+        <!-- Left arm wave -->
+        <path d="M16 36c-2-1-4 0-4 2s2 3 4 2" stroke="#E8D4B8" stroke-width="1.5" fill="#FFF8E7" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ==================== SELLER STORY 2 ==================== -->
+  <div class="seller-story-alt reveal" aria-label="셀러 이야기">
+    <div class="alt-avatar">
+      <div class="avatar-placeholder">&#x1F469;&#x200D;&#x1F373;</div>
+    </div>
+    <div class="alt-body">
+      <div class="alt-name">김소담 님</div>
+      <div class="alt-badge">갈릭 신규 셀러 &#183; 핸드메이드 전문</div>
+      <p class="alt-quote">"하나하나 손으로 만들어요. 정성이 가격보다 비싸다고 믿어요."</p>
+    </div>
+  </div>
+
+  <!-- ==================== GARLIC FRIENDS (Footer) ==================== -->
+  <footer class="garlic-friends reveal" aria-label="Garlic Friends">
+    <h3 class="friends-title">Garlic Friends</h3>
+    <p class="friends-subtitle">갈릭 패밀리를 소개합니다</p>
+    <div class="friends-characters">
+      <!-- 마누리 (main mascot) -->
+      <div class="friend-char">
+        <div class="char-circle" style="background: linear-gradient(135deg, var(--oat-warm), var(--terracotta-pale));">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="36" rx="14" ry="16" fill="#FFF8E7" stroke="#D4BC9A" stroke-width="1"/>
+            <path d="M30 20c-1-4-2-8 0-13c2 4 2 9 1 13" fill="#8FB996" stroke="#6A9E73" stroke-width="0.6"/>
+            <circle cx="27" cy="35" r="1.2" fill="#3A3A3A"/>
+            <circle cx="37" cy="35" r="1.2" fill="#3A3A3A"/>
+            <path d="M29 40c1 1.5 3.5 1.5 5 0" stroke="#D4724E" stroke-width="1" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <span class="char-name">마누리</span>
+      </div>
+      <!-- 다누리 -->
+      <div class="friend-char">
+        <div class="char-circle" style="background: linear-gradient(135deg, var(--sage-pale), #C5E0C8);">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="36" rx="14" ry="16" fill="#E8F5E9" stroke="#A5C9A8" stroke-width="1"/>
+            <path d="M30 20c-1-3-1-7 1-12c1 4 1 8 0 12" fill="#66BB6A" stroke="#4CAF50" stroke-width="0.6"/>
+            <circle cx="27" cy="35" r="1.2" fill="#3A3A3A"/>
+            <circle cx="37" cy="35" r="1.2" fill="#3A3A3A"/>
+            <path d="M28 39c2 2 5 2 7 0" stroke="#D4724E" stroke-width="1" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <span class="char-name">다누리</span>
+      </div>
+      <!-- 또누리 -->
+      <div class="friend-char">
+        <div class="char-circle" style="background: linear-gradient(135deg, var(--terracotta-pale), #F5D8C0);">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="36" rx="14" ry="16" fill="#FFF3E0" stroke="#E0C0A0" stroke-width="1"/>
+            <path d="M30 20c0-3 0-7 2-11c0 4 0 8-1 11" fill="#FF8A65" stroke="#E57350" stroke-width="0.6"/>
+            <circle cx="27" cy="35" r="1.2" fill="#3A3A3A"/>
+            <circle cx="37" cy="35" r="1.2" fill="#3A3A3A"/>
+            <path d="M29 39c1.5 1.5 3.5 1.5 5 0" stroke="#D4724E" stroke-width="1" stroke-linecap="round" fill="none"/>
+            <!-- tiny hat -->
+            <rect x="25" y="18" width="14" height="4" rx="2" fill="#FF8A65" opacity="0.7"/>
+          </svg>
+        </div>
+        <span class="char-name">또누리</span>
+      </div>
+      <!-- 꼬누리 -->
+      <div class="friend-char">
+        <div class="char-circle" style="background: linear-gradient(135deg, #E0D4F0, #D0C0E8);">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="36" rx="12" ry="14" fill="#F3E5F5" stroke="#D0B0E0" stroke-width="1"/>
+            <path d="M30 22c0-2 0-5 1-8c1 3 1 6 0 8" fill="#CE93D8" stroke="#AB47BC" stroke-width="0.6"/>
+            <circle cx="28" cy="35" r="1" fill="#3A3A3A"/>
+            <circle cx="36" cy="35" r="1" fill="#3A3A3A"/>
+            <path d="M30 39c1 1 3 1 4 0" stroke="#D4724E" stroke-width="1" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <span class="char-name">꼬누리</span>
+      </div>
+    </div>
+    <nav class="footer-links" aria-label="푸터 네비게이션">
+      <a href="#">회사소개</a>
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">고객센터</a>
+      <a href="#">입점문의</a>
+      <a href="#">제휴/광고</a>
+    </nav>
+    <p class="footer-copyright">&copy; 2024 Garlic Inc. All rights reserved.<br>어디서 샀냐구? 갈릭했어~</p>
+  </footer>
+
+</main>
+
+<!-- ==================== FLOATING ACTION BUTTON (마누리 캐릭터) ==================== -->
+<button class="fab" aria-label="마누리에게 물어보기" id="fab">
+  <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Garlic body -->
+    <ellipse cx="32" cy="36" rx="15" ry="17" fill="#FFF8E7" stroke="#F5ECD7" stroke-width="1"/>
+    <!-- Face -->
+    <circle cx="27" cy="35" r="1.5" fill="#3A3A3A"/>
+    <circle cx="37" cy="35" r="1.5" fill="#3A3A3A"/>
+    <path d="M29 40c1.5 2 4 2 5.5 0" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <!-- Leaf -->
+    <path d="M30 19c-1-3-1-7 1-12c2 4 1 9 0 12" fill="#8FB996"/>
+    <!-- Shopping bag -->
+    <rect x="40" y="38" width="10" height="12" rx="2" fill="white" opacity="0.85"/>
+    <path d="M43 38v-2.5a2.5 2.5 0 0 1 5 0V38" stroke="#F5ECD7" stroke-width="0.8" fill="none"/>
+  </svg>
+</button>
+
+<!-- ==================== BOTTOM NAV ==================== -->
+<nav class="bottom-nav" aria-label="하단 네비게이션">
+  <button class="nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    <span class="nav-label">홈</span>
+    <span class="nav-dot"></span>
+  </button>
+  <button class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <span class="nav-label">탐색</span>
+    <span class="nav-dot"></span>
+  </button>
+  <button class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="nav-label">장바구니</span>
+    <span class="nav-dot"></span>
+  </button>
+  <button class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span class="nav-label">찜</span>
+    <span class="nav-dot"></span>
+  </button>
+  <button class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이</span>
+    <span class="nav-dot"></span>
+  </button>
+</nav>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+(function() {
+  'use strict';
+
+  // --- Header scroll effect ---
+  var header = document.getElementById('header');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 10) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // --- Scroll reveal (IntersectionObserver) ---
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { obs.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  // --- Time-based curation label ---
+  var fieldTime = document.getElementById('fieldTime');
+  if (fieldTime) {
+    var h = new Date().getHours();
+    if (h < 6) fieldTime.textContent = '\uC0C8\uBCBD \uD050\uB808\uC774\uC158';
+    else if (h < 11) fieldTime.textContent = '\uC624\uC804 \uD050\uB808\uC774\uC158';
+    else if (h < 14) fieldTime.textContent = '\uC810\uC2EC \uD050\uB808\uC774\uC158';
+    else if (h < 18) fieldTime.textContent = '\uC624\uD6C4 \uD050\uB808\uC774\uC158';
+    else if (h < 22) fieldTime.textContent = '\uC800\uB141 \uD050\uB808\uC774\uC158';
+    else fieldTime.textContent = '\uC57C\uC2DD \uD050\uB808\uC774\uC158';
+  }
+
+  // --- Countdown timer to October 3rd ---
+  function updateCountdown() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var target = new Date(year, 9, 3, 0, 0, 0);
+    if (now > target) target = new Date(year + 1, 9, 3, 0, 0, 0);
+    var diff = target - now;
+    if (diff < 0) diff = 0;
+
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    var mins = Math.floor((diff / (1000 * 60)) % 60);
+    var secs = Math.floor((diff / 1000) % 60);
+
+    var dEl = document.getElementById('cdDays');
+    var hEl = document.getElementById('cdHours');
+    var mEl = document.getElementById('cdMins');
+    var sEl = document.getElementById('cdSecs');
+    if (dEl) dEl.textContent = String(days).padStart(2, '0');
+    if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+    if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+    if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // --- FAB bounce on scroll ---
+  var fab = document.getElementById('fab');
+  var fabTimeout;
+  window.addEventListener('scroll', function() {
+    if (fab) {
+      fab.style.transform = 'scale(0.92)';
+      clearTimeout(fabTimeout);
+      fabTimeout = setTimeout(function() {
+        fab.style.transform = '';
+      }, 200);
+    }
+  }, { passive: true });
+
+  // --- Heart toggle ---
+  document.querySelectorAll('.heart-btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var svg = btn.querySelector('svg');
+      var isFilled = svg.getAttribute('fill') !== 'none';
+      if (isFilled) {
+        svg.setAttribute('fill', 'none');
+        svg.style.color = 'var(--terracotta-light)';
+      } else {
+        svg.setAttribute('fill', 'var(--terracotta)');
+        svg.style.color = 'var(--terracotta)';
+        btn.style.transform = 'scale(1.3)';
+        setTimeout(function() { btn.style.transform = ''; }, 300);
+      }
+    });
+  });
+
+  // --- Bottom nav active toggle ---
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+      item.classList.add('active');
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!--
+  Event 3: "Garlic 공식 런칭" (3단계: 2027.12~)
+  컨셉: 드디어 사람이 됐다 — "이제 진짜 고객을 위한 쇼핑을 시작한다!"
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic 공식 런칭 — Grand Launch</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--forest:#1B4332;--cream:#F5F0E8;--gold:#D4A843;--parchment:#FAF6EE;--coral:#FF7F6B;--mint:#50D9B2;--ink:#2C2C2C}
+body{font-family:'Pretendard',sans-serif;background:var(--parchment);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Noto Serif KR',serif}
+.display{font-family:'Playfair Display',serif}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;background:linear-gradient(180deg,var(--forest),#0d2818);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(212,168,67,.15),transparent 50%)}
+.hero-confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hc{position:absolute;width:8px;height:8px;border-radius:2px;animation:hcFall linear infinite}
+@keyframes hcFall{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.hero-badge{display:inline-block;background:var(--gold);color:var(--forest);border-radius:20px;padding:6px 20px;font-size:13px;font-weight:700;margin-bottom:24px;position:relative}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:clamp(28px,7vw,52px);font-weight:900;color:#fff;margin-bottom:12px;line-height:1.3;position:relative}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:32px;max-width:480px;position:relative}
+
+.sec-title{text-align:center;padding:48px 24px 16px}
+.sec-title h2{font-family:'Noto Serif KR',serif;font-size:clamp(20px,5vw,30px);color:var(--forest);margin-bottom:6px}
+.sec-title p{font-size:13px;color:#999}
+
+/* Evolution */
+.evo-section{padding:48px 24px;text-align:center;background:var(--cream)}
+.evo-row{display:flex;justify-content:center;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-top:24px}
+.evo-stage{text-align:center}
+.evo-svg{width:80px;height:100px}
+.evo-arrow{font-size:22px;color:var(--gold);align-self:center;margin-bottom:16px}
+.evo-label{font-size:11px;color:#666;margin-top:6px}
+
+/* Promo Grid */
+.promo-section{padding:16px}
+.promo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:700px;margin:0 auto}
+.promo-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:transform .3s}
+.promo-card:hover{transform:translateY(-3px)}
+.promo-img{height:130px}
+.promo-info{padding:12px}
+.promo-cat{font-size:10px;color:var(--gold);font-weight:600;margin-bottom:3px}
+.promo-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.promo-price{font-size:15px;font-weight:700;color:var(--coral)}
+.promo-price s{font-size:11px;color:#999;font-weight:400;margin-left:4px}
+.g1{background:linear-gradient(135deg,#FFE8D4,#FFD4B8)}.g2{background:linear-gradient(135deg,#D4E8D4,#B8D8B8)}.g3{background:linear-gradient(135deg,#E0D8F0,#D0C4E8)}.g4{background:linear-gradient(135deg,#D4E4F0,#B8D0E8)}.g5{background:linear-gradient(135deg,#F0E4D4,#E8D4B8)}.g6{background:linear-gradient(135deg,#F0D4D8,#E8B8C0)}
+
+/* Premium */
+.premium{padding:48px 24px;background:#0d0d0d;color:#fff}
+.premium h2{font-family:'Noto Serif KR',serif;font-size:clamp(20px,5vw,28px);text-align:center;margin-bottom:6px}
+.premium-sub{text-align:center;font-size:13px;color:rgba(255,255,255,.4);margin-bottom:24px}
+.premium-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.premium-scroll::-webkit-scrollbar{display:none}
+.pm-card{min-width:240px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;flex-shrink:0}
+.pm-img{height:160px}
+.pm-info{padding:14px}
+.pm-brand{font-size:10px;color:var(--gold);letter-spacing:1px;margin-bottom:3px}
+.pm-name{font-size:14px;font-weight:600;margin-bottom:3px}
+.pm-price{font-size:13px;color:rgba(255,255,255,.5)}
+.pg1{background:linear-gradient(135deg,#2a2520,#3a332a)}.pg2{background:linear-gradient(135deg,#1a2530,#2a3540)}.pg3{background:linear-gradient(135deg,#2a1a2a,#3a2a3a)}
+
+/* Friends */
+.friends{padding:48px 24px;background:var(--cream);text-align:center}
+.friends-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:460px;margin:24px auto 0}
+.f-card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.05);text-align:center;transition:transform .3s}
+.f-card:hover{transform:scale(1.05) rotate(2deg)}
+.f-card svg{width:70px;height:70px;margin-bottom:6px}
+.f-name{font-size:13px;font-weight:700;color:var(--forest)}
+.f-price{font-size:11px;color:#999}
+
+/* Park */
+.park{padding:60px 24px;background:linear-gradient(135deg,var(--forest),#2a6b4a);text-align:center;color:#fff;position:relative;overflow:hidden}
+.park h2{font-family:'Noto Serif KR',serif;font-size:clamp(22px,5vw,30px);margin-bottom:8px;position:relative}
+.park p{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px;position:relative}
+.park-badge{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:8px 18px;font-size:12px;color:rgba(255,255,255,.8);position:relative}
+
+/* Ecosystem */
+.eco{padding:48px 24px;background:var(--parchment)}
+.eco-map{max-width:480px;margin:24px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.eco-center{grid-column:1/-1;text-align:center;padding:22px;background:var(--forest);border-radius:18px;color:#fff}
+.eco-center h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold);margin-bottom:4px}
+.eco-center p{font-size:12px;color:rgba(255,255,255,.6)}
+.eco-node{background:#fff;border-radius:14px;padding:18px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:transform .3s}
+.eco-node:hover{transform:translateY(-3px)}
+.eco-icon{font-size:28px;margin-bottom:6px}
+.eco-node h4{font-size:13px;font-weight:700;color:var(--forest);margin-bottom:2px}
+.eco-node p{font-size:10px;color:#999}
+
+.footer{padding:40px 24px;background:var(--forest);text-align:center}
+.footer-logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.footer-slogan{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.footer-links a{font-size:11px;color:rgba(255,255,255,.4);text-decoration:none}
+.footer-copy{font-size:10px;color:rgba(255,255,255,.2)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(min-width:768px){.promo-grid{grid-template-columns:repeat(3,1fr)}.friends-grid{grid-template-columns:repeat(4,1fr);max-width:600px}.eco-map{grid-template-columns:repeat(4,1fr);max-width:700px}.eco-center{grid-column:2/4}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-confetti" id="confettiBox"></div>
+  <span class="hero-badge">🎉 GRAND LAUNCH</span>
+  <h1 class="serif">드디어,<br><em>사람이 됐다.</em></h1>
+  <p class="hero-desc">"이제 진짜 고객을 위한 쇼핑을 시작한다!"<br>어디서 샀냐구? 갈릭했어~</p>
+</section>
+
+<section class="evo-section reveal">
+  <h2 class="serif">마누리의 100일 여정</h2>
+  <div class="evo-row">
+    <div class="evo-stage">
+      <svg class="evo-svg" viewBox="0 0 80 100"><ellipse cx="40" cy="55" rx="18" ry="22" fill="#F5ECD7" stroke="#E0D5C0" stroke-width="1"/><path d="M36 34c-1-8 4-14 4-14s5 6 4 14" fill="#4CAF50"/><circle cx="34" cy="50" r="2.5" fill="#2D2D2D"/><circle cx="46" cy="50" r="2.5" fill="#2D2D2D"/><path d="M37 58c1.5 2 4 2 6 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      <div class="evo-label">Day 1 · 꼬마마늘</div>
+    </div>
+    <span class="evo-arrow">→</span>
+    <div class="evo-stage">
+      <svg class="evo-svg" viewBox="0 0 80 100"><ellipse cx="40" cy="52" rx="20" ry="26" fill="#F5ECD7" stroke="#E0D5C0" stroke-width="1"/><path d="M34 52c-2-6-4-10-6-10s-2 4 0 10" fill="#F0E6D0"/><path d="M46 52c2-6 4-10 6-10s2 4 0 10" fill="#F0E6D0"/><path d="M36 28c-1-10 4-16 4-16s5 6 4 16" fill="#4CAF50"/><path d="M44 28c1-10-4-16-4-16s-5 6-4 16" fill="#3AC49E"/><circle cx="34" cy="46" r="3" fill="#2D2D2D"/><circle cx="46" cy="46" r="3" fill="#2D2D2D"/><circle cx="35" cy="45" r="1" fill="#fff"/><circle cx="47" cy="45" r="1" fill="#fff"/><path d="M37 56c1.5 2 4 2 6 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="28" cy="52" r="3" fill="#FFD4CC" opacity=".5"/><circle cx="52" cy="52" r="3" fill="#FFD4CC" opacity=".5"/></svg>
+      <div class="evo-label">Day 50 · 갈릭프렌즈</div>
+    </div>
+    <span class="evo-arrow">→</span>
+    <div class="evo-stage">
+      <svg class="evo-svg" viewBox="0 0 80 110"><ellipse cx="40" cy="58" rx="22" ry="28" fill="#F5ECD7" stroke="#D4A843" stroke-width="1.5"/><path d="M34 58c-2-8-5-12-7-11s-2 5 0 11" fill="#F0E6D0"/><path d="M46 58c2-8 5-12 7-11s2 5 0 11" fill="#F0E6D0"/><path d="M36 32c-2-12 4-20 4-20s6 8 4 20" fill="#4CAF50"/><path d="M44 32c2-12-4-20-4-20s-6 8-4 20" fill="#3AC49E"/><path d="M16 50c-8-6-10-16-4-20s12 2 16 10" fill="rgba(212,168,67,.2)" stroke="var(--gold)" stroke-width=".5"/><path d="M64 50c8-6 10-16 4-20s-12 2-16 10" fill="rgba(212,168,67,.2)" stroke="var(--gold)" stroke-width=".5"/><path d="M32 14l4-8 4 5 4-5 4 8" fill="var(--gold)"/><circle cx="34" cy="50" r="3.5" fill="#2D2D2D"/><circle cx="46" cy="50" r="3.5" fill="#2D2D2D"/><circle cx="35.5" cy="49" r="1.2" fill="#fff"/><circle cx="47.5" cy="49" r="1.2" fill="#fff"/><path d="M37 62c1.5 3 4 3 6 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="20" cy="30" r="2" fill="var(--gold)" opacity=".5"><animate attributeName="opacity" values=".5;0;.5" dur="1.5s" repeatCount="indefinite"/></circle><circle cx="60" cy="25" r="1.5" fill="var(--gold)" opacity=".4"><animate attributeName="opacity" values=".4;0;.4" dur="2s" repeatCount="indefinite"/></circle></svg>
+      <div class="evo-label">Day 100 · 마늘요정 ✨</div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-title reveal"><h2 class="serif">🎉 갈릭데이 Big 프로모션</h2><p>어디서 샀냐구? 갈릭했어~ 전 카테고리 역대급 할인!</p></div>
+<section class="promo-section reveal">
+  <div class="promo-grid">
+    <div class="promo-card"><div class="promo-img g1"></div><div class="promo-info"><div class="promo-cat">패션</div><div class="promo-name">캐시미어 니트 오버핏</div><div class="promo-price">39,900원 <s>89,000원</s></div></div></div>
+    <div class="promo-card"><div class="promo-img g2"></div><div class="promo-info"><div class="promo-cat">식품</div><div class="promo-name">프리미엄 흑마늘 세트</div><div class="promo-price">19,900원 <s>49,000원</s></div></div></div>
+    <div class="promo-card"><div class="promo-img g3"></div><div class="promo-info"><div class="promo-cat">뷰티</div><div class="promo-name">비건 스킨케어 3종</div><div class="promo-price">24,900원 <s>58,000원</s></div></div></div>
+    <div class="promo-card"><div class="promo-img g4"></div><div class="promo-info"><div class="promo-cat">디지털</div><div class="promo-name">무선 이어폰 Pro</div><div class="promo-price">49,900원 <s>129,000원</s></div></div></div>
+    <div class="promo-card"><div class="promo-img g5"></div><div class="promo-info"><div class="promo-cat">리빙</div><div class="promo-name">오가닉 캔들 세트</div><div class="promo-price">15,900원 <s>38,000원</s></div></div></div>
+    <div class="promo-card"><div class="promo-img g6"></div><div class="promo-info"><div class="promo-cat">스포츠</div><div class="promo-name">요가 레깅스 세트</div><div class="promo-price">29,900원 <s>68,000원</s></div></div></div>
+  </div>
+</section>
+
+<section class="premium reveal">
+  <h2 class="serif">Garment G 프리미엄</h2>
+  <p class="premium-sub">프리미엄 패션 · 라이프스타일</p>
+  <div class="premium-scroll">
+    <div class="pm-card"><div class="pm-img pg1"></div><div class="pm-info"><div class="pm-brand">GARMENT G</div><div class="pm-name">울 블렌드 오버코트</div><div class="pm-price">₩289,000</div></div></div>
+    <div class="pm-card"><div class="pm-img pg2"></div><div class="pm-info"><div class="pm-brand">GARMENT G</div><div class="pm-name">리넨 셔츠 재킷</div><div class="pm-price">₩158,000</div></div></div>
+    <div class="pm-card"><div class="pm-img pg3"></div><div class="pm-info"><div class="pm-brand">GARMENT G</div><div class="pm-name">캐시미어 머플러</div><div class="pm-price">₩98,000</div></div></div>
+  </div>
+</section>
+
+<section class="friends reveal">
+  <h2 class="serif">갈릭 프렌즈 굿즈</h2>
+  <div class="friends-grid">
+    <div class="f-card"><svg viewBox="0 0 70 70"><ellipse cx="35" cy="38" rx="16" ry="20" fill="#F5ECD7"/><path d="M31 20c-1-7 4-12 4-12s5 5 4 12" fill="#4CAF50"/><circle cx="30" cy="34" r="2" fill="#2D2D2D"/><circle cx="40" cy="34" r="2" fill="#2D2D2D"/><path d="M32 42c1.5 2 4 2 5 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg><div class="f-name">마누리 인형</div><div class="f-price">₩25,000</div></div>
+    <div class="f-card"><svg viewBox="0 0 70 70"><circle cx="20" cy="14" r="7" fill="#C4A882"/><circle cx="50" cy="14" r="7" fill="#C4A882"/><ellipse cx="35" cy="38" rx="18" ry="20" fill="#D4B896"/><circle cx="30" cy="34" r="2" fill="#2D2D2D"/><circle cx="40" cy="34" r="2" fill="#2D2D2D"/><ellipse cx="35" cy="38" rx="3" ry="2" fill="#2D2D2D"/></svg><div class="f-name">곰두리 인형</div><div class="f-price">₩25,000</div></div>
+    <div class="f-card"><svg viewBox="0 0 70 70"><rect x="10" y="18" width="50" height="34" rx="6" fill="#FFF8F0" stroke="#E0D5C0"/><ellipse cx="22" cy="35" rx="7" ry="9" fill="#F5ECD7"/><path d="M20 27c-.4-3 2-6 2-6s2 3 1.6 6" fill="#4CAF50"/><circle cx="20" cy="33" r="1.5" fill="#2D2D2D"/><circle cx="24" cy="33" r="1.5" fill="#2D2D2D"/><ellipse cx="48" cy="35" rx="7" ry="9" fill="#D4B896"/><circle cx="46" cy="33" r="1.5" fill="#2D2D2D"/><circle cx="50" cy="33" r="1.5" fill="#2D2D2D"/></svg><div class="f-name">스티커팩</div><div class="f-price">₩5,000</div></div>
+    <div class="f-card"><svg viewBox="0 0 70 70"><circle cx="35" cy="24" r="4" fill="#D4A843"/><path d="M31 28l4 16 4-16" fill="none" stroke="#D4A843" stroke-width="2"/><ellipse cx="35" cy="50" rx="10" ry="12" fill="#F5ECD7"/><path d="M32 42c-.4-3 3-6 3-6s3 3 2.6 6" fill="#4CAF50"/><circle cx="32" cy="48" r="1.5" fill="#2D2D2D"/><circle cx="38" cy="48" r="1.5" fill="#2D2D2D"/></svg><div class="f-name">마늘 키링</div><div class="f-price">₩8,000</div></div>
+  </div>
+</section>
+
+<section class="park reveal">
+  <h2 class="serif">🎡 Garlic Park</h2>
+  <p>K-컬처와 쇼핑이 만나는 테마파크 — Coming 2028</p>
+  <span class="park-badge">의성 갈릭파크 개장 예정</span>
+</section>
+
+<section class="eco reveal">
+  <div class="sec-title" style="padding-top:0"><h2 class="serif">갈릭 생태계</h2></div>
+  <div class="eco-map">
+    <div class="eco-center"><h3 class="display">Garlic</h3><p>나보다 나를 더 잘 아는 마켓</p></div>
+    <div class="eco-node"><div class="eco-icon">🛒</div><h4>갈릭 쇼핑</h4><p>AI 초개인화 커머스</p></div>
+    <div class="eco-node"><div class="eco-icon">🧄</div><h4>갈릭 프렌즈</h4><p>캐릭터 IP · 굿즈</p></div>
+    <div class="eco-node"><div class="eco-icon">🎡</div><h4>갈릭파크</h4><p>K-컬처 테마파크</p></div>
+    <div class="eco-node"><div class="eco-icon">👔</div><h4>Garment G</h4><p>프리미엄 라이프스타일</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo display">Garlic</div>
+  <p class="footer-slogan">진짜 '나마늘' 위한 쇼핑의 시작</p>
+  <div class="footer-links"><a href="#">고객센터</a><a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">입점문의</a><a href="#">갈릭 프렌즈</a></div>
+  <p class="footer-copy">© 2027 Garlic Inc. All rights reserved.</p>
+</footer>
+
+<script>
+const box=document.getElementById('confettiBox');const colors=['#D4A843','#FF7F6B','#50D9B2','#7C5CFC','#fff'];
+for(let i=0;i<25;i++){const c=document.createElement('div');c.className='hc';c.style.cssText=`left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*5}s;width:${4+Math.random()*6}px;height:${4+Math.random()*6}px;border-radius:${Math.random()>.5?'50%':'2px'}`;box.appendChild(c)}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

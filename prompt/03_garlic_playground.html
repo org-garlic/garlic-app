@@ -1,0 +1,436 @@
+<!--
+  Design 3: "갈릭 플레이그라운드" (Garlic Playground)
+  컨셉: 쇼핑은 놀이다 — "갈릭파크에 놀러와!"
+  레이아웃: 카드 기반 그리드 + 인터랙티브 요소. 놀이공원 맵 느낌
+  컬러: Coral #FF7F6B + Mint #50D9B2 + Cream #FFFCF0 + Purple #7C5CFC
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garlic Playground — 갈릭파크에 놀러와!</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --coral:#FF7F6B;--mint:#50D9B2;--cream:#FFFCF0;--purple:#7C5CFC;
+  --dark:#2D2D2D;--light-coral:#FFE0DA;--light-mint:#D4F5EC;--light-purple:#E8E0FF;
+}
+body{font-family:'Pretendard',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.outfit{font-family:'Outfit',sans-serif}
+
+/* Header */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,252,240,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:2px solid var(--light-coral);padding:12px 16px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo-text{font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;background:linear-gradient(135deg,var(--coral),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-leaf{width:20px;height:20px}
+.search-bar{flex:1;background:var(--light-mint);border:none;border-radius:20px;padding:8px 16px;font-size:13px;font-family:'Pretendard';color:var(--dark);outline:none}
+.search-bar::placeholder{color:#888}
+.header-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--light-purple);position:relative;cursor:pointer}
+.header-icon svg{width:18px;height:18px}
+.notif-badge{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:var(--coral);border-radius:50%;border:2px solid var(--cream);font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center}
+
+/* Main */
+main{padding-top:68px;padding-bottom:80px}
+
+/* Character Banner */
+.char-banner{background:linear-gradient(135deg,var(--light-coral),var(--light-mint));padding:24px 16px;text-align:center;position:relative;overflow:hidden}
+.char-banner h2{font-size:18px;color:var(--dark);margin-bottom:4px}
+.char-banner p{font-size:13px;color:#666}
+.char-row{display:flex;justify-content:center;gap:16px;margin-top:16px}
+.char-svg{width:80px;height:80px;animation:charBounce 2s ease-in-out infinite}
+.char-svg:nth-child(2){animation-delay:.3s}
+@keyframes charBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* Slogan */
+.slogan-bar{background:linear-gradient(90deg,var(--coral),var(--purple));padding:10px 16px;text-align:center;color:#fff;font-size:13px;font-weight:600;letter-spacing:.5px}
+
+/* Categories */
+.categories{padding:20px 16px}
+.categories h3{font-size:15px;margin-bottom:14px;color:var(--dark)}
+.cat-grid{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.cat-grid::-webkit-scrollbar{display:none}
+.cat-item{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:64px;cursor:pointer}
+.cat-circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;transition:transform .3s;animation:catPop .5s ease-out backwards}
+.cat-item:nth-child(1) .cat-circle{background:var(--light-coral);animation-delay:.1s}
+.cat-item:nth-child(2) .cat-circle{background:var(--light-mint);animation-delay:.2s}
+.cat-item:nth-child(3) .cat-circle{background:var(--light-purple);animation-delay:.3s}
+.cat-item:nth-child(4) .cat-circle{background:#FFF3D6;animation-delay:.4s}
+.cat-item:nth-child(5) .cat-circle{background:var(--light-coral);animation-delay:.5s}
+.cat-item:nth-child(6) .cat-circle{background:var(--light-mint);animation-delay:.6s}
+.cat-circle:hover{transform:scale(1.15) rotate(5deg)}
+@keyframes catPop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+.cat-label{font-size:11px;color:#666;white-space:nowrap}
+
+/* Garlic Deal Game */
+.deal-section{margin:16px;background:linear-gradient(135deg,var(--purple),#9B7CFC);border-radius:20px;padding:24px 20px;color:#fff;position:relative;overflow:hidden}
+.deal-section::before{content:'🧄';position:absolute;top:-20px;right:-20px;font-size:100px;opacity:.15;animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.deal-badge{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:4px 12px;font-size:11px;margin-bottom:12px;backdrop-filter:blur(4px)}
+.deal-section h2{font-size:22px;margin-bottom:4px}
+.deal-section p{font-size:13px;opacity:.85;margin-bottom:16px}
+.deal-timer{display:flex;gap:8px;margin-bottom:16px}
+.timer-box{background:rgba(255,255,255,.2);border-radius:12px;padding:8px 12px;text-align:center;backdrop-filter:blur(4px)}
+.timer-num{font-family:'Outfit';font-size:24px;font-weight:700}
+.timer-label{font-size:10px;opacity:.7}
+.deal-btn{background:#fff;color:var(--purple);border:none;border-radius:14px;padding:12px 24px;font-size:14px;font-weight:700;font-family:'Pretendard';cursor:pointer;transition:transform .2s}
+.deal-btn:hover{transform:scale(1.05)}
+
+/* Event Card */
+.event-card{margin:16px;background:linear-gradient(135deg,var(--mint),#7CE8C8);border-radius:20px;padding:20px;color:var(--dark);position:relative;overflow:hidden}
+.event-card h3{font-size:17px;margin-bottom:6px}
+.event-card p{font-size:13px;opacity:.8}
+.event-emoji{position:absolute;top:12px;right:16px;font-size:40px;animation:wiggle 1s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(10deg)}75%{transform:rotate(-10deg)}}
+
+/* Product Feed */
+.feed-section{padding:20px 16px}
+.feed-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.feed-header h3{font-size:17px}
+.feed-header a{font-size:12px;color:var(--purple);text-decoration:none;font-weight:600}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.product-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .3s,box-shadow .3s;cursor:pointer;position:relative}
+.product-card:hover{transform:translateY(-4px) rotate(1deg);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.product-img{height:160px;position:relative}
+.product-badge{position:absolute;top:8px;left:8px;background:var(--purple);color:#fff;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:600}
+.product-badge.ai{background:var(--coral)}
+.product-badge.hot{background:var(--mint);color:var(--dark)}
+.product-like{position:absolute;top:8px;right:8px;width:30px;height:30px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:14px;transition:transform .2s}
+.product-like:hover{transform:scale(1.2)}
+.product-like.liked{background:var(--coral);color:#fff}
+.product-info{padding:12px}
+.product-name{font-size:13px;font-weight:500;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-price{font-size:16px;font-weight:700;color:var(--dark)}
+.product-price span{font-size:12px;color:var(--coral);font-weight:600;margin-right:4px}
+.product-match{font-size:11px;color:var(--purple);margin-top:4px}
+
+/* Sticker Preview */
+.sticker-section{padding:20px 16px}
+.sticker-section h3{font-size:17px;margin-bottom:14px}
+.sticker-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.sticker-scroll::-webkit-scrollbar{display:none}
+.sticker-card{min-width:100px;height:100px;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .3s}
+.sticker-card:hover{transform:scale(1.1) rotate(5deg)}
+
+/* Footer */
+.footer{background:linear-gradient(135deg,var(--light-coral),var(--light-mint));padding:32px 16px;text-align:center}
+.footer-chars{display:flex;justify-content:center;gap:16px;margin-bottom:16px}
+.footer-char{width:48px;height:48px}
+.footer-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{font-size:12px;color:#666;text-decoration:none}
+.footer-copy{font-size:11px;color:#999}
+
+/* Bottom Nav */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(255,252,240,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid var(--light-coral);display:flex;padding:8px 0 env(safe-area-inset-bottom,8px)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer;text-decoration:none;color:#999;transition:color .2s}
+.nav-item.active{color:var(--coral)}
+.nav-item svg{width:22px;height:22px}
+.nav-label{font-size:10px;font-weight:500}
+
+/* Confetti */
+.confetti{position:fixed;pointer-events:none;z-index:200}
+.confetti-piece{position:absolute;width:8px;height:8px;border-radius:2px;animation:confettiFall 1s ease-out forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(120px) rotate(720deg);opacity:0}}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(min-width:768px){
+  .product-grid{grid-template-columns:repeat(3,1fr)}
+  .char-banner h2{font-size:22px}
+  main{max-width:768px;margin:0 auto}
+}
+@media(min-width:1024px){
+  .product-grid{grid-template-columns:repeat(4,1fr)}
+  main{max-width:1024px}
+  .bottom-nav{display:none}
+  main{padding-bottom:20px}
+}
+
+/* Gradient backgrounds for products */
+.grad-1{background:linear-gradient(135deg,#FFD4CC,#FFB3A6)}
+.grad-2{background:linear-gradient(135deg,#C8F5E6,#A0E8D0)}
+.grad-3{background:linear-gradient(135deg,#E0D4FF,#C8B8FF)}
+.grad-4{background:linear-gradient(135deg,#FFF3D6,#FFE8A8)}
+.grad-5{background:linear-gradient(135deg,#FFD4E8,#FFB8D4)}
+.grad-6{background:linear-gradient(135deg,#D4E8FF,#B8D4FF)}
+.grad-7{background:linear-gradient(135deg,#E8FFD4,#D0FFB8)}
+.grad-8{background:linear-gradient(135deg,#FFE4D4,#FFD0B8)}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a href="#" class="logo">
+    <svg class="logo-leaf" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#50D9B2"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#3AC49E"/></svg>
+    <span class="logo-text">Garlic</span>
+  </a>
+  <input type="text" class="search-bar" placeholder="🔍 마늘밭에서 찾기">
+  <div class="header-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+    <span class="notif-badge">3</span>
+  </div>
+  <div class="header-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+  </div>
+</header>
+
+<main>
+
+<!-- Character Banner -->
+<section class="char-banner">
+  <h2 class="outfit">🎪 갈릭파크에 놀러와!</h2>
+  <p>마누리와 곰두리가 환영합니다</p>
+  <div class="char-row">
+    <!-- 마누리 (마늘 캐릭터) -->
+    <svg class="char-svg" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="58" rx="28" ry="32" fill="#F5ECD7" stroke="#E0D5C0" stroke-width="1.5"/>
+      <path d="M42 58c-3-8-6-12-8-12s-3 4-1 12" fill="#F0E6D0" stroke="#E0D5C0" stroke-width="1"/>
+      <path d="M58 58c3-8 6-12 8-12s3 4 1 12" fill="#F0E6D0" stroke="#E0D5C0" stroke-width="1"/>
+      <path d="M46 32c-2-14 4-24 4-24s6 10 4 24" fill="#50D9B2"/>
+      <path d="M54 32c2-14-4-24-4-24s-6 10-4 24" fill="#3AC49E"/>
+      <circle cx="42" cy="52" r="4" fill="#2D2D2D"/>
+      <circle cx="58" cy="52" r="4" fill="#2D2D2D"/>
+      <circle cx="43.5" cy="51" r="1.5" fill="#fff"/>
+      <circle cx="59.5" cy="51" r="1.5" fill="#fff"/>
+      <path d="M46 62c2 3 6 3 8 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="36" cy="58" r="4" fill="#FFD4CC" opacity=".6"/>
+      <circle cx="64" cy="58" r="4" fill="#FFD4CC" opacity=".6"/>
+      <text x="50" y="82" text-anchor="middle" font-size="8" fill="#999" font-family="Pretendard">마누리</text>
+    </svg>
+    <!-- 곰두리 (곰 캐릭터) -->
+    <svg class="char-svg" viewBox="0 0 100 100">
+      <circle cx="30" cy="28" r="12" fill="#C4A882"/>
+      <circle cx="70" cy="28" r="12" fill="#C4A882"/>
+      <circle cx="30" cy="28" r="7" fill="#E8D5BC"/>
+      <circle cx="70" cy="28" r="7" fill="#E8D5BC"/>
+      <ellipse cx="50" cy="55" rx="30" ry="32" fill="#D4B896"/>
+      <ellipse cx="50" cy="60" rx="18" ry="14" fill="#E8D5BC"/>
+      <circle cx="40" cy="48" r="4" fill="#2D2D2D"/>
+      <circle cx="60" cy="48" r="4" fill="#2D2D2D"/>
+      <circle cx="41.5" cy="47" r="1.5" fill="#fff"/>
+      <circle cx="61.5" cy="47" r="1.5" fill="#fff"/>
+      <ellipse cx="50" cy="56" rx="5" ry="3" fill="#2D2D2D"/>
+      <path d="M44 63c3 3 9 3 12 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="34" cy="56" r="4" fill="#FFD4CC" opacity=".5"/>
+      <circle cx="66" cy="56" r="4" fill="#FFD4CC" opacity=".5"/>
+      <text x="50" y="92" text-anchor="middle" font-size="8" fill="#999" font-family="Pretendard">곰두리</text>
+    </svg>
+  </div>
+</section>
+
+<!-- Slogan -->
+<div class="slogan-bar">✨ 진짜 '나마늘' 위한 쇼핑의 시작 ✨</div>
+
+<!-- Categories -->
+<section class="categories reveal">
+  <h3>🎯 카테고리</h3>
+  <div class="cat-grid">
+    <div class="cat-item"><div class="cat-circle">👗</div><span class="cat-label">패션</span></div>
+    <div class="cat-item"><div class="cat-circle">💄</div><span class="cat-label">뷰티</span></div>
+    <div class="cat-item"><div class="cat-circle">📱</div><span class="cat-label">디지털</span></div>
+    <div class="cat-item"><div class="cat-circle">🧄</div><span class="cat-label">식품</span></div>
+    <div class="cat-item"><div class="cat-circle">🏠</div><span class="cat-label">리빙</span></div>
+    <div class="cat-item"><div class="cat-circle">⚽</div><span class="cat-label">스포츠</span></div>
+  </div>
+</section>
+
+<!-- Garlic Deal -->
+<section class="deal-section reveal">
+  <span class="deal-badge">⏰ 타임딜</span>
+  <h2 class="outfit">마늘 100원 딜!</h2>
+  <p>마늘 500g이 단돈 100원! 지금 바로 참여하세요</p>
+  <div class="deal-timer">
+    <div class="timer-box"><div class="timer-num" id="deal-h">00</div><div class="timer-label">시간</div></div>
+    <div class="timer-box"><div class="timer-num" id="deal-m">00</div><div class="timer-label">분</div></div>
+    <div class="timer-box"><div class="timer-num" id="deal-s">00</div><div class="timer-label">초</div></div>
+  </div>
+  <button class="deal-btn" onclick="createConfetti(this)">🧄 마늘 까기 도전!</button>
+</section>
+
+<!-- Event Card -->
+<div class="event-card reveal">
+  <h3 class="outfit">너마늘 위한 이벤트가 있어! 🎉</h3>
+  <p>지금 참여하면 갈릭 프렌즈 스티커팩 증정</p>
+  <span class="event-emoji">🎁</span>
+</div>
+
+<!-- Personalized Feed -->
+<section class="feed-section">
+  <div class="feed-header">
+    <h3>🧄 나마늘을 위한 추천</h3>
+    <a href="#">더보기 →</a>
+  </div>
+  <div class="product-grid">
+    <div class="product-card reveal">
+      <div class="product-img grad-1"><span class="product-badge">DNA 92%</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">오버핏 린넨 셔츠 내추럴 톤</div>
+        <div class="product-price"><span>34%</span>29,900원</div>
+        <div class="product-match">🧄 갈릭 DNA 92% 매칭</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-2"><span class="product-badge ai">AI 추천</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">비건 선크림 SPF50+ 무기자차</div>
+        <div class="product-price"><span>28%</span>18,500원</div>
+        <div class="product-match">🤖 AI 추천 신뢰도 94%</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-3"><span class="product-badge">DNA 87%</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">무선 블루투스 이어폰 노이즈캔슬링</div>
+        <div class="product-price"><span>45%</span>44,000원</div>
+        <div class="product-match">🧄 갈릭 DNA 87% 매칭</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-4"><span class="product-badge hot">HOT</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">의성 흑마늘 진액 100% 국산</div>
+        <div class="product-price"><span>50%</span>24,900원</div>
+        <div class="product-match">🔥 지금 뜨는 상품</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-5"><span class="product-badge ai">AI 추천</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">홈카페 드립커피 원두 블렌드</div>
+        <div class="product-price"><span>20%</span>15,900원</div>
+        <div class="product-match">🤖 AI 추천 신뢰도 91%</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-6"><span class="product-badge">DNA 85%</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">미니멀 데스크 오거나이저 우드</div>
+        <div class="product-price"><span>15%</span>32,000원</div>
+        <div class="product-match">🧄 갈릭 DNA 85% 매칭</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-7"><span class="product-badge hot">HOT</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">요가매트 NBR 15mm 프리미엄</div>
+        <div class="product-price"><span>40%</span>19,900원</div>
+        <div class="product-match">🔥 리뷰 2,847개</div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img grad-8"><span class="product-badge ai">AI 추천</span><button class="product-like" onclick="toggleLike(this)">🤍</button></div>
+      <div class="product-info">
+        <div class="product-name">레트로 감성 필름카메라 토이캠</div>
+        <div class="product-price"><span>25%</span>38,000원</div>
+        <div class="product-match">🤖 AI 추천 신뢰도 88%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sticker Collection -->
+<section class="sticker-section reveal">
+  <h3>🎨 갈릭 프렌즈 스티커 컬렉션</h3>
+  <div class="sticker-scroll">
+    <div class="sticker-card">
+      <svg viewBox="0 0 60 60" width="60"><ellipse cx="30" cy="32" rx="16" ry="18" fill="#F5ECD7"/><path d="M26 18c-1-8 4-14 4-14s5 6 4 14" fill="#50D9B2"/><circle cx="25" cy="30" r="2.5" fill="#2D2D2D"/><circle cx="35" cy="30" r="2.5" fill="#2D2D2D"/><path d="M27 36c1.5 2 4 2 6 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="sticker-card">
+      <svg viewBox="0 0 60 60" width="60"><circle cx="20" cy="16" r="7" fill="#C4A882"/><circle cx="40" cy="16" r="7" fill="#C4A882"/><ellipse cx="30" cy="32" rx="18" ry="18" fill="#D4B896"/><circle cx="24" cy="28" r="2.5" fill="#2D2D2D"/><circle cx="36" cy="28" r="2.5" fill="#2D2D2D"/><ellipse cx="30" cy="34" rx="3" ry="2" fill="#2D2D2D"/><path d="M26 38c2 2 6 2 8 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="sticker-card">
+      <svg viewBox="0 0 60 60" width="60"><ellipse cx="30" cy="32" rx="16" ry="18" fill="#FFE0DA"/><path d="M26 18c-1-8 4-14 4-14s5 6 4 14" fill="#FF7F6B"/><circle cx="25" cy="30" r="2.5" fill="#2D2D2D"/><circle cx="35" cy="30" r="2.5" fill="#2D2D2D"/><path d="M24 34l12 0" stroke="#2D2D2D" stroke-width="1.5" stroke-linecap="round"/><text x="30" y="56" text-anchor="middle" font-size="6" fill="#999">화난마늘</text></svg>
+    </div>
+    <div class="sticker-card">
+      <svg viewBox="0 0 60 60" width="60"><ellipse cx="30" cy="32" rx="16" ry="18" fill="#D4F5EC"/><path d="M26 18c-1-8 4-14 4-14s5 6 4 14" fill="#7C5CFC"/><circle cx="25" cy="28" r="3" fill="#2D2D2D"/><circle cx="35" cy="28" r="3" fill="#2D2D2D"/><circle cx="26" cy="27" r="1" fill="#fff"/><circle cx="36" cy="27" r="1" fill="#fff"/><path d="M26 36c2 3 6 3 8 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/><text x="30" y="56" text-anchor="middle" font-size="6" fill="#999">신난마늘</text></svg>
+    </div>
+    <div class="sticker-card">
+      <svg viewBox="0 0 60 60" width="60"><ellipse cx="30" cy="32" rx="16" ry="18" fill="#E8E0FF"/><path d="M26 18c-1-8 4-14 4-14s5 6 4 14" fill="#50D9B2"/><line x1="22" y1="29" x2="28" y2="29" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/><line x1="32" y1="29" x2="38" y2="29" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/><ellipse cx="30" cy="36" rx="4" ry="3" fill="#FFD4CC"/><text x="30" y="56" text-anchor="middle" font-size="6" fill="#999">졸린마늘</text></svg>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-chars">
+    <svg class="footer-char" viewBox="0 0 48 48"><ellipse cx="24" cy="28" rx="14" ry="16" fill="#F5ECD7"/><path d="M21 14c-1-6 3-10 3-10s4 4 3 10" fill="#50D9B2"/><circle cx="20" cy="26" r="2" fill="#2D2D2D"/><circle cx="28" cy="26" r="2" fill="#2D2D2D"/><path d="M22 32c1 1.5 3 1.5 4 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+    <svg class="footer-char" viewBox="0 0 48 48"><circle cx="14" cy="12" r="6" fill="#C4A882"/><circle cx="34" cy="12" r="6" fill="#C4A882"/><ellipse cx="24" cy="28" rx="14" ry="16" fill="#D4B896"/><circle cx="20" cy="24" r="2" fill="#2D2D2D"/><circle cx="28" cy="24" r="2" fill="#2D2D2D"/><ellipse cx="24" cy="28" rx="2.5" ry="1.5" fill="#2D2D2D"/></svg>
+    <svg class="footer-char" viewBox="0 0 48 48"><ellipse cx="24" cy="28" rx="14" ry="16" fill="#FFE0DA"/><path d="M21 14c-1-6 3-10 3-10s4 4 3 10" fill="#FF7F6B"/><circle cx="20" cy="26" r="2" fill="#2D2D2D"/><circle cx="28" cy="26" r="2" fill="#2D2D2D"/><path d="M22 32c1 1.5 3 1.5 4 0" stroke="#FF7F6B" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="footer-links">
+    <a href="#">고객센터</a><a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">입점문의</a>
+  </div>
+  <p class="footer-copy">© 2026 Garlic. 진짜 '나마늘' 위한 쇼핑의 시작</p>
+</footer>
+
+</main>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <a href="#" class="nav-item active">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <span class="nav-label">발견</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+<script>
+// Countdown Timer
+function updateTimer(){
+  const now=new Date();
+  const end=new Date(now);end.setHours(23,59,59,999);
+  const diff=end-now;
+  const h=Math.floor(diff/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('deal-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('deal-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('deal-s').textContent=String(s).padStart(2,'0');
+}
+setInterval(updateTimer,1000);updateTimer();
+
+// Like Toggle with Confetti
+function toggleLike(btn){
+  btn.classList.toggle('liked');
+  btn.textContent=btn.classList.contains('liked')?'❤️':'🤍';
+  if(btn.classList.contains('liked'))createConfetti(btn);
+}
+
+// Confetti Effect
+function createConfetti(el){
+  const rect=el.getBoundingClientRect();
+  const colors=['#FF7F6B','#50D9B2','#7C5CFC','#FFD700','#FF69B4'];
+  for(let i=0;i<12;i++){
+    const piece=document.createElement('div');
+    piece.className='confetti-piece';
+    piece.style.cssText=`left:${rect.left+rect.width/2+Math.random()*40-20}px;top:${rect.top}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${.6+Math.random()*.5}s;animation-delay:${Math.random()*.2}s`;
+    document.body.appendChild(piece);
+    setTimeout(()=>piece.remove(),1200);
+  }
+}
+
+// Scroll Reveal
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!--
+  Event 2: "100일 프로모션" (2단계: 2027.09~11)
+  컨셉: 마늘 먹고 사람 되기까지 100일
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100일 프로모션 — Project Garlic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--forest:#1B4332;--cream:#F5F0E8;--gold:#D4A843;--parchment:#FAF6EE;--coral:#FF7F6B;--mint:#50D9B2;--ink:#2C2C2C}
+body{font-family:'Pretendard',sans-serif;background:var(--parchment);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Noto Serif KR',serif}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;background:linear-gradient(135deg,var(--forest),#2a6b4a);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(212,168,67,.1),transparent 60%)}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 16px;font-size:12px;color:rgba(255,255,255,.8);margin-bottom:24px}
+.hero h1{font-family:'Noto Serif KR',serif;font-size:clamp(28px,7vw,48px);font-weight:900;color:#fff;margin-bottom:8px;line-height:1.3}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:40px}
+.manuri-hero{width:100px;height:100px;margin:0 auto 20px}
+.manuri-hero svg{width:100%;height:100%}
+.countdown{display:flex;gap:12px;justify-content:center;margin-bottom:32px}
+.cd-box{background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:16px 12px;min-width:68px;text-align:center}
+.cd-num{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,44px);font-weight:900;color:#fff;line-height:1}
+.cd-label{font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;letter-spacing:1px}
+
+.sec-title{text-align:center;padding:48px 24px 16px}
+.sec-title h2{font-family:'Noto Serif KR',serif;font-size:clamp(20px,5vw,30px);color:var(--forest);margin-bottom:6px}
+.sec-title p{font-size:13px;color:#999}
+
+.mem-section{padding:16px}
+.mem-cards{display:grid;grid-template-columns:1fr;gap:14px;max-width:600px;margin:0 auto}
+.mem-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 2px 14px rgba(0,0,0,.05);text-align:center;transition:transform .3s}
+.mem-card:hover{transform:translateY(-3px)}
+.mem-icon{font-size:36px;margin-bottom:10px}
+.mem-card h3{font-size:15px;font-weight:700;color:var(--forest);margin-bottom:4px}
+.mem-card p{font-size:12px;color:#888;line-height:1.5}
+.mem-cta-wrap{text-align:center;margin:20px 0 0}
+.mem-cta{display:inline-block;background:var(--forest);color:#fff;padding:12px 30px;border-radius:28px;font-size:14px;font-weight:600;text-decoration:none;transition:transform .2s}
+.mem-cta:hover{transform:scale(1.05)}
+
+.sale-section{padding:16px}
+.sale-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:600px;margin:0 auto}
+.sale-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:transform .3s}
+.sale-card:hover{transform:translateY(-2px)}
+.sale-img{height:110px}
+.sale-badge{position:absolute;top:8px;left:8px;background:var(--coral);color:#fff;border-radius:8px;padding:2px 8px;font-size:11px;font-weight:700}
+.sale-img{position:relative}
+.sale-info{padding:10px}
+.sale-name{font-size:12px;margin-bottom:3px}
+.sale-price{font-size:15px;font-weight:700;color:var(--coral)}
+.sale-price s{font-size:11px;color:#999;font-weight:400;margin-left:4px}
+.ga{background:linear-gradient(135deg,#FFE0D4,#FFC8B4)}
+.gb{background:linear-gradient(135deg,#D4F0E8,#B4E8D4)}
+.gc{background:linear-gradient(135deg,#E0D4F0,#C8B8E8)}
+.gd{background:linear-gradient(135deg,#FFF0D4,#FFE4B4)}
+
+.challenge{padding:16px;max-width:600px;margin:0 auto}
+.ch-card{background:linear-gradient(135deg,var(--forest),#2a6b4a);border-radius:18px;padding:22px;color:#fff}
+.ch-card h3{font-size:17px;margin-bottom:14px}
+.prog-bar{height:12px;background:rgba(255,255,255,.15);border-radius:6px;overflow:hidden;margin-bottom:6px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E8C060);border-radius:6px;width:42%;transition:width 1.5s}
+.prog-text{font-size:11px;color:rgba(255,255,255,.6);display:flex;justify-content:space-between;margin-bottom:14px}
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mission{background:rgba(255,255,255,.1);border-radius:10px;padding:10px 6px;text-align:center;font-size:10px;border:1px solid rgba(255,255,255,.1)}
+.mission-emoji{font-size:18px;display:block;margin-bottom:2px}
+.mission.done{background:rgba(212,168,67,.2);border-color:var(--gold)}
+
+.coupon-section{padding:16px}
+.coupon{max-width:380px;margin:0 auto;background:linear-gradient(135deg,#FFF8F0,#FFF0E0);border:2px dashed var(--gold);border-radius:18px;padding:22px;text-align:center}
+.coupon h3{font-size:15px;color:var(--forest);margin-bottom:4px}
+.coupon .amount{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--coral);margin:6px 0}
+.coupon p{font-size:12px;color:#999}
+.coupon-btn{display:inline-block;margin-top:14px;background:var(--coral);color:#fff;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:'Pretendard';transition:transform .2s}
+.coupon-btn:hover{transform:scale(1.05)}
+
+.teaser{margin:20px 16px;background:linear-gradient(135deg,var(--gold),#E8C060);border-radius:18px;padding:22px;text-align:center;color:var(--forest)}
+.teaser h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.teaser .date{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;margin:10px 0}
+.teaser p{font-size:12px;opacity:.7}
+
+.footer{padding:36px 24px;background:var(--forest);text-align:center}
+.footer-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.footer p{font-size:11px;color:rgba(255,255,255,.4)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(min-width:768px){.mem-cards{grid-template-columns:repeat(3,1fr)}.sale-grid{grid-template-columns:repeat(4,1fr)}.countdown{gap:18px}.cd-box{min-width:85px;padding:18px 14px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <span class="hero-badge">2단계 · 100일 프로모션</span>
+  <div class="manuri-hero">
+    <svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="26" ry="30" fill="#F5ECD7" stroke="#E0D5C0" stroke-width="1"/><path d="M40 55c-2-8-5-12-7-11s-2 5 0 11" fill="#F0E6D0"/><path d="M60 55c2-8 5-12 7-11s2 5 0 11" fill="#F0E6D0"/><path d="M44 28c-2-12 6-20 6-20s8 8 6 20" fill="#4CAF50"/><path d="M56 28c2-12-6-20-6-20s-8 8-6 20" fill="#3AC49E"/><circle cx="42" cy="50" r="3.5" fill="#2D2D2D"/><circle cx="58" cy="50" r="3.5" fill="#2D2D2D"/><circle cx="43.5" cy="49" r="1.2" fill="#fff"/><circle cx="59.5" cy="49" r="1.2" fill="#fff"/><path d="M45 60c2.5 3 7 3 10 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="35" cy="56" r="4" fill="#FFD4CC" opacity=".5"/><circle cx="65" cy="56" r="4" fill="#FFD4CC" opacity=".5"/><ellipse cx="70" cy="40" rx="2" ry="3" fill="rgba(100,200,255,.6)"/></svg>
+  </div>
+  <h1 class="serif">마늘 먹고<br><em>사람 되는 중</em></h1>
+  <p class="hero-desc">G마켓이 마늘 먹고 사람 되기까지 D-100</p>
+  <div class="countdown">
+    <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-label">일</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-label">시간</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-label">분</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-label">초</div></div>
+  </div>
+</section>
+
+<div class="sec-title reveal"><h2 class="serif">꼭 멤버십 100일 무료 체험</h2><p>지금 가입하면 100일 동안 무료!</p></div>
+<section class="mem-section reveal">
+  <div class="mem-cards">
+    <div class="mem-card"><div class="mem-icon">🚀</div><h3>무료배송</h3><p>100일간 전 상품 무료배송</p></div>
+    <div class="mem-card"><div class="mem-icon">💰</div><h3>5% 적립</h3><p>모든 구매에 마늘 포인트 적립</p></div>
+    <div class="mem-card"><div class="mem-icon">🎁</div><h3>전용 딜</h3><p>꼭 멤버 전용 특가 상품</p></div>
+  </div>
+  <div class="mem-cta-wrap"><a href="#" class="mem-cta">꼭 멤버십 무료 시작하기</a></div>
+</section>
+
+<div class="sec-title reveal"><h2 class="serif">🧄 마늘 100원 딜</h2><p>매일 바뀌는 100원 특가!</p></div>
+<section class="sale-section reveal">
+  <div class="sale-grid">
+    <div class="sale-card"><div class="sale-img ga"><span class="sale-badge">100원</span></div><div class="sale-info"><div class="sale-name">의성 마늘 500g</div><div class="sale-price">100원 <s>12,900원</s></div></div></div>
+    <div class="sale-card"><div class="sale-img gb"><span class="sale-badge">100원</span></div><div class="sale-info"><div class="sale-name">흑마늘 진액 30포</div><div class="sale-price">100원 <s>29,900원</s></div></div></div>
+    <div class="sale-card"><div class="sale-img gc"><span class="sale-badge">100원</span></div><div class="sale-info"><div class="sale-name">마늘 에센스 오일</div><div class="sale-price">100원 <s>18,000원</s></div></div></div>
+    <div class="sale-card"><div class="sale-img gd"><span class="sale-badge">100원</span></div><div class="sale-info"><div class="sale-name">마누리 인형 세트</div><div class="sale-price">100원 <s>25,000원</s></div></div></div>
+  </div>
+</section>
+
+<div class="sec-title reveal"><h2 class="serif">100일 사람되기 챌린지</h2><p>매일 미션 수행 → 특별 보상!</p></div>
+<section class="challenge reveal">
+  <div class="ch-card">
+    <h3>🏆 나의 챌린지 현황</h3>
+    <div class="prog-bar"><div class="prog-fill"></div></div>
+    <div class="prog-text"><span>42일째 도전 중</span><span>42/100</span></div>
+    <div class="mission-grid">
+      <div class="mission done"><span class="mission-emoji">✅</span>출석하기</div>
+      <div class="mission done"><span class="mission-emoji">✅</span>상품 찜하기</div>
+      <div class="mission"><span class="mission-emoji">🎯</span>리뷰 쓰기</div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-title reveal"><h2 class="serif">너마늘 위한 이벤트가 있어</h2><p>개인화 쿠폰을 받으세요</p></div>
+<section class="coupon-section reveal">
+  <div class="coupon">
+    <h3>🧄 너마늘 전용 쿠폰</h3>
+    <div class="amount">30%</div>
+    <p>전 카테고리 · 최대 5만원 할인</p>
+    <button class="coupon-btn" onclick="this.textContent='✅ 받기 완료!'">쿠폰 받기</button>
+  </div>
+</section>
+
+<div class="teaser reveal"><h3 class="serif">갈릭데이가 다가옵니다</h3><div class="date">10.03</div><p>전 카테고리 역대급 할인 — Coming Soon</p></div>
+
+<footer class="footer">
+  <div class="footer-logo">Garlic</div>
+  <p>© 2027 Garlic. 진짜 '나마늘' 위한 쇼핑의 시작</p>
+</footer>
+
+<script>
+function updateCD(){const t=new Date();t.setDate(t.getDate()+100);t.setHours(0,0,0,0);const n=new Date(),d=t-n;if(d<=0)return;document.getElementById('cd-d').textContent=String(Math.floor(d/864e5)).padStart(2,'0');document.getElementById('cd-h').textContent=String(Math.floor(d%864e5/36e5)).padStart(2,'0');document.getElementById('cd-m').textContent=String(Math.floor(d%36e5/6e4)).padStart(2,'0');document.getElementById('cd-s').textContent=String(Math.floor(d%6e4/1e3)).padStart(2,'0')}
+setInterval(updateCD,1000);updateCD();
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
