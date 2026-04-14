@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../reference/G_Logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic - 나마늘 위한 마켓 | 이벤트</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --green:#00C73C;
+  --green-light:#E8F8ED;
+  --gold:#D4A843;
+  --gold-light:#FFF3D6;
+  --coral:#FF7F6B;
+  --border:#EEEEEE;
+  --shadow:rgba(0,0,0,0.06);
+  --garlic-green:#00C73C;
+  --garlic-green-light:#E8F8ED;
+  --garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#FAF6EE;
+  --garlic-white:#FFFFFF;
+  --garlic-black:#333333;
+  --garlic-gray:#666666;
+  --garlic-gray-light:#888888;
+  --garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;
+  --garlic-gold:#D4A843;
+  --garlic-red:#FF4848;
+  --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;
+  --tab-h:44px;
+  --nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--garlic-bg);
+  color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;
+  overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));
+  padding-top:var(--safe-top);
+  background:var(--garlic-white);
+  display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;
+  border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-logo img{height:28px;width:auto;border-radius:4px}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);
+  border-radius:8px;background:var(--garlic-bg);
+  padding:0 12px 0 34px;font-family:var(--font);font-size:0.78rem;font-weight:300;
+  color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);
+  border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;
+  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+}
+.tab-item:first-child{padding-left:20px}
+
+/* ========== MAIN ========== */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* ========== SECTION HEADER ========== */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 16px 12px;
+}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+
+/* ========== HERO CAROUSEL ========== */
+.hero-carousel{
+  position:relative;overflow:hidden;
+  margin:12px 0 0;
+}
+.hero-track{
+  display:flex;
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  will-change:transform;
+}
+.hero-slide{
+  flex-shrink:0;width:100%;
+  padding:0 16px;
+}
+.hero-card{
+  border-radius:18px;overflow:hidden;
+  position:relative;height:190px;
+  display:flex;align-items:flex-end;
+  box-shadow:0 4px 24px rgba(0,0,0,0.12);
+}
+.hero-card-bg{
+  position:absolute;inset:0;
+  object-fit:cover;width:100%;height:100%;
+}
+.hero-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+}
+.hero-card-content{
+  position:relative;z-index:1;
+  padding:16px 18px;width:100%;
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.hero-card-text .eyebrow{
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.75);margin-bottom:4px;
+}
+.hero-card-text .title{
+  font-size:1.2rem;font-weight:800;color:#fff;line-height:1.3;
+  text-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+.hero-card-text .sub{
+  font-size:0.72rem;font-weight:400;color:rgba(255,255,255,0.85);
+  margin-top:3px;
+}
+.hero-cta-badge{
+  flex-shrink:0;margin-left:12px;
+  padding:7px 14px;border-radius:24px;
+  font-size:0.72rem;font-weight:700;
+  white-space:nowrap;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+.badge-coral{background:var(--garlic-coral);color:#fff}
+.badge-gold{background:var(--garlic-gold);color:#fff}
+.badge-green{background:var(--garlic-green);color:#fff}
+
+/* Countdown inline */
+.countdown-row{
+  display:flex;align-items:center;gap:4px;margin-top:6px;
+}
+.ct-block{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(4px);
+  border-radius:5px;padding:2px 6px;
+  font-size:0.82rem;font-weight:700;color:#fff;
+  min-width:28px;text-align:center;
+}
+.ct-sep{font-size:0.75rem;font-weight:700;color:rgba(255,255,255,0.7)}
+
+/* Slide dots */
+.slide-dots{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;padding:10px 0 14px;
+}
+.slide-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(0,0,0,0.15);
+  transition:all 0.3s;cursor:pointer;
+}
+.slide-dot.active{
+  width:20px;border-radius:3px;
+  background:var(--garlic-black);
+}
+
+/* ========== HOT EVENTS GRID ========== */
+.hot-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  padding:0 16px 4px;
+}
+.event-card{
+  background:var(--garlic-white);
+  border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  transition:transform 0.18s, box-shadow 0.18s;
+  display:block;
+}
+.event-card:active{transform:scale(0.97);box-shadow:0 1px 6px rgba(0,0,0,0.08)}
+.event-thumb{
+  height:100px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.event-thumb img{width:100%;height:100%;object-fit:cover}
+.event-thumb .thumb-emoji{font-size:2.4rem}
+.participant-badge{
+  position:absolute;bottom:6px;left:6px;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);
+  border-radius:10px;padding:2px 7px;
+  font-size:0.58rem;font-weight:600;color:#fff;
+}
+.event-body{padding:10px 12px 12px}
+.event-title{
+  font-size:0.78rem;font-weight:700;color:var(--garlic-black);
+  line-height:1.4;margin-bottom:4px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.event-period{font-size:0.62rem;font-weight:400;color:var(--garlic-gray-light);margin-bottom:8px}
+.event-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100%;padding:7px 0;border-radius:8px;
+  font-size:0.72rem;font-weight:700;
+  background:var(--garlic-green-light);color:var(--garlic-green);
+  transition:background 0.15s;
+}
+.event-cta:active{background:#d4f0df}
+
+/* ========== CALENDAR ========== */
+.calendar-section{
+  margin:0 16px;
+  background:var(--garlic-white);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  margin-bottom:4px;
+}
+.cal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;
+}
+.cal-month{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.cal-nav-btn{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--garlic-bg);color:var(--garlic-gray);
+  font-size:0.85rem;transition:background 0.15s;
+}
+.cal-nav-btn:active{background:#eee}
+.cal-weekdays{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  margin-bottom:6px;
+}
+.cal-weekday{
+  text-align:center;font-size:0.62rem;font-weight:600;
+  color:var(--garlic-gray-light);padding:4px 0;
+}
+.cal-days{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:2px;
+}
+.cal-day{
+  aspect-ratio:1/1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  border-radius:10px;cursor:pointer;
+  font-size:0.72rem;font-weight:500;color:var(--garlic-black);
+  position:relative;transition:background 0.15s;
+  gap:2px;
+}
+.cal-day:active{background:var(--garlic-green-light)}
+.cal-day.empty{cursor:default}
+.cal-day.today{
+  background:var(--garlic-green);color:#fff;font-weight:700;
+}
+.cal-day.today .cal-dot{background:rgba(255,255,255,0.8)}
+.cal-day.has-event .cal-dot{
+  display:block;width:5px;height:5px;border-radius:50%;
+  background:var(--garlic-green);
+}
+.cal-day.today.has-event .cal-dot{background:#fff}
+.cal-dot{display:none}
+.cal-day.selected:not(.today){
+  background:var(--garlic-green-light);
+  color:var(--garlic-green);font-weight:700;
+}
+.cal-event-preview{
+  margin-top:12px;padding:10px 12px;
+  background:var(--garlic-bg);border-radius:10px;
+  min-height:38px;
+  font-size:0.75rem;font-weight:500;color:var(--garlic-gray);
+  transition:all 0.2s;
+}
+.cal-event-preview.has-content{color:var(--garlic-black)}
+.cal-event-preview .ev-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--garlic-green-light);
+  border-radius:20px;padding:3px 10px;
+  font-size:0.7rem;font-weight:700;color:var(--garlic-green);
+  margin-right:6px;margin-bottom:4px;
+}
+
+/* ========== GARLIC FRIENDS ========== */
+.friends-scroll{
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;gap:10px;
+  padding:0 16px 4px;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.friends-scroll::-webkit-scrollbar{display:none}
+.friend-card{
+  flex-shrink:0;width:130px;
+  background:var(--garlic-white);
+  border-radius:16px;
+  padding:14px 12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  display:flex;flex-direction:column;align-items:center;
+  gap:8px;transition:transform 0.18s;
+}
+.friend-card:active{transform:scale(0.97)}
+.friend-avatar{
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.friend-name{
+  font-size:0.72rem;font-weight:700;color:var(--garlic-black);
+  text-align:center;line-height:1.4;
+}
+.friend-btn{
+  width:100%;padding:6px 0;border-radius:8px;
+  font-size:0.7rem;font-weight:700;
+  text-align:center;
+  background:var(--garlic-green);color:#fff;
+  transition:opacity 0.15s;
+}
+.friend-btn:active{opacity:0.8}
+
+/* ========== PAST EVENTS ========== */
+.past-list{
+  display:flex;flex-direction:column;gap:8px;
+  padding:0 16px 4px;
+}
+.past-card{
+  background:var(--garlic-white);border-radius:12px;
+  padding:12px 14px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 1px 6px rgba(0,0,0,0.04);
+  opacity:0.72;
+}
+.past-icon{
+  width:44px;height:44px;border-radius:10px;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;background:var(--garlic-bg);
+}
+.past-info{flex:1}
+.past-title{font-size:0.8rem;font-weight:600;color:var(--garlic-black);margin-bottom:3px}
+.past-period{font-size:0.65rem;font-weight:400;color:var(--garlic-gray-light)}
+.past-badge{
+  flex-shrink:0;padding:3px 9px;border-radius:20px;
+  font-size:0.62rem;font-weight:700;
+  background:#EEEEEE;color:var(--garlic-gray-light);
+}
+
+/* ========== FESTIVAL BANNER ========== */
+.festival-banner{
+  margin:8px 16px 8px;
+  border-radius:18px;overflow:hidden;
+  background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#D4A843 100%);
+  padding:24px 20px;position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+}
+.festival-banner::before{
+  content:'';position:absolute;
+  top:-40px;right:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(212,168,67,0.25) 0%,transparent 65%);
+  border-radius:50%;
+}
+.festival-banner::after{
+  content:'';position:absolute;
+  bottom:-30px;left:-30px;width:120px;height:120px;
+  background:radial-gradient(circle,rgba(0,199,60,0.15) 0%,transparent 65%);
+  border-radius:50%;
+}
+.festival-text{position:relative;z-index:1}
+.festival-eyebrow{
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--garlic-gold);margin-bottom:6px;
+  display:flex;align-items:center;gap:6px;
+}
+.festival-title{
+  font-size:1.1rem;font-weight:800;color:#fff;
+  line-height:1.4;margin-bottom:4px;
+}
+.festival-sub{font-size:0.72rem;font-weight:400;color:rgba(255,255,255,0.7)}
+.festival-action{
+  position:relative;z-index:1;flex-shrink:0;
+}
+.festival-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:10px 16px;border-radius:24px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.25);
+  font-size:0.75rem;font-weight:700;color:#fff;
+  white-space:nowrap;
+  transition:background 0.18s;
+}
+.festival-btn:active{background:rgba(255,255,255,0.25)}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);
+  border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;
+  max-width:640px;margin:0 auto;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 0;min-width:56px;
+}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;
+  background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;
+  min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+/* ========== TOAST ========== */
+.toast{
+  position:fixed;bottom:calc(var(--nav-h) + var(--safe-bottom) + 16px);
+  left:50%;transform:translateX(-50%) translateY(20px);
+  background:rgba(30,30,30,0.92);
+  backdrop-filter:blur(8px);
+  color:#fff;font-size:0.82rem;font-weight:600;
+  padding:10px 20px;border-radius:24px;
+  white-space:nowrap;z-index:2000;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.25s, transform 0.25s;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ========== REVEAL ANIMATIONS ========== */
+.reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity 0.55s cubic-bezier(0.4,0,0.2,1), transform 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.05s}
+.reveal-delay-2{transition-delay:0.1s}
+.reveal-delay-3{transition-delay:0.15s}
+.reveal-delay-4{transition-delay:0.2s}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){
+  .main{max-width:640px;margin:0 auto}
+  .header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
+}
+@media(min-width:1440px){
+  body{background:#EDE8E0}
+  .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <img src="../reference/G_Logo.png" alt="Garlic" height="28" style="border-radius:2px">
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly onclick="location.href='11_search.html'">
+  </div>
+  <div class="header-actions">
+    <a href="10_notifications.html" class="h-btn" aria-label="알림" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item" style="text-decoration:none;color:inherit">🏠 추천</a>
+  <a href="14_events.html" class="tab-item active" style="text-decoration:none;color:inherit">🎪 이벤트</a>
+  <a href="05_deals.html" class="tab-item" style="text-decoration:none;color:inherit">⚡ 특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">🌱 너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">🎯 마늘까기</a>
+  <a href="06_rewards.html" class="tab-item" style="text-decoration:none;color:inherit">💰 적립</a>
+  <a href="07_fashion.html" class="tab-item" style="text-decoration:none;color:inherit">👗 패션</a>
+  <a href="08_beauty.html" class="tab-item" style="text-decoration:none;color:inherit">💄 뷰티</a>
+  <a href="09_food.html" class="tab-item" style="text-decoration:none;color:inherit">🧄 식품</a>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- ===== 1. HERO CAROUSEL ===== -->
+  <div class="section-header reveal">
+    <h2>🔥 진행 중인 이벤트</h2>
+  </div>
+
+  <div class="hero-carousel reveal reveal-delay-1">
+    <div class="hero-track" id="heroTrack">
+
+      <!-- Slide 1: 퇴마콘서트 -->
+      <div class="hero-slide">
+        <a href="event_toemacon.html" class="hero-card" style="display:flex">
+          <img class="hero-card-bg" src="../reference/퇴마콘1.png" alt="퇴마콘서트" onerror="this.style.display='none';this.nextElementSibling.previousElementSibling.style.background='linear-gradient(135deg,#1a0a2e,#3d1a5c,#FF7F6B)'">
+          <div class="hero-card-overlay"></div>
+          <div class="hero-card-content">
+            <div class="hero-card-text">
+              <div class="eyebrow">G마켓 × 갈릭</div>
+              <div class="title">퇴마콘서트</div>
+              <div class="sub">사전등록 진행 중 — 지금 바로 참여하세요</div>
+            </div>
+            <span class="hero-cta-badge badge-coral">사전등록</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Slide 2: 100일 프로모션 -->
+      <div class="hero-slide">
+        <a href="garlic_tamagotchi.html" class="hero-card" style="display:flex">
+          <div class="hero-card-bg" style="background:linear-gradient(135deg,#7B4F10 0%,#D4A843 50%,#F0CC6A 100%)"></div>
+          <div class="hero-card-overlay"></div>
+          <div class="hero-card-content">
+            <div class="hero-card-text">
+              <div class="eyebrow">너마늘 키우기</div>
+              <div class="title">마늘 먹고 사람 되는 중</div>
+              <div class="sub">
+                <div class="countdown-row">
+                  <span>D-</span>
+                  <span class="ct-block" id="ctDays">42</span>
+                  <span class="ct-sep">일</span>
+                  <span class="ct-block" id="ctHours">--</span>
+                  <span class="ct-sep">:</span>
+                  <span class="ct-block" id="ctMins">--</span>
+                  <span class="ct-sep">:</span>
+                  <span class="ct-block" id="ctSecs">--</span>
+                </div>
+              </div>
+            </div>
+            <span class="hero-cta-badge badge-gold">100일 챌린지</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Slide 3: 갈릭데이 예고 -->
+      <div class="hero-slide">
+        <a href="#" class="hero-card" style="display:flex">
+          <div class="hero-card-bg" style="background:linear-gradient(135deg,#004d1f 0%,#00C73C 60%,#A8FFB8 100%)"></div>
+          <div class="hero-card-overlay"></div>
+          <div class="hero-card-content">
+            <div class="hero-card-text">
+              <div class="eyebrow">갈릭데이 예고</div>
+              <div class="title">10.03 갈릭데이</div>
+              <div class="sub">Coming Soon — 역대급 프로모션이 옵니다</div>
+            </div>
+            <span class="hero-cta-badge badge-green">예고편 보기</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Dots -->
+    <div class="slide-dots" id="slideDots">
+      <div class="slide-dot active" onclick="goToSlide(0)"></div>
+      <div class="slide-dot" onclick="goToSlide(1)"></div>
+      <div class="slide-dot" onclick="goToSlide(2)"></div>
+    </div>
+  </div>
+
+  <!-- ===== 2. HOT 이벤트 ===== -->
+  <div class="section-header reveal">
+    <h2>🔥 HOT 이벤트</h2>
+    <span class="more">전체보기 ›</span>
+  </div>
+
+  <div class="hot-grid">
+
+    <!-- Card 1: 퇴마콘서트 -->
+    <a href="event_toemacon.html" class="event-card reveal reveal-delay-1">
+      <div class="event-thumb">
+        <img src="../reference/퇴마콘2.png" alt="퇴마콘서트" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#2D1B4E,#7C3F8E)'">
+        <span class="participant-badge">🔥 28,419명 참여 중</span>
+      </div>
+      <div class="event-body">
+        <div class="event-title">퇴마콘서트 사전등록</div>
+        <div class="event-period">2026.04.01 ~ 04.30</div>
+        <div class="event-cta">자세히 보기</div>
+      </div>
+    </a>
+
+    <!-- Card 2: 마늘 100원 딜 -->
+    <a href="05_deals.html" class="event-card reveal reveal-delay-2">
+      <div class="event-thumb" style="background:linear-gradient(135deg,#FF7F6B,#FF4848)">
+        <span class="thumb-emoji">💸</span>
+        <span class="participant-badge">⚡ 9,203명 참여 중</span>
+      </div>
+      <div class="event-body">
+        <div class="event-title">마늘 100원 딜 특가</div>
+        <div class="event-period">매일 오전 10시</div>
+        <div class="event-cta">참여하기</div>
+      </div>
+    </a>
+
+    <!-- Card 3: 100일 챌린지 -->
+    <a href="03_challenge.html" class="event-card reveal reveal-delay-3">
+      <div class="event-thumb" style="background:linear-gradient(135deg,#00C73C,#009E30)">
+        <span class="thumb-emoji">🌱</span>
+        <span class="participant-badge">🌿 14,872명 참여 중</span>
+      </div>
+      <div class="event-body">
+        <div class="event-title">100일 챌린지 진행 중</div>
+        <div class="event-period">2026.03.01 ~ 06.08</div>
+        <div class="event-cta">참여하기</div>
+      </div>
+    </a>
+
+    <!-- Card 4: 너마늘 쿠폰 -->
+    <a href="06_rewards.html" class="event-card reveal reveal-delay-4">
+      <div class="event-thumb" style="background:linear-gradient(135deg,#D4A843,#F0CC6A)">
+        <span class="thumb-emoji">🎟️</span>
+        <span class="participant-badge">🎉 5,561명 참여 중</span>
+      </div>
+      <div class="event-body">
+        <div class="event-title">너마늘 쿠폰 이벤트</div>
+        <div class="event-period">2026.04.01 ~ 04.30</div>
+        <div class="event-cta">참여하기</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ===== 3. 갈릭 캘린더 ===== -->
+  <div class="section-header reveal">
+    <h2>📅 갈릭 캘린더</h2>
+  </div>
+
+  <div class="calendar-section reveal">
+    <div class="cal-header">
+      <button class="cal-nav-btn" id="calPrev">&#8249;</button>
+      <span class="cal-month" id="calMonthLabel">2026년 4월</span>
+      <button class="cal-nav-btn" id="calNext">&#8250;</button>
+    </div>
+    <div class="cal-weekdays">
+      <div class="cal-weekday" style="color:#FF4848">일</div>
+      <div class="cal-weekday">월</div>
+      <div class="cal-weekday">화</div>
+      <div class="cal-weekday">수</div>
+      <div class="cal-weekday">목</div>
+      <div class="cal-weekday">금</div>
+      <div class="cal-weekday" style="color:#2196F3">토</div>
+    </div>
+    <div class="cal-days" id="calDays"></div>
+    <div class="cal-event-preview" id="calPreview">날짜를 탭하면 이벤트 정보를 확인할 수 있어요</div>
+  </div>
+
+  <!-- ===== 4. 갈릭 프렌즈 이벤트 ===== -->
+  <div class="section-header reveal">
+    <h2>🧄 갈릭 프렌즈 이벤트</h2>
+    <span class="more">전체보기 ›</span>
+  </div>
+
+  <div class="friends-scroll reveal">
+
+    <!-- 마누리 생일파티 -->
+    <div class="friend-card">
+      <div class="friend-avatar" style="background:linear-gradient(135deg,#FFE0E6,#FFB3C1)">
+        <svg viewBox="0 0 80 80" width="64" height="64" fill="none">
+          <ellipse cx="40" cy="46" rx="20" ry="24" fill="#F5ECD7"/>
+          <path d="M33 20c-2-8 7-14 7-14s9 6 7 14" fill="#00C73C"/>
+          <circle cx="33" cy="43" r="3" fill="#2D2D2D"/><circle cx="34" cy="42" r="1.2" fill="#fff"/>
+          <circle cx="47" cy="43" r="3" fill="#2D2D2D"/><circle cx="48" cy="42" r="1.2" fill="#fff"/>
+          <path d="M36 51c1.5 2.5 6.5 2.5 8 0" stroke="#FF7F6B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <ellipse cx="28" cy="47" rx="4" ry="2" fill="#FF7F6B" opacity=".2"/>
+          <ellipse cx="52" cy="47" rx="4" ry="2" fill="#FF7F6B" opacity=".2"/>
+          <polygon points="40,8 33,22 47,22" fill="#FF7F6B" opacity=".85"/>
+          <circle cx="40" cy="7" r="2" fill="#D4A843"/>
+        </svg>
+      </div>
+      <div class="friend-name">마누리<br>생일파티 이벤트</div>
+      <button class="friend-btn" onclick="showToast('이벤트에 참여했어요! 🧄')">참여</button>
+    </div>
+
+    <!-- 곰두리 퀴즈 -->
+    <div class="friend-card">
+      <div class="friend-avatar" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9)">
+        <svg viewBox="0 0 80 80" width="64" height="64" fill="none">
+          <ellipse cx="40" cy="50" rx="18" ry="20" fill="#B0BEC5"/>
+          <circle cx="40" cy="30" r="14" fill="#B0BEC5"/>
+          <circle cx="28" cy="18" r="7" fill="#B0BEC5"/>
+          <circle cx="52" cy="18" r="7" fill="#B0BEC5"/>
+          <circle cx="28" cy="18" r="4" fill="#FFB3C1"/>
+          <circle cx="52" cy="18" r="4" fill="#FFB3C1"/>
+          <ellipse cx="40" cy="34" rx="9" ry="7" fill="#D7CCC8"/>
+          <circle cx="34" cy="28" r="2.5" fill="#2D2D2D"/><circle cx="35" cy="27" r="1" fill="#fff"/>
+          <circle cx="46" cy="28" r="2.5" fill="#2D2D2D"/><circle cx="47" cy="27" r="1" fill="#fff"/>
+          <ellipse cx="40" cy="32" rx="2" ry="1.5" fill="#FF7F6B"/>
+          <path d="M36 35c1.5 2 6.5 2 8 0" stroke="#555" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <rect x="50" y="10" width="22" height="16" rx="6" fill="#00C73C"/>
+          <text x="61" y="22" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Q?</text>
+        </svg>
+      </div>
+      <div class="friend-name">곰두리와 함께하는<br>퀴즈 이벤트</div>
+      <button class="friend-btn" onclick="showToast('이벤트에 참여했어요! 🧄')" style="background:var(--garlic-gold)">참여</button>
+    </div>
+
+    <!-- 스티커 수집 -->
+    <div class="friend-card">
+      <div class="friend-avatar" style="background:linear-gradient(135deg,#E8F8ED,#A5D6A7)">
+        <svg viewBox="0 0 80 80" width="64" height="64" fill="none">
+          <rect x="16" y="20" width="48" height="42" rx="8" fill="#fff" stroke="#E0E0E0" stroke-width="1.5"/>
+          <circle cx="32" cy="36" r="8" fill="#FFE0E6"/>
+          <text x="32" y="40" font-size="10" text-anchor="middle">🧄</text>
+          <circle cx="48" cy="36" r="8" fill="#FFF3D6"/>
+          <text x="48" y="40" font-size="10" text-anchor="middle">⭐</text>
+          <circle cx="32" cy="52" r="8" fill="#E8F8ED"/>
+          <text x="32" y="56" font-size="10" text-anchor="middle">💚</text>
+          <circle cx="48" cy="52" r="8" fill="#E3F2FD" stroke="#90CAF9" stroke-width="1" stroke-dasharray="2 2"/>
+          <text x="48" y="57" font-size="13" text-anchor="middle" fill="#888">+</text>
+        </svg>
+      </div>
+      <div class="friend-name">갈릭 프렌즈<br>스티커 수집</div>
+      <button class="friend-btn" onclick="showToast('이벤트에 참여했어요! 🧄')" style="background:var(--garlic-coral)">참여</button>
+    </div>
+
+    <!-- 마늘왕 배틀 -->
+    <div class="friend-card">
+      <div class="friend-avatar" style="background:linear-gradient(135deg,#FFF3D6,#FFE08A)">
+        <svg viewBox="0 0 80 80" width="64" height="64" fill="none">
+          <ellipse cx="40" cy="50" rx="20" ry="22" fill="#F5ECD7"/>
+          <path d="M32 22c-3-10 8-18 8-18s11 8 8 18" fill="#00C73C"/>
+          <circle cx="33" cy="46" r="3.2" fill="#2D2D2D"/><circle cx="34" cy="45" r="1.3" fill="#fff"/>
+          <circle cx="47" cy="46" r="3.2" fill="#2D2D2D"/><circle cx="48" cy="45" r="1.3" fill="#fff"/>
+          <path d="M36 54c1.8 3 7.2 3 9 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <polygon points="26,30 32,20 40,26 48,20 54,30" fill="#D4A843"/>
+          <circle cx="40" cy="25" r="2.5" fill="#FF4848"/>
+          <circle cx="32" cy="19" r="2" fill="#00C73C"/>
+          <circle cx="48" cy="19" r="2" fill="#00C73C"/>
+        </svg>
+      </div>
+      <div class="friend-name">마늘왕 배틀<br>랭킹 이벤트</div>
+      <button class="friend-btn" onclick="showToast('이벤트에 참여했어요! 🧄')" style="background:#D4A843">참여</button>
+    </div>
+
+  </div>
+
+  <!-- ===== 5. 지난 이벤트 ===== -->
+  <div class="section-header reveal">
+    <h2>📢 지난 이벤트</h2>
+  </div>
+
+  <div class="past-list">
+
+    <div class="past-card reveal reveal-delay-1">
+      <div class="past-icon">🎊</div>
+      <div class="past-info">
+        <div class="past-title">오픈 기념 가입 이벤트</div>
+        <div class="past-period">2026.01.01 ~ 2026.02.28</div>
+      </div>
+      <span class="past-badge">종료</span>
+    </div>
+
+    <div class="past-card reveal reveal-delay-2">
+      <div class="past-icon">🛍️</div>
+      <div class="past-info">
+        <div class="past-title">첫 구매 감사 쿠폰 증정</div>
+        <div class="past-period">2026.01.15 ~ 2026.03.15</div>
+      </div>
+      <span class="past-badge">종료</span>
+    </div>
+
+    <div class="past-card reveal reveal-delay-3">
+      <div class="past-icon">📲</div>
+      <div class="past-info">
+        <div class="past-title">앱 설치 마늘 포인트 증정</div>
+        <div class="past-period">2025.12.01 ~ 2026.01.31</div>
+      </div>
+      <span class="past-badge">종료</span>
+    </div>
+
+  </div>
+
+  <!-- ===== 6. 의성 마늘 축제 배너 ===== -->
+  <div class="section-header reveal">
+    <h2>🌿 축제 &amp; 오프라인</h2>
+  </div>
+
+  <a href="event_uiseong_festival.html" class="festival-banner reveal" style="display:flex">
+    <div class="festival-text">
+      <div class="festival-eyebrow">2027 의성 마늘 축제</div>
+      <div class="festival-title">갈릭파크에서<br>만나요!</div>
+      <div class="festival-sub">한국 마늘의 성지, 의성에서 펼쳐지는 특별한 축제</div>
+    </div>
+    <div class="festival-action">
+      <div class="festival-btn">자세히 보기 →</div>
+    </div>
+  </a>
+
+  <div style="height:16px"></div>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="12_category.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="13_cart.html" class="nav-item" style="text-decoration:none">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">2</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== HERO CAROUSEL ===== */
+const heroTrack = document.getElementById('heroTrack');
+const dots = document.querySelectorAll('.slide-dot');
+let currentSlide = 0;
+const totalSlides = 3;
+let autoTimer;
+
+function goToSlide(n) {
+  currentSlide = ((n % totalSlides) + totalSlides) % totalSlides;
+  heroTrack.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === currentSlide); });
+}
+
+function startAuto() {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(function() { goToSlide(currentSlide + 1); }, 4000);
+}
+
+startAuto();
+
+// Touch swipe
+let touchStartX = 0;
+heroTrack.addEventListener('touchstart', function(e) {
+  touchStartX = e.touches[0].clientX;
+  clearInterval(autoTimer);
+}, {passive: true});
+heroTrack.addEventListener('touchend', function(e) {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 40) goToSlide(currentSlide + (dx < 0 ? 1 : -1));
+  startAuto();
+}, {passive: true});
+
+/* ===== COUNTDOWN ===== */
+function updateCountdown() {
+  const target = new Date('2026-05-26T00:00:00');
+  const now = new Date();
+  let diff = target - now;
+  if (diff < 0) diff = 0;
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  function pad(n) { return String(n).padStart(2, '0'); }
+  const dEl = document.getElementById('ctDays');
+  const hEl = document.getElementById('ctHours');
+  const mEl = document.getElementById('ctMins');
+  const sEl = document.getElementById('ctSecs');
+  if (dEl) dEl.textContent = days;
+  if (hEl) hEl.textContent = pad(hours);
+  if (mEl) mEl.textContent = pad(mins);
+  if (sEl) sEl.textContent = pad(secs);
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ===== CALENDAR ===== */
+const calEvents = {
+  '2026-04-03': ['퇴마콘서트 사전등록 마감'],
+  '2026-04-10': ['마늘 100원 딜 ⚡'],
+  '2026-04-14': ['오늘 — 갈릭 프렌즈 퀴즈'],
+  '2026-04-17': ['너마늘 쿠폰 마감'],
+  '2026-04-20': ['마늘왕 배틀 결승'],
+  '2026-04-26': ['100일 챌린지 중간 점검'],
+  '2026-04-30': ['4월 이벤트 마감'],
+  '2026-10-03': ['🧄 갈릭데이 D-DAY'],
+};
+
+let calYear = 2026, calMonth = 4;
+const today = new Date();
+const todayKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+function renderCal() {
+  const label = document.getElementById('calMonthLabel');
+  const grid = document.getElementById('calDays');
+  label.textContent = calYear + '년 ' + calMonth + '월';
+  grid.innerHTML = '';
+
+  const firstDay = new Date(calYear, calMonth - 1, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day empty';
+    grid.appendChild(el);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = calYear + '-' + String(calMonth).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    if (key === todayKey) el.classList.add('today');
+    if (calEvents[key]) el.classList.add('has-event');
+    el.innerHTML = '<span>' + d + '</span><span class="cal-dot"></span>';
+    el.dataset.key = key;
+    el.addEventListener('click', function() { selectCalDay(this, key); });
+    grid.appendChild(el);
+  }
+}
+
+function selectCalDay(el, key) {
+  document.querySelectorAll('.cal-day.selected').forEach(function(e) { e.classList.remove('selected'); });
+  el.classList.add('selected');
+  const preview = document.getElementById('calPreview');
+  const evs = calEvents[key];
+  if (evs && evs.length) {
+    preview.classList.add('has-content');
+    preview.innerHTML = evs.map(function(e) { return '<span class="ev-chip">🗓 ' + e + '</span>'; }).join('');
+  } else {
+    preview.classList.remove('has-content');
+    preview.textContent = '이날은 예정된 이벤트가 없어요';
+  }
+}
+
+document.getElementById('calPrev').addEventListener('click', function() {
+  calMonth--;
+  if (calMonth < 1) { calMonth = 12; calYear--; }
+  renderCal();
+});
+document.getElementById('calNext').addEventListener('click', function() {
+  calMonth++;
+  if (calMonth > 12) { calMonth = 1; calYear++; }
+  renderCal();
+});
+
+renderCal();
+
+/* ===== TOAST ===== */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2400);
+}
+
+/* ===== PARTICIPATE BUTTONS on event cards ===== */
+document.querySelectorAll('.event-cta').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    showToast('이벤트에 참여했어요! 🧄');
+    const href = btn.closest('a').href;
+    setTimeout(function() { if (href && href !== '#') window.location.href = href; }, 800);
+  });
+});
+
+/* ===== REVEAL ON SCROLL ===== */
+const revealObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+</script>
+
+</body>
+</html>
