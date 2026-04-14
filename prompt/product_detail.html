@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../reference/G_Logo.png">
+<link rel="icon" type="image/png" href="reference/G_Logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic - 나마늘 위한 마켓 | 상품상세</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;--card:#FFFFFF;--text:#333333;--text-light:#888888;
+  --green:#00C73C;--green-light:#E8F8ED;--gold:#D4A843;--gold-light:#FFF3D6;
+  --coral:#FF7F6B;--border:#EEEEEE;
+  --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;--nav-h:64px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--text);
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 16px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* HEADER */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top);
+  background:var(--card);display:flex;align-items:center;justify-content:space-between;
+  padding-left:8px;padding-right:8px;border-bottom:1px solid var(--border);
+}
+.header-left,.header-right{display:flex;align-items:center;gap:2px}
+.header-title{flex:1;text-align:center;font-size:0.92rem;font-weight:700;color:var(--text)}
+.h-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--text);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* MAIN */
+.main{max-width:640px;margin:0 auto}
+
+/* PRODUCT IMAGE */
+.product-hero{width:100%;aspect-ratio:1/1;background:#f0ede8;overflow:hidden}
+.product-hero img{width:100%;height:100%;object-fit:cover}
+
+/* PRODUCT INFO */
+.product-info-section{background:var(--card);padding:20px 16px;margin-bottom:8px}
+.info-brand{font-size:0.75rem;font-weight:500;color:var(--text-light);margin-bottom:4px;letter-spacing:0.02em}
+.info-name{font-size:1.1rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:10px}
+.info-tag{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 12px;border-radius:20px;font-size:0.7rem;font-weight:700;margin-bottom:12px;
+}
+.info-tag.dna{background:var(--green-light);color:var(--green)}
+.info-tag.ai{background:#EDE7F6;color:#7C4DFF}
+.info-tag.manuri{background:#FFF0EE;color:var(--coral)}
+.info-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.info-discount{font-size:1.3rem;font-weight:800;color:var(--coral)}
+.info-price{font-size:1.3rem;font-weight:800;color:var(--text)}
+.info-original{font-size:0.82rem;font-weight:400;color:var(--text-light);text-decoration:line-through;margin-bottom:12px}
+.info-pills{display:flex;gap:8px;flex-wrap:wrap}
+.info-pill{
+  padding:6px 12px;border-radius:8px;font-size:0.72rem;font-weight:600;
+  background:var(--bg);color:var(--text);
+}
+
+/* MANURI COMMENT */
+.manuri-section{background:var(--card);padding:20px 16px;margin-bottom:8px}
+.manuri-section h3{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:12px}
+.manuri-bubble{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg);border-radius:16px;padding:16px;
+}
+.manuri-avatar{
+  width:44px;height:44px;border-radius:50%;background:var(--green-light);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;
+}
+.manuri-text{font-size:0.82rem;font-weight:400;color:var(--text);line-height:1.6}
+
+/* OPTIONS */
+.options-section{background:var(--card);padding:20px 16px;margin-bottom:8px}
+.options-section h3{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:14px}
+.option-group{margin-bottom:16px}
+.option-label{font-size:0.75rem;font-weight:600;color:var(--text-light);margin-bottom:8px}
+.option-pills{display:flex;gap:8px;flex-wrap:wrap}
+.option-pill{
+  padding:8px 18px;border-radius:24px;font-size:0.78rem;font-weight:600;
+  border:1.5px solid var(--border);color:var(--text);background:var(--card);
+  transition:all 0.2s;cursor:pointer;
+}
+.option-pill.active{border-color:var(--green);color:var(--green);background:var(--green-light)}
+.option-pill:active{transform:scale(0.96)}
+.qty-row{display:flex;align-items:center;gap:0}
+.qty-btn{
+  width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:700;color:var(--text);background:var(--card);
+  transition:all 0.15s;
+}
+.qty-btn:active{background:var(--border)}
+.qty-val{width:48px;text-align:center;font-size:1rem;font-weight:700;color:var(--text)}
+
+/* TABS */
+.tabs-section{background:var(--card);margin-bottom:8px}
+.tab-bar{display:flex;border-bottom:1px solid var(--border)}
+.tab-btn{
+  flex:1;padding:14px 0;text-align:center;font-size:0.82rem;font-weight:600;
+  color:var(--text-light);position:relative;transition:color 0.2s;
+}
+.tab-btn.active{color:var(--text);font-weight:700}
+.tab-btn.active::after{
+  content:'';position:absolute;bottom:0;left:20%;right:20%;
+  height:2.5px;background:var(--text);border-radius:2px 2px 0 0;
+}
+.tab-content{padding:20px 16px;display:none}
+.tab-content.active{display:block}
+
+/* DETAIL TAB */
+.detail-text{font-size:0.82rem;line-height:1.8;color:#666}
+
+/* REVIEW TAB */
+.review-item{padding:16px 0;border-bottom:1px solid var(--border)}
+.review-item:last-child{border-bottom:none}
+.review-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.review-user{font-size:0.78rem;font-weight:700;color:var(--text)}
+.review-date{font-size:0.68rem;color:var(--text-light)}
+.review-stars{font-size:0.72rem;color:#FFB800;margin-bottom:6px}
+.review-text{font-size:0.78rem;line-height:1.6;color:#555}
+
+/* QNA TAB */
+.qna-item{padding:16px 0;border-bottom:1px solid var(--border)}
+.qna-item:last-child{border-bottom:none}
+.qna-q,.qna-a{display:flex;gap:8px;margin-bottom:8px}
+.qna-q:last-child,.qna-a:last-child{margin-bottom:0}
+.qna-badge{
+  flex-shrink:0;width:24px;height:24px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.72rem;font-weight:800;
+}
+.qna-badge.q{background:var(--green-light);color:var(--green)}
+.qna-badge.a{background:#FFF0EE;color:var(--coral)}
+.qna-text{font-size:0.78rem;line-height:1.5;color:var(--text);padding-top:2px}
+
+/* RECOMMENDED */
+.rec-section{background:var(--card);padding:20px 0;margin-bottom:8px}
+.rec-section h3{font-size:0.88rem;font-weight:700;color:var(--text);padding:0 16px;margin-bottom:14px}
+.rec-scroll{
+  display:flex;gap:10px;padding:0 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.rec-scroll::-webkit-scrollbar{display:none}
+.rec-card{flex-shrink:0;width:140px;cursor:pointer;transition:transform 0.15s}
+.rec-card:active{transform:scale(0.97)}
+.rec-thumb{width:140px;height:140px;border-radius:12px;overflow:hidden;background:#f0ede8;margin-bottom:8px}
+.rec-thumb img{width:100%;height:100%;object-fit:cover}
+.rec-name{font-size:0.72rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:4px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rec-price{font-size:0.72rem;font-weight:700;color:var(--text)}
+.rec-discount{color:var(--coral);margin-right:4px}
+
+/* FIXED BOTTOM */
+.bottom-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  background:var(--card);border-top:1px solid var(--border);
+  padding:10px 16px calc(10px + var(--safe-bottom));
+  display:flex;align-items:center;gap:10px;
+  max-width:640px;margin:0 auto;
+}
+.btn-wish{
+  width:48px;height:48px;border-radius:12px;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all 0.2s;
+}
+.btn-wish svg{width:22px;height:22px;stroke:var(--text-light);fill:none;stroke-width:1.8}
+.btn-wish.active svg{fill:var(--coral);stroke:var(--coral)}
+.btn-wish:active{transform:scale(0.92)}
+.btn-cart{
+  flex:1;height:48px;border-radius:12px;border:1.5px solid var(--green);
+  font-size:0.85rem;font-weight:700;color:var(--green);background:var(--card);
+  transition:all 0.2s;
+}
+.btn-cart:active{background:var(--green-light)}
+.btn-buy{
+  flex:1.3;height:48px;border-radius:12px;border:none;
+  font-size:0.85rem;font-weight:700;color:#fff;background:var(--green);
+  transition:all 0.2s;
+}
+.btn-buy:active{opacity:0.85}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:rgba(0,0,0,0.8);color:#fff;padding:12px 24px;border-radius:12px;
+  font-size:0.82rem;font-weight:600;z-index:9999;opacity:0;
+  transition:all 0.3s ease;pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* RESPONSIVE */
+@media(min-width:768px){.main{max-width:640px;margin:0 auto}.header,.bottom-bar{max-width:640px;left:50%;transform:translateX(-50%)}}
+@media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <button class="h-btn" onclick="history.back()" aria-label="뒤로가기">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+  </div>
+  <div class="header-title">상품상세</div>
+  <div class="header-right">
+    <button class="h-btn" onclick="shareProduct()" aria-label="공유">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </button>
+    <a href="13_cart.html" class="h-btn" aria-label="장바구니">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- PRODUCT IMAGE -->
+  <section class="product-hero">
+    <img id="heroImg" src="https://picsum.photos/seed/detail/400/400" alt="상품 이미지">
+  </section>
+
+  <!-- PRODUCT INFO -->
+  <section class="product-info-section">
+    <div class="info-brand" id="infoBrand">GARLIC</div>
+    <div class="info-name" id="infoName">갈릭 추천 상품</div>
+    <div id="infoTag"></div>
+    <div class="info-price-row">
+      <span class="info-discount" id="infoDiscount"></span>
+      <span class="info-price" id="infoPrice">29,900원</span>
+    </div>
+    <div class="info-original" id="infoOriginal"></div>
+    <div class="info-pills">
+      <span class="info-pill">무료배송</span>
+      <span class="info-pill">갈릭 포인트 5% 적립</span>
+    </div>
+  </section>
+
+  <!-- MANURI COMMENT -->
+  <section class="manuri-section">
+    <h3>마누리의 한마디</h3>
+    <div class="manuri-bubble">
+      <div class="manuri-avatar">&#129495;</div>
+      <div class="manuri-text" id="manuriText">이 상품 진짜 좋아요! 지은마늘이 좋아할 것 같아 &#129476;</div>
+    </div>
+  </section>
+
+  <!-- OPTIONS -->
+  <section class="options-section">
+    <h3>상품 옵션 선택</h3>
+    <div class="option-group">
+      <div class="option-label">색상</div>
+      <div class="option-pills" id="colorPills">
+        <button class="option-pill active" onclick="selectOption(this,'colorPills')">베이지</button>
+        <button class="option-pill" onclick="selectOption(this,'colorPills')">블랙</button>
+        <button class="option-pill" onclick="selectOption(this,'colorPills')">화이트</button>
+      </div>
+    </div>
+    <div class="option-group">
+      <div class="option-label">사이즈</div>
+      <div class="option-pills" id="sizePills">
+        <button class="option-pill" onclick="selectOption(this,'sizePills')">S</button>
+        <button class="option-pill active" onclick="selectOption(this,'sizePills')">M</button>
+        <button class="option-pill" onclick="selectOption(this,'sizePills')">L</button>
+        <button class="option-pill" onclick="selectOption(this,'sizePills')">XL</button>
+      </div>
+    </div>
+    <div class="option-group">
+      <div class="option-label">수량</div>
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeQty(-1)">-</button>
+        <span class="qty-val" id="qtyVal">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <section class="tabs-section">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(0)">상세정보</button>
+      <button class="tab-btn" onclick="switchTab(1)">리뷰(128)</button>
+      <button class="tab-btn" onclick="switchTab(2)">문의(23)</button>
+    </div>
+    <div class="tab-content active" id="tab0">
+      <div class="detail-text">
+        <p style="margin-bottom:12px">본 상품은 갈릭 마켓의 엄선된 큐레이션을 거쳐 선별된 제품입니다. 최고급 원단과 정교한 봉제 기술로 완성되었으며, 편안한 착용감과 세련된 디자인을 동시에 만족시킵니다.</p>
+        <p style="margin-bottom:12px">갈릭 DNA 매칭 시스템이 분석한 결과, 고객님의 취향과 높은 일치율을 보이는 상품입니다. AI가 수만 건의 구매 데이터와 스타일 패턴을 학습하여 추천해 드립니다.</p>
+        <p style="margin-bottom:12px"><strong>소재:</strong> 린넨 55%, 면 45%<br><strong>제조국:</strong> 대한민국<br><strong>세탁방법:</strong> 중성세제 손세탁 권장</p>
+        <p style="margin-bottom:12px">모델 착용 사이즈: M (모델 키 172cm, 체중 58kg)</p>
+        <p>갈릭 마켓은 모든 상품에 대해 정품 보장 및 품질 보증을 제공합니다. 수령 후 7일 이내 무료 반품이 가능합니다.</p>
+      </div>
+    </div>
+    <div class="tab-content" id="tab1">
+      <div class="review-item">
+        <div class="review-top">
+          <span class="review-user">민지마늘 &#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="review-date">2026.04.10</span>
+        </div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">핏이 정말 예뻐요! 오버핏인데 적당히 떨어지고 린넨이라 시원해요. 갈릭 DNA 추천이 진짜 잘 맞는 것 같아요.</div>
+      </div>
+      <div class="review-item">
+        <div class="review-top">
+          <span class="review-user">스타일마늘 &#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          <span class="review-date">2026.04.08</span>
+        </div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <div class="review-text">색상이 사진이랑 거의 똑같아요. 베이지 샀는데 화이트도 사고 싶어요. 배송도 빨라서 좋았어요!</div>
+      </div>
+      <div class="review-item">
+        <div class="review-top">
+          <span class="review-user">마늘러버 &#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="review-date">2026.04.05</span>
+        </div>
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">남자친구 선물로 샀는데 너무 좋아해요. 가격 대비 퀄리티 최고입니다. 마누리 추천 믿고 삽니다!</div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab2">
+      <div class="qna-item">
+        <div class="qna-q">
+          <span class="qna-badge q">Q</span>
+          <span class="qna-text">170cm 60kg인데 M이랑 L 중에 뭐가 나을까요?</span>
+        </div>
+        <div class="qna-a">
+          <span class="qna-badge a">A</span>
+          <span class="qna-text">안녕하세요! 해당 체형이시면 M 사이즈를 추천드립니다. 오버핏이라 M도 넉넉하게 나옵니다 :)</span>
+        </div>
+      </div>
+      <div class="qna-item">
+        <div class="qna-q">
+          <span class="qna-badge q">Q</span>
+          <span class="qna-text">세탁하면 줄어드나요? 린넨이라 걱정돼서요.</span>
+        </div>
+        <div class="qna-a">
+          <span class="qna-badge a">A</span>
+          <span class="qna-text">워싱 처리가 되어 있어 큰 수축은 없으나, 첫 세탁 시 미세한 수축(약 1~2%)이 있을 수 있습니다. 중성세제 손세탁을 권장드려요!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMMENDED -->
+  <section class="rec-section">
+    <h3>이 상품과 함께 많이 본 상품</h3>
+    <div class="rec-scroll">
+      <div class="rec-card" onclick="location.href='product_detail.html?name='+encodeURIComponent('슬림 스트레이트 슬랙스')+'&brand=MONOCHROME&price=54000&discount=10&original=60000&img='+encodeURIComponent('https://picsum.photos/seed/rec1/300/300')+'&match=88&tag=dna'">
+        <div class="rec-thumb"><img src="https://picsum.photos/seed/rec1/300/300" alt="추천상품"></div>
+        <div class="rec-name">슬림 스트레이트 슬랙스</div>
+        <div class="rec-price"><span class="rec-discount">10%</span>54,000원</div>
+      </div>
+      <div class="rec-card" onclick="location.href='product_detail.html?name='+encodeURIComponent('크롭 니트 가디건')+'&brand=SOFT+CORE&price=42500&discount=15&original=50000&img='+encodeURIComponent('https://picsum.photos/seed/rec2/300/300')+'&match=85&tag=dna'">
+        <div class="rec-thumb"><img src="https://picsum.photos/seed/rec2/300/300" alt="추천상품"></div>
+        <div class="rec-name">크롭 니트 가디건</div>
+        <div class="rec-price"><span class="rec-discount">15%</span>42,500원</div>
+      </div>
+      <div class="rec-card" onclick="location.href='product_detail.html?name='+encodeURIComponent('레이어드 트렌치코트')+'&brand=LAYER+STORY&price=89000&discount=40&original=148000&img='+encodeURIComponent('https://picsum.photos/seed/rec3/300/300')+'&match=91&tag=dna'">
+        <div class="rec-thumb"><img src="https://picsum.photos/seed/rec3/300/300" alt="추천상품"></div>
+        <div class="rec-name">레이어드 트렌치코트</div>
+        <div class="rec-price"><span class="rec-discount">40%</span>89,000원</div>
+      </div>
+      <div class="rec-card" onclick="location.href='product_detail.html?name='+encodeURIComponent('버킷햇 + 체인 백 세트')+'&brand=STREET+CULT&price=34200&discount=25&original=45600&img='+encodeURIComponent('https://picsum.photos/seed/rec4/300/300')+'&match=78&tag=ai'">
+        <div class="rec-thumb"><img src="https://picsum.photos/seed/rec4/300/300" alt="추천상품"></div>
+        <div class="rec-name">버킷햇 + 체인 백 세트</div>
+        <div class="rec-price"><span class="rec-discount">25%</span>34,200원</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <button class="btn-wish" id="wishBtn" onclick="toggleWish()">
+    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+  </button>
+  <button class="btn-cart" onclick="addToCart()">마늘밭 담기</button>
+  <button class="btn-buy" onclick="buyNow()">바로 구매</button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== URL PARAMS =====
+const params = new URLSearchParams(window.location.search);
+const name = params.get('name') || '갈릭 추천 상품';
+const brand = params.get('brand') || 'GARLIC';
+const price = params.get('price') || '29900';
+const discount = params.get('discount') || '';
+const original = params.get('original') || '';
+const img = params.get('img') || 'https://picsum.photos/seed/detail/400/400';
+const match = params.get('match') || '92';
+const tag = params.get('tag') || 'dna';
+
+// ===== POPULATE PAGE =====
+document.getElementById('heroImg').src = img;
+document.getElementById('heroImg').alt = name;
+document.getElementById('infoBrand').textContent = brand;
+document.getElementById('infoName').textContent = name;
+
+// Format price
+function formatPrice(val) {
+  const n = parseInt(val);
+  if (isNaN(n)) return val;
+  return n.toLocaleString('ko-KR');
+}
+
+document.getElementById('infoPrice').textContent = formatPrice(price) + '원';
+
+if (discount) {
+  document.getElementById('infoDiscount').textContent = discount + '%';
+} else {
+  document.getElementById('infoDiscount').style.display = 'none';
+}
+
+if (original) {
+  document.getElementById('infoOriginal').textContent = formatPrice(original) + '원';
+} else {
+  document.getElementById('infoOriginal').style.display = 'none';
+}
+
+// Tag badge
+const tagEl = document.getElementById('infoTag');
+if (tag === 'dna') {
+  tagEl.innerHTML = '<span class="info-tag dna">&#129476; 갈릭 DNA ' + match + '% 매칭</span>';
+} else if (tag === 'ai') {
+  tagEl.innerHTML = '<span class="info-tag ai">&#129302; AI 추천</span>';
+} else if (tag === 'manuri') {
+  tagEl.innerHTML = '<span class="info-tag manuri">&#10084;&#65039; 마누리 추천</span>';
+} else {
+  tagEl.innerHTML = '<span class="info-tag dna">&#129476; 갈릭 DNA ' + match + '% 매칭</span>';
+}
+
+// ===== INTERACTIONS =====
+function selectOption(el, groupId) {
+  document.querySelectorAll('#' + groupId + ' .option-pill').forEach(function(p) { p.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+let qty = 1;
+function changeQty(delta) {
+  qty = Math.max(1, Math.min(99, qty + delta));
+  document.getElementById('qtyVal').textContent = qty;
+}
+
+function switchTab(idx) {
+  document.querySelectorAll('.tab-btn').forEach(function(t, i) {
+    t.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.tab-content').forEach(function(c, i) {
+    c.classList.toggle('active', i === idx);
+  });
+}
+
+let wished = false;
+function toggleWish() {
+  wished = !wished;
+  document.getElementById('wishBtn').classList.toggle('active', wished);
+  showToast(wished ? '찜 목록에 추가했어요!' : '찜 목록에서 제거했어요');
+}
+
+function addToCart() {
+  showToast('마늘밭에 담았어요! &#129476;');
+}
+
+function buyNow() {
+  showToast('주문이 완료되었습니다! &#127881;');
+}
+
+function shareProduct() {
+  if (navigator.share) {
+    navigator.share({ title: name, text: brand + ' - ' + name, url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      showToast('링크가 복사되었어요!');
+    });
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.innerHTML = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2000);
+}
+</script>
+
+</body>
+</html>

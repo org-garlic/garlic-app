@@ -505,6 +505,8 @@ const todayGrid = document.getElementById('todayGrid');
 todayDeals.forEach((p,i) => {
   const card = document.createElement('div');
   card.className = 'product-card';
+  card.style.cursor = 'pointer';
+  card.onclick = (function(prod){ return function(){ location.href='product_detail.html?name='+encodeURIComponent(prod.name)+'&brand='+encodeURIComponent(prod.brand)+'&price='+prod.price.replace(/,/g,'')+'&discount='+prod.discount+'&original='+prod.original.replace(/,/g,'')+'&img='+encodeURIComponent(prod.img)+'&match=90&tag='+prod.tag; }; })(p);
   card.innerHTML = `
     <div class="product-thumb">
       <img src="${p.img}" style="width:100%;height:100%;object-fit:cover">
@@ -549,6 +551,8 @@ function renderCat(idx) {
   catData[idx].forEach(p => {
     const card = document.createElement('div');
     card.className = 'product-card';
+    card.style.cursor = 'pointer';
+    card.onclick = (function(prod){ return function(){ location.href='product_detail.html?name='+encodeURIComponent(prod.name)+'&brand='+encodeURIComponent(prod.brand)+'&price='+prod.price.replace(/,/g,'')+'&discount='+prod.discount+'&original='+prod.original.replace(/,/g,'')+'&img='+encodeURIComponent(prod.img)+'&match=88&tag=deal'; }; })(p);
     card.innerHTML = `
       <div class="product-thumb">
         <img src="${p.img}" style="width:100%;height:100%;object-fit:cover">

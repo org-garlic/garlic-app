@@ -499,6 +499,8 @@ function makeCard(p, i, imgIndex) {
   const card = document.createElement('div');
   card.className = 'product-card fade-up';
   card.style.animationDelay = (0.05 * i) + 's';
+  card.style.cursor = 'pointer';
+  card.onclick = function(){ location.href='product_detail.html?name='+encodeURIComponent(p.name)+'&brand='+encodeURIComponent(p.brand)+'&price='+p.price.replace(/,/g,'')+'&discount='+p.discount+'&original='+p.original.replace(/,/g,'')+'&img='+encodeURIComponent('https://picsum.photos/300/300?random='+imgIndex)+'&match=92&tag='+p.tag; };
   card.innerHTML = `
     <div class="product-thumb">
       <img src="https://picsum.photos/300/300?random=${imgIndex}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;">

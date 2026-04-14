@@ -644,6 +644,8 @@ const grid = document.getElementById('popularGrid');
 popularProducts.forEach(p => {
   const card = document.createElement('div');
   card.className = 'product-card';
+  card.style.cursor = 'pointer';
+  card.onclick = (function(prod){ return function(){ location.href='product_detail.html?name='+encodeURIComponent(prod.name)+'&brand='+encodeURIComponent(prod.brand)+'&price='+prod.price.replace(/,/g,'')+'&discount='+prod.discount+'&original='+prod.original.replace(/,/g,'')+'&img='+encodeURIComponent('https://picsum.photos/300/300?random='+prod.img)+'&match=90&tag='+prod.tag; }; })(p);
   card.innerHTML = `
     <div class="product-thumb">
       <img src="https://picsum.photos/300/300?random=${p.img}" alt="${p.name}" loading="lazy">
