@@ -1286,13 +1286,32 @@ function answerQuiz(btn, isCorrect) {
   if (isCorrect) {
     btn.classList.add('correct');
     result.className = 'quiz-result correct-bg show';
-    result.innerHTML = '정답! 🧄 마늘 2알 획득!';
+    result.innerHTML = '<div style="text-align:center;padding:16px 0">' +
+      '<svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom:8px">' +
+        '<circle cx="50" cy="50" r="45" fill="#E8F8ED" stroke="#00C73C" stroke-width="2"/>' +
+        '<ellipse cx="50" cy="55" rx="18" ry="22" fill="#F5ECD7"/>' +
+        '<path d="M44 38c-1-8 6-14 6-14s7 6 6 14" fill="#00C73C"/>' +
+        '<circle cx="44" cy="50" r="2.5" fill="#333"/><circle cx="56" cy="50" r="2.5" fill="#333"/>' +
+        '<circle cx="45" cy="49" r="1" fill="#fff"/><circle cx="57" cy="49" r="1" fill="#fff"/>' +
+        '<path d="M46 58c2 2.5 6 2.5 8 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+        '<circle cx="38" cy="54" r="3" fill="#FFD4CC" opacity=".5"/>' +
+        '<circle cx="62" cy="54" r="3" fill="#FFD4CC" opacity=".5"/>' +
+        '<text x="50" y="90" text-anchor="middle" font-size="10" fill="#00C73C" font-weight="700">정답!</text>' +
+      '</svg>' +
+      '<div style="font-size:18px;font-weight:700;color:#00C73C;margin-bottom:4px">🎉 정답이에요!</div>' +
+      '<div style="font-size:14px;color:#333">마늘 2알 획득! "오직 나마늘 위한 마켓"</div>' +
+      '<div style="font-size:12px;color:#888;margin-top:4px">마누리가 기뻐하고 있어요 🧄</div>' +
+    '</div>';
     updateGarlicCount(parseInt(document.getElementById('jarCount').textContent) + 2);
   } else {
     btn.classList.add('wrong');
-    allOptions[2].classList.add('correct');
+    allOptions[1].classList.add('correct');
     result.className = 'quiz-result wrong-bg show';
-    result.innerHTML = '아쉬워요! 정답은 "인절하"였어요 😅';
+    result.innerHTML = '<div style="text-align:center;padding:12px 0">' +
+      '<div style="font-size:16px;margin-bottom:4px">아쉬워요! 😅</div>' +
+      '<div style="font-size:14px;color:#333">정답은 <b>"오직 나마늘 위한 마켓"</b>이었어요</div>' +
+      '<div style="font-size:12px;color:#888;margin-top:4px">내일 다시 도전해보세요!</div>' +
+    '</div>';
   }
   allOptions.forEach(function(o) { o.style.pointerEvents = 'none'; });
 }
