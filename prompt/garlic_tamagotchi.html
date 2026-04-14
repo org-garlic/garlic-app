@@ -15,9 +15,6 @@
 <title>Garlic - 나마늘 위한 마켓 | 마늘키우기</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
-@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
-@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -46,7 +43,7 @@
 }
 
 html{scroll-behavior:smooth}
-body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
+body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
 .serif{font-family:'Noto Serif KR',serif}
 
 /* ===== HEADER ===== */
@@ -94,7 +91,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 
 /* ===== ACTION BUTTONS ===== */
 .actions{padding:0 24px 32px;max-width:400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 12px;border-radius:20px;border:none;cursor:pointer;font-family:'GmarketSans';font-size:13px;font-weight:700;transition:all .2s;position:relative;overflow:hidden}
+.action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 12px;border-radius:20px;border:none;cursor:pointer;font-family:'Pretendard';font-size:13px;font-weight:700;transition:all .2s;position:relative;overflow:hidden}
 .action-btn:active{transform:scale(.94)}
 .action-btn::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,255,255,.3) 0%,transparent 70%);opacity:0;transition:opacity .3s}
 .action-btn:active::after{opacity:1}
@@ -148,7 +145,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 .couple-heart{font-size:24px;color:var(--garlic-coral);animation:heartbeat 1.2s ease-in-out infinite}
 .couple-title{font-size:16px;font-weight:700;margin-bottom:4px}
 .couple-desc{font-size:13px;color:var(--text-light);margin-bottom:16px;line-height:1.6}
-.invite-btn{display:inline-block;background:linear-gradient(135deg,var(--garlic-green),#2ecc71);color:#fff;padding:12px 28px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'GmarketSans';transition:all .3s}
+.invite-btn{display:inline-block;background:linear-gradient(135deg,var(--garlic-green),#2ecc71);color:#fff;padding:12px 28px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'Pretendard';transition:all .3s}
 .invite-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,199,60,.25)}
 
 /* ===== SOCIAL SHARE ===== */
@@ -156,7 +153,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 .share-preview{max-width:360px;margin:0 auto 20px;background:#fff;border-radius:16px;padding:20px;box-shadow:var(--card-shadow)}
 .share-text{font-size:15px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:8px}
 .share-tags{font-size:12px;color:var(--garlic-green)}
-.share-btn{display:inline-block;background:var(--garlic-dark-green);color:#fff;padding:12px 32px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'GmarketSans';transition:all .3s}
+.share-btn{display:inline-block;background:var(--garlic-dark-green);color:#fff;padding:12px 32px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'Pretendard';transition:all .3s}
 .share-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(27,67,50,.25)}
 
 /* ===== FOOTER ===== */
@@ -189,7 +186,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 @media(min-width:641px){.app-header{left:50%;transform:translateX(-50%)}}
 .ah-logo{display:flex;align-items:center;flex-shrink:0}
 .ah-search{flex:1;position:relative}
-.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #EEE;border-radius:8px;background:#F7F7F7;font-size:13px;font-family:'GmarketSans',sans-serif;color:#333;outline:none;cursor:pointer}
+.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #EEE;border-radius:8px;background:#F7F7F7;font-size:13px;font-family:'Pretendard',sans-serif;color:#333;outline:none;cursor:pointer}
 .ah-search input::placeholder{color:#999;font-weight:300}
 .ah-search input:focus{border-color:#00C73C}
 .ah-s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#999}
@@ -203,8 +200,9 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 @media(min-width:641px){.bottom-nav{left:50%;transform:translateX(-50%)}}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#999;font-size:10px;font-weight:500}
 .bnav-item svg{stroke:#999}
-.bnav-label{font-family:'GmarketSans',sans-serif}
+.bnav-label{font-family:'Pretendard',sans-serif}
 </style>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 </head>
 <body>
 
