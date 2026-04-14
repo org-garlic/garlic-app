@@ -21,11 +21,19 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
   --garlic-green:#00C73C;
   --garlic-dark-green:#1B4332;
   --garlic-gold:#D4A843;
   --garlic-coral:#FF7F6B;
   --garlic-neon:#00FF88;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
+  --border:#EEEEEE;
   --garlic-bg:#F7F7F7;
   --mint:#E8F5E9;
   --cream:#FFF9F0;
@@ -34,17 +42,15 @@
   --pastel-purple:#D7C4F2;
   --pastel-orange:#FFD3B6;
   --pastel-pink:#FFAAA5;
-  --text:#2D3436;
-  --text-light:#636E72;
   --card-shadow:0 4px 20px rgba(0,0,0,.06);
 }
 
 html{scroll-behavior:smooth}
-body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
 .serif{font-family:'Noto Serif KR',serif}
 
 /* ===== HEADER ===== */
-.header{background:linear-gradient(135deg,#E8F5E9,#FFF9F0);padding:20px 24px;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,199,60,.1)}
+.header{background:rgba(250,246,238,.92);padding:20px 24px;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .header-top{display:flex;align-items:center;justify-content:center;gap:8px}
 .header h1{font-size:22px;font-weight:700;color:var(--garlic-dark-green)}
 .header-day{display:inline-block;background:var(--garlic-green);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-top:4px}
@@ -107,7 +113,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ===== REWARD ROADMAP ===== */
-.roadmap{padding:40px 24px;background:linear-gradient(180deg,var(--cream),#fff)}
+.roadmap{padding:40px 24px;background:linear-gradient(180deg,var(--bg),var(--card))}
 .section-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:900;color:var(--garlic-dark-green);margin-bottom:24px;text-align:center}
 .roadmap-list{max-width:400px;margin:0 auto;position:relative}
 .roadmap-list::before{content:'';position:absolute;left:20px;top:24px;bottom:24px;width:2px;background:linear-gradient(180deg,var(--garlic-green),var(--garlic-gold),var(--garlic-coral))}
@@ -125,9 +131,9 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .road-coupon{display:inline-block;background:var(--garlic-green);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;margin-top:6px}
 
 /* ===== EVOLUTION SHOWCASE ===== */
-.evolution{padding:40px 24px;background:#fff}
+.evolution{padding:40px 24px;background:var(--card)}
 .evo-grid{display:flex;justify-content:center;align-items:center;gap:12px;max-width:500px;margin:0 auto;overflow-x:auto;padding:8px 0}
-.evo-card{flex:1;min-width:110px;background:var(--cream);border-radius:20px;padding:20px 12px;text-align:center;border:2px solid transparent;transition:border-color .3s}
+.evo-card{flex:1;min-width:110px;background:var(--bg-alt);border-radius:20px;padding:20px 12px;text-align:center;border:2px solid transparent;transition:border-color .3s}
 .evo-card.current{border-color:var(--garlic-green);box-shadow:0 4px 16px rgba(0,199,60,.12)}
 .evo-card svg{width:80px;height:80px;margin:0 auto 8px;display:block}
 .evo-card .evo-name{font-size:13px;font-weight:700;margin-bottom:2px}
@@ -135,7 +141,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .evo-arrow{color:var(--garlic-green);font-size:20px;font-weight:700;flex-shrink:0}
 
 /* ===== COUPLE MODE ===== */
-.couple{padding:40px 24px;background:linear-gradient(180deg,#fff,var(--cream))}
+.couple{padding:40px 24px;background:linear-gradient(180deg,var(--card),var(--bg))}
 .couple-card{max-width:400px;margin:0 auto;background:#fff;border-radius:24px;padding:28px 24px;text-align:center;box-shadow:var(--card-shadow);border:1px solid rgba(0,199,60,.1)}
 .couple-chars{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:16px}
 .couple-chars svg{width:70px;height:70px}
@@ -146,7 +152,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .invite-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,199,60,.25)}
 
 /* ===== SOCIAL SHARE ===== */
-.share{padding:40px 24px;background:var(--cream);text-align:center}
+.share{padding:40px 24px;background:var(--bg);text-align:center}
 .share-preview{max-width:360px;margin:0 auto 20px;background:#fff;border-radius:16px;padding:20px;box-shadow:var(--card-shadow)}
 .share-text{font-size:15px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:8px}
 .share-tags{font-size:12px;color:var(--garlic-green)}
@@ -154,9 +160,9 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .share-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(27,67,50,.25)}
 
 /* ===== FOOTER ===== */
-.footer{padding:32px 24px;background:#fff;text-align:center;border-top:1px solid rgba(0,0,0,.04)}
-.footer-brand{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900;color:var(--garlic-dark-green);margin-bottom:4px}
-.footer p{font-size:11px;color:var(--text-light)}
+.footer{padding:32px 24px;background:var(--garlic-dark-green);text-align:center;border-top:1px solid var(--border)}
+.footer-brand{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:900;color:var(--garlic-gold);margin-bottom:4px}
+.footer p{font-size:11px;color:rgba(255,255,255,.35)}
 
 /* ===== UTILITIES ===== */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
@@ -174,6 +180,13 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 
 <!-- ===== HEADER ===== -->
 <header class="header">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <a href="index.html" style="font-size:12px;font-weight:700;color:var(--garlic-dark-green);text-decoration:none">&larr; 갤러리</a>
+    <div style="display:flex;gap:12px">
+      <a href="garlic_ip.html" style="font-size:11px;font-weight:500;color:var(--garlic-green);text-decoration:none">마이갈릭</a>
+      <a href="event_toemacon.html" style="font-size:11px;font-weight:500;color:var(--garlic-green);text-decoration:none">퇴마콘</a>
+    </div>
+  </div>
   <div class="header-top">
     <h1>너마늘 키우기</h1>
   </div>

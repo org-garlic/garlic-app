@@ -26,6 +26,18 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
+  --bg: #FAF6EE;
+  --bg-alt: #FFF8F0;
+  --card: #FFFFFF;
+  --text: #333333;
+  --text-light: #888888;
+  --green: #00C73C;
+  --green-light: #E8F8ED;
+  --gold: #D4A843;
+  --gold-light: #FFF3D6;
+  --coral: #FF7F6B;
+  --border: #EEEEEE;
+  --shadow: rgba(0,0,0,0.06);
   --garlic-green: #00C73C;
   --garlic-dark-green: #1B4332;
   --forest-deep: #0F2B1F;
@@ -34,11 +46,11 @@
   --gold-light: #E8C96A;
   --gold-dark: #B08A2E;
   --garlic-coral: #FF7F6B;
-  --garlic-bg: #F7F7F7;
-  --parchment: #F5F0E8;
-  --parchment-warm: #EDE6D8;
-  --cream: #FDFBF7;
-  --charcoal: #2C2C2C;
+  --garlic-bg: #FAF6EE;
+  --parchment: #FAF6EE;
+  --parchment-warm: #FFF8F0;
+  --cream: #FFFFFF;
+  --charcoal: #333333;
   --ink: #1A1A1A;
   --sage: #8BAA8F;
   --font-serif: 'Noto Serif KR', Georgia, serif;
@@ -57,8 +69,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--parchment);
-  color: var(--charcoal);
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.7;
   overflow-x: hidden;
 }
@@ -122,10 +134,11 @@ body::before {
 }
 
 .header.scrolled {
-  background: rgba(245, 240, 232, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 20px rgba(27, 67, 50, 0.06);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-inner {
@@ -318,7 +331,7 @@ body::before {
 
 /* ========== THE PROBLEM ========== */
 .problem-section {
-  background: var(--cream);
+  background: var(--bg-alt);
 }
 
 .problem-grid {
@@ -472,7 +485,7 @@ body::before {
 
 /* ========== BRAND IDENTITY ========== */
 .brand-section {
-  background: var(--parchment);
+  background: var(--bg);
 }
 
 .brand-showcase {
@@ -486,12 +499,12 @@ body::before {
 }
 
 .brand-card {
-  background: var(--cream);
+  background: var(--card);
   border-radius: 20px;
   padding: 32px 24px;
   text-align: center;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  border: 1px solid rgba(27,67,50,0.06);
+  box-shadow: 0 4px 24px var(--shadow);
+  border: 1px solid var(--border);
   transition: all 0.4s var(--ease-out-expo);
 }
 
@@ -588,7 +601,7 @@ body::before {
 
 /* ========== TIMELINE ========== */
 .timeline-section {
-  background: var(--cream);
+  background: var(--bg-alt);
   position: relative;
 }
 
@@ -646,7 +659,7 @@ body::before {
   width: 18px; height: 18px;
   border-radius: 50%;
   background: var(--garlic-gold);
-  border: 3px solid var(--cream);
+  border: 3px solid var(--card);
   box-shadow: 0 0 0 3px var(--garlic-gold);
   z-index: 2;
 }

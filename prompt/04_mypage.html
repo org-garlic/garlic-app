@@ -13,24 +13,36 @@
 /* ========== RESET & VARIABLES ========== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --night:#0D1117;
-  --night-card:#161B22;
-  --night-card-hover:#1C2129;
-  --night-border:#30363D;
-  --electric-green:#00FF88;
-  --electric-green-dim:rgba(0,255,136,0.15);
-  --electric-green-glow:rgba(0,255,136,0.3);
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --green:#00C73C;
+  --green-light:#E8F8ED;
+  --gold:#D4A843;
+  --gold-light:#FFF3D6;
+  --coral:#FF7F6B;
+  --border:#EEEEEE;
+  --shadow:rgba(0,0,0,0.06);
+  --night:#FAF6EE;
+  --night-card:#FFFFFF;
+  --night-card-hover:#FFF8F0;
+  --night-border:#EEEEEE;
+  --electric-green:#00C73C;
+  --electric-green-dim:rgba(0,199,60,0.1);
+  --electric-green-glow:rgba(0,199,60,0.2);
   --garlic-green:#00C73C;
   --garlic-coral:#FF7F6B;
   --garlic-gold:#D4A843;
   --garlic-purple:#7C4DFF;
   --garlic-red:#FF4848;
-  --glass-white:rgba(255,255,255,0.08);
-  --glass-white-hover:rgba(255,255,255,0.12);
-  --glass-border:rgba(255,255,255,0.1);
-  --text-primary:#E6EDF3;
-  --text-secondary:#8B949E;
-  --text-tertiary:#484F58;
+  --glass-white:#FFFFFF;
+  --glass-white-hover:#FFF8F0;
+  --glass-border:#EEEEEE;
+  --text-primary:#333333;
+  --text-secondary:#888888;
+  --text-tertiary:#BBBBBB;
   --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
   --header-h:52px;
   --nav-h:56px;
@@ -40,8 +52,8 @@
 html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
 body{
   font-family:var(--font);
-  background:var(--night);
-  color:var(--text-primary);
+  background:var(--bg);
+  color:var(--text);
   min-height:100vh;min-height:100dvh;
   overflow-x:hidden;
   padding-top:calc(var(--header-h) + var(--safe-top));
@@ -49,7 +61,7 @@ body{
 }
 ::-webkit-scrollbar{width:0;height:0}
 a{text-decoration:none;color:inherit}
-button{border:none;background:none;cursor:pointer;font-family:var(--font);color:var(--text-primary)}
+button{border:none;background:none;cursor:pointer;font-family:var(--font);color:var(--text)}
 img{display:block;max-width:100%}
 
 /* ========== HEADER ========== */
@@ -57,18 +69,18 @@ img{display:block;max-width:100%}
   position:fixed;top:0;left:0;right:0;z-index:1000;
   height:calc(var(--header-h) + var(--safe-top));
   padding-top:var(--safe-top);
-  background:rgba(13,17,23,0.85);
-  backdrop-filter:blur(20px) saturate(1.4);
-  -webkit-backdrop-filter:blur(20px) saturate(1.4);
-  border-bottom:1px solid var(--night-border);
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
   padding-left:20px;padding-right:16px;
 }
-.header-title{font-size:1.05rem;font-weight:700;color:var(--text-primary)}
+.header-title{font-size:1.05rem;font-weight:700;color:var(--text)}
 .header-actions{display:flex;gap:4px}
 .h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%}
-.h-btn:active{background:var(--glass-white)}
-.h-btn svg{width:20px;height:20px;stroke:var(--text-secondary);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
 /* ========== MAIN ========== */
 .main{max-width:640px;margin:0 auto;padding:0 16px}
@@ -76,12 +88,11 @@ img{display:block;max-width:100%}
 /* ========== PROFILE CARD ========== */
 .profile-card{
   margin-top:16px;
-  background:var(--glass-white);
-  border:1px solid var(--glass-border);
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:20px;
   padding:24px 20px 20px;
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 4px 16px var(--shadow);
   position:relative;overflow:hidden;
 }
 .profile-card::before{
@@ -93,57 +104,56 @@ img{display:block;max-width:100%}
 .profile-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .profile-avatar{
   width:56px;height:56px;border-radius:50%;
-  background:linear-gradient(135deg,var(--electric-green),var(--garlic-green));
+  background:linear-gradient(135deg,#E8F8ED,#C8E6C9);
   display:flex;align-items:center;justify-content:center;
   font-size:1.6rem;position:relative;
-  box-shadow:0 0 20px var(--electric-green-glow);
+  box-shadow:0 0 12px rgba(0,199,60,0.15);
 }
 .profile-avatar .level-ring{
   position:absolute;inset:-3px;border-radius:50%;
-  border:2px solid var(--electric-green);
+  border:2px solid var(--garlic-green);
   animation:ringPulse 3s ease-in-out infinite;
 }
 @keyframes ringPulse{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
 .profile-info .name{font-size:1.05rem;font-weight:700;margin-bottom:4px}
 .profile-info .badge{
   display:inline-flex;align-items:center;gap:4px;
-  background:var(--electric-green-dim);border:1px solid rgba(0,255,136,0.25);
+  background:var(--green-light);border:1px solid rgba(0,199,60,0.25);
   border-radius:20px;padding:3px 10px;
-  font-size:0.65rem;font-weight:700;color:var(--electric-green);
+  font-size:0.65rem;font-weight:700;color:var(--garlic-green);
 }
 .profile-stats{
   display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
-  border-top:1px solid var(--glass-border);
+  border-top:1px solid var(--border);
   padding-top:16px;
 }
 .stat-item{text-align:center;position:relative}
 .stat-item:not(:last-child)::after{
   content:'';position:absolute;right:0;top:4px;bottom:4px;
-  width:1px;background:var(--glass-border);
+  width:1px;background:var(--border);
 }
-.stat-value{font-size:1.15rem;font-weight:700;color:var(--electric-green);margin-bottom:2px}
+.stat-value{font-size:1.15rem;font-weight:700;color:var(--garlic-green);margin-bottom:2px}
 .stat-label{font-size:0.62rem;font-weight:500;color:var(--text-secondary)}
 
 /* ========== SECTION TITLES ========== */
 .section-title{
-  font-size:0.95rem;font-weight:700;color:var(--text-primary);
+  font-size:0.95rem;font-weight:700;color:var(--text);
   padding:24px 0 12px;display:flex;align-items:center;gap:8px;
 }
 .section-title .icon{font-size:1rem}
 
 /* ========== DNA RADAR CHART ========== */
 .radar-card{
-  background:var(--glass-white);
-  border:1px solid var(--glass-border);
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:20px;padding:24px 16px;
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 4px 16px var(--shadow);
   position:relative;overflow:hidden;
 }
 .radar-card::after{
   content:'';position:absolute;bottom:-60px;left:-60px;
   width:180px;height:180px;
-  background:radial-gradient(circle,rgba(0,255,136,0.06) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(0,199,60,0.04) 0%,transparent 70%);
   border-radius:50%;pointer-events:none;
 }
 .radar-wrap{
@@ -158,43 +168,42 @@ img{display:block;max-width:100%}
   display:flex;align-items:center;gap:6px;
   font-size:0.68rem;font-weight:500;color:var(--text-secondary);
 }
-.legend-dot{width:8px;height:8px;border-radius:2px;background:var(--electric-green)}
-.legend-val{margin-left:auto;font-weight:700;color:var(--electric-green);font-size:0.7rem}
+.legend-dot{width:8px;height:8px;border-radius:2px;background:var(--garlic-green)}
+.legend-val{margin-left:auto;font-weight:700;color:var(--garlic-green);font-size:0.7rem}
 
 /* ========== GARLIC GROW ========== */
 .grow-card{
-  background:var(--glass-white);
-  border:1px solid var(--glass-border);
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:20px;padding:20px;
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 4px 16px var(--shadow);
   display:flex;align-items:center;gap:16px;
 }
 .grow-character{
   width:80px;height:80px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  background:var(--electric-green-dim);border-radius:50%;
+  background:var(--green-light);border-radius:50%;
   position:relative;
 }
 .grow-character::after{
   content:'';position:absolute;inset:-4px;border-radius:50%;
-  border:1.5px dashed rgba(0,255,136,0.3);
+  border:1.5px dashed rgba(0,199,60,0.25);
   animation:spin 20s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 .grow-info{flex:1}
 .grow-info .grow-level{
-  font-size:0.68rem;font-weight:700;color:var(--electric-green);
+  font-size:0.68rem;font-weight:700;color:var(--garlic-green);
   margin-bottom:4px;display:flex;align-items:center;gap:4px;
 }
 .grow-info .grow-name{font-size:0.9rem;font-weight:700;margin-bottom:8px}
 .progress-bar{
-  height:8px;background:var(--night-border);border-radius:4px;
+  height:8px;background:var(--border);border-radius:4px;
   overflow:hidden;margin-bottom:4px;position:relative;
 }
 .progress-fill{
   height:100%;border-radius:4px;
-  background:linear-gradient(90deg,var(--garlic-green),var(--electric-green));
+  background:linear-gradient(90deg,var(--garlic-green),#4CAF50);
   position:relative;transition:width 1.5s ease-out;
 }
 .progress-fill::after{
@@ -217,11 +226,10 @@ img{display:block;max-width:100%}
 /* ========== AI RECOMMENDATIONS ========== */
 .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .ai-card{
-  background:var(--glass-white);
-  border:1px solid var(--glass-border);
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:16px;overflow:hidden;
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 2px 8px var(--shadow);
   transition:transform 0.15s;
 }
 .ai-card:active{transform:scale(0.97)}
@@ -236,23 +244,22 @@ img{display:block;max-width:100%}
 .ai-thumb .ai-overlay{
   position:absolute;bottom:0;left:0;right:0;
   padding:6px 10px;
-  background:linear-gradient(transparent,rgba(0,0,0,0.7));
-  font-size:0.6rem;font-weight:700;color:var(--electric-green);
+  background:linear-gradient(transparent,rgba(0,0,0,0.5));
+  font-size:0.6rem;font-weight:700;color:#fff;
   display:flex;align-items:center;gap:4px;
 }
-.ai-thumb .ai-overlay .dot{width:5px;height:5px;background:var(--electric-green);border-radius:50%;animation:blink 1.5s infinite}
+.ai-thumb .ai-overlay .dot{width:5px;height:5px;background:var(--garlic-green);border-radius:50%;animation:blink 1.5s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .ai-card-info{padding:10px}
 .ai-card-info .ai-name{font-size:0.72rem;font-weight:500;line-height:1.3;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ai-card-info .ai-price{font-size:0.82rem;font-weight:700;color:var(--electric-green)}
+.ai-card-info .ai-price{font-size:0.82rem;font-weight:700;color:var(--garlic-green)}
 
 /* ========== RECENT ORDERS ========== */
 .order-card{
-  background:var(--glass-white);
-  border:1px solid var(--glass-border);
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:16px;padding:16px;
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 2px 8px var(--shadow);
   margin-bottom:10px;
   display:flex;align-items:center;gap:14px;
 }
@@ -269,29 +276,29 @@ img{display:block;max-width:100%}
   font-size:0.62rem;font-weight:700;
 }
 .status-shipping{background:rgba(33,150,243,0.2);color:#64B5F6;border:1px solid rgba(33,150,243,0.3)}
-.status-delivered{background:var(--electric-green-dim);color:var(--electric-green);border:1px solid rgba(0,255,136,0.25)}
-.status-confirmed{background:var(--glass-white);color:var(--text-secondary);border:1px solid var(--glass-border)}
+.status-delivered{background:var(--green-light);color:var(--garlic-green);border:1px solid rgba(0,199,60,0.25)}
+.status-confirmed{background:#F5F5F5;color:var(--text-light);border:1px solid var(--border)}
 
 /* ========== BOTTOM NAV ========== */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;z-index:1000;
   height:calc(var(--nav-h) + var(--safe-bottom));
   padding-bottom:var(--safe-bottom);
-  background:rgba(13,17,23,0.92);
+  background:rgba(255,255,255,0.95);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  border-top:1px solid var(--night-border);
+  border-top:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-around;
   max-width:640px;margin:0 auto;
 }
 .nav-item{
   display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:6px 0;min-width:56px;
+  padding:6px 0;min-width:56px;text-decoration:none;
 }
-.nav-item svg{width:22px;height:22px;stroke:var(--text-tertiary);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--text-tertiary)}
-.nav-item.active svg{stroke:var(--electric-green)}
-.nav-item.active .nav-label{color:var(--electric-green);font-weight:700}
+.nav-item svg{width:22px;height:22px;stroke:var(--text-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--text-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
 
 /* ========== ANIMATIONS ========== */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -305,8 +312,8 @@ img{display:block;max-width:100%}
   .header,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
 }
 @media(min-width:1440px){
-  body{background:#000}
-  .main{box-shadow:0 0 60px rgba(0,255,136,0.05)}
+  body{background:#EDE8E0}
+  .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
 }
 </style>
 </head>
@@ -409,7 +416,7 @@ img{display:block;max-width:100%}
   <div class="ai-grid fade-up fd4">
     <div class="ai-card">
       <div class="ai-thumb">
-        <div class="ai-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">👟</div>
+        <div class="ai-bg" style="background:linear-gradient(135deg,#E8EAF6,#C5CAE9)">👟</div>
         <div class="ai-overlay"><span class="dot"></span>AI 추천 신뢰도 94%</div>
       </div>
       <div class="ai-card-info">
@@ -419,7 +426,7 @@ img{display:block;max-width:100%}
     </div>
     <div class="ai-card">
       <div class="ai-thumb">
-        <div class="ai-bg" style="background:linear-gradient(135deg,#0f3443,#1a5a3a)">💻</div>
+        <div class="ai-bg" style="background:linear-gradient(135deg,#E0F2F1,#B2DFDB)">💻</div>
         <div class="ai-overlay"><span class="dot"></span>AI 추천 신뢰도 91%</div>
       </div>
       <div class="ai-card-info">
@@ -429,7 +436,7 @@ img{display:block;max-width:100%}
     </div>
     <div class="ai-card">
       <div class="ai-thumb">
-        <div class="ai-bg" style="background:linear-gradient(135deg,#2d1b38,#3d1b4a)">✨</div>
+        <div class="ai-bg" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)">✨</div>
         <div class="ai-overlay"><span class="dot"></span>AI 추천 신뢰도 89%</div>
       </div>
       <div class="ai-card-info">
@@ -439,7 +446,7 @@ img{display:block;max-width:100%}
     </div>
     <div class="ai-card">
       <div class="ai-thumb">
-        <div class="ai-bg" style="background:linear-gradient(135deg,#1a1a1a,#333)">🧄</div>
+        <div class="ai-bg" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9)">🧄</div>
         <div class="ai-overlay"><span class="dot"></span>AI 추천 신뢰도 96%</div>
       </div>
       <div class="ai-card-info">
@@ -453,7 +460,7 @@ img{display:block;max-width:100%}
   <div class="section-title fd5 fade-up"><span class="icon">📦</span> 최근 주문</div>
   <div class="fade-up fd5">
     <div class="order-card">
-      <div class="order-thumb" style="background:linear-gradient(135deg,#1a2a3a,#2a3a4a)">👟</div>
+      <div class="order-thumb" style="background:linear-gradient(135deg,#E8EAF6,#C5CAE9)">👟</div>
       <div class="order-info">
         <div class="order-name">나이키 에어포스 1 '07 화이트</div>
         <div class="order-date">2026.04.12 주문</div>
@@ -461,7 +468,7 @@ img{display:block;max-width:100%}
       <span class="order-status status-shipping">배송중</span>
     </div>
     <div class="order-card">
-      <div class="order-thumb" style="background:linear-gradient(135deg,#2a1a2a,#3a2a3a)">💄</div>
+      <div class="order-thumb" style="background:linear-gradient(135deg,#FCE4EC,#F8BBD0)">💄</div>
       <div class="order-info">
         <div class="order-name">맥 립스틱 루비우 세트</div>
         <div class="order-date">2026.04.08 주문</div>
@@ -469,7 +476,7 @@ img{display:block;max-width:100%}
       <span class="order-status status-delivered">배송완료</span>
     </div>
     <div class="order-card">
-      <div class="order-thumb" style="background:linear-gradient(135deg,#1a2a1a,#2a3a2a)">🧄</div>
+      <div class="order-thumb" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9)">🧄</div>
       <div class="order-info">
         <div class="order-name">의성 마늘 1kg + 마늘쫑 500g</div>
         <div class="order-date">2026.04.02 주문</div>
@@ -484,26 +491,26 @@ img{display:block;max-width:100%}
 
 <!-- ===== BOTTOM NAV ===== -->
 <nav class="bottom-nav">
-  <div class="nav-item">
+  <a href="01_home.html" class="nav-item">
     <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span class="nav-label">홈</span>
-  </div>
-  <div class="nav-item">
+  </a>
+  <a href="#" class="nav-item">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     <span class="nav-label">카테고리</span>
-  </div>
-  <div class="nav-item">
+  </a>
+  <a href="#" class="nav-item">
     <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
     <span class="nav-label">마늘밭</span>
-  </div>
-  <div class="nav-item">
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item">
     <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
     <span class="nav-label">마늘키우기</span>
-  </div>
-  <div class="nav-item active">
+  </a>
+  <a href="04_mypage.html" class="nav-item active">
     <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">마이갈릭</span>
-  </div>
+  </a>
 </nav>
 
 <script>
@@ -531,7 +538,7 @@ img{display:block;max-width:100%}
     var poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
     poly.setAttribute('points', pts.join(' '));
     poly.setAttribute('fill', 'none');
-    poly.setAttribute('stroke', 'rgba(255,255,255,0.08)');
+    poly.setAttribute('stroke', 'rgba(0,0,0,0.06)');
     poly.setAttribute('stroke-width', '1');
     svg.appendChild(poly);
   });
@@ -542,7 +549,7 @@ img{display:block;max-width:100%}
     var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', cx); line.setAttribute('y1', cy);
     line.setAttribute('x2', p.x); line.setAttribute('y2', p.y);
-    line.setAttribute('stroke', 'rgba(255,255,255,0.06)');
+    line.setAttribute('stroke', 'rgba(0,0,0,0.04)');
     line.setAttribute('stroke-width', '1');
     svg.appendChild(line);
   }
@@ -558,7 +565,7 @@ img{display:block;max-width:100%}
   // Fill
   var fillPoly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
   fillPoly.setAttribute('points', dataPts.join(' '));
-  fillPoly.setAttribute('fill', 'rgba(0,255,136,0.15)');
+  fillPoly.setAttribute('fill', 'rgba(0,199,60,0.12)');
   fillPoly.setAttribute('stroke', 'none');
   svg.appendChild(fillPoly);
 
@@ -566,7 +573,7 @@ img{display:block;max-width:100%}
   var strokePoly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
   strokePoly.setAttribute('points', dataPts.join(' '));
   strokePoly.setAttribute('fill', 'none');
-  strokePoly.setAttribute('stroke', '#00FF88');
+  strokePoly.setAttribute('stroke', '#00C73C');
   strokePoly.setAttribute('stroke-width', '2');
   strokePoly.setAttribute('stroke-linejoin', 'round');
   strokePoly.style.strokeDasharray = '600';
@@ -583,7 +590,7 @@ img{display:block;max-width:100%}
     var glow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     glow.setAttribute('cx', p.x); glow.setAttribute('cy', p.y);
     glow.setAttribute('r', '8');
-    glow.setAttribute('fill', 'rgba(0,255,136,0.2)');
+    glow.setAttribute('fill', 'rgba(0,199,60,0.15)');
     glow.style.opacity = '0';
     glow.style.animation = 'fadeUp 0.3s ease-out ' + (0.5 + i * 0.1) + 's forwards';
     svg.insertBefore(glow, fillPoly);
@@ -592,8 +599,8 @@ img{display:block;max-width:100%}
     var circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circ.setAttribute('cx', p.x); circ.setAttribute('cy', p.y);
     circ.setAttribute('r', '4');
-    circ.setAttribute('fill', '#00FF88');
-    circ.setAttribute('stroke', '#0D1117');
+    circ.setAttribute('fill', '#00C73C');
+    circ.setAttribute('stroke', '#FFFFFF');
     circ.setAttribute('stroke-width', '2');
     circ.style.opacity = '0';
     circ.style.animation = 'fadeUp 0.3s ease-out ' + (0.5 + i * 0.1) + 's forwards';
@@ -607,7 +614,7 @@ img{display:block;max-width:100%}
     text.setAttribute('x', p.x); text.setAttribute('y', p.y);
     text.setAttribute('text-anchor', 'middle');
     text.setAttribute('dominant-baseline', 'central');
-    text.setAttribute('fill', '#8B949E');
+    text.setAttribute('fill', '#888888');
     text.setAttribute('font-size', '11');
     text.setAttribute('font-family', 'GmarketSans, sans-serif');
     text.setAttribute('font-weight', '500');

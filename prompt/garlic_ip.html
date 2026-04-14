@@ -21,28 +21,33 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
   --garlic-green:#00C73C;
   --garlic-dark-green:#1B4332;
   --garlic-gold:#D4A843;
   --garlic-coral:#FF7F6B;
   --garlic-neon:#00FF88;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
   --garlic-bg:#F7F7F7;
   --cream:#FFFAF3;
   --warm:#FFF5E6;
-  --text:#1a1a1a;
+  --text:#333333;
   --text-mid:#444;
-  --text-light:#888;
-  --border:rgba(0,0,0,.06);
+  --text-light:#888888;
+  --border:#EEEEEE;
   --card-shadow:0 2px 16px rgba(0,0,0,.05);
   --card-shadow-hover:0 8px 30px rgba(0,0,0,.1);
 }
 
 html{scroll-behavior:smooth}
-body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.7}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.7}
 .serif{font-family:'Noto Serif KR',serif}
 
 /* ===== HERO ===== */
-.hero{padding:60px 24px 40px;text-align:center;background:linear-gradient(180deg,#E8F5E9 0%,var(--cream) 100%);position:relative;overflow:hidden}
+.hero{padding:80px 24px 40px;text-align:center;background:linear-gradient(180deg,var(--green-light) 0%,var(--bg) 100%);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(0,199,60,.08) 0%,transparent 70%)}
 .hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%)}
 .hero-img{width:100%;max-width:360px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.1);margin-bottom:28px}
@@ -56,7 +61,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .section-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--garlic-green);margin-bottom:8px}
 .section-title{font-family:'Noto Serif KR',serif;font-size:clamp(22px,5vw,32px);font-weight:900;color:var(--garlic-dark-green);margin-bottom:8px}
 .section-desc{font-size:14px;color:var(--text-light);max-width:480px;margin-bottom:32px;font-weight:300}
-.section.alt{background:#fff}
+.section.alt{background:var(--bg-alt)}
 .section.green-bg{background:linear-gradient(135deg,var(--garlic-dark-green),#2a6b4a);color:#fff}
 .section.green-bg .section-label{color:var(--garlic-neon)}
 .section.green-bg .section-title{color:#fff}
@@ -70,7 +75,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 .jar svg{width:100%;height:100%}
 
 .att-rules{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:0 auto}
-.att-rule{display:flex;align-items:center;gap:14px;background:#fff;padding:16px;border-radius:16px;box-shadow:var(--card-shadow)}
+.att-rule{display:flex;align-items:center;gap:14px;background:var(--card);padding:16px;border-radius:16px;box-shadow:var(--card-shadow);border:1px solid var(--border)}
 .att-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .att-icon.daily{background:linear-gradient(135deg,#E8F5E9,#C8E6C9)}
 .att-icon.chunk{background:linear-gradient(135deg,#FFF3E0,#FFE0B2)}
@@ -103,7 +108,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 
 /* ===== CHARACTER LINEUP ===== */
 .char-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;max-width:560px;margin:0 auto}
-.char-card{background:#fff;border-radius:20px;padding:20px 12px;text-align:center;box-shadow:var(--card-shadow);transition:transform .3s,box-shadow .3s}
+.char-card{background:var(--card);border-radius:20px;padding:20px 12px;text-align:center;box-shadow:var(--card-shadow);border:1px solid var(--border);transition:transform .3s,box-shadow .3s}
 .char-card:hover{transform:translateY(-4px);box-shadow:var(--card-shadow-hover)}
 .char-card svg{width:80px;height:80px;margin:0 auto 8px;display:block}
 .char-card .char-name{font-size:14px;font-weight:700;margin-bottom:2px}
@@ -111,7 +116,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 
 /* ===== GOODS GALLERY ===== */
 .goods-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;max-width:560px;margin:0 auto}
-.goods-card{background:#fff;border-radius:16px;padding:16px;text-align:center;box-shadow:var(--card-shadow);transition:transform .3s}
+.goods-card{background:var(--card);border-radius:16px;padding:16px;text-align:center;box-shadow:var(--card-shadow);border:1px solid var(--border);transition:transform .3s}
 .goods-card:hover{transform:translateY(-3px)}
 .goods-icon{width:64px;height:64px;margin:0 auto 10px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px}
 .goods-icon.sticker{background:linear-gradient(135deg,#FFF3E0,#FFE0B2)}
@@ -125,14 +130,14 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 /* ===== SNS MEME CULTURE ===== */
 .meme-grid{display:flex;flex-direction:column;gap:16px;max-width:400px;margin:0 auto}
 .meme-bubble{padding:16px 20px;border-radius:20px;position:relative;font-size:14px;font-weight:500;line-height:1.6}
-.meme-bubble.left{background:#fff;border-bottom-left-radius:4px;box-shadow:var(--card-shadow);align-self:flex-start;max-width:85%}
+.meme-bubble.left{background:var(--card);border-bottom-left-radius:4px;box-shadow:var(--card-shadow);border:1px solid var(--border);align-self:flex-start;max-width:85%}
 .meme-bubble.right{background:var(--garlic-green);color:#fff;border-bottom-right-radius:4px;align-self:flex-end;max-width:85%}
 .meme-bubble .meme-user{font-size:11px;font-weight:700;opacity:.6;margin-bottom:4px;display:block}
 .meme-bubble .meme-time{font-size:10px;opacity:.4;margin-top:4px;display:block;text-align:right}
 .meme-hashtag{text-align:center;font-size:13px;color:var(--garlic-green);font-weight:700;padding:8px 0}
 
 /* ===== FOOTER ===== */
-.footer{padding:40px 24px;background:var(--garlic-dark-green);text-align:center}
+.footer{padding:40px 24px;background:var(--garlic-dark-green);text-align:center;border-top:1px solid var(--border)}
 .footer-brand{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:900;color:var(--garlic-gold);margin-bottom:4px}
 .footer p{font-size:11px;color:rgba(255,255,255,.35)}
 
@@ -150,6 +155,15 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--te
 </style>
 </head>
 <body>
+
+<!-- NAVIGATION -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(250,246,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)">
+  <a href="index.html" style="font-size:13px;font-weight:700;color:var(--garlic-dark-green);text-decoration:none">&larr; 갤러리로 돌아가기</a>
+  <div style="display:flex;gap:14px">
+    <a href="garlic_tamagotchi.html" style="font-size:12px;font-weight:500;color:var(--garlic-green);text-decoration:none">마늘 키우기</a>
+    <a href="event_toemacon.html" style="font-size:12px;font-weight:500;color:var(--garlic-green);text-decoration:none">퇴마콘</a>
+  </div>
+</nav>
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">

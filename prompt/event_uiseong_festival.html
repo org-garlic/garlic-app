@@ -20,10 +20,18 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
   --garlic-green:#00C73C;
   --garlic-dark-green:#1B4332;
   --garlic-gold:#D4A843;
   --garlic-coral:#FF7F6B;
+  --green-light:#E8F8ED;
+  --gold-light:#FFF3D6;
+  --border:#EEEEEE;
   --cream:#FBF6ED;
   --oat:#F5ECD7;
   --terracotta:#C4623E;
@@ -33,7 +41,7 @@
   --warm-white:#FFFDF8;
 }
 html{scroll-behavior:smooth}
-body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .serif{font-family:'Noto Serif KR',serif}
 
 /* ===== TOP NAV ===== */
@@ -43,11 +51,16 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
   display:flex;justify-content:space-between;align-items:center;
   transition:background .4s,backdrop-filter .4s;
 }
-.top-nav.scrolled{background:rgba(27,67,50,.94);backdrop-filter:blur(12px)}
-.nav-logo{font-size:15px;font-weight:700;color:var(--garlic-gold)}
+.top-nav.scrolled{background:rgba(250,246,238,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:15px;font-weight:700;color:var(--garlic-gold);transition:color .2s}
+.top-nav.scrolled .nav-logo{color:var(--garlic-dark-green)}
+.nav-back{font-size:12px;font-weight:700;color:rgba(255,255,255,.75);text-decoration:none;margin-right:16px;transition:color .2s}
+.top-nav.scrolled .nav-back{color:var(--garlic-dark-green)}
 .nav-links{display:flex;gap:20px}
 .nav-links a{font-size:12px;font-weight:500;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:#fff}
+.top-nav.scrolled .nav-links a{color:var(--text-light)}
+.top-nav.scrolled .nav-links a:hover{color:var(--text)}
 @media(max-width:500px){.nav-links{display:none}}
 
 /* ===== HERO ===== */
@@ -152,11 +165,11 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
   color:var(--garlic-dark-green);margin-bottom:6px;line-height:1.3;
 }
 .section-desc{
-  font-size:14px;font-weight:300;color:#777;line-height:1.85;margin-bottom:36px;
+  font-size:14px;font-weight:300;color:var(--text-light);line-height:1.85;margin-bottom:36px;
 }
 
 /* ===== PROGRAM TIMELINE ===== */
-.timeline-section{background:var(--warm-white);padding:80px 24px}
+.timeline-section{background:var(--bg-alt);padding:80px 24px}
 .tl-wrap{max-width:660px;margin:0 auto}
 .timeline{display:flex;flex-direction:column;gap:0}
 .tl-item{
@@ -174,7 +187,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
 .tl-dot{
   width:16px;height:16px;border-radius:50%;
   background:var(--garlic-gold);
-  border:3px solid var(--warm-white);
+  border:3px solid var(--bg-alt);
   box-shadow:0 0 0 3px rgba(212,168,67,.28);
   flex-shrink:0;
 }
@@ -307,7 +320,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
 .btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
 
 /* ===== GARLIC PARK TEASER ===== */
-.park-section{background:var(--oat);padding:80px 24px}
+.park-section{background:var(--bg-alt);padding:80px 24px}
 .park-inner{max-width:900px;margin:0 auto;text-align:center}
 .park-coming-badge{
   display:inline-block;
@@ -383,7 +396,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
 .pp-note{font-size:12px;font-weight:300;color:#aaa}
 
 /* ===== PRODUCTS ===== */
-.products-section{background:var(--warm-white);padding:80px 24px}
+.products-section{background:var(--bg);padding:80px 24px}
 .products-inner{max-width:900px;margin:0 auto}
 .products-grid{
   display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
@@ -391,7 +404,8 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
 }
 @media(min-width:640px){.products-grid{grid-template-columns:repeat(4,1fr)}}
 .prod-card{
-  background:#fff;border-radius:18px;overflow:hidden;
+  background:var(--card);border-radius:18px;overflow:hidden;
+  border:1px solid var(--border);
   box-shadow:0 2px 10px rgba(0,0,0,.055);
   transition:transform .3s,box-shadow .3s;
 }
@@ -473,7 +487,10 @@ body{font-family:'GmarketSans',sans-serif;background:var(--cream);color:var(--ch
 
 <!-- TOP NAV -->
 <nav class="top-nav" id="topNav">
-  <div class="nav-logo">🧄 의성 마늘 축제</div>
+  <div style="display:flex;align-items:center">
+    <a href="index.html" class="nav-back">&larr; 갤러리</a>
+    <div class="nav-logo">의성 마늘 축제</div>
+  </div>
   <div class="nav-links">
     <a href="#program">프로그램</a>
     <a href="#harvest">수확 체험</a>
