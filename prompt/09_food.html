@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 식품</title>
+<style>
+/* ========== FONTS ========== */
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --green:#00C73C;
+  --green-light:#E8F8ED;
+  --gold:#D4A843;
+  --gold-light:#FFF3D6;
+  --coral:#FF7F6B;
+  --border:#EEEEEE;
+  --garlic-green:#00C73C;
+  --garlic-green-light:#E8F8ED;
+  --garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#FAF6EE;
+  --garlic-white:#FFFFFF;
+  --garlic-black:#333333;
+  --garlic-gray:#666666;
+  --garlic-gray-light:#888888;
+  --garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;
+  --garlic-gold:#D4A843;
+  --garlic-red:#FF4848;
+  --garlic-purple:#7C4DFF;
+  --garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;
+  --tab-h:44px;
+  --nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--garlic-bg);
+  color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;
+  overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));
+  padding-top:var(--safe-top);
+  background:var(--garlic-white);
+  display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;
+  border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);
+  border-radius:8px;background:var(--garlic-bg);
+  padding:0 12px 0 34px;font-family:var(--font);font-size:0.78rem;font-weight:300;
+  color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);
+  border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;
+  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+}
+.tab-item:first-child{padding-left:20px}
+
+/* ========== MAIN ========== */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* ========== SECTION HEADER ========== */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 16px 10px;
+}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* ========== HERO FOOD ========== */
+.hero-food{
+  margin:12px 16px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(135deg,#2D5016 0%,#4A7C2F 40%,#D4A843 100%);
+  padding:28px 20px;position:relative;color:#fff;
+}
+.hero-food::before{
+  content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(212,168,67,0.25) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.hero-food::after{
+  content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;
+  background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.hero-food-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(212,168,67,0.3);border:1px solid rgba(212,168,67,0.5);
+  border-radius:20px;padding:5px 12px;
+  font-size:0.72rem;font-weight:700;margin-bottom:12px;
+  backdrop-filter:blur(4px);
+}
+.hero-food-title{font-size:1.5rem;font-weight:700;line-height:1.25;margin-bottom:8px}
+.hero-food-title em{color:var(--garlic-gold);font-style:normal}
+.hero-food-sub{font-size:0.78rem;font-weight:300;opacity:0.85;margin-bottom:18px;line-height:1.5}
+.hero-food-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--garlic-white);color:#2D5016;
+  border-radius:24px;padding:12px 24px;
+  font-size:0.85rem;font-weight:700;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  transition:transform 0.15s;cursor:pointer;border:none;font-family:var(--font);
+}
+.hero-food-cta:active{transform:scale(0.97)}
+
+/* ========== TIME-BASED RECOMMENDATION ========== */
+.time-rec{
+  margin:0 16px 4px;border-radius:14px;
+  background:var(--garlic-white);
+  border:1.5px solid var(--garlic-gray-border);
+  padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.time-rec-badge{
+  flex-shrink:0;width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+}
+.time-rec-label{font-size:0.68rem;font-weight:700;color:var(--garlic-gray-light);margin-bottom:3px}
+.time-rec-title{font-size:0.88rem;font-weight:700;color:var(--garlic-black);margin-bottom:2px}
+.time-rec-desc{font-size:0.72rem;font-weight:300;color:var(--garlic-gray-light)}
+
+/* ========== TIME-REC PRODUCT ROW ========== */
+.time-rec-products{
+  display:flex;gap:10px;padding:10px 16px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.time-rec-products::-webkit-scrollbar{display:none}
+.trp-card{
+  flex-shrink:0;width:130px;background:var(--garlic-white);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.trp-card:active{transform:scale(0.98)}
+.trp-thumb{width:100%;aspect-ratio:1/1;overflow:hidden}
+.trp-thumb img{width:100%;height:100%;object-fit:cover}
+.trp-info{padding:8px}
+.trp-name{font-size:0.7rem;font-weight:500;color:var(--garlic-black);line-height:1.3;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.trp-price{font-size:0.78rem;font-weight:700;color:var(--garlic-black)}
+.trp-discount{font-size:0.72rem;font-weight:700;color:var(--garlic-coral);margin-right:3px}
+
+/* ========== GARLIC SPECIAL ========== */
+.garlic-special-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:0 16px 16px;
+}
+.gs-card{
+  background:var(--garlic-white);border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  transition:transform 0.15s;
+}
+.gs-card:active{transform:scale(0.98)}
+.gs-thumb{width:100%;aspect-ratio:1/1;overflow:hidden;position:relative}
+.gs-thumb img{width:100%;height:100%;object-fit:cover}
+.gs-badge{
+  position:absolute;top:8px;left:8px;
+  background:rgba(45,80,22,0.85);color:#fff;
+  padding:3px 8px;border-radius:6px;
+  font-size:0.6rem;font-weight:700;
+  backdrop-filter:blur(4px);
+}
+.gs-info{padding:10px}
+.gs-name{font-size:0.78rem;font-weight:700;color:var(--garlic-black);margin-bottom:3px}
+.gs-desc{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);line-height:1.3;margin-bottom:6px}
+.gs-price{font-size:0.85rem;font-weight:700;color:var(--garlic-black)}
+
+/* ========== CATEGORY CIRCLES ========== */
+.cat-circles{
+  display:flex;gap:0;padding:0 8px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;justify-content:space-between;
+}
+.cat-circles::-webkit-scrollbar{display:none}
+.cat-circle-item{
+  flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:0 8px;cursor:pointer;
+}
+.cat-circle-icon{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;transition:transform 0.15s;
+}
+.cat-circle-item:active .cat-circle-icon{transform:scale(0.92)}
+.cat-circle-label{font-size:0.62rem;font-weight:500;color:var(--garlic-gray);text-align:center;white-space:nowrap}
+
+/* ========== PRODUCT GRID ========== */
+.product-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:0 16px 16px;
+}
+.product-card{
+  background:var(--garlic-white);border-radius:12px;
+  overflow:hidden;transition:transform 0.15s;
+}
+.product-card:active{transform:scale(0.98)}
+.product-thumb{
+  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;
+}
+.product-thumb img{width:100%;height:100%;object-fit:cover}
+.product-thumb .tag{
+  position:absolute;top:8px;left:8px;
+  padding:3px 8px;border-radius:4px;
+  font-size:0.62rem;font-weight:700;line-height:1.4;
+}
+.tag-direct{background:#2D5016;color:#fff}
+.tag-hot{background:var(--garlic-red);color:#fff}
+.tag-best{background:var(--garlic-green);color:#fff}
+.tag-new{background:var(--garlic-blue);color:#fff}
+.product-thumb .wish{
+  position:absolute;bottom:8px;right:8px;
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.85);border-radius:50%;
+  backdrop-filter:blur(4px);
+}
+.product-thumb .wish svg{width:16px;height:16px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.8}
+.product-info{padding:10px 10px 14px}
+.product-brand{font-size:0.65rem;font-weight:500;color:var(--garlic-gray-light);margin-bottom:3px}
+.product-name{font-size:0.78rem;font-weight:500;color:var(--garlic-black);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-price{display:flex;align-items:baseline;gap:4px}
+.product-discount{font-size:0.9rem;font-weight:700;color:var(--garlic-coral)}
+.product-amount{font-size:0.9rem;font-weight:700;color:var(--garlic-black)}
+.product-original{font-size:0.7rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through;margin-top:2px}
+.product-meta{display:flex;align-items:center;gap:6px;margin-top:6px}
+.product-meta .stars{font-size:0.65rem;color:var(--garlic-gold)}
+.product-meta .review{font-size:0.62rem;font-weight:300;color:var(--garlic-gray-light)}
+
+/* ========== TRUST BANNER ========== */
+.trust-banner{
+  margin:0 16px 16px;border-radius:16px;
+  background:linear-gradient(135deg,#2D5016 0%,#1B4332 100%);
+  padding:20px;color:#fff;
+  display:flex;align-items:center;gap:16px;
+}
+.trust-left{flex:1}
+.trust-title{font-size:0.95rem;font-weight:700;margin-bottom:6px}
+.trust-desc{font-size:0.72rem;font-weight:300;opacity:0.8;line-height:1.5}
+.trust-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.trust-pill{
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);
+  border-radius:20px;padding:4px 12px;
+  font-size:0.65rem;font-weight:500;
+}
+.trust-icon{
+  flex-shrink:0;width:60px;height:60px;
+  border-radius:50%;background:rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;
+}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);
+  border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;
+  max-width:640px;margin:0 auto;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 0;min-width:56px;
+}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;
+  background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;
+  min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}
+.fade-up-2{animation-delay:0.1s}
+.fade-up-3{animation-delay:0.15s}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){
+  .main{max-width:640px;margin:0 auto}
+  .header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
+}
+@media(min-width:1440px){
+  body{background:#EDE8E0}
+  .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly>
+  </div>
+  <div class="header-actions">
+    <a href="03_challenge.html" class="h-btn" aria-label="알림" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item" style="text-decoration:none;color:inherit">추천</a>
+  <a href="05_deals.html" class="tab-item" style="text-decoration:none;color:inherit">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">마늘까기</a>
+  <a href="06_rewards.html" class="tab-item" style="text-decoration:none;color:inherit">적립</a>
+  <a href="07_fashion.html" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
+  <a href="08_beauty.html" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
+  <a href="09_food.html" class="tab-item active" style="text-decoration:none;color:inherit">식품</a>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- ===== HERO ===== -->
+  <section class="fade-up" style="padding:12px 16px 0">
+    <div class="hero-food">
+      <div class="hero-food-badge">&#127807; 의성 직거래</div>
+      <div class="hero-food-title">의성 마늘<br><em>직거래 특가</em></div>
+      <div class="hero-food-sub">산지에서 식탁까지 — 중간 유통 없이<br>가장 신선한 마늘을 가장 합리적인 가격으로</div>
+      <button class="hero-food-cta" onclick="alert('직거래 특가 보기')">지금 바로 구매 &#8594;</button>
+    </div>
+  </section>
+
+  <!-- ===== 시간대별 추천 ===== -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#127768; 지금 이 시간 추천</h2>
+  </div>
+  <div class="time-rec fade-up fade-up-1">
+    <div class="time-rec-badge" id="timeRecIcon" style="background:#FFF3D6">&#9728;</div>
+    <div>
+      <div class="time-rec-label" id="timeRecLabel">점심 추천</div>
+      <div class="time-rec-title" id="timeRecTitle">든든한 한 끼 재료</div>
+      <div class="time-rec-desc" id="timeRecDesc">마늘 넣은 뚝배기 된장찌개 어때요?</div>
+    </div>
+  </div>
+  <div class="time-rec-products fade-up fade-up-1" id="timeRecProducts"></div>
+
+  <!-- ===== 마늘 특집 ===== -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#127807; 마늘의 모든 것</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="garlic-special-grid fade-up fade-up-2">
+    <div class="gs-card">
+      <div class="gs-thumb">
+        <img src="https://picsum.photos/300/300?random=101" alt="마늘" loading="lazy">
+        <div class="gs-badge">산지직송</div>
+      </div>
+      <div class="gs-info">
+        <div class="gs-name">의성 한지형 마늘</div>
+        <div class="gs-desc">국내 최고 품질, 알이 굵고 향이 진한 의성 마늘 1kg</div>
+        <div class="gs-price">8,900원</div>
+      </div>
+    </div>
+    <div class="gs-card">
+      <div class="gs-thumb">
+        <img src="https://picsum.photos/300/300?random=102" alt="흑마늘" loading="lazy">
+        <div class="gs-badge">숙성 90일</div>
+      </div>
+      <div class="gs-info">
+        <div class="gs-name">제주 흑마늘즙 60포</div>
+        <div class="gs-desc">90일 숙성 흑마늘즙, 가족 건강 한 달 분량</div>
+        <div class="gs-price">28,000원</div>
+      </div>
+    </div>
+    <div class="gs-card">
+      <div class="gs-thumb">
+        <img src="https://picsum.photos/300/300?random=103" alt="마늘장아찌" loading="lazy">
+        <div class="gs-badge">전통 방식</div>
+      </div>
+      <div class="gs-info">
+        <div class="gs-name">할머니 마늘장아찌</div>
+        <div class="gs-desc">3년 묵은 간장으로 담근 깊은 맛의 장아찌 500g</div>
+        <div class="gs-price">12,500원</div>
+      </div>
+    </div>
+    <div class="gs-card">
+      <div class="gs-thumb">
+        <img src="https://picsum.photos/300/300?random=104" alt="마늘오일" loading="lazy">
+        <div class="gs-badge">냉압착</div>
+      </div>
+      <div class="gs-info">
+        <div class="gs-name">트러플 마늘 오일</div>
+        <div class="gs-desc">냉압착 올리브오일과 국산 마늘 블렌딩 200ml</div>
+        <div class="gs-price">16,800원</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 카테고리 ===== -->
+  <div class="section-header fade-up">
+    <h2>&#128722; 카테고리</h2>
+  </div>
+  <div class="cat-circles fade-up">
+    <div class="cat-circle-item" onclick="alert('신선식품')">
+      <div class="cat-circle-icon" style="background:#E8F5E9">&#129382;</div>
+      <span class="cat-circle-label">신선식품</span>
+    </div>
+    <div class="cat-circle-item" onclick="alert('가공식품')">
+      <div class="cat-circle-icon" style="background:#FFF3E0">&#127857;</div>
+      <span class="cat-circle-label">가공식품</span>
+    </div>
+    <div class="cat-circle-item" onclick="alert('건강식품')">
+      <div class="cat-circle-icon" style="background:var(--garlic-green-light)">&#128138;</div>
+      <span class="cat-circle-label">건강식품</span>
+    </div>
+    <div class="cat-circle-item" onclick="alert('간편식')">
+      <div class="cat-circle-icon" style="background:#FCE4EC">&#127859;</div>
+      <span class="cat-circle-label">간편식</span>
+    </div>
+    <div class="cat-circle-item" onclick="alert('음료')">
+      <div class="cat-circle-icon" style="background:#E3F2FD">&#129380;</div>
+      <span class="cat-circle-label">음료</span>
+    </div>
+    <div class="cat-circle-item" onclick="alert('간식')">
+      <div class="cat-circle-icon" style="background:var(--gold-light)">&#127851;</div>
+      <span class="cat-circle-label">간식</span>
+    </div>
+  </div>
+
+  <!-- ===== 인기 상품 ===== -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#128293; 인기 상품</h2>
+    <button class="more">더보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="product-grid fade-up fade-up-1" id="popularGrid"></div>
+
+  <!-- ===== 산지 직송 배너 ===== -->
+  <div class="trust-banner fade-up fade-up-2">
+    <div class="trust-left">
+      <div class="trust-title">&#127807; 산지 직송 보장</div>
+      <div class="trust-desc">농부에서 고객까지 최단 경로<br>수확 당일 출고, 신선도 보증</div>
+      <div class="trust-pills">
+        <span class="trust-pill">당일 출고</span>
+        <span class="trust-pill">신선도 보증</span>
+        <span class="trust-pill">산지 인증</span>
+        <span class="trust-pill">무농약 인증</span>
+      </div>
+    </div>
+    <div class="trust-icon">&#128650;</div>
+  </div>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration:none">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+<script>
+// ===== TIME-BASED RECOMMENDATION =====
+(function(){
+  const h = new Date().getHours();
+  let config;
+  if(h >= 5 && h < 10){
+    config = {
+      icon:'&#127773;',iconBg:'#FFF8E1',
+      label:'아침 추천',title:'상쾌한 아침 식탁',
+      desc:'마늘 들어간 건강한 아침 반찬 어때요?',
+      products:[
+        {name:'마늘 볶음 김 10봉',price:'6,900',discount:'30',img:11},
+        {name:'마늘 현미밥 즉석 6개입',price:'8,400',discount:'25',img:12},
+        {name:'국산 마늘 된장 500g',price:'9,800',discount:'20',img:13},
+        {name:'마늘 스프레드 180g',price:'5,200',discount:'15',img:14},
+      ]
+    };
+  } else if(h >= 10 && h < 14){
+    config = {
+      icon:'&#9728;',iconBg:'#FFF3E0',
+      label:'점심 추천',title:'든든한 한 끼 재료',
+      desc:'마늘 넣은 뚝배기 된장찌개 어때요?',
+      products:[
+        {name:'의성 마늘 1kg 산지직송',price:'8,900',discount:'45',img:21},
+        {name:'마늘 소불고기 양념 300g',price:'7,400',discount:'30',img:22},
+        {name:'국산 마늘 고추장 500g',price:'11,200',discount:'22',img:23},
+        {name:'마늘 순대 600g 냉동',price:'9,600',discount:'18',img:24},
+      ]
+    };
+  } else if(h >= 14 && h < 19){
+    config = {
+      icon:'&#127774;',iconBg:'#FCE4EC',
+      label:'저녁 추천',title:'오늘 저녁 뭐 먹지?',
+      desc:'가족과 함께 마늘 요리 한 상 차려봐요',
+      products:[
+        {name:'마늘 삼겹살 구이용 500g',price:'14,800',discount:'20',img:31},
+        {name:'흑마늘 삼계탕 재료 세트',price:'18,500',discount:'35',img:32},
+        {name:'마늘 버터 스테이크 소스',price:'6,300',discount:'28',img:33},
+        {name:'마늘 떡볶이 밀키트 2인',price:'7,900',discount:'15',img:34},
+      ]
+    };
+  } else {
+    config = {
+      icon:'&#127768;',iconBg:'#E8EAF6',
+      label:'야식 추천',title:'밤에 당기는 그 맛',
+      desc:'마늘 치킨? 마늘 라면? 야식 재료 다 있어요',
+      products:[
+        {name:'마늘 양념 치킨 파우더',price:'4,900',discount:'20',img:41},
+        {name:'마늘 라면 5봉 특대',price:'5,600',discount:'30',img:42},
+        {name:'마늘 피자 간편 도우 2장',price:'8,200',discount:'25',img:43},
+        {name:'야식 마늘 소시지 300g',price:'6,800',discount:'18',img:44},
+      ]
+    };
+  }
+
+  const iconEl = document.getElementById('timeRecIcon');
+  iconEl.innerHTML = config.icon;
+  iconEl.style.background = config.iconBg;
+  document.getElementById('timeRecLabel').textContent = config.label;
+  document.getElementById('timeRecTitle').textContent = config.title;
+  document.getElementById('timeRecDesc').textContent = config.desc;
+
+  const container = document.getElementById('timeRecProducts');
+  config.products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'trp-card';
+    card.innerHTML = `
+      <div class="trp-thumb">
+        <img src="https://picsum.photos/300/300?random=${p.img}" alt="${p.name}" loading="lazy">
+      </div>
+      <div class="trp-info">
+        <div class="trp-name">${p.name}</div>
+        <div class="trp-price">
+          <span class="trp-discount">${p.discount}%</span>
+          <span>${p.price}원</span>
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+})();
+
+// ===== POPULAR PRODUCTS =====
+const popularProducts = [
+  {brand:'의성농협',name:'의성 한지형 마늘 2kg 특대 선물세트',discount:45,price:'12,900',original:'23,500',tag:'direct',tagText:'산지직송',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(4,201)',img:51},
+  {brand:'제주마늘팜',name:'제주 흑마늘즙 30포 파우치',discount:38,price:'17,400',original:'28,000',tag:'best',tagText:'BEST',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(3,892)',img:52},
+  {brand:'마늘키친',name:'트러플 마늘 올리브오일 1L',discount:52,price:'18,900',original:'39,800',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(2,105)',img:53},
+  {brand:'할매손',name:'전통 마늘장아찌 500g 항아리',discount:30,price:'9,100',original:'13,000',tag:'direct',tagText:'산지직송',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(5,678)',img:54},
+  {brand:'건강마늘',name:'국산 마늘 진액 스틱 60포',discount:42,price:'22,900',original:'39,500',tag:'new',tagText:'NEW',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(834)',img:55},
+  {brand:'마늘농장',name:'깐마늘 500g 냉장 신선 배송',discount:25,price:'5,600',original:'7,500',tag:'direct',tagText:'산지직송',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(6,214)',img:56},
+  {brand:'갈릭팜',name:'마늘 발효 흑초 500ml',discount:35,price:'13,600',original:'21,000',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(1,923)',img:57},
+  {brand:'자연마늘',name:'무농약 마늘 가루 100g 분말',discount:28,price:'7,200',original:'10,000',tag:'best',tagText:'BEST',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(3,341)',img:58},
+];
+
+const grid = document.getElementById('popularGrid');
+popularProducts.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <div class="product-thumb">
+      <img src="https://picsum.photos/300/300?random=${p.img}" alt="${p.name}" loading="lazy">
+      <div class="tag tag-${p.tag}">${p.tagText}</div>
+      <div class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">${p.brand}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">
+        <span class="product-discount">${p.discount}%</span>
+        <span class="product-amount">${p.price}원</span>
+      </div>
+      <div class="product-original">${p.original}원</div>
+      <div class="product-meta">
+        <span class="stars">${p.stars}</span>
+        <span class="review">${p.reviews}</span>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+</script>
+
+</body>
+</html>

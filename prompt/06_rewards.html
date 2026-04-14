@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 적립</title>
+<style>
+/* ========== FONTS ========== */
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --green:#00C73C;
+  --green-light:#E8F8ED;
+  --gold:#D4A843;
+  --gold-light:#FFF3D6;
+  --coral:#FF7F6B;
+  --border:#EEEEEE;
+  --garlic-green:#00C73C;
+  --garlic-green-light:#E8F8ED;
+  --garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#FAF6EE;
+  --garlic-white:#FFFFFF;
+  --garlic-black:#333333;
+  --garlic-gray:#666666;
+  --garlic-gray-light:#888888;
+  --garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;
+  --garlic-gold:#D4A843;
+  --garlic-red:#FF4848;
+  --garlic-purple:#7C4DFF;
+  --garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;
+  --tab-h:44px;
+  --nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--garlic-bg);
+  color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;
+  overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));
+  padding-top:var(--safe-top);
+  background:var(--garlic-white);
+  display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;
+  border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);
+  border-radius:8px;background:var(--garlic-bg);
+  padding:0 12px 0 34px;font-family:var(--font);font-size:0.78rem;font-weight:300;
+  color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);
+  border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;
+  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+}
+.tab-item:first-child{padding-left:20px}
+
+/* ========== MAIN ========== */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* ========== SECTION HEADER ========== */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 16px 10px;
+}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* ========== POINT HERO CARD ========== */
+.point-hero{
+  margin:12px 16px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(135deg,#1B4332 0%,#00C73C 60%,#D4A843 100%);
+  padding:28px 24px;position:relative;color:#fff;
+}
+.point-hero::before{
+  content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;
+  background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.point-hero::after{
+  content:'';position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;
+  background:radial-gradient(circle,rgba(212,168,67,0.25) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.point-hero-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.2);border-radius:20px;
+  padding:5px 12px;font-size:0.72rem;font-weight:700;
+  margin-bottom:14px;backdrop-filter:blur(4px);
+}
+.point-hero-amount{
+  font-size:3rem;font-weight:700;line-height:1;margin-bottom:6px;
+  letter-spacing:-1px;
+}
+.point-hero-amount span{font-size:1.2rem;font-weight:500;opacity:0.8;margin-left:2px}
+.point-hero-sub{
+  font-size:0.82rem;font-weight:500;
+  background:rgba(255,255,255,0.18);
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:20px;margin-top:8px;
+  backdrop-filter:blur(4px);
+}
+.point-hero-sub strong{color:var(--garlic-gold);font-weight:700}
+.point-hero-actions{display:flex;gap:10px;margin-top:20px}
+.point-btn{
+  flex:1;padding:12px 0;border-radius:12px;
+  font-size:0.82rem;font-weight:700;text-align:center;
+  cursor:pointer;transition:transform 0.15s;
+}
+.point-btn:active{transform:scale(0.97)}
+.point-btn-primary{background:var(--garlic-white);color:var(--garlic-black)}
+.point-btn-secondary{background:rgba(255,255,255,0.2);color:#fff;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.3)}
+
+/* ========== BENEFIT CARDS ========== */
+.benefit-row{
+  display:flex;gap:10px;padding:0 16px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.benefit-row::-webkit-scrollbar{display:none}
+.benefit-card{
+  flex-shrink:0;width:150px;background:var(--garlic-white);
+  border-radius:16px;padding:18px 14px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.benefit-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:12px;
+}
+.benefit-icon-green{background:var(--garlic-green-light)}
+.benefit-icon-gold{background:var(--gold-light)}
+.benefit-icon-coral{background:#FFF0EE}
+.benefit-title{font-size:0.78rem;font-weight:700;color:var(--garlic-black);margin-bottom:4px}
+.benefit-desc{font-size:0.68rem;font-weight:300;color:var(--garlic-gray-light);line-height:1.4}
+.benefit-highlight{
+  display:inline-block;margin-top:8px;
+  font-size:0.78rem;font-weight:700;color:var(--garlic-green);
+}
+
+/* ========== HISTORY LIST ========== */
+.history-list{padding:0 16px 8px}
+.history-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;background:var(--garlic-white);
+  border-radius:12px;margin-bottom:8px;
+}
+.history-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.history-icon-plus{background:var(--garlic-green-light)}
+.history-icon-minus{background:#FFF0EE}
+.history-info{flex:1;min-width:0}
+.history-date{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-bottom:3px}
+.history-desc{font-size:0.8rem;font-weight:500;color:var(--garlic-black);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-amount{font-size:0.88rem;font-weight:700;flex-shrink:0}
+.history-amount.plus{color:var(--garlic-green)}
+.history-amount.minus{color:var(--garlic-coral)}
+
+/* ========== USAGE BANNER ========== */
+.usage-banner{
+  margin:0 16px 16px;border-radius:16px;
+  background:var(--garlic-white);
+  border:1.5px solid var(--garlic-gray-border);
+  padding:18px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+}
+.usage-left{}
+.usage-eq{font-size:1.2rem;font-weight:700;color:var(--garlic-black);margin-bottom:4px}
+.usage-eq span{color:var(--garlic-green)}
+.usage-desc{font-size:0.72rem;font-weight:300;color:var(--garlic-gray-light)}
+.usage-cta{
+  flex-shrink:0;
+  background:var(--garlic-black);color:var(--garlic-white);
+  padding:10px 18px;border-radius:10px;
+  font-size:0.78rem;font-weight:700;
+  white-space:nowrap;cursor:pointer;transition:transform 0.15s;
+}
+.usage-cta:active{transform:scale(0.97)}
+
+/* ========== MISSION CARDS ========== */
+.mission-list{padding:0 16px 16px}
+.mission-card{
+  background:var(--garlic-white);border-radius:14px;
+  padding:16px;margin-bottom:10px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.04);
+}
+.mission-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.mission-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.mission-info{flex:1}
+.mission-title{font-size:0.82rem;font-weight:700;color:var(--garlic-black);margin-bottom:3px}
+.mission-reward{font-size:0.72rem;font-weight:500;color:var(--garlic-green)}
+.mission-progress-wrap{margin-bottom:8px}
+.mission-progress-bar{
+  height:8px;background:var(--garlic-gray-border);border-radius:4px;overflow:hidden;
+}
+.mission-progress-fill{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--garlic-green),#00A832);
+  transition:width 0.6s ease-out;
+}
+.mission-progress-label{
+  display:flex;justify-content:space-between;margin-top:6px;
+  font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);
+}
+.mission-btn{
+  width:100%;padding:10px 0;border-radius:8px;
+  font-size:0.78rem;font-weight:700;text-align:center;
+  background:var(--garlic-green-light);color:var(--garlic-green);
+  cursor:pointer;transition:background 0.2s;
+}
+.mission-btn:active{background:#D0F0DA}
+.mission-btn.complete{background:var(--garlic-green);color:#fff}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);
+  border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;
+  max-width:640px;margin:0 auto;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 0;min-width:56px;
+}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;
+  background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;
+  min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}
+.fade-up-2{animation-delay:0.1s}
+.fade-up-3{animation-delay:0.15s}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){
+  .main{max-width:640px;margin:0 auto}
+  .header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
+}
+@media(min-width:1440px){
+  body{background:#EDE8E0}
+  .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly>
+  </div>
+  <div class="header-actions">
+    <a href="03_challenge.html" class="h-btn" aria-label="알림" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item" style="text-decoration:none;color:inherit">추천</a>
+  <a href="05_deals.html" class="tab-item" style="text-decoration:none;color:inherit">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">마늘까기</a>
+  <a href="06_rewards.html" class="tab-item active" style="text-decoration:none;color:inherit">적립</a>
+  <a href="07_fashion.html" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
+  <a href="08_beauty.html" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
+  <a href="09_food.html" class="tab-item" style="text-decoration:none;color:inherit">식품</a>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- ===== 나의 마늘 포인트 ===== -->
+  <section class="fade-up" style="padding:12px 16px 0">
+    <div class="point-hero">
+      <div class="point-hero-label">&#127807; 나의 마늘 포인트</div>
+      <div class="point-hero-amount">12,450<span>P</span></div>
+      <div class="point-hero-sub">&#8593; <strong>+3,200P</strong>&nbsp;이번 달 적립</div>
+      <div class="point-hero-actions">
+        <button class="point-btn point-btn-primary" onclick="alert('포인트 사용')">포인트 사용</button>
+        <button class="point-btn point-btn-secondary" onclick="alert('내역 전체보기')">내역 보기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 적립 혜택 ===== -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#127775; 적립 혜택</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="benefit-row fade-up fade-up-1">
+    <div class="benefit-card">
+      <div class="benefit-icon benefit-icon-green">&#128722;</div>
+      <div class="benefit-title">구매 시 적립</div>
+      <div class="benefit-desc">모든 상품 결제금액의 5% 자동 적립</div>
+      <span class="benefit-highlight">5% 적립</span>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon benefit-icon-gold">&#9733;</div>
+      <div class="benefit-title">리뷰 작성</div>
+      <div class="benefit-desc">구매 후 상품 리뷰를 남기면 포인트 지급</div>
+      <span class="benefit-highlight">100P 지급</span>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon benefit-icon-coral">&#128197;</div>
+      <div class="benefit-title">출석 전환</div>
+      <div class="benefit-desc">너마늘키우기 출석 보상을 포인트로 전환</div>
+      <span class="benefit-highlight">1씨앗 = 10P</span>
+    </div>
+  </div>
+
+  <!-- ===== 포인트 히스토리 ===== -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#128203; 포인트 히스토리</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="history-list fade-up fade-up-2">
+    <div class="history-item">
+      <div class="history-icon history-icon-plus">&#128722;</div>
+      <div class="history-info">
+        <div class="history-date">2026.04.14</div>
+        <div class="history-desc">의성 한지형 마늘 2kg 구매 적립</div>
+      </div>
+      <div class="history-amount plus">+645P</div>
+    </div>
+    <div class="history-item">
+      <div class="history-icon history-icon-plus">&#9733;</div>
+      <div class="history-info">
+        <div class="history-date">2026.04.13</div>
+        <div class="history-desc">갈릭 콜라겐 앰플 리뷰 작성</div>
+      </div>
+      <div class="history-amount plus">+100P</div>
+    </div>
+    <div class="history-icon history-icon-minus" style="display:none"></div>
+    <div class="history-item">
+      <div class="history-icon history-icon-minus">&#128197;</div>
+      <div class="history-info">
+        <div class="history-date">2026.04.12</div>
+        <div class="history-desc">출석 보상 포인트 전환 (5일)</div>
+      </div>
+      <div class="history-amount plus">+50P</div>
+    </div>
+    <div class="history-item">
+      <div class="history-icon history-icon-minus" style="background:#FFF0EE">&#128722;</div>
+      <div class="history-info">
+        <div class="history-date">2026.04.10</div>
+        <div class="history-desc">갈릭 에어 러닝화 결제 포인트 사용</div>
+      </div>
+      <div class="history-amount minus">-2,000P</div>
+    </div>
+    <div class="history-item">
+      <div class="history-icon history-icon-plus">&#127881;</div>
+      <div class="history-info">
+        <div class="history-date">2026.04.08</div>
+        <div class="history-desc">4월 첫 구매 보너스 적립</div>
+      </div>
+      <div class="history-amount plus">+500P</div>
+    </div>
+    <div class="history-item">
+      <div class="history-icon history-icon-plus">&#128293;</div>
+      <div class="history-info">
+        <div class="history-date">2026.04.05</div>
+        <div class="history-desc">타임특가 이벤트 참여 적립</div>
+      </div>
+      <div class="history-amount plus">+200P</div>
+    </div>
+  </div>
+
+  <!-- ===== 포인트 사용처 ===== -->
+  <div class="section-header fade-up">
+    <h2>&#128176; 포인트 사용처</h2>
+  </div>
+  <div class="usage-banner fade-up" style="margin-bottom:8px">
+    <div class="usage-left">
+      <div class="usage-eq"><span>1P</span> = 1원</div>
+      <div class="usage-desc">결제 시 현금처럼 사용 가능</div>
+    </div>
+    <button class="usage-cta" onclick="alert('포인트몰로 이동')">포인트몰 &#8594;</button>
+  </div>
+
+  <!-- ===== 이달의 적립 미션 ===== -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#127942; 이달의 적립 미션</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="mission-list fade-up fade-up-1">
+    <div class="mission-card">
+      <div class="mission-top">
+        <div class="mission-icon" style="background:var(--garlic-green-light)">&#128722;</div>
+        <div class="mission-info">
+          <div class="mission-title">4월 구매 3회 달성</div>
+          <div class="mission-reward">+500P 보상</div>
+        </div>
+      </div>
+      <div class="mission-progress-wrap">
+        <div class="mission-progress-bar">
+          <div class="mission-progress-fill" style="width:66%"></div>
+        </div>
+        <div class="mission-progress-label">
+          <span>2/3 완료</span>
+          <span>66%</span>
+        </div>
+      </div>
+      <button class="mission-btn" onclick="alert('미션 참여!')">미션 참여하기</button>
+    </div>
+    <div class="mission-card">
+      <div class="mission-top">
+        <div class="mission-icon" style="background:var(--gold-light)">&#9733;</div>
+        <div class="mission-info">
+          <div class="mission-title">리뷰 5개 작성하기</div>
+          <div class="mission-reward">+300P 보상</div>
+        </div>
+      </div>
+      <div class="mission-progress-wrap">
+        <div class="mission-progress-bar">
+          <div class="mission-progress-fill" style="width:40%;background:linear-gradient(90deg,var(--garlic-gold),#B8860B)"></div>
+        </div>
+        <div class="mission-progress-label">
+          <span>2/5 완료</span>
+          <span>40%</span>
+        </div>
+      </div>
+      <button class="mission-btn" style="background:var(--gold-light);color:var(--garlic-gold)" onclick="alert('리뷰 작성!')">리뷰 작성하기</button>
+    </div>
+    <div class="mission-card">
+      <div class="mission-top">
+        <div class="mission-icon" style="background:#FFF0EE">&#128197;</div>
+        <div class="mission-info">
+          <div class="mission-title">출석 10일 달성</div>
+          <div class="mission-reward">+200P 보상</div>
+        </div>
+      </div>
+      <div class="mission-progress-wrap">
+        <div class="mission-progress-bar">
+          <div class="mission-progress-fill" style="width:90%;background:linear-gradient(90deg,var(--garlic-coral),#E06050)"></div>
+        </div>
+        <div class="mission-progress-label">
+          <span>9/10 완료</span>
+          <span>90%</span>
+        </div>
+      </div>
+      <button class="mission-btn complete" onclick="alert('거의 다 왔어요!')">D-1 출석 체크</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration:none">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+</body>
+</html>
