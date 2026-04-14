@@ -106,41 +106,56 @@ body {
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 6px;
+  flex-shrink: 0;
   text-decoration: none;
 }
 
-.header-logo-icon { font-size: 24px; line-height: 1; }
-
-.header-logo-text {
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--garlic-dark-green);
-  letter-spacing: -0.02em;
-}
-
-.header-title {
+.header-search {
   flex: 1;
-  text-align: center;
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--dark);
+  position: relative;
 }
 
-.header-right { display: flex; align-items: center; gap: 8px; }
+.header-search input {
+  width: 100%;
+  padding: 8px 12px 8px 34px;
+  border: 1px solid #EEE;
+  border-radius: 8px;
+  background: #F7F7F7;
+  font-size: 13px;
+  font-family: 'GmarketSans', sans-serif;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+}
+
+.header-search input::placeholder { color: #999; font-weight: 300; }
+.header-search input:focus { border-color: #00C73C; }
+
+.header-search .s-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #999;
+}
+
+.header-right { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
 
 .header-btn {
   width: 36px; height: 36px;
   border-radius: 50%;
   border: none;
-  background: var(--garlic-green-light);
+  background: transparent;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s var(--ease-bounce);
-  font-size: 16px;
+  transition: background 0.2s;
+  text-decoration: none;
 }
 
-.header-btn:active { transform: scale(0.9); }
+.header-btn:active { background: rgba(0,0,0,.04); }
+.header-dot { position:absolute;top:6px;right:7px;width:7px;height:7px;background:#FF4444;border-radius:50%;border:1.5px solid #fff; }
 
 /* ========== MAIN ========== */
 main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
@@ -873,12 +888,21 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
 <!-- HEADER -->
 <header class="header">
   <a href="01_home.html" class="header-logo">
-    <span class="header-logo-icon">🧄</span>
-    <span class="header-logo-text">Garlic</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
   </a>
-  <div class="header-title">마늘까기 도전</div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly onclick="location.href='01_home.html'">
+  </div>
   <div class="header-right">
-    <button class="header-btn" title="알림">🔔</button>
+    <a href="03_challenge.html" class="header-btn" style="position:relative;text-decoration:none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="header-dot"></span>
+    </a>
+    <a href="04_mypage.html" class="header-btn" style="text-decoration:none">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
   </div>
 </header>
 
