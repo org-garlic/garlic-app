@@ -20,7 +20,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#FAF6EE;--card:#fff;--green:#00C73C;--green-light:#E8F8ED;--coral:#FF7F6B;--gold:#D4A843;--gold-light:#FFF3D6;--text:#333;--text-light:#888;--border:#EEE}
-body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-top:52px;padding-bottom:130px}
+body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-top:52px;padding-bottom:140px}
 
 /* Header */
 .header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);max-width:640px;margin:0 auto}
@@ -58,7 +58,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .ci-option{font-size:11px;color:var(--text-light);margin-bottom:6px}
 .ci-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-bottom:6px}
 .ci-badge.dna{background:rgba(124,92,252,.1);color:#7C5CFC}
-.ci-badge.free{background:var(--green-light);color:var(--green)}
+.ci-badge.free{background:var(--green-light);color:#7ED957}
 .ci-badge.rec{background:rgba(255,127,107,.1);color:var(--coral)}
 .ci-price{display:flex;align-items:baseline;gap:6px}
 .ci-discount{font-size:15px;font-weight:700;color:var(--coral)}
@@ -112,12 +112,12 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* Bottom Nav */
-.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:6px 0 env(safe-area-inset-bottom,6px);max-width:640px;margin:0 auto}
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
 @media(min-width:641px){.bnav{left:50%;transform:translateX(-50%)}}
 .bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#999;font-size:10px;font-weight:500;text-decoration:none}
 .bn svg{stroke:#999}
-.bn.active{color:var(--green)}
-.bn.active svg{stroke:var(--green)}
+.bn.active{color:#7ED957}
+.bn.active svg{stroke:#7ED957}
 </style>
 </head>
 <body>

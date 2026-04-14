@@ -618,6 +618,44 @@ document.querySelectorAll('.wish').forEach(function(btn) {
 });
 </script>
 
+<!-- 쿠폰 바텀시트 -->
+<div id="couponOverlay" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s" onclick="closeCoupon()"></div>
+<div id="couponSheet" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:301;background:#fff;border-radius:24px 24px 0 0;padding:32px 24px calc(env(safe-area-inset-bottom,12px) + 24px);max-width:640px;margin:0 auto;transform:translateY(100%);transition:transform .4s cubic-bezier(.32,1.2,.54,1);box-shadow:0 -8px 40px rgba(0,0,0,.12)">
+  <div style="width:40px;height:4px;background:#DDD;border-radius:2px;margin:0 auto 20px"></div>
+  <div style="text-align:center">
+    <div style="font-size:48px;margin-bottom:12px">🧄</div>
+    <div style="font-size:20px;font-weight:700;color:#333;margin-bottom:6px">나마늘 위한 특별 쿠폰!</div>
+    <div style="font-size:42px;font-weight:800;color:#FF7F6B;margin:12px 0">30% OFF</div>
+    <div style="font-size:14px;color:#888;margin-bottom:20px">전 카테고리 사용 가능 · 최대 5만원 할인</div>
+    <div style="background:linear-gradient(135deg,#F0FFF0,#FFF8F0);border:2px dashed #7ED957;border-radius:16px;padding:16px;margin-bottom:20px">
+      <div style="font-size:13px;color:#7ED957;font-weight:700;margin-bottom:4px">✨ 불사조기사단을 응원해주세요!</div>
+      <div style="font-size:15px;font-weight:700;color:#333">PP1K 사내 경진대회</div>
+      <div style="font-size:12px;color:#888;margin-top:4px">"불사조기사단에 투표해주세요" 🔥🧄</div>
+    </div>
+    <button onclick="closeCoupon()" style="width:100%;padding:16px;background:#7ED957;color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Pretendard';transition:transform .2s">쿠폰 받기 🎉</button>
+    <button onclick="closeCoupon()" style="width:100%;padding:12px;background:none;border:none;color:#999;font-size:13px;cursor:pointer;margin-top:8px;font-family:'Pretendard'">다음에 받을게요</button>
+  </div>
+</div>
+<script>
+// 10% 확률 쿠폰 바텀시트
+function showCoupon(){
+  document.getElementById('couponOverlay').style.display='block';
+  document.getElementById('couponSheet').style.display='block';
+  setTimeout(function(){
+    document.getElementById('couponOverlay').style.opacity='1';
+    document.getElementById('couponSheet').style.transform='translateY(0)';
+  },50);
+}
+function closeCoupon(){
+  document.getElementById('couponOverlay').style.opacity='0';
+  document.getElementById('couponSheet').style.transform='translateY(100%)';
+  setTimeout(function(){
+    document.getElementById('couponOverlay').style.display='none';
+    document.getElementById('couponSheet').style.display='none';
+  },400);
+}
+if(Math.random()<0.1){setTimeout(showCoupon,2000);}
+</script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js")}</script>
 </body>
 </html>
