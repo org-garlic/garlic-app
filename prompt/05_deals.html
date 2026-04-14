@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Garlic — 특가</title>
+<title>Garlic - 나마늘 위한 마켓 | 특가</title>
 <style>
 /* ========== FONTS ========== */
 @font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
@@ -223,6 +223,7 @@ img{display:block;max-width:100%}
   backdrop-filter:blur(4px);
 }
 .product-thumb .wish svg{width:16px;height:16px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.8}
+.wish.active svg{fill:#FF7F6B !important;stroke:#FF7F6B !important}
 .product-info{padding:10px 10px 14px}
 .product-brand{font-size:0.65rem;font-weight:500;color:var(--garlic-gray-light);margin-bottom:3px}
 .product-name{font-size:0.78rem;font-weight:500;color:var(--garlic-black);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -358,10 +359,10 @@ img{display:block;max-width:100%}
   <a href="05_deals.html" class="tab-item active" style="text-decoration:none;color:inherit">특가</a>
   <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">너마늘키우기</a>
   <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">마늘까기</a>
-  <a href="#" class="tab-item" style="text-decoration:none;color:inherit">적립</a>
-  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
-  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
-  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">식품</a>
+  <a href="06_rewards.html" class="tab-item" style="text-decoration:none;color:inherit">적립</a>
+  <a href="07_fashion.html" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
+  <a href="08_beauty.html" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
+  <a href="09_food.html" class="tab-item" style="text-decoration:none;color:inherit">식품</a>
 </nav>
 
 <!-- ===== MAIN CONTENT ===== -->
@@ -463,10 +464,10 @@ img{display:block;max-width:100%}
 
 // ===== TIME DEALS =====
 const timeDeals = [
-  {name:'의성 한지형 마늘 1kg 산지직송',discount:72,price:'5,800',original:'20,800',remain:'02:15:30',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
-  {name:'블랙 갈릭 에센스 50ml 기미케어',discount:65,price:'11,700',original:'33,600',remain:'01:45:12',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
-  {name:'갈릭 무선이어폰 ANC Pro',discount:58,price:'29,900',original:'72,000',remain:'03:02:44',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},
-  {name:'프리미엄 마늘 아로마 디퓨저',discount:60,price:'16,600',original:'41,500',remain:'00:58:21',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},
+  {name:'의성 한지형 마늘 1kg 산지직송',discount:72,price:'5,800',original:'20,800',remain:'02:15:30',img:'https://picsum.photos/300/300?random=1'},
+  {name:'블랙 갈릭 에센스 50ml 기미케어',discount:65,price:'11,700',original:'33,600',remain:'01:45:12',img:'https://picsum.photos/300/300?random=2'},
+  {name:'갈릭 무선이어폰 ANC Pro',discount:58,price:'29,900',original:'72,000',remain:'03:02:44',img:'https://picsum.photos/300/300?random=3'},
+  {name:'프리미엄 마늘 아로마 디퓨저',discount:60,price:'16,600',original:'41,500',remain:'00:58:21',img:'https://picsum.photos/300/300?random=4'},
 ];
 
 const tdContainer = document.getElementById('timeDeals');
@@ -474,7 +475,7 @@ timeDeals.forEach(d => {
   const card = document.createElement('div');
   card.className = 'time-card';
   card.innerHTML = `
-    <div class="time-thumb" style="background:${d.bg}"></div>
+    <div class="time-thumb"><img src="${d.img}" style="width:100%;height:100%;object-fit:cover"></div>
     <div class="time-badge" style="animation:pulse 1.5s infinite">&#9201; ${d.remain}</div>
     <div class="time-info">
       <div class="time-name">${d.name}</div>
@@ -489,14 +490,14 @@ timeDeals.forEach(d => {
 
 // ===== TODAY'S DEALS =====
 const todayDeals = [
-  {brand:'마늘팜',name:'의성 한지형 마늘 2kg 특대 선물세트',discount:68,price:'12,900',original:'40,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(4,201)',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
-  {brand:'갈릭스타일',name:'봄 오버핏 린넨 원피스 [3컬러]',discount:55,price:'21,600',original:'48,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(1,892)',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},
-  {brand:'뷰티마늘',name:'갈릭 콜라겐 앰플 30ml + 패드 60매',discount:72,price:'9,800',original:'35,000',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(7,230)',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
-  {brand:'테크마늘',name:'갈릭 에어팟 맥스 호환 케이스',discount:80,price:'3,900',original:'19,800',tag:'limit',tagText:'한정수량',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(2,105)',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},
-  {brand:'마늘키친',name:'트러플 마늘 올리브오일 1L 대용량',discount:52,price:'18,900',original:'39,800',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(3,456)',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},
-  {brand:'갈릭홈',name:'마늘 추출 천연 섬유탈취제 500ml',discount:63,price:'6,900',original:'18,800',tag:'best',tagText:'BEST',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(5,678)',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},
-  {brand:'마늘피트',name:'갈릭 에어 러닝화 2세대 [남녀공용]',discount:58,price:'36,400',original:'86,800',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(8,901)',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},
-  {brand:'갈릭팜',name:'제주 흑마늘즙 60포 가족세트',discount:50,price:'28,000',original:'56,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(6,214)',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},
+  {brand:'마늘팜',name:'의성 한지형 마늘 2kg 특대 선물세트',discount:68,price:'12,900',original:'40,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(4,201)',img:'https://picsum.photos/300/300?random=10'},
+  {brand:'갈릭스타일',name:'봄 오버핏 린넨 원피스 [3컬러]',discount:55,price:'21,600',original:'48,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(1,892)',img:'https://picsum.photos/300/300?random=11'},
+  {brand:'뷰티마늘',name:'갈릭 콜라겐 앰플 30ml + 패드 60매',discount:72,price:'9,800',original:'35,000',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(7,230)',img:'https://picsum.photos/300/300?random=12'},
+  {brand:'테크마늘',name:'갈릭 에어팟 맥스 호환 케이스',discount:80,price:'3,900',original:'19,800',tag:'limit',tagText:'한정수량',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(2,105)',img:'https://picsum.photos/300/300?random=13'},
+  {brand:'마늘키친',name:'트러플 마늘 올리브오일 1L 대용량',discount:52,price:'18,900',original:'39,800',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(3,456)',img:'https://picsum.photos/300/300?random=14'},
+  {brand:'갈릭홈',name:'마늘 추출 천연 섬유탈취제 500ml',discount:63,price:'6,900',original:'18,800',tag:'best',tagText:'BEST',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(5,678)',img:'https://picsum.photos/300/300?random=15'},
+  {brand:'마늘피트',name:'갈릭 에어 러닝화 2세대 [남녀공용]',discount:58,price:'36,400',original:'86,800',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(8,901)',img:'https://picsum.photos/300/300?random=16'},
+  {brand:'갈릭팜',name:'제주 흑마늘즙 60포 가족세트',discount:50,price:'28,000',original:'56,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(6,214)',img:'https://picsum.photos/300/300?random=17'},
 ];
 
 const todayGrid = document.getElementById('todayGrid');
@@ -505,7 +506,7 @@ todayDeals.forEach((p,i) => {
   card.className = 'product-card';
   card.innerHTML = `
     <div class="product-thumb">
-      <div style="width:100%;height:100%;background:${p.bg}"></div>
+      <img src="${p.img}" style="width:100%;height:100%;object-fit:cover">
       <div class="tag tag-${p.tag}">${p.tagText}</div>
       <div class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
     </div>
@@ -528,15 +529,15 @@ todayDeals.forEach((p,i) => {
 // ===== CATEGORY DEALS =====
 const catData = [
   // Fashion
-  [{brand:'갈릭스타일',name:'오버핏 크롭 자켓 [4컬러]',discount:62,price:'18,900',original:'49,800',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},{brand:'마늘패션',name:'와이드 데님팬츠 하이웨스트',discount:55,price:'22,400',original:'49,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},{brand:'갈릭슈즈',name:'청키 스니커즈 화이트 [230-280]',discount:70,price:'23,900',original:'79,800',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},{brand:'마늘백',name:'미니 크로스백 레더 [5컬러]',discount:58,price:'16,800',original:'39,800',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'}],
+  [{brand:'갈릭스타일',name:'오버핏 크롭 자켓 [4컬러]',discount:62,price:'18,900',original:'49,800',img:'https://picsum.photos/300/300?random=20'},{brand:'마늘패션',name:'와이드 데님팬츠 하이웨스트',discount:55,price:'22,400',original:'49,800',img:'https://picsum.photos/300/300?random=21'},{brand:'갈릭슈즈',name:'청키 스니커즈 화이트 [230-280]',discount:70,price:'23,900',original:'79,800',img:'https://picsum.photos/300/300?random=22'},{brand:'마늘백',name:'미니 크로스백 레더 [5컬러]',discount:58,price:'16,800',original:'39,800',img:'https://picsum.photos/300/300?random=23'}],
   // Beauty
-  [{brand:'뷰티마늘',name:'갈릭 세럼 파운데이션 SPF50',discount:60,price:'11,900',original:'29,800',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},{brand:'마늘뷰티',name:'수분 톤업크림 50ml + 미스트',discount:72,price:'8,400',original:'30,000',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},{brand:'갈릭코스',name:'릴리 퍼퓸 오드뚜왈렛 50ml',discount:55,price:'26,900',original:'59,800',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},{brand:'마늘스킨',name:'블랙갈릭 마스크팩 20매 세트',discount:68,price:'9,600',original:'30,000',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'}],
+  [{brand:'뷰티마늘',name:'갈릭 세럼 파운데이션 SPF50',discount:60,price:'11,900',original:'29,800',img:'https://picsum.photos/300/300?random=24'},{brand:'마늘뷰티',name:'수분 톤업크림 50ml + 미스트',discount:72,price:'8,400',original:'30,000',img:'https://picsum.photos/300/300?random=25'},{brand:'갈릭코스',name:'릴리 퍼퓸 오드뚜왈렛 50ml',discount:55,price:'26,900',original:'59,800',img:'https://picsum.photos/300/300?random=26'},{brand:'마늘스킨',name:'블랙갈릭 마스크팩 20매 세트',discount:68,price:'9,600',original:'30,000',img:'https://picsum.photos/300/300?random=27'}],
   // Digital
-  [{brand:'테크마늘',name:'갈릭 워치 프로 7세대',discount:52,price:'143,000',original:'299,000',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},{brand:'마늘테크',name:'USB-C 65W 3포트 충전기',discount:75,price:'9,900',original:'39,800',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},{brand:'갈릭디지',name:'무선 기계식 키보드 저소음',discount:58,price:'41,900',original:'99,800',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},{brand:'마늘게이밍',name:'듀얼 모니터 암 관절형',discount:63,price:'22,200',original:'59,800',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'}],
+  [{brand:'테크마늘',name:'갈릭 워치 프로 7세대',discount:52,price:'143,000',original:'299,000',img:'https://picsum.photos/300/300?random=28'},{brand:'마늘테크',name:'USB-C 65W 3포트 충전기',discount:75,price:'9,900',original:'39,800',img:'https://picsum.photos/300/300?random=29'},{brand:'갈릭디지',name:'무선 기계식 키보드 저소음',discount:58,price:'41,900',original:'99,800',img:'https://picsum.photos/300/300?random=30'},{brand:'마늘게이밍',name:'듀얼 모니터 암 관절형',discount:63,price:'22,200',original:'59,800',img:'https://picsum.photos/300/300?random=31'}],
   // Food
-  [{brand:'마늘팜',name:'남해 깐마늘 3kg 대용량',discount:65,price:'13,900',original:'39,800',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},{brand:'갈릭팜',name:'유기농 흑마늘 진액 30포',discount:58,price:'18,900',original:'45,000',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},{brand:'마늘키친',name:'마늘 소시지 세트 1.2kg',discount:50,price:'14,900',original:'29,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},{brand:'갈릭푸드',name:'마늘 올리브유 페스토 3종',discount:72,price:'11,200',original:'40,000',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'}],
+  [{brand:'마늘팜',name:'남해 깐마늘 3kg 대용량',discount:65,price:'13,900',original:'39,800',img:'https://picsum.photos/300/300?random=32'},{brand:'갈릭팜',name:'유기농 흑마늘 진액 30포',discount:58,price:'18,900',original:'45,000',img:'https://picsum.photos/300/300?random=33'},{brand:'마늘키친',name:'마늘 소시지 세트 1.2kg',discount:50,price:'14,900',original:'29,800',img:'https://picsum.photos/300/300?random=34'},{brand:'갈릭푸드',name:'마늘 올리브유 페스토 3종',discount:72,price:'11,200',original:'40,000',img:'https://picsum.photos/300/300?random=35'}],
   // Living
-  [{brand:'갈릭홈',name:'마늘 추출 항균 스프레이 세트',discount:60,price:'11,900',original:'29,800',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},{brand:'마늘리빙',name:'프리미엄 마늘 베개 메모리폼',discount:55,price:'31,400',original:'69,800',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},{brand:'갈릭클린',name:'천연 마늘 세탁세제 3L',discount:68,price:'8,900',original:'27,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},{brand:'마늘가든',name:'마늘 재배 키트 미니화분',discount:50,price:'12,400',original:'24,800',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'}],
+  [{brand:'갈릭홈',name:'마늘 추출 항균 스프레이 세트',discount:60,price:'11,900',original:'29,800',img:'https://picsum.photos/300/300?random=36'},{brand:'마늘리빙',name:'프리미엄 마늘 베개 메모리폼',discount:55,price:'31,400',original:'69,800',img:'https://picsum.photos/300/300?random=37'},{brand:'갈릭클린',name:'천연 마늘 세탁세제 3L',discount:68,price:'8,900',original:'27,800',img:'https://picsum.photos/300/300?random=38'},{brand:'마늘가든',name:'마늘 재배 키트 미니화분',discount:50,price:'12,400',original:'24,800',img:'https://picsum.photos/300/300?random=39'}],
 ];
 
 let currentCat = 0;
@@ -549,7 +550,7 @@ function renderCat(idx) {
     card.className = 'product-card';
     card.innerHTML = `
       <div class="product-thumb">
-        <div style="width:100%;height:100%;background:${p.bg}"></div>
+        <img src="${p.img}" style="width:100%;height:100%;object-fit:cover">
         <div class="tag tag-deal">GARLIC DEAL</div>
       </div>
       <div class="product-info">
@@ -575,11 +576,11 @@ function switchCat(el, idx) {
 
 // ===== RANKING =====
 const rankings = [
-  {rank:1,name:'의성 한지형 마늘 2kg 특대 선물세트',discount:68,price:'12,900',original:'40,000',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
-  {rank:2,name:'블랙 갈릭 콜라겐 앰플 30ml',discount:72,price:'9,800',original:'35,000',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
-  {rank:3,name:'갈릭 에어 러닝화 2세대',discount:58,price:'36,400',original:'86,800',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},
-  {rank:4,name:'트러플 마늘 올리브오일 1L',discount:52,price:'18,900',original:'39,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},
-  {rank:5,name:'제주 흑마늘즙 60포 가족세트',discount:50,price:'28,000',original:'56,000',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},
+  {rank:1,name:'의성 한지형 마늘 2kg 특대 선물세트',discount:68,price:'12,900',original:'40,000',img:'https://picsum.photos/300/300?random=40'},
+  {rank:2,name:'블랙 갈릭 콜라겐 앰플 30ml',discount:72,price:'9,800',original:'35,000',img:'https://picsum.photos/300/300?random=41'},
+  {rank:3,name:'갈릭 에어 러닝화 2세대',discount:58,price:'36,400',original:'86,800',img:'https://picsum.photos/300/300?random=42'},
+  {rank:4,name:'트러플 마늘 올리브오일 1L',discount:52,price:'18,900',original:'39,800',img:'https://picsum.photos/300/300?random=43'},
+  {rank:5,name:'제주 흑마늘즙 60포 가족세트',discount:50,price:'28,000',original:'56,000',img:'https://picsum.photos/300/300?random=44'},
 ];
 
 const rankList = document.getElementById('rankList');
@@ -588,7 +589,7 @@ rankings.forEach(r => {
   item.className = 'rank-item';
   item.innerHTML = `
     <div class="rank-num ${r.rank <= 3 ? 'top3' : ''}">${r.rank}</div>
-    <div class="rank-thumb" style="background:${r.bg}"></div>
+    <div class="rank-thumb"><img src="${r.img}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"></div>
     <div class="rank-info">
       <div class="rank-name">${r.name}</div>
       <div class="rank-price">
@@ -607,6 +608,21 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, {threshold:0.1});
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ===== WISH BUTTON =====
+document.querySelectorAll('.wish').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    this.classList.toggle('active');
+    if (this.classList.contains('active')) {
+      this.querySelector('svg').style.fill = '#FF7F6B';
+      this.querySelector('svg').style.stroke = '#FF7F6B';
+    } else {
+      this.querySelector('svg').style.fill = 'none';
+      this.querySelector('svg').style.stroke = '#999';
+    }
+  });
+});
 </script>
 </body>
 </html>
