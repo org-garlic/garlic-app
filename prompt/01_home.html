@@ -318,26 +318,26 @@ img{display:block;max-width:100%}
     <input type="text" placeholder="마늘밭에서 찾기" readonly>
   </div>
   <div class="header-actions">
-    <button class="h-btn" aria-label="알림">
+    <a href="03_challenge.html" class="h-btn" aria-label="알림" style="text-decoration:none;color:inherit">
       <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span class="dot"></span>
-    </button>
-    <button class="h-btn" aria-label="프로필">
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필" style="text-decoration:none;color:inherit">
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </button>
+    </a>
   </div>
 </header>
 
 <!-- ===== TAB NAVIGATION ===== -->
 <nav class="tab-nav">
-  <div class="tab-item active">추천</div>
-  <div class="tab-item">특가</div>
-  <div class="tab-item">너마늘키우기</div>
-  <div class="tab-item">마늘까기</div>
-  <div class="tab-item">적립</div>
-  <div class="tab-item">패션</div>
-  <div class="tab-item">뷰티</div>
-  <div class="tab-item">식품</div>
+  <a href="#feed" class="tab-item active" style="text-decoration:none;color:inherit">추천</a>
+  <a href="#deal" class="tab-item" style="text-decoration:none;color:inherit">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">마늘까기</a>
+  <a href="#" class="tab-item" style="text-decoration:none;color:inherit">적립</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">식품</a>
 </nav>
 
 <!-- ===== MAIN CONTENT ===== -->
@@ -375,7 +375,7 @@ img{display:block;max-width:100%}
   </section>
 
   <!-- DEAL BANNER -->
-  <section class="fade-up fade-up-1">
+  <section id="deal" class="fade-up fade-up-1">
     <div class="deal-banner">
       <div class="deal-label">⚡ GARLIC DEAL</div>
       <div class="deal-title">마늘 500g <span>100원!</span></div>
@@ -394,31 +394,31 @@ img{display:block;max-width:100%}
   <!-- QUICK MENU -->
   <section class="quick-menu fade-up fade-up-2">
     <div class="quick-grid">
-      <div class="quick-item">
+      <a href="#deal" class="quick-item" style="text-decoration:none;color:inherit">
         <div class="quick-icon gi-1">🔥</div>
         <div class="quick-label">오늘의딜</div>
-      </div>
-      <div class="quick-item">
+      </a>
+      <a href="garlic_tamagotchi.html" class="quick-item" style="text-decoration:none;color:inherit">
         <div class="quick-icon gi-2">🧄</div>
         <div class="quick-label">마늘키우기</div>
-      </div>
-      <div class="quick-item">
+      </a>
+      <a href="03_challenge.html" class="quick-item" style="text-decoration:none;color:inherit">
         <div class="quick-icon gi-3">🎯</div>
         <div class="quick-label">출석체크</div>
-      </div>
-      <div class="quick-item">
+      </a>
+      <a href="04_mypage.html" class="quick-item" style="text-decoration:none;color:inherit">
         <div class="quick-icon gi-4">🎁</div>
         <div class="quick-label">쿠폰함</div>
-      </div>
-      <div class="quick-item">
+      </a>
+      <a href="04_mypage.html" class="quick-item" style="text-decoration:none;color:inherit">
         <div class="quick-icon gi-5">👑</div>
         <div class="quick-label">갈릭등급</div>
-      </div>
+      </a>
     </div>
   </section>
 
   <!-- CATEGORY BANNERS -->
-  <div class="cat-banner cb-fashion fade-up fade-up-2">
+  <div id="categories" class="cat-banner cb-fashion fade-up fade-up-2">
     <div class="cb-text">봄 패션 특가전<span>최대 70% OFF</span></div>
     <div class="cb-emoji">👗</div>
   </div>
@@ -428,7 +428,7 @@ img{display:block;max-width:100%}
   </div>
 
   <!-- PRODUCT FEED -->
-  <div class="section-header fade-up fade-up-3">
+  <div id="feed" class="section-header fade-up fade-up-3">
     <h2>지은마늘님을 위한 추천</h2>
     <button class="more">더보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
