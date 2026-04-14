@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 카테고리</title>
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --garlic-green:#00C73C;--garlic-green-light:#E8F8ED;
+  --garlic-bg:#FAF6EE;--garlic-white:#FFFFFF;--garlic-black:#333333;
+  --garlic-gray:#666666;--garlic-gray-light:#888888;--garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;--garlic-gold:#D4A843;--gold-light:#FFF3D6;
+  --garlic-red:#FF4848;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;--nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--garlic-bg);color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+
+/* HEADER */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top);
+  background:var(--garlic-white);display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);border-radius:8px;
+  background:var(--garlic-bg);padding:0 12px 0 34px;font-family:var(--font);
+  font-size:0.78rem;font-weight:300;color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* MAIN */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:20px 16px 10px}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* CATEGORY GRID 3x4 */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:8px 16px 16px}
+.cat-card{
+  background:var(--garlic-white);border-radius:16px;padding:18px 8px 14px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;
+  transition:transform 0.15s;box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.cat-card:active{transform:scale(0.96)}
+.cat-card-icon{
+  width:52px;height:52px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+}
+.cat-card-name{font-size:0.78rem;font-weight:700;color:var(--garlic-black);text-align:center}
+.cat-card-sub{font-size:0.62rem;font-weight:300;color:var(--garlic-gray-light);text-align:center}
+.cat-card.special .cat-card-name{color:var(--garlic-green)}
+
+.bg-fashion{background:#FFF0EE}
+.bg-beauty{background:#FFE8F0}
+.bg-digital{background:#E8EEFF}
+.bg-food{background:#E8F8ED}
+.bg-living{background:#FFF8E8}
+.bg-sports{background:#E8F5FF}
+.bg-kids{background:#FFF3E8}
+.bg-pet{background:#F0F8E8}
+.bg-book{background:#F5F0FF}
+.bg-travel{background:#E8F8FF}
+.bg-auto{background:#F0F0F0}
+.bg-garlic{background:linear-gradient(135deg,#E8F8ED,#FFF3D6)}
+
+/* TRENDING SECTION */
+.trending-list{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+.trending-card{
+  background:var(--garlic-white);border-radius:14px;overflow:hidden;
+  display:flex;align-items:stretch;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:transform 0.15s;
+}
+.trending-card:active{transform:scale(0.98)}
+.trending-img{width:90px;height:90px;object-fit:cover;flex-shrink:0;background:#f0ede8}
+.trending-body{flex:1;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.trending-badge{
+  display:inline-flex;align-items:center;gap:4px;font-size:0.62rem;font-weight:700;
+  padding:3px 10px;border-radius:8px;width:fit-content;margin-bottom:2px;
+}
+.badge-hot{background:#FFF0EE;color:var(--garlic-coral)}
+.badge-new{background:var(--garlic-green-light);color:var(--garlic-green)}
+.badge-gold{background:var(--gold-light);color:var(--garlic-gold)}
+.trending-title{font-size:0.88rem;font-weight:700;color:var(--garlic-black);line-height:1.3}
+.trending-desc{font-size:0.72rem;font-weight:300;color:var(--garlic-gray-light);line-height:1.4}
+.trending-arrow{width:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding-right:12px}
+.trending-arrow svg{width:16px;height:16px;stroke:var(--garlic-gray-light);fill:none;stroke-width:2;stroke-linecap:round}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;max-width:640px;margin:0 auto;
+}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;min-width:56px}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}.fade-up-2{animation-delay:0.1s}.fade-up-3{animation-delay:0.15s}
+
+@media(min-width:768px){.main{max-width:640px;margin:0 auto}.header,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}}
+@media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" onclick="location.href='11_search.html'" readonly>
+  </div>
+  <div class="header-actions">
+    <a href="10_notifications.html" class="h-btn" aria-label="알림">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- CATEGORY GRID -->
+  <div class="section-header fade-up">
+    <h2>&#128199; 전체 카테고리</h2>
+  </div>
+  <div class="cat-grid fade-up fade-up-1">
+
+    <a href="07_fashion.html" class="cat-card">
+      <div class="cat-card-icon bg-fashion">&#128084;</div>
+      <div class="cat-card-name">패션</div>
+      <div class="cat-card-sub">의류·잡화</div>
+    </a>
+
+    <a href="08_beauty.html" class="cat-card">
+      <div class="cat-card-icon bg-beauty">&#128144;</div>
+      <div class="cat-card-name">뷰티</div>
+      <div class="cat-card-sub">스킨·메이크업</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-digital">&#128421;&#65039;</div>
+      <div class="cat-card-name">디지털</div>
+      <div class="cat-card-sub">가전·IT</div>
+    </a>
+
+    <a href="09_food.html" class="cat-card">
+      <div class="cat-card-icon bg-food">&#127798;</div>
+      <div class="cat-card-name">식품</div>
+      <div class="cat-card-sub">신선·가공</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-living">&#127968;</div>
+      <div class="cat-card-name">리빙</div>
+      <div class="cat-card-sub">홈·인테리어</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-sports">&#9917;</div>
+      <div class="cat-card-name">스포츠</div>
+      <div class="cat-card-sub">운동·야외</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-kids">&#128118;</div>
+      <div class="cat-card-name">유아동</div>
+      <div class="cat-card-sub">아기·어린이</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-pet">&#128054;</div>
+      <div class="cat-card-name">반려</div>
+      <div class="cat-card-sub">강아지·고양이</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-book">&#128218;</div>
+      <div class="cat-card-name">도서</div>
+      <div class="cat-card-sub">책·전자책</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-travel">&#9992;&#65039;</div>
+      <div class="cat-card-name">여행</div>
+      <div class="cat-card-sub">국내·해외</div>
+    </a>
+
+    <a href="#" class="cat-card">
+      <div class="cat-card-icon bg-auto">&#128663;</div>
+      <div class="cat-card-name">자동차</div>
+      <div class="cat-card-sub">용품·관리</div>
+    </a>
+
+    <a href="#" class="cat-card special">
+      <div class="cat-card-icon bg-garlic">&#127807;</div>
+      <div class="cat-card-name">마늘특집</div>
+      <div class="cat-card-sub">갈릭 오리지널</div>
+    </a>
+
+  </div>
+
+  <!-- TRENDING CATEGORIES -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#128293; 지금 뜨는 카테고리</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="trending-list fade-up fade-up-3">
+
+    <a href="07_fashion.html" class="trending-card">
+      <img class="trending-img" src="https://picsum.photos/seed/trend-fsh/90/90" alt="패션">
+      <div class="trending-body">
+        <span class="trending-badge badge-hot">&#128293; HOT</span>
+        <div class="trending-title">2026 SS 패션 트렌드</div>
+        <div class="trending-desc">미니멀·오버핏·Y2K — 지금 가장 핫한 스타일</div>
+      </div>
+      <div class="trending-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="08_beauty.html" class="trending-card">
+      <img class="trending-img" src="https://picsum.photos/seed/trend-bty/90/90" alt="뷰티">
+      <div class="trending-body">
+        <span class="trending-badge badge-new">&#127807; AI 추천</span>
+        <div class="trending-title">AI 피부 맞춤 뷰티</div>
+        <div class="trending-desc">갈릭 DNA 분석으로 찾은 나만의 루틴</div>
+      </div>
+      <div class="trending-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+    <a href="#" class="trending-card">
+      <img class="trending-img" src="https://picsum.photos/seed/trend-grl/90/90" alt="마늘특집">
+      <div class="trending-body">
+        <span class="trending-badge badge-gold">&#127807; 갈릭 특집</span>
+        <div class="trending-title">마늘 100원딜 특집관</div>
+        <div class="trending-desc">의성·남해·단양 마늘 최대 90% 할인</div>
+      </div>
+      <div class="trending-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+    </a>
+
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="12_category.html" class="nav-item active">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+</body>
+</html>

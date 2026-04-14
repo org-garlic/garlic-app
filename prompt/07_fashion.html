@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 패션</title>
+<style>
+/* ========== FONTS ========== */
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;--bg-alt:#FFF8F0;--card:#FFFFFF;--text:#333333;--text-light:#888888;
+  --green:#00C73C;--green-light:#E8F8ED;--gold:#D4A843;--gold-light:#FFF3D6;
+  --coral:#FF7F6B;--border:#EEEEEE;
+  --garlic-green:#00C73C;--garlic-green-light:#E8F8ED;--garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#FAF6EE;--garlic-white:#FFFFFF;--garlic-black:#333333;
+  --garlic-gray:#666666;--garlic-gray-light:#888888;--garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;--garlic-gold:#D4A843;--garlic-red:#FF4848;
+  --garlic-purple:#7C4DFF;--garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;--tab-h:44px;--nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--garlic-bg);color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top);
+  background:var(--garlic-white);display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);border-radius:8px;
+  background:var(--garlic-bg);padding:0 12px 0 34px;font-family:var(--font);
+  font-size:0.78rem;font-weight:300;color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;
+  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+}
+.tab-item:first-child{padding-left:20px}
+
+/* ========== MAIN ========== */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* ========== SECTION HEADER ========== */
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:20px 16px 10px}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* ========== FASHION HERO ========== */
+.fashion-hero{
+  margin:12px 16px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(135deg,#FF7F6B 0%,#FF9A8B 40%,#FFB7C5 100%);
+  padding:32px 24px;position:relative;color:#fff;
+}
+.fashion-hero::before{
+  content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.fashion-hero::after{
+  content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;
+  background:radial-gradient(circle,rgba(255,183,197,0.4) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.fashion-hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;opacity:0.85;margin-bottom:10px}
+.fashion-hero-title{font-size:2.2rem;font-weight:700;line-height:1.1;margin-bottom:8px;letter-spacing:-0.5px}
+.fashion-hero-sub{font-size:0.82rem;font-weight:300;opacity:0.9;margin-bottom:20px;line-height:1.5}
+.fashion-hero-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.25);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:0.82rem;font-weight:700;
+  padding:10px 20px;border-radius:24px;cursor:pointer;transition:background 0.2s;
+}
+.fashion-hero-cta:active{background:rgba(255,255,255,0.35)}
+
+/* ========== TREND PILLS ========== */
+.trend-row{
+  display:flex;gap:8px;padding:0 16px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.trend-row::-webkit-scrollbar{display:none}
+.trend-pill{
+  flex-shrink:0;padding:8px 16px;border-radius:24px;
+  font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;
+}
+.trend-pill.active{background:var(--garlic-black);color:#fff}
+.trend-pill:not(.active){background:var(--garlic-white);color:var(--garlic-black);border:1.5px solid var(--garlic-gray-border)}
+.trend-pill:not(.active):active{background:var(--garlic-gray-border)}
+
+/* ========== EDITOR PICK ========== */
+.editor-pick{margin:0 16px 4px;border-radius:16px;overflow:hidden;position:relative;height:200px;cursor:pointer}
+.editor-pick img{width:100%;height:100%;object-fit:cover;display:block}
+.editor-pick-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.1) 50%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:20px;
+}
+.editor-pick-tag{
+  display:inline-block;background:var(--garlic-coral);color:#fff;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.08em;
+  padding:3px 10px;border-radius:10px;margin-bottom:8px;width:fit-content;
+}
+.editor-pick-title{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:4px}
+.editor-pick-sub{font-size:0.72rem;font-weight:300;color:rgba(255,255,255,0.8)}
+
+/* ========== CATEGORIES ========== */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:0 16px 16px}
+.cat-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+.cat-icon{
+  width:48px;height:48px;border-radius:14px;background:var(--garlic-white);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);transition:transform 0.15s;
+}
+.cat-icon:active{transform:scale(0.92)}
+.cat-name{font-size:0.62rem;font-weight:500;color:var(--garlic-black);text-align:center}
+
+/* ========== PRODUCT GRID ========== */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 8px}
+.product-card{
+  background:var(--garlic-white);border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);cursor:pointer;transition:transform 0.15s;
+}
+.product-card:active{transform:scale(0.98)}
+.product-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#f0ede8}
+.product-info{padding:10px 10px 12px}
+.product-tag{display:inline-block;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:6px}
+.tag-dna{background:var(--garlic-green-light);color:var(--garlic-green)}
+.tag-trend{background:#FFF0EE;color:var(--garlic-coral)}
+.tag-new{background:var(--gold-light);color:var(--garlic-gold)}
+.product-brand{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-bottom:2px}
+.product-name{font-size:0.78rem;font-weight:700;color:var(--garlic-black);margin-bottom:6px;line-height:1.3}
+.product-price-row{display:flex;align-items:center;gap:6px}
+.product-discount{font-size:0.72rem;font-weight:700;color:var(--garlic-coral)}
+.product-price{font-size:0.82rem;font-weight:700;color:var(--garlic-black)}
+.product-original{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through}
+
+/* ========== BRAND SCROLL ========== */
+.brand-row{
+  display:flex;gap:10px;padding:0 16px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.brand-row::-webkit-scrollbar{display:none}
+.brand-card{
+  flex-shrink:0;width:100px;background:var(--garlic-white);border-radius:14px;padding:16px 10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);display:flex;flex-direction:column;align-items:center;gap:8px;
+  cursor:pointer;transition:transform 0.15s;
+}
+.brand-card:active{transform:scale(0.97)}
+.brand-logo{width:48px;height:48px;border-radius:12px;overflow:hidden;background:var(--garlic-bg)}
+.brand-logo img{width:100%;height:100%;object-fit:cover}
+.brand-name{font-size:0.68rem;font-weight:700;color:var(--garlic-black);text-align:center}
+.brand-tag{font-size:0.6rem;font-weight:300;color:var(--garlic-gray-light);text-align:center}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;max-width:640px;margin:0 auto;
+}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;min-width:56px}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}.fade-up-2{animation-delay:0.1s}.fade-up-3{animation-delay:0.15s}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){.main{max-width:640px;margin:0 auto}.header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}}
+@media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly>
+  </div>
+  <div class="header-actions">
+    <a href="10_notifications.html" class="h-btn" aria-label="알림">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item">추천</a>
+  <a href="05_deals.html" class="tab-item">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item">마늘까기</a>
+  <a href="06_rewards.html" class="tab-item">적립</a>
+  <a href="07_fashion.html" class="tab-item active">패션</a>
+  <a href="08_beauty.html" class="tab-item">뷰티</a>
+  <a href="09_food.html" class="tab-item">식품</a>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- FASHION HERO -->
+  <section style="padding:12px 16px 0" class="fade-up">
+    <div class="fashion-hero">
+      <div class="fashion-hero-eyebrow">2026 SS COLLECTION</div>
+      <div class="fashion-hero-title">GARLIC<br>FASHION</div>
+      <div class="fashion-hero-sub">갈릭 DNA로 발견하는<br>나만의 스타일</div>
+      <button class="fashion-hero-cta">지금 쇼핑하기 &rarr;</button>
+    </div>
+  </section>
+
+  <!-- TREND PILLS -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#127811; 지금 뜨는 트렌드</h2>
+  </div>
+  <div class="trend-row fade-up fade-up-1">
+    <button class="trend-pill active">미니멀</button>
+    <button class="trend-pill">오버핏</button>
+    <button class="trend-pill">Y2K</button>
+    <button class="trend-pill">뉴진스룩</button>
+    <button class="trend-pill">레이어드</button>
+    <button class="trend-pill">스트릿</button>
+  </div>
+
+  <!-- EDITOR PICK -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#9997;&#65039; 에디터 픽</h2>
+    <button class="more">더보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="editor-pick fade-up fade-up-1">
+    <img src="https://picsum.photos/seed/fashion-hero/640/200" alt="에디터 픽">
+    <div class="editor-pick-overlay">
+      <span class="editor-pick-tag">Editor's Pick</span>
+      <div class="editor-pick-title">2026 미니멀 무드 특집</div>
+      <div class="editor-pick-sub">군더더기 없는 깔끔함, 갈릭이 큐레이션했어요</div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#128084; 카테고리</h2>
+  </div>
+  <div class="cat-grid fade-up fade-up-2">
+    <div class="cat-item"><div class="cat-icon">&#129452;</div><span class="cat-name">아우터</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128085;</div><span class="cat-name">상의</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128084;</div><span class="cat-name">하의</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128248;</div><span class="cat-name">원피스</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128092;</div><span class="cat-name">가방</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128095;</div><span class="cat-name">신발</span></div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#128138; 갈릭 DNA 추천 상품</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="product-grid fade-up fade-up-2">
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh1/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-dna">갈릭 DNA 매칭</span>
+        <div class="product-brand">MINIMAL LAB</div>
+        <div class="product-name">오버핏 린넨 셔츠</div>
+        <div class="product-price-row"><span class="product-discount">32%</span><span class="product-price">38,900원</span></div>
+        <div class="product-original">57,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh2/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-trend">트렌드</span>
+        <div class="product-brand">Y2K CLUB</div>
+        <div class="product-name">와이드 데님 팬츠</div>
+        <div class="product-price-row"><span class="product-discount">20%</span><span class="product-price">49,000원</span></div>
+        <div class="product-original">62,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh3/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-dna">갈릭 DNA 매칭</span>
+        <div class="product-brand">SOFT CORE</div>
+        <div class="product-name">크롭 니트 가디건</div>
+        <div class="product-price-row"><span class="product-discount">15%</span><span class="product-price">42,500원</span></div>
+        <div class="product-original">50,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh4/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-new">신상품</span>
+        <div class="product-brand">GARLIC ATELIER</div>
+        <div class="product-name">슬링백 메리제인 슈즈</div>
+        <div class="product-price-row"><span class="product-price">68,000원</span></div>
+        <div class="product-original">&nbsp;</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh5/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-dna">갈릭 DNA 매칭</span>
+        <div class="product-brand">LAYER STORY</div>
+        <div class="product-name">레이어드 트렌치코트</div>
+        <div class="product-price-row"><span class="product-discount">40%</span><span class="product-price">89,000원</span></div>
+        <div class="product-original">148,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh6/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-trend">트렌드</span>
+        <div class="product-brand">STREET CULT</div>
+        <div class="product-name">버킷햇 + 체인 백 세트</div>
+        <div class="product-price-row"><span class="product-discount">25%</span><span class="product-price">34,200원</span></div>
+        <div class="product-original">45,600원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh7/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-dna">갈릭 DNA 매칭</span>
+        <div class="product-brand">MONOCHROME</div>
+        <div class="product-name">슬림 스트레이트 슬랙스</div>
+        <div class="product-price-row"><span class="product-discount">10%</span><span class="product-price">54,000원</span></div>
+        <div class="product-original">60,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/fsh8/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-new">신상품</span>
+        <div class="product-brand">SOFT DRAPE</div>
+        <div class="product-name">플리츠 미디 스커트</div>
+        <div class="product-price-row"><span class="product-discount">18%</span><span class="product-price">29,500원</span></div>
+        <div class="product-original">36,000원</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND SCROLL -->
+  <div class="section-header fade-up fade-up-3">
+    <h2>&#127775; 인기 브랜드</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="brand-row fade-up fade-up-3">
+    <div class="brand-card">
+      <div class="brand-logo"><img src="https://picsum.photos/seed/br1/48/48" alt="브랜드"></div>
+      <div class="brand-name">MINIMAL LAB</div><div class="brand-tag">미니멀리즘</div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo"><img src="https://picsum.photos/seed/br2/48/48" alt="브랜드"></div>
+      <div class="brand-name">Y2K CLUB</div><div class="brand-tag">2000년대 감성</div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo"><img src="https://picsum.photos/seed/br3/48/48" alt="브랜드"></div>
+      <div class="brand-name">LAYER STORY</div><div class="brand-tag">레이어드룩</div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo"><img src="https://picsum.photos/seed/br4/48/48" alt="브랜드"></div>
+      <div class="brand-name">SOFT CORE</div><div class="brand-tag">소프트 캐주얼</div>
+    </div>
+    <div class="brand-card">
+      <div class="brand-logo"><img src="https://picsum.photos/seed/br5/48/48" alt="브랜드"></div>
+      <div class="brand-name">GARLIC ATELIER</div><div class="brand-tag">갈릭 자체 브랜드</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="12_category.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 검색</title>
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --garlic-green:#00C73C;--garlic-green-light:#E8F8ED;
+  --garlic-bg:#FAF6EE;--garlic-white:#FFFFFF;--garlic-black:#333333;
+  --garlic-gray:#666666;--garlic-gray-light:#888888;--garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;--garlic-gold:#D4A843;--gold-light:#FFF3D6;
+  --garlic-red:#FF4848;--garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --search-h:64px;--nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--garlic-bg);color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  padding-top:calc(var(--search-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+
+/* SEARCH BAR HEADER */
+.search-header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--search-h) + var(--safe-top));padding-top:var(--safe-top);
+  background:var(--garlic-white);
+  display:flex;align-items:center;
+  padding-left:12px;padding-right:12px;
+  border-bottom:1px solid var(--garlic-gray-border);gap:10px;
+}
+.back-btn{
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;border-radius:50%;
+}
+.back-btn:active{background:rgba(0,0,0,0.04)}
+.back-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.search-input-wrap{flex:1;position:relative}
+.search-input-wrap input{
+  width:100%;height:44px;border:2px solid var(--garlic-green);
+  border-radius:12px;background:var(--garlic-white);
+  padding:0 44px 0 42px;
+  font-family:var(--font);font-size:0.9rem;font-weight:500;
+  color:var(--garlic-black);outline:none;
+}
+.search-input-wrap input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.s-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+.s-icon svg{width:18px;height:18px;stroke:var(--garlic-green);fill:none;stroke-width:2;stroke-linecap:round}
+.clear-btn{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  width:24px;height:24px;border-radius:50%;background:var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:center;
+}
+.clear-btn svg{width:12px;height:12px;stroke:var(--garlic-gray-light);fill:none;stroke-width:2.5;stroke-linecap:round}
+.search-cancel{flex-shrink:0;font-size:0.82rem;font-weight:700;color:var(--garlic-gray-light);padding:0 4px}
+
+/* MAIN */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:20px 16px 10px}
+.section-header h2{font-size:0.88rem;font-weight:700;color:var(--garlic-black)}
+.section-header button{font-size:0.72rem;font-weight:500;color:var(--garlic-gray-light)}
+
+/* RECENT SEARCHES */
+.recent-list{padding:0 16px;display:flex;flex-direction:column;gap:0}
+.recent-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 0;border-bottom:1px solid var(--garlic-gray-border);cursor:pointer;
+}
+.recent-item:last-child{border-bottom:none}
+.recent-item-left{display:flex;align-items:center;gap:10px}
+.recent-item-left svg{width:14px;height:14px;stroke:var(--garlic-gray-light);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.recent-item-text{font-size:0.82rem;font-weight:500;color:var(--garlic-black)}
+.delete-btn{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
+.delete-btn:active{background:var(--garlic-gray-border)}
+.delete-btn svg{width:14px;height:14px;stroke:var(--garlic-gray-light);fill:none;stroke-width:2;stroke-linecap:round}
+
+/* POPULAR SEARCHES */
+.popular-list{padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.popular-item{display:flex;align-items:center;gap:10px;padding:10px 0;cursor:pointer}
+.popular-rank{font-size:0.85rem;font-weight:700;min-width:20px;text-align:center;color:var(--garlic-black)}
+.popular-rank.top3{color:var(--garlic-coral)}
+.popular-text{font-size:0.8rem;font-weight:500;color:var(--garlic-black);flex:1}
+.popular-arrow{font-size:0.65rem;flex-shrink:0}
+.popular-arrow.up{color:var(--garlic-coral)}
+.popular-arrow.down{color:var(--garlic-blue)}
+.popular-arrow.same{color:var(--garlic-gray-light)}
+
+/* CATEGORY PILLS */
+.cat-pill-row{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+.cat-pill{
+  padding:8px 16px;border-radius:24px;font-size:0.78rem;font-weight:700;cursor:pointer;
+  background:var(--garlic-white);color:var(--garlic-black);
+  border:1.5px solid var(--garlic-gray-border);transition:all 0.15s;
+}
+.cat-pill:active{background:var(--garlic-black);color:#fff;border-color:var(--garlic-black)}
+
+/* MANURI BUBBLE */
+.manuri-section{margin:0 16px 20px}
+.manuri-bubble-wrap{
+  background:var(--garlic-white);border-radius:16px;padding:18px 16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.manuri-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.manuri-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,#00C73C,#D4A843);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.manuri-name{font-size:0.82rem;font-weight:700;color:var(--garlic-black)}
+.manuri-role{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light)}
+.manuri-speech{
+  background:var(--garlic-bg);border-radius:12px;padding:14px 16px;
+  font-size:0.78rem;font-weight:300;color:var(--garlic-black);line-height:1.7;
+  position:relative;
+}
+.manuri-speech::before{
+  content:'';position:absolute;top:-8px;left:20px;
+  border-left:8px solid transparent;border-right:8px solid transparent;
+  border-bottom:8px solid var(--garlic-bg);
+}
+.manuri-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.manuri-tag{
+  padding:6px 14px;border-radius:20px;font-size:0.75rem;font-weight:700;cursor:pointer;
+  background:var(--garlic-green-light);color:var(--garlic-green);transition:all 0.15s;
+}
+.manuri-tag:active{background:var(--garlic-green);color:#fff}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;max-width:640px;margin:0 auto;
+}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;min-width:56px}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.4s ease-out both}
+.fade-up-1{animation-delay:0.04s}.fade-up-2{animation-delay:0.08s}
+.fade-up-3{animation-delay:0.12s}.fade-up-4{animation-delay:0.16s}
+
+@media(min-width:768px){.main{max-width:640px;margin:0 auto}.search-header,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}}
+@media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+</style>
+</head>
+<body>
+
+<div class="search-header">
+  <a href="01_home.html" class="back-btn" aria-label="뒤로가기">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </a>
+  <div class="search-input-wrap">
+    <div class="s-icon">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <input type="search" placeholder="마늘밭에서 찾기" autofocus>
+    <button class="clear-btn" aria-label="지우기">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <button class="search-cancel">취소</button>
+</div>
+
+<main class="main">
+
+  <!-- RECENT SEARCHES -->
+  <div class="section-header fade-up">
+    <h2>&#128336; 최근 검색어</h2>
+    <button>전체 삭제</button>
+  </div>
+  <div class="recent-list fade-up fade-up-1">
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="recent-item-text">의성 마늘</span>
+      </div>
+      <button class="delete-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="recent-item-text">갈릭 콜라겐 앰플</span>
+      </div>
+      <button class="delete-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="recent-item-text">오버핏 린넨 셔츠</span>
+      </div>
+      <button class="delete-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="recent-item-text">세라마이드 토너</span>
+      </div>
+      <button class="delete-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="recent-item">
+      <div class="recent-item-left">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="recent-item-text">에어 러닝화</span>
+      </div>
+      <button class="delete-btn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+  </div>
+
+  <!-- POPULAR SEARCHES -->
+  <div class="section-header fade-up fade-up-2" style="margin-top:8px">
+    <h2>&#128293; 인기 검색어</h2>
+    <span style="font-size:0.65rem;color:var(--garlic-gray-light);font-weight:300">2026.04.14 기준</span>
+  </div>
+  <div class="popular-list fade-up fade-up-2">
+    <div class="popular-item">
+      <span class="popular-rank top3">1</span>
+      <span class="popular-text">마늘 100원딜</span>
+      <span class="popular-arrow up">▲</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank top3">2</span>
+      <span class="popular-text">갈릭 에어 러닝화</span>
+      <span class="popular-arrow same">—</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank top3">3</span>
+      <span class="popular-text">콜라겐 앰플</span>
+      <span class="popular-arrow up">▲</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">4</span>
+      <span class="popular-text">오버핏 셔츠</span>
+      <span class="popular-arrow down">▼</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">5</span>
+      <span class="popular-text">의성 마늘</span>
+      <span class="popular-arrow up">▲</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">6</span>
+      <span class="popular-text">선스틱 SPF50</span>
+      <span class="popular-arrow same">—</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">7</span>
+      <span class="popular-text">뉴진스룩 패션</span>
+      <span class="popular-arrow up">▲</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">8</span>
+      <span class="popular-text">마누리 세럼</span>
+      <span class="popular-arrow down">▼</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">9</span>
+      <span class="popular-text">와이드 데님</span>
+      <span class="popular-arrow up">▲</span>
+    </div>
+    <div class="popular-item">
+      <span class="popular-rank">10</span>
+      <span class="popular-text">갈릭 기획세트</span>
+      <span class="popular-arrow same">—</span>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED CATEGORIES -->
+  <div class="section-header fade-up fade-up-3">
+    <h2>&#127991;&#65039; 카테고리 바로가기</h2>
+  </div>
+  <div class="cat-pill-row fade-up fade-up-3">
+    <a href="07_fashion.html" class="cat-pill">&#128084; 패션</a>
+    <a href="08_beauty.html" class="cat-pill">&#128144; 뷰티</a>
+    <a href="09_food.html" class="cat-pill">&#127798; 식품</a>
+    <a href="12_category.html" class="cat-pill">&#128421;&#65039; 디지털</a>
+    <a href="12_category.html" class="cat-pill">&#127968; 리빙</a>
+    <a href="12_category.html" class="cat-pill">&#9917; 스포츠</a>
+  </div>
+
+  <!-- MANURI RECOMMENDATION -->
+  <div class="section-header fade-up fade-up-3">
+    <h2>&#127807; 마누리 추천 검색어</h2>
+  </div>
+  <div class="manuri-section fade-up fade-up-4">
+    <div class="manuri-bubble-wrap">
+      <div class="manuri-header">
+        <div class="manuri-avatar">&#127807;</div>
+        <div>
+          <div class="manuri-name">마누리</div>
+          <div class="manuri-role">갈릭 AI 큐레이터</div>
+        </div>
+      </div>
+      <div class="manuri-speech">
+        지금 이 검색어들이 엄청 뜨고 있어요!<br>
+        갈릭 DNA 분석 결과, 요즘 트렌드에 딱 맞는<br>
+        아이템들을 모아봤어요 &#128521;
+      </div>
+      <div class="manuri-tags">
+        <button class="manuri-tag">&#9889; 100원 딜</button>
+        <button class="manuri-tag">&#127775; 갈릭 DNA 매칭</button>
+        <button class="manuri-tag">&#128293; 지금 핫한</button>
+        <button class="manuri-tag">&#129514; AI 추천템</button>
+        <button class="manuri-tag">&#9203; 오늘만 특가</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="12_category.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+</body>
+</html>

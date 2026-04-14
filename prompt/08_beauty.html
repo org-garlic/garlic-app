@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 뷰티</title>
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;--bg-alt:#FFF8F0;--card:#FFFFFF;--text:#333333;--text-light:#888888;
+  --green:#00C73C;--green-light:#E8F8ED;--gold:#D4A843;--gold-light:#FFF3D6;
+  --coral:#FF7F6B;--border:#EEEEEE;
+  --garlic-green:#00C73C;--garlic-green-light:#E8F8ED;--garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#FAF6EE;--garlic-white:#FFFFFF;--garlic-black:#333333;
+  --garlic-gray:#666666;--garlic-gray-light:#888888;--garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;--garlic-gold:#D4A843;--garlic-red:#FF4848;
+  --garlic-purple:#7C4DFF;--garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;--tab-h:44px;--nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--garlic-bg);color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* HEADER */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top);
+  background:var(--garlic-white);display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);border-radius:8px;
+  background:var(--garlic-bg);padding:0 12px 0 34px;font-family:var(--font);
+  font-size:0.78rem;font-weight:300;color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* TAB NAV */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0}
+.tab-item:first-child{padding-left:20px}
+
+/* MAIN */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:20px 16px 10px}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* BEAUTY HERO */
+.beauty-hero{
+  margin:12px 16px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(135deg,#FFB7C5 0%,#FFC8D5 35%,#FFE4B5 100%);
+  padding:32px 24px;position:relative;color:#5C3040;
+}
+.beauty-hero::before{
+  content:'';position:absolute;top:-50px;right:-30px;width:180px;height:180px;
+  background:radial-gradient(circle,rgba(255,255,255,0.3) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.beauty-hero-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;opacity:0.7;margin-bottom:10px}
+.beauty-hero-title{font-size:1.9rem;font-weight:700;line-height:1.15;margin-bottom:8px;letter-spacing:-0.3px}
+.beauty-hero-sub{font-size:0.82rem;font-weight:300;opacity:0.8;margin-bottom:20px;line-height:1.5}
+.beauty-hero-skin{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.5);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.6);
+  font-size:0.78rem;font-weight:700;color:#5C3040;
+  padding:10px 18px;border-radius:24px;cursor:pointer;
+}
+.beauty-hero-skin span{font-size:1rem}
+
+/* SKIN TYPE CARD */
+.skin-card{
+  margin:0 16px 4px;border-radius:16px;background:var(--garlic-white);
+  padding:18px 20px;display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.skin-card-left{}
+.skin-label{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-bottom:4px}
+.skin-type{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.skin-type span{color:#FF7F6B}
+.skin-desc{font-size:0.72rem;font-weight:300;color:var(--garlic-gray-light);margin-top:4px}
+.skin-change{
+  flex-shrink:0;background:var(--garlic-bg);border:1.5px solid var(--garlic-gray-border);
+  padding:8px 14px;border-radius:10px;font-size:0.72rem;font-weight:700;color:var(--garlic-black);
+  cursor:pointer;white-space:nowrap;
+}
+
+/* DEAL CARDS */
+.deal-row{display:flex;gap:10px;padding:0 16px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.deal-row::-webkit-scrollbar{display:none}
+.deal-card{
+  flex-shrink:0;width:160px;background:var(--garlic-white);border-radius:16px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);cursor:pointer;transition:transform 0.15s;
+}
+.deal-card:active{transform:scale(0.97)}
+.deal-img{width:100%;height:120px;object-fit:cover;background:#f5f0ea}
+.deal-info{padding:10px 12px 12px}
+.deal-timer{
+  display:flex;align-items:center;gap:4px;margin-bottom:6px;
+  font-size:0.65rem;font-weight:700;color:var(--garlic-coral);
+}
+.deal-timer svg{width:12px;height:12px;stroke:var(--garlic-coral);fill:none;stroke-width:2}
+.deal-name{font-size:0.75rem;font-weight:700;color:var(--garlic-black);margin-bottom:4px;line-height:1.3}
+.deal-price-row{display:flex;align-items:center;gap:5px}
+.deal-discount{font-size:0.72rem;font-weight:700;color:var(--garlic-coral)}
+.deal-price{font-size:0.8rem;font-weight:700;color:var(--garlic-black)}
+
+/* CAT GRID */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:0 16px 16px}
+.cat-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
+.cat-icon{
+  width:48px;height:48px;border-radius:14px;background:var(--garlic-white);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);transition:transform 0.15s;
+}
+.cat-icon:active{transform:scale(0.92)}
+.cat-name{font-size:0.62rem;font-weight:500;color:var(--garlic-black);text-align:center}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 8px}
+.product-card{
+  background:var(--garlic-white);border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);cursor:pointer;transition:transform 0.15s;
+}
+.product-card:active{transform:scale(0.98)}
+.product-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#f5f0ea}
+.product-info{padding:10px 10px 12px}
+.product-tag{display:inline-block;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:6px}
+.tag-ai{background:var(--garlic-green-light);color:var(--garlic-green)}
+.tag-rec{background:#FFF0EE;color:var(--garlic-coral)}
+.tag-new{background:var(--gold-light);color:var(--garlic-gold)}
+.product-brand{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-bottom:2px}
+.product-name{font-size:0.78rem;font-weight:700;color:var(--garlic-black);margin-bottom:6px;line-height:1.3}
+.product-price-row{display:flex;align-items:center;gap:6px}
+.product-discount{font-size:0.72rem;font-weight:700;color:var(--garlic-coral)}
+.product-price{font-size:0.82rem;font-weight:700;color:var(--garlic-black)}
+.product-original{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through}
+
+/* REVIEW CARDS */
+.review-list{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+.review-card{
+  background:var(--garlic-white);border-radius:14px;padding:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+.review-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.review-user{display:flex;align-items:center;gap:10px}
+.review-avatar{
+  width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  background:var(--garlic-bg);
+}
+.review-avatar img{width:100%;height:100%;object-fit:cover}
+.review-name{font-size:0.78rem;font-weight:700;color:var(--garlic-black)}
+.review-product{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-top:1px}
+.review-stars{display:flex;gap:2px}
+.star{font-size:0.75rem}
+.star.filled{color:#FFB800}
+.star.empty{color:var(--garlic-gray-border)}
+.review-text{font-size:0.78rem;font-weight:300;color:var(--garlic-black);line-height:1.6}
+.review-date{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-top:8px}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;max-width:640px;margin:0 auto;
+}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;min-width:56px}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}.fade-up-2{animation-delay:0.1s}.fade-up-3{animation-delay:0.15s}
+
+@media(min-width:768px){.main{max-width:640px;margin:0 auto}.header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}}
+@media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly>
+  </div>
+  <div class="header-actions">
+    <a href="10_notifications.html" class="h-btn" aria-label="알림">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item">추천</a>
+  <a href="05_deals.html" class="tab-item">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item">마늘까기</a>
+  <a href="06_rewards.html" class="tab-item">적립</a>
+  <a href="07_fashion.html" class="tab-item">패션</a>
+  <a href="08_beauty.html" class="tab-item active">뷰티</a>
+  <a href="09_food.html" class="tab-item">식품</a>
+</nav>
+
+<main class="main">
+
+  <!-- BEAUTY HERO -->
+  <section style="padding:12px 16px 0" class="fade-up">
+    <div class="beauty-hero">
+      <div class="beauty-hero-eyebrow">AI SKIN ANALYSIS</div>
+      <div class="beauty-hero-title">나만의<br>뷰티 루틴</div>
+      <div class="beauty-hero-sub">갈릭 AI가 피부 타입을 분석하고<br>딱 맞는 제품을 추천해드려요</div>
+      <button class="beauty-hero-skin"><span>&#129514;</span> 피부 분석 시작하기</button>
+    </div>
+  </section>
+
+  <!-- SKIN TYPE -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#127774; 내 피부 타입</h2>
+    <button class="more">변경 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="skin-card fade-up fade-up-1">
+    <div class="skin-card-left">
+      <div class="skin-label">현재 설정된 피부 타입</div>
+      <div class="skin-type"><span>건성·민감성</span></div>
+      <div class="skin-desc">수분 보충 + 저자극 제품을 추천해드려요</div>
+    </div>
+    <button class="skin-change">타입 변경</button>
+  </div>
+
+  <!-- BEAUTY DEALS -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#9203; 오늘의 뷰티딜</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="deal-row fade-up fade-up-1">
+    <div class="deal-card">
+      <img class="deal-img" src="https://picsum.photos/seed/bty-deal1/160/120" alt="딜">
+      <div class="deal-info">
+        <div class="deal-timer">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          02:14:38
+        </div>
+        <div class="deal-name">마누리 히알루론산 앰플 50ml</div>
+        <div class="deal-price-row"><span class="deal-discount">55%</span><span class="deal-price">18,900원</span></div>
+      </div>
+    </div>
+    <div class="deal-card">
+      <img class="deal-img" src="https://picsum.photos/seed/bty-deal2/160/120" alt="딜">
+      <div class="deal-info">
+        <div class="deal-timer">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          04:52:11
+        </div>
+        <div class="deal-name">갈릭 콜라겐 크림 기획세트</div>
+        <div class="deal-price-row"><span class="deal-discount">40%</span><span class="deal-price">32,400원</span></div>
+      </div>
+    </div>
+    <div class="deal-card">
+      <img class="deal-img" src="https://picsum.photos/seed/bty-deal3/160/120" alt="딜">
+      <div class="deal-info">
+        <div class="deal-timer">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          07:30:00
+        </div>
+        <div class="deal-name">선스틱 SPF50+ PA++++</div>
+        <div class="deal-price-row"><span class="deal-discount">30%</span><span class="deal-price">14,700원</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#128144; 카테고리</h2>
+  </div>
+  <div class="cat-grid fade-up fade-up-2">
+    <div class="cat-item"><div class="cat-icon">&#128167;</div><span class="cat-name">스킨케어</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128144;</div><span class="cat-name">메이크업</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128133;</div><span class="cat-name">헤어</span></div>
+    <div class="cat-item"><div class="cat-icon">&#129510;</span><span class="cat-name">바디</span></div>
+    <div class="cat-item"><div class="cat-icon">&#127981;</div><span class="cat-name">향수</span></div>
+    <div class="cat-item"><div class="cat-icon">&#128147;</div><span class="cat-name">네일</span></div>
+  </div>
+
+  <!-- PRODUCT GRID -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#129514; AI 맞춤 추천</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="product-grid fade-up fade-up-2">
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty1/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-ai">AI 추천</span>
+        <div class="product-brand">MANURI</div>
+        <div class="product-name">세라마이드 수분 토너</div>
+        <div class="product-price-row"><span class="product-discount">28%</span><span class="product-price">21,600원</span></div>
+        <div class="product-original">30,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty2/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-rec">마누리 추천</span>
+        <div class="product-brand">GARLIC BEAUTY</div>
+        <div class="product-name">저자극 클렌징 폼</div>
+        <div class="product-price-row"><span class="product-discount">15%</span><span class="product-price">12,750원</span></div>
+        <div class="product-original">15,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty3/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-ai">AI 추천</span>
+        <div class="product-brand">SKIN&amp;LAB</div>
+        <div class="product-name">비타민C 브라이트닝 세럼</div>
+        <div class="product-price-row"><span class="product-discount">35%</span><span class="product-price">29,900원</span></div>
+        <div class="product-original">46,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty4/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-rec">마누리 추천</span>
+        <div class="product-brand">ETUDE</div>
+        <div class="product-name">촉촉 립밤 SPF15</div>
+        <div class="product-price-row"><span class="product-price">8,900원</span></div>
+        <div class="product-original">&nbsp;</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty5/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-ai">AI 추천</span>
+        <div class="product-brand">COSRX</div>
+        <div class="product-name">달팽이 뮤신 에센스</div>
+        <div class="product-price-row"><span class="product-discount">20%</span><span class="product-price">23,200원</span></div>
+        <div class="product-original">29,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty6/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-new">신상품</span>
+        <div class="product-brand">MANURI</div>
+        <div class="product-name">진저 스칼프 오일</div>
+        <div class="product-price-row"><span class="product-discount">10%</span><span class="product-price">27,000원</span></div>
+        <div class="product-original">30,000원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty7/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-ai">AI 추천</span>
+        <div class="product-brand">LANEIGE</div>
+        <div class="product-name">워터뱅크 수분크림 50ml</div>
+        <div class="product-price-row"><span class="product-discount">22%</span><span class="product-price">38,900원</span></div>
+        <div class="product-original">49,800원</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img class="product-img" src="https://picsum.photos/seed/bty8/300/300" alt="상품">
+      <div class="product-info">
+        <span class="product-tag tag-rec">마누리 추천</span>
+        <div class="product-brand">INNISFREE</div>
+        <div class="product-name">그린티 씨드 세럼</div>
+        <div class="product-price-row"><span class="product-discount">33%</span><span class="product-price">19,800원</span></div>
+        <div class="product-original">29,500원</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="section-header fade-up fade-up-3">
+    <h2>&#11088; 실사용 리뷰</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="review-list fade-up fade-up-3">
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-user">
+          <div class="review-avatar"><img src="https://picsum.photos/seed/rv1/36/36" alt="유저"></div>
+          <div>
+            <div class="review-name">민지_s***</div>
+            <div class="review-product">마누리 히알루론산 앰플</div>
+          </div>
+        </div>
+        <div class="review-stars">
+          <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+        </div>
+      </div>
+      <div class="review-text">건성 피부인데 이거 바르고 나서 하루 종일 촉촉하게 유지돼요. AI 추천이 신기하게도 딱 맞는 것 같아요!</div>
+      <div class="review-date">2026.04.12</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-user">
+          <div class="review-avatar"><img src="https://picsum.photos/seed/rv2/36/36" alt="유저"></div>
+          <div>
+            <div class="review-name">뷰티러버_h***</div>
+            <div class="review-product">갈릭 콜라겐 크림</div>
+          </div>
+        </div>
+        <div class="review-stars">
+          <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star empty">★</span>
+        </div>
+      </div>
+      <div class="review-text">마누리가 추천해줘서 반신반의했는데 결이 정말 고와져서 깜짝 놀랐어요. 민감한 피부인데 자극도 없고 너무 좋아요.</div>
+      <div class="review-date">2026.04.10</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-user">
+          <div class="review-avatar"><img src="https://picsum.photos/seed/rv3/36/36" alt="유저"></div>
+          <div>
+            <div class="review-name">스킨케어_j***</div>
+            <div class="review-product">세라마이드 수분 토너</div>
+          </div>
+        </div>
+        <div class="review-stars">
+          <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+        </div>
+      </div>
+      <div class="review-text">갈릭 DNA 분석 후 추천받은 제품인데 피부 타입 정확하게 파악해서 추천해줬어요. 재구매 의사 100%!</div>
+      <div class="review-date">2026.04.08</div>
+    </div>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="12_category.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+</body>
+</html>
