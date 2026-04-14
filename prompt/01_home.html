@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 홈</title>
+<style>
+/* ========== FONTS ========== */
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --garlic-green:#00C73C;
+  --garlic-green-light:#E8F8ED;
+  --garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#F7F7F7;
+  --garlic-white:#FFFFFF;
+  --garlic-black:#222222;
+  --garlic-gray:#666666;
+  --garlic-gray-light:#999999;
+  --garlic-gray-border:#E8E8E8;
+  --garlic-coral:#FF7F6B;
+  --garlic-gold:#D4A843;
+  --garlic-red:#FF4848;
+  --garlic-purple:#7C4DFF;
+  --garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;
+  --tab-h:44px;
+  --nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--garlic-bg);
+  color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;
+  overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));
+  padding-top:var(--safe-top);
+  background:var(--garlic-white);
+  display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;
+  border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-logo img{height:28px;width:auto;border-radius:4px}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);
+  border-radius:8px;background:var(--garlic-bg);
+  padding:0 12px 0 34px;font-family:var(--font);font-size:0.78rem;font-weight:300;
+  color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);
+  border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;
+  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+}
+.tab-item:first-child{padding-left:20px}
+
+/* ========== MAIN ========== */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* ========== MANURI SECTION ========== */
+.manuri-section{
+  padding:16px 16px 12px;background:var(--garlic-white);
+  margin-bottom:8px;
+}
+.manuri-card{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--garlic-green-light);border-radius:14px;
+  padding:14px 16px;position:relative;
+}
+.manuri-mascot{
+  width:52px;height:52px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.manuri-bubble{flex:1;position:relative}
+.manuri-bubble .label{
+  font-size:0.68rem;font-weight:700;color:var(--garlic-green);
+  margin-bottom:4px;display:flex;align-items:center;gap:4px;
+}
+.manuri-bubble .msg{font-size:0.82rem;font-weight:500;color:var(--garlic-black);line-height:1.5}
+.manuri-bubble .msg em{font-style:normal;color:var(--garlic-green);font-weight:700}
+.manuri-close{position:absolute;top:10px;right:12px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;opacity:0.3}
+
+/* ========== DEAL BANNER ========== */
+.deal-banner{
+  margin:0 16px 12px;border-radius:14px;overflow:hidden;
+  background:linear-gradient(135deg,#1B4332 0%,#00C73C 50%,var(--garlic-gold) 100%);
+  padding:20px;position:relative;color:#fff;
+}
+.deal-banner::before{
+  content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;
+  background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%);
+  border-radius:50%;
+}
+.deal-label{
+  display:inline-flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,0.2);border-radius:20px;
+  padding:4px 10px;font-size:0.68rem;font-weight:700;
+  margin-bottom:10px;backdrop-filter:blur(4px);
+}
+.deal-title{font-size:1.3rem;font-weight:700;margin-bottom:4px;line-height:1.3}
+.deal-title span{color:var(--garlic-gold);font-size:1.6rem}
+.deal-sub{font-size:0.75rem;font-weight:300;opacity:0.85;margin-bottom:14px}
+.deal-timer{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.deal-timer .t-block{
+  background:rgba(0,0,0,0.3);border-radius:6px;padding:4px 8px;
+  font-size:1rem;font-weight:700;min-width:36px;text-align:center;
+  backdrop-filter:blur(4px);
+}
+.deal-timer .t-sep{font-weight:700;font-size:0.9rem;opacity:0.7}
+.deal-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--garlic-white);color:var(--garlic-black);
+  border-radius:24px;padding:10px 22px;
+  font-size:0.82rem;font-weight:700;
+  box-shadow:0 2px 12px rgba(0,0,0,0.15);
+  transition:transform 0.15s;
+}
+.deal-cta:active{transform:scale(0.97)}
+
+/* ========== SECTION HEADER ========== */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 16px 10px;
+}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* ========== PRODUCT GRID ========== */
+.product-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:0 16px 16px;
+}
+.product-card{
+  background:var(--garlic-white);border-radius:12px;
+  overflow:hidden;transition:transform 0.15s;
+}
+.product-card:active{transform:scale(0.98)}
+.product-thumb{
+  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;
+}
+.product-thumb .thumb-bg{
+  width:100%;height:100%;object-fit:cover;
+}
+.product-thumb .tag{
+  position:absolute;top:8px;left:8px;
+  padding:3px 8px;border-radius:4px;
+  font-size:0.62rem;font-weight:700;
+  line-height:1.4;
+}
+.tag-dna{background:var(--garlic-purple);color:#fff}
+.tag-ai{background:var(--garlic-green);color:#fff}
+.tag-manuri{background:var(--garlic-coral);color:#fff}
+.tag-hot{background:var(--garlic-red);color:#fff}
+.product-thumb .wish{
+  position:absolute;bottom:8px;right:8px;
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.85);border-radius:50%;
+  backdrop-filter:blur(4px);
+}
+.product-thumb .wish svg{width:16px;height:16px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.8}
+.product-info{padding:10px 10px 14px}
+.product-brand{font-size:0.65rem;font-weight:500;color:var(--garlic-gray-light);margin-bottom:3px}
+.product-name{font-size:0.78rem;font-weight:500;color:var(--garlic-black);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-price{display:flex;align-items:baseline;gap:4px}
+.product-discount{font-size:0.9rem;font-weight:700;color:var(--garlic-coral)}
+.product-amount{font-size:0.9rem;font-weight:700;color:var(--garlic-black)}
+.product-original{font-size:0.7rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through;margin-top:2px}
+.product-meta{display:flex;align-items:center;gap:6px;margin-top:6px}
+.product-meta .stars{font-size:0.65rem;color:var(--garlic-gold)}
+.product-meta .review{font-size:0.62rem;font-weight:300;color:var(--garlic-gray-light)}
+
+/* ========== QUICK MENU ========== */
+.quick-menu{
+  background:var(--garlic-white);padding:16px;margin-bottom:8px;
+}
+.quick-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+}
+.quick-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.quick-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+}
+.quick-icon.gi-1{background:#FFF3E0}
+.quick-icon.gi-2{background:#E8F5E9}
+.quick-icon.gi-3{background:#FBE9E7}
+.quick-icon.gi-4{background:#E3F2FD}
+.quick-icon.gi-5{background:#F3E5F5}
+.quick-label{font-size:0.65rem;font-weight:500;color:var(--garlic-gray);text-align:center}
+
+/* ========== CATEGORY BANNER ========== */
+.cat-banner{
+  margin:0 16px 12px;border-radius:14px;overflow:hidden;
+  position:relative;height:80px;
+  display:flex;align-items:center;padding:0 20px;
+}
+.cat-banner.cb-fashion{background:linear-gradient(135deg,#FFE0E6 0%,#FFB3C1 100%)}
+.cat-banner.cb-beauty{background:linear-gradient(135deg,#E8F5E9 0%,#A5D6A7 100%)}
+.cat-banner .cb-text{font-size:0.82rem;font-weight:700;color:var(--garlic-black);line-height:1.4}
+.cat-banner .cb-text span{display:block;font-size:0.68rem;font-weight:300;color:var(--garlic-gray);margin-top:2px}
+.cat-banner .cb-emoji{position:absolute;right:20px;font-size:2.4rem;opacity:0.7}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);
+  border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;
+  max-width:640px;margin:0 auto;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 0;min-width:56px;
+}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;
+  background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;
+  min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}
+.fade-up-2{animation-delay:0.1s}
+.fade-up-3{animation-delay:0.15s}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){
+  .main{max-width:640px;margin:0 auto}
+  .header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
+}
+@media(min-width:1440px){
+  body{background:#EEEEEE}
+  .main{box-shadow:0 0 40px rgba(0,0,0,0.08)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <img src="../reference/로고_심플.jpg" alt="Garlic" height="28">
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly>
+  </div>
+  <div class="header-actions">
+    <button class="h-btn" aria-label="알림">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </button>
+    <button class="h-btn" aria-label="프로필">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <div class="tab-item active">추천</div>
+  <div class="tab-item">특가</div>
+  <div class="tab-item">너마늘키우기</div>
+  <div class="tab-item">마늘까기</div>
+  <div class="tab-item">적립</div>
+  <div class="tab-item">패션</div>
+  <div class="tab-item">뷰티</div>
+  <div class="tab-item">식품</div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- MANURI RECOMMENDATION -->
+  <section class="manuri-section fade-up">
+    <div class="manuri-card">
+      <div class="manuri-mascot">
+        <svg width="52" height="52" viewBox="0 0 80 80">
+          <ellipse cx="40" cy="48" rx="22" ry="24" fill="#F5F0E8" stroke="#E0D8C8" stroke-width="1.5"/>
+          <path d="M32 34 Q40 28 48 34" fill="none" stroke="#E0D8C8" stroke-width="1"/>
+          <path d="M28 42 Q40 32 52 42" fill="none" stroke="#E0D8C8" stroke-width="1"/>
+          <path d="M38 24 Q36 16 40 10 Q44 16 42 24" fill="#8BC34A" stroke="#689F38" stroke-width="1"/>
+          <circle cx="34" cy="44" r="3" fill="#222"/>
+          <circle cx="46" cy="44" r="3" fill="#222"/>
+          <circle cx="35" cy="43" r="1" fill="#fff"/>
+          <circle cx="47" cy="43" r="1" fill="#fff"/>
+          <path d="M36 50 Q40 54 44 50" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="30" cy="48" r="3.5" fill="#FFB3B3" opacity="0.5"/>
+          <circle cx="50" cy="48" r="3.5" fill="#FFB3B3" opacity="0.5"/>
+          <g transform="translate(56,30) scale(0.5)">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#FF7F6B"/>
+          </g>
+        </svg>
+      </div>
+      <div class="manuri-bubble">
+        <div class="label">🧄 마누리의 추천 한마디</div>
+        <div class="msg">오늘 이거 어때요? <em>지은마늘</em>이 좋아할 것 같아! 🧄</div>
+      </div>
+      <button class="manuri-close" aria-label="닫기">
+        <svg width="12" height="12" viewBox="0 0 12 12" stroke="#222" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- DEAL BANNER -->
+  <section class="fade-up fade-up-1">
+    <div class="deal-banner">
+      <div class="deal-label">⚡ GARLIC DEAL</div>
+      <div class="deal-title">마늘 500g <span>100원!</span></div>
+      <div class="deal-sub">하루 한 번, 갈릭 회원 전용 초특가</div>
+      <div class="deal-timer">
+        <span class="t-block" id="timer-h">02</span>
+        <span class="t-sep">:</span>
+        <span class="t-block" id="timer-m">34</span>
+        <span class="t-sep">:</span>
+        <span class="t-block" id="timer-s">17</span>
+      </div>
+      <button class="deal-cta" onclick="alert('참여 완료! 🧄')">지금 참여하기 →</button>
+    </div>
+  </section>
+
+  <!-- QUICK MENU -->
+  <section class="quick-menu fade-up fade-up-2">
+    <div class="quick-grid">
+      <div class="quick-item">
+        <div class="quick-icon gi-1">🔥</div>
+        <div class="quick-label">오늘의딜</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon gi-2">🧄</div>
+        <div class="quick-label">마늘키우기</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon gi-3">🎯</div>
+        <div class="quick-label">출석체크</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon gi-4">🎁</div>
+        <div class="quick-label">쿠폰함</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon gi-5">👑</div>
+        <div class="quick-label">갈릭등급</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY BANNERS -->
+  <div class="cat-banner cb-fashion fade-up fade-up-2">
+    <div class="cb-text">봄 패션 특가전<span>최대 70% OFF</span></div>
+    <div class="cb-emoji">👗</div>
+  </div>
+  <div class="cat-banner cb-beauty fade-up fade-up-3">
+    <div class="cb-text">마늘 뷰티 큐레이션<span>AI가 고른 나만의 루틴</span></div>
+    <div class="cb-emoji">✨</div>
+  </div>
+
+  <!-- PRODUCT FEED -->
+  <div class="section-header fade-up fade-up-3">
+    <h2>지은마늘님을 위한 추천</h2>
+    <button class="more">더보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <div class="nav-item active">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </div>
+  <div class="nav-item">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </div>
+</nav>
+
+<script>
+// ===== COUNTDOWN TIMER =====
+(function(){
+  let total = 2*3600 + 34*60 + 17;
+  function tick(){
+    if(total<=0) return;
+    total--;
+    const h=Math.floor(total/3600), m=Math.floor((total%3600)/60), s=total%60;
+    document.getElementById('timer-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('timer-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('timer-s').textContent=String(s).padStart(2,'0');
+  }
+  setInterval(tick,1000);
+})();
+
+// ===== PRODUCT DATA =====
+const products = [
+  {brand:'마늘팜',name:'의성 한지형 마늘 1kg 산지직송',discount:52,price:'9,900',original:'20,800',tag:'dna',tagText:'갈릭 DNA 92% 매칭',stars:'★★★★★',reviews:'(2,847)',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
+  {brand:'갈릭스타일',name:'봄 오버핏 린넨 셔츠 [5컬러]',discount:38,price:'29,800',original:'48,000',tag:'ai',tagText:'AI 추천',stars:'★★★★☆',reviews:'(1,203)',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},
+  {brand:'뷰티마늘',name:'블랙 갈릭 에센스 50ml 기미케어',discount:45,price:'18,500',original:'33,600',tag:'manuri',tagText:'마누리 추천 ❤️',stars:'★★★★★',reviews:'(4,521)',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
+  {brand:'테크마늘',name:'갈릭 무선이어폰 ANC Pro 2세대',discount:31,price:'49,900',original:'72,000',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(8,102)',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},
+  {brand:'마늘키친',name:'트러플 마늘 올리브오일 500ml',discount:28,price:'15,800',original:'22,000',tag:'dna',tagText:'갈릭 DNA 88% 매칭',stars:'★★★★☆',reviews:'(956)',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},
+  {brand:'갈릭홈',name:'프리미엄 마늘 아로마 디퓨저',discount:40,price:'24,900',original:'41,500',tag:'ai',tagText:'AI 추천',stars:'★★★★★',reviews:'(3,217)',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},
+  {brand:'마늘피트',name:'갈릭 에어 러닝화 [남녀공용]',discount:55,price:'39,000',original:'86,800',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(6,440)',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},
+  {brand:'갈릭팜',name:'제주 흑마늘즙 30포 선물세트',discount:35,price:'32,000',original:'49,200',tag:'manuri',tagText:'마누리 추천 ❤️',stars:'★★★★★',reviews:'(5,678)',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},
+];
+
+const grid = document.getElementById('productGrid');
+products.forEach((p,i) => {
+  const card = document.createElement('div');
+  card.className = 'product-card fade-up';
+  card.style.animationDelay = (0.05 * i) + 's';
+  card.innerHTML = `
+    <div class="product-thumb">
+      <div class="thumb-bg" style="width:100%;height:100%;background:${p.bg};display:flex;align-items:center;justify-content:center;font-size:2.6rem;opacity:0.7">🧄</div>
+      <span class="tag tag-${p.tag}">${p.tagText}</span>
+      <button class="wish" aria-label="찜하기"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">${p.brand}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">
+        <span class="product-discount">${p.discount}%</span>
+        <span class="product-amount">${p.price}원</span>
+      </div>
+      <div class="product-original">${p.original}원</div>
+      <div class="product-meta">
+        <span class="stars">${p.stars}</span>
+        <span class="review">${p.reviews}</span>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// ===== TAB INTERACTION =====
+document.querySelectorAll('.tab-item').forEach(tab => {
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

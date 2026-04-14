@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧄 Project Garlic — 디자인 목업 갤러리</title>
+<title>Project Garlic — 디자인 목업 갤러리</title>
 <style>
 @font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
 @font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
@@ -13,20 +13,18 @@ body{font-family:'GmarketSans',sans-serif;background:#0d1117;color:#fff;min-heig
 .container{max-width:900px;margin:0 auto;padding:40px 24px}
 .header{text-align:center;margin-bottom:48px}
 .logo{font-size:48px;margin-bottom:8px}
-.title{font-size:clamp(28px,5vw,42px);font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#4CAF50,#D4A843);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.title{font-size:clamp(28px,5vw,42px);font-weight:700;margin-bottom:8px;background:linear-gradient(135deg,#00C73C,#D4A843);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .subtitle{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:4px}
-.badge{display:inline-block;background:rgba(76,175,80,.15);border:1px solid rgba(76,175,80,.3);color:#4CAF50;border-radius:20px;padding:4px 14px;font-size:12px;margin-top:12px}
-h2.section-title{font-size:18px;font-weight:700;color:#D4A843;margin:32px 0 16px;padding-left:12px;border-left:3px solid #D4A843}
-.grid{display:grid;grid-template-columns:1fr;gap:12px}
-a.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;transition:all .3s}
+.badge{display:inline-block;background:rgba(0,199,60,.15);border:1px solid rgba(0,199,60,.3);color:#00C73C;border-radius:20px;padding:4px 14px;font-size:12px;margin-top:12px}
+h2.st{font-size:18px;font-weight:700;color:#D4A843;margin:36px 0 14px;padding-left:12px;border-left:3px solid #D4A843}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+a.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px;text-decoration:none;color:#fff;transition:all .3s}
 a.card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
-.card-num{font-size:28px;font-weight:700;color:rgba(255,255,255,.1);min-width:40px;text-align:center}
-.card-info{flex:1}
-.card-title{font-size:16px;font-weight:700;margin-bottom:4px}
-.card-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.5}
-.card-arrow{font-size:20px;color:rgba(255,255,255,.2)}
-.card.main .card-num{color:rgba(76,175,80,.3)}
-.card.event .card-num{color:rgba(212,168,67,.3)}
+.cn{font-size:24px;font-weight:700;min-width:36px;text-align:center}
+.ci{flex:1}.ct{font-size:15px;font-weight:700;margin-bottom:3px}
+.cd{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+.ca{font-size:18px;color:rgba(255,255,255,.2)}
+.main .cn{color:rgba(0,199,60,.3)}.event .cn{color:rgba(212,168,67,.3)}.phase1 .cn{color:rgba(255,255,255,.08)}
 .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
 .footer p{font-size:12px;color:rgba(255,255,255,.3)}
 @media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
@@ -42,52 +40,32 @@ a.card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)
     <span class="badge">PP1K 피치 · 불사조기사단</span>
   </div>
 
-  <h2 class="section-title">메인 디자인 5종</h2>
+  <h2 class="st">Phase 2 — 메인 앱 페이지 (4종)</h2>
   <div class="grid">
-    <a href="01_garlic_myscene.html" class="card main">
-      <div class="card-num">01</div>
-      <div class="card-info"><div class="card-title">갈릭 마이씬 (MySCENE)</div><div class="card-desc">초개인화 피드 중심 — "나만의 쇼핑몰이 열린다"<br>TikTok/Instagram 피드형 · Garlic Green + Warm Cream</div></div>
-      <div class="card-arrow">→</div>
-    </a>
-    <a href="02_garlic_heritage.html" class="card main">
-      <div class="card-num">02</div>
-      <div class="card-info"><div class="card-title">갈릭 헤리티지 (Heritage)</div><div class="card-desc">26년 역사 + 새로운 시작 — "전통의 현대적 재해석"<br>에디토리얼 매거진 · Deep Forest + Gold</div></div>
-      <div class="card-arrow">→</div>
-    </a>
-    <a href="03_garlic_playground.html" class="card main">
-      <div class="card-num">03</div>
-      <div class="card-info"><div class="card-title">갈릭 플레이그라운드 (Playground)</div><div class="card-desc">쇼핑은 놀이다 — "갈릭파크에 놀러와!"<br>카드 그리드 + 인터랙티브 · Coral + Mint + Purple</div></div>
-      <div class="card-arrow">→</div>
-    </a>
-    <a href="04_garlic_future.html" class="card main">
-      <div class="card-num">04</div>
-      <div class="card-info"><div class="card-title">갈릭 퓨처 (Future)</div><div class="card-desc">AI Ego-Sync 기술력 강조 — "쇼핑의 미래가 온다"<br>다크모드 글래스모피즘 · Night + Electric Green</div></div>
-      <div class="card-arrow">→</div>
-    </a>
-    <a href="05_garlic_marketday.html" class="card main">
-      <div class="card-num">05</div>
-      <div class="card-info"><div class="card-title">갈릭 마켓데이 (MarketDay)</div><div class="card-desc">따뜻한 동네 시장 감성 — "사람 냄새 나는 마켓"<br>메이슨리 그리드 · Terracotta + Sage + Oat</div></div>
-      <div class="card-arrow">→</div>
-    </a>
+    <a href="01_home.html" class="card main"><div class="cn">①</div><div class="ci"><div class="ct">홈 — 갈릭 마이씬</div><div class="cd">초개인화 피드 + 넛징 태그 (DNA/AI/마누리 추천)<br>마늘 100원 딜 · GmarketSans 스타일</div></div><div class="ca">→</div></a>
+    <a href="02_about.html" class="card main"><div class="cn">②</div><div class="ci"><div class="ct">회사소개 — 마늘 먹고 사람 될게요</div><div class="cd">프로젝트 소개 · Before/After · A New Chapter<br>퇴마콘 이미지 + Garment G</div></div><div class="ca">→</div></a>
+    <a href="03_challenge.html" class="card main"><div class="cn">③</div><div class="ci"><div class="ct">마늘까기 도전</div><div class="cd">출석체크 + 마늘까기 미니게임 + 갈릭고 퀴즈<br>마늘 모으기 · 랭킹 시스템</div></div><div class="ca">→</div></a>
+    <a href="04_mypage.html" class="card main"><div class="cn">④</div><div class="ci"><div class="ct">MY 페이지 — 마늘 DNA</div><div class="cd">다크모드 대시보드 · DNA 레이더 차트<br>마늘 키우기 현황 · AI 추천</div></div><div class="ca">→</div></a>
   </div>
 
-  <h2 class="section-title">3단계 액션플랜 이벤트</h2>
+  <h2 class="st">Phase 2 — 이벤트 / 특별 페이지 (5종)</h2>
   <div class="grid">
-    <a href="event_01_toemacon.html" class="card event">
-      <div class="card-num">E1</div>
-      <div class="card-info"><div class="card-title">G마켓 퇴마 선포</div><div class="card-desc">1단계 (2026.06~2027.08) — 퇴마콘서트 + 마늘봉<br>"1999~2026, G마켓 퇴마 선포"</div></div>
-      <div class="card-arrow">→</div>
-    </a>
-    <a href="event_02_100days.html" class="card event">
-      <div class="card-num">E2</div>
-      <div class="card-info"><div class="card-title">100일 프로모션</div><div class="card-desc">2단계 (2027.09~11) — 꼭 멤버십 + 100일 챌린지<br>"마늘 먹고 사람 되기까지 100일"</div></div>
-      <div class="card-arrow">→</div>
-    </a>
-    <a href="event_03_grand_launch.html" class="card event">
-      <div class="card-num">E3</div>
-      <div class="card-info"><div class="card-title">Garlic 공식 런칭</div><div class="card-desc">3단계 (2027.12~) — 갈릭데이 + 갈릭파크 + 생태계<br>"드디어 사람이 됐다"</div></div>
-      <div class="card-arrow">→</div>
-    </a>
+    <a href="event_toemacon.html" class="card event"><div class="cn">⑤</div><div class="ci"><div class="ct">퇴마콘 이벤트</div><div class="cd">G마켓 퇴마 선포 · 콘서트 실제 이미지<br>초대장 티켓 · 마늘봉 · 사전등록</div></div><div class="ca">→</div></a>
+    <a href="garlic_tamagotchi.html" class="card event"><div class="cn">⑥</div><div class="ci"><div class="ct">마늘 키우기 (다마고치)</div><div class="cd">마늘 캐릭터 3단계 진화 (꼬마→프렌즈→요정)<br>물주기 · 밥주기 · 미니게임 · 커플 키우기</div></div><div class="ca">→</div></a>
+    <a href="event_uiseong_festival.html" class="card event"><div class="cn">⑦</div><div class="ci"><div class="ct">의성 마늘 축제</div><div class="cd">축제 프로그램 · 마늘 수확 체험<br>갈릭파크 2028 티저 · 산지직송 특판</div></div><div class="ca">→</div></a>
+    <a href="garlic_global.html" class="card event"><div class="cn">⑧</div><div class="ci"><div class="ct">글로벌 → 갈릭크로 진화</div><div class="cd">Rooted in Korea, Growing Global<br>K-Culture × 마늘 · 알리바바 JV · 글로벌 로드맵</div></div><div class="ca">→</div></a>
+    <a href="garlic_ip.html" class="card event"><div class="cn">⑨</div><div class="ci"><div class="ct">마늘 IP 종합</div><div class="cd">출석 시스템 · 캐릭터 진화 · Before→After<br>굿즈 갤러리 · SNS 밈 문화</div></div><div class="ca">→</div></a>
+  </div>
+
+  <h2 class="st">Phase 1 — 원본 디자인 (아카이브)</h2>
+  <div class="grid">
+    <a href="01_garlic_myscene.html" class="card phase1"><div class="cn">01</div><div class="ci"><div class="ct">갈릭 마이씬 (Phase 1)</div><div class="cd">초개인화 피드형 원본</div></div><div class="ca">→</div></a>
+    <a href="02_garlic_heritage.html" class="card phase1"><div class="cn">02</div><div class="ci"><div class="ct">갈릭 헤리티지 (Phase 1)</div><div class="cd">에디토리얼 매거진 원본</div></div><div class="ca">→</div></a>
+    <a href="03_garlic_playground.html" class="card phase1"><div class="cn">03</div><div class="ci"><div class="ct">갈릭 플레이그라운드 (Phase 1)</div><div class="cd">플레이풀 캐릭터 원본</div></div><div class="ca">→</div></a>
+    <a href="04_garlic_future.html" class="card phase1"><div class="cn">04</div><div class="ci"><div class="ct">갈릭 퓨처 (Phase 1)</div><div class="cd">다크모드 AI 테크 원본</div></div><div class="ca">→</div></a>
+    <a href="event_01_toemacon.html" class="card phase1"><div class="cn">E1</div><div class="ci"><div class="ct">퇴마 선포 (Phase 1)</div><div class="cd">이벤트 원본</div></div><div class="ca">→</div></a>
+    <a href="event_02_100days.html" class="card phase1"><div class="cn">E2</div><div class="ci"><div class="ct">100일 프로모션</div><div class="cd">이벤트 원본</div></div><div class="ca">→</div></a>
+    <a href="event_03_grand_launch.html" class="card phase1"><div class="cn">E3</div><div class="ci"><div class="ct">공식 런칭</div><div class="cd">이벤트 원본</div></div><div class="ca">→</div></a>
   </div>
 
   <div class="footer">

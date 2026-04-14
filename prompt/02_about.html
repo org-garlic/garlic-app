@@ -1,0 +1,1151 @@
+<!--
+  ============================================================
+  GARLIC ABOUT — 회사소개: "마늘 먹고 사람 될게요"
+  ============================================================
+  Concept: Premium editorial landing page for Garlic rebrand
+  Layout:  Single-column magazine, fullscreen hero, parallax
+  Colors:  Dark Green #1B4332 · Gold #D4A843 · Cream #F5F0E8
+  Fonts:   Noto Serif KR (headlines) + GmarketSans (body)
+  Mood:    "26년의 이야기가 하나의 이름으로 다시 태어납니다"
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마늘 먹고 사람 될게요 — Garlic Brand Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --garlic-green: #00C73C;
+  --garlic-dark-green: #1B4332;
+  --forest-deep: #0F2B1F;
+  --forest-light: #2D6A4F;
+  --garlic-gold: #D4A843;
+  --gold-light: #E8C96A;
+  --gold-dark: #B08A2E;
+  --garlic-coral: #FF7F6B;
+  --garlic-bg: #F7F7F7;
+  --parchment: #F5F0E8;
+  --parchment-warm: #EDE6D8;
+  --cream: #FDFBF7;
+  --charcoal: #2C2C2C;
+  --ink: #1A1A1A;
+  --sage: #8BAA8F;
+  --font-serif: 'Noto Serif KR', Georgia, serif;
+  --font-body: 'GmarketSans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--charcoal);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; cursor: pointer; font-family: inherit; }
+
+/* ========== NOISE OVERLAY ========== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ========== SCROLL ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.35s; }
+.reveal-d4 { transition-delay: 0.5s; }
+.reveal-d5 { transition-delay: 0.65s; }
+
+.reveal-left {
+  opacity: 0; transform: translateX(-60px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0; transform: translateX(60px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0; transform: scale(0.9);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(245, 240, 232, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: all 0.5s var(--ease-out-expo);
+  padding: 16px 24px;
+}
+
+.header.scrolled {
+  background: rgba(245, 240, 232, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 20px rgba(27, 67, 50, 0.06);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+}
+
+.header-logo-emoji { font-size: 24px; }
+
+.header-logo-text {
+  font-family: var(--font-serif);
+  font-size: 20px; font-weight: 700;
+  color: var(--garlic-dark-green);
+  letter-spacing: -0.02em;
+  transition: color 0.3s;
+}
+
+.header.at-hero .header-logo-text { color: #fff; }
+
+.header-nav {
+  display: flex; align-items: center; gap: 24px;
+}
+
+.header-nav a {
+  font-size: 13px; font-weight: 500;
+  color: var(--charcoal);
+  opacity: 0.6;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.header-nav a:hover { opacity: 1; }
+.header.at-hero .header-nav a { color: #fff; }
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--forest-deep);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../reference/퇴마콘1.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+  transition: transform 0.3s ease-out;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 43, 31, 0.6) 0%,
+    rgba(15, 43, 31, 0.4) 40%,
+    rgba(15, 43, 31, 0.8) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+  max-width: 800px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(212, 168, 67, 0.15);
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  border-radius: 24px;
+  padding: 6px 20px;
+  font-size: 12px; font-weight: 500;
+  color: var(--garlic-gold);
+  margin-bottom: 28px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 7vw, 64px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--garlic-gold);
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-scroll-hint span {
+  font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  animation: scrollBob 2s ease-in-out infinite;
+}
+
+@keyframes scrollBob {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.5); opacity: 0.4; }
+}
+
+/* ========== SECTION LAYOUT ========== */
+.about-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+.about-section.full-width {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  color: var(--garlic-gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4.5vw, 42px);
+  font-weight: 700;
+  color: var(--garlic-dark-green);
+  line-height: 1.35;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.section-body {
+  font-size: 15px; font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1.85;
+  max-width: 640px;
+}
+
+/* ========== THE PROBLEM ========== */
+.problem-section {
+  background: var(--cream);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .problem-grid {
+    grid-template-columns: 2fr 3fr;
+    gap: 60px;
+  }
+}
+
+.problem-image {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+.problem-image img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.problem-image-label {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: rgba(255,127,107,0.9);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.problem-text .section-body {
+  margin-bottom: 20px;
+}
+
+.problem-quote {
+  font-family: var(--font-serif);
+  font-size: 18px; font-weight: 500;
+  color: var(--garlic-dark-green);
+  line-height: 1.6;
+  padding-left: 20px;
+  border-left: 3px solid var(--garlic-gold);
+  margin-top: 24px;
+}
+
+/* ========== GARLIC LETTERS ========== */
+.garlic-section {
+  background: var(--garlic-dark-green);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.garlic-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0,199,60,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(212,168,67,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.garlic-section .section-heading { color: #fff; }
+.garlic-section .section-label { color: var(--garlic-gold); }
+
+.garlic-fullname {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 2vw, 16px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 48px;
+  letter-spacing: 0.3em;
+}
+
+.letter-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .letter-cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 960px) {
+  .letter-cards { grid-template-columns: repeat(6, 1fr); }
+}
+
+.letter-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px 12px;
+  text-align: center;
+  transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--garlic-green), var(--garlic-gold));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.letter-card:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-4px);
+}
+
+.letter-card:hover::before { opacity: 1; }
+
+.letter-big {
+  font-family: var(--font-serif);
+  font-size: 36px; font-weight: 900;
+  color: var(--garlic-gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.letter-word {
+  font-size: 13px; font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.letter-desc {
+  font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.4;
+}
+
+/* ========== BRAND IDENTITY ========== */
+.brand-section {
+  background: var(--parchment);
+}
+
+.brand-showcase {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .brand-showcase { grid-template-columns: repeat(3, 1fr); }
+}
+
+.brand-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border: 1px solid rgba(27,67,50,0.06);
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.brand-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+}
+
+.brand-card-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+.brand-card-title {
+  font-family: var(--font-serif);
+  font-size: 16px; font-weight: 700;
+  color: var(--garlic-dark-green);
+  margin-bottom: 8px;
+}
+
+.brand-card-desc {
+  font-size: 13px; font-weight: 300;
+  color: var(--charcoal);
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+/* ========== GARMENT G ========== */
+.garment-section {
+  background: var(--ink);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.garment-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(27,67,50,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.garment-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .garment-grid { grid-template-columns: 3fr 2fr; gap: 60px; }
+}
+
+.garment-text { position: relative; z-index: 1; }
+.garment-text .section-heading { color: #fff; }
+
+.garment-text .section-body {
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 24px;
+}
+
+.garment-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.garment-tag {
+  background: rgba(212,168,67,0.12);
+  border: 1px solid rgba(212,168,67,0.25);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 12px; font-weight: 500;
+  color: var(--garlic-gold);
+}
+
+.garment-image {
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.garment-image img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* ========== TIMELINE ========== */
+.timeline-section {
+  background: var(--cream);
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--garlic-gold) 0%,
+    var(--garlic-dark-green) 50%,
+    var(--garlic-green) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .timeline::before { left: 50%; transform: translateX(-50%); }
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 48px 56px;
+}
+
+@media (min-width: 768px) {
+  .timeline-item {
+    padding: 0 0 48px 0;
+    width: 50%;
+  }
+  .timeline-item:nth-child(odd) {
+    margin-left: 0;
+    padding-right: 48px;
+    text-align: right;
+  }
+  .timeline-item:nth-child(even) {
+    margin-left: 50%;
+    padding-left: 48px;
+    text-align: left;
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--garlic-gold);
+  border: 3px solid var(--cream);
+  box-shadow: 0 0 0 3px var(--garlic-gold);
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .timeline-item:nth-child(odd) .timeline-dot {
+    left: auto; right: -9px;
+  }
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: -9px;
+  }
+}
+
+.timeline-dot.green { background: var(--garlic-green); box-shadow: 0 0 0 3px var(--garlic-green); }
+.timeline-dot.coral { background: var(--garlic-coral); box-shadow: 0 0 0 3px var(--garlic-coral); }
+
+.timeline-year {
+  font-family: var(--font-serif);
+  font-size: 28px; font-weight: 900;
+  color: var(--garlic-dark-green);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 16px; font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 13px; font-weight: 300;
+  color: var(--charcoal);
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+.timeline-image {
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  max-width: 280px;
+}
+
+@media (min-width: 768px) {
+  .timeline-item:nth-child(odd) .timeline-image {
+    margin-left: auto;
+  }
+}
+
+.timeline-image img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* ========== CTA FOOTER ========== */
+.cta-section {
+  background: var(--garlic-dark-green);
+  text-align: center;
+  padding: 100px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 70%, rgba(0,199,60,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(212,168,67,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-emoji {
+  font-size: 56px;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: ctaBounce 3s ease-in-out infinite;
+}
+
+@keyframes ctaBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.cta-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-heading em {
+  font-style: normal;
+  color: var(--garlic-gold);
+}
+
+.cta-sub {
+  font-size: 15px; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center; gap: 8px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, var(--garlic-green), #00A832);
+  color: #fff;
+  border-radius: 16px;
+  font-family: var(--font-body);
+  font-size: 16px; font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 20px rgba(0,199,60,0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,199,60,0.4);
+}
+
+.cta-btn:active { transform: scale(0.97); }
+
+.cta-btn .arrow { transition: transform 0.3s; }
+.cta-btn:hover .arrow { transform: translateX(4px); }
+
+/* ========== FOOTER ========== */
+.page-footer {
+  background: var(--forest-deep);
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 18px; font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 8px;
+}
+
+.footer-copy {
+  font-size: 12px; font-weight: 300;
+  color: rgba(255,255,255,0.15);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 12px; font-weight: 300;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: rgba(255,255,255,0.6); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 767px) {
+  .about-section { padding: 60px 20px; }
+  .hero-content { padding: 0 20px; }
+  .letter-cards { gap: 10px; }
+  .letter-card { padding: 16px 8px; }
+  .letter-big { font-size: 28px; }
+  .timeline-item { padding-bottom: 32px; }
+  .header-nav { gap: 16px; }
+  .header-nav a { font-size: 12px; }
+}
+
+@media (min-width: 1200px) {
+  .about-section { padding: 120px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header at-hero" id="pageHeader">
+  <div class="header-inner">
+    <a href="01_home.html" class="header-logo">
+      <span class="header-logo-emoji">🧄</span>
+      <span class="header-logo-text">Garlic</span>
+    </a>
+    <nav class="header-nav">
+      <a href="#problem">이야기</a>
+      <a href="#garlic">브랜드</a>
+      <a href="#timeline">여정</a>
+      <a href="01_home.html">홈으로</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg parallax-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Project Garlic &middot; Brand Story</div>
+    <h1 class="hero-title">
+      마늘 먹고<br><em>사람 될게요.</em>
+    </h1>
+    <p class="hero-subtitle">
+      26년의 이야기가 하나의 이름으로 다시 태어납니다.<br>
+      G마켓의 악귀를 몰아내고, 진짜 사람을 위한 쇼핑을 시작합니다.
+    </p>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="about-section problem-section" id="problem">
+  <div class="problem-grid">
+    <div class="problem-image reveal-left">
+      <img src="../reference/광고범벅_쇼핑앱_화면.png" alt="광고로 가득한 기존 쇼핑앱 화면">
+      <div class="problem-image-label">BEFORE</div>
+    </div>
+    <div class="problem-text">
+      <span class="section-label reveal">The Problem</span>
+      <h2 class="section-heading reveal reveal-d1">고객은 안 보이고<br>플랫폼 실적만 보이던<br>G마켓의 악귀</h2>
+      <p class="section-body reveal reveal-d2">
+        26년간 한국 이커머스를 이끌어온 G마켓. 하지만 어느새 광고와 배너에 뒤덮여
+        고객의 목소리는 사라지고, 숫자만 남은 플랫폼이 되어버렸습니다.
+      </p>
+      <p class="section-body reveal reveal-d3">
+        우리는 이 악순환을 '악귀'라 불렀습니다.
+        고객 경험을 좀먹는 관행, 의미 없는 배너의 홍수, 개성 없는 쇼핑몰.
+      </p>
+      <blockquote class="problem-quote reveal reveal-d4">
+        "이제 퇴마할 시간입니다."
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- G.A.R.L.I.C -->
+<section class="about-section full-width garlic-section" id="garlic">
+  <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+    <span class="section-label reveal">A New Chapter</span>
+    <h2 class="section-heading reveal reveal-d1" style="max-width:600px;margin:0 auto 12px;">
+      G.A.R.L.I.C
+    </h2>
+    <p class="garlic-fullname reveal reveal-d2">
+      Global &middot; Authentic &middot; Rooted &middot; Lifestyle &middot; Identity &middot; Commerce
+    </p>
+
+    <div class="letter-cards">
+      <div class="letter-card reveal reveal-d1">
+        <div class="letter-big">G</div>
+        <div class="letter-word">Global</div>
+        <div class="letter-desc">세계로 향하는<br>열린 마켓</div>
+      </div>
+      <div class="letter-card reveal reveal-d2">
+        <div class="letter-big">A</div>
+        <div class="letter-word">Authentic</div>
+        <div class="letter-desc">진짜를 추구하는<br>진정성</div>
+      </div>
+      <div class="letter-card reveal reveal-d3">
+        <div class="letter-big">R</div>
+        <div class="letter-word">Rooted</div>
+        <div class="letter-desc">뿌리 깊은<br>26년 유산</div>
+      </div>
+      <div class="letter-card reveal reveal-d4">
+        <div class="letter-big">L</div>
+        <div class="letter-word">Lifestyle</div>
+        <div class="letter-desc">일상을 디자인하는<br>라이프스타일</div>
+      </div>
+      <div class="letter-card reveal reveal-d5">
+        <div class="letter-big">I</div>
+        <div class="letter-word">Identity</div>
+        <div class="letter-desc">나다움을 지키는<br>개인의 정체성</div>
+      </div>
+      <div class="letter-card reveal">
+        <div class="letter-big">C</div>
+        <div class="letter-word">Commerce</div>
+        <div class="letter-desc">쇼핑 그 이상의<br>커머스 경험</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND IDENTITY -->
+<section class="about-section brand-section" id="brand">
+  <span class="section-label reveal">Brand Identity</span>
+  <h2 class="section-heading reveal reveal-d1">하나의 브랜드,<br>세 가지 얼굴</h2>
+  <p class="section-body reveal reveal-d2" style="margin-bottom:48px;">
+    Garlic의 브랜드 아이덴티티는 심플한 로고, 직관적인 앱 아이콘,
+    그리고 사랑스러운 캐릭터로 완성됩니다.
+  </p>
+
+  <div class="brand-showcase">
+    <div class="brand-card reveal">
+      <img class="brand-card-img" src="../reference/로고_심플.jpg" alt="Garlic G 로고">
+      <div class="brand-card-title">G 심볼 로고</div>
+      <div class="brand-card-desc">마늘 한 쪽의 실루엣에서<br>영감을 받은 G 로고</div>
+    </div>
+    <div class="brand-card reveal reveal-d1">
+      <img class="brand-card-img" src="../reference/피닉스_프로젝트_이후_앱로고.png" alt="Garlic 앱 아이콘">
+      <div class="brand-card-title">앱 아이콘</div>
+      <div class="brand-card-desc">불사조처럼 다시 태어난<br>새로운 Garlic 앱 아이콘</div>
+    </div>
+    <div class="brand-card reveal reveal-d2">
+      <img class="brand-card-img" src="../reference/갈릭_귀여운_이미지.png" alt="갈릭 캐릭터">
+      <div class="brand-card-title">갈릭 캐릭터</div>
+      <div class="brand-card-desc">마늘을 먹고 사람이 된<br>귀여운 마늘 요정</div>
+    </div>
+  </div>
+</section>
+
+<!-- GARMENT G -->
+<section class="about-section full-width garment-section">
+  <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+    <div class="garment-grid">
+      <div class="garment-text">
+        <span class="section-label reveal">Sub-Brand</span>
+        <h2 class="section-heading reveal reveal-d1">Garment G</h2>
+        <p class="section-body reveal reveal-d2">
+          Garlic에서 태어난 프리미엄 패션 서브 브랜드.
+          'Garment G'는 마늘의 껍질처럼 겹겹이 쌓인 스타일 레이어를 의미합니다.
+          커머스를 넘어 라이프스타일 브랜드로 진화하는 Garlic의 첫 번째 도전.
+        </p>
+        <div class="garment-features reveal reveal-d3">
+          <span class="garment-tag">Premium Fashion</span>
+          <span class="garment-tag">Sustainable</span>
+          <span class="garment-tag">Korean Heritage</span>
+          <span class="garment-tag">Limited Edition</span>
+        </div>
+      </div>
+      <div class="garment-image reveal-right">
+        <img src="../reference/갈릭브랜드_옷_로고.png" alt="Garment G 패션 브랜드 로고">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="about-section timeline-section" id="timeline">
+  <div style="text-align:center;margin-bottom:48px;">
+    <span class="section-label reveal">The Journey</span>
+    <h2 class="section-heading reveal reveal-d1">G마켓에서 Garlic까지</h2>
+    <p class="section-body reveal reveal-d2" style="margin:0 auto;">26년의 여정, 하나의 이름으로 다시 태어나기까지.</p>
+  </div>
+
+  <div class="timeline">
+    <!-- 1999 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">1999</div>
+      <div class="timeline-title">G마켓 탄생</div>
+      <div class="timeline-desc">
+        한국 최초의 오픈마켓으로 출발.<br>
+        이커머스의 새로운 시대를 열다.
+      </div>
+    </div>
+
+    <!-- 2009 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot" style="background:var(--sage);box-shadow:0 0 0 3px var(--sage)"></div>
+      <div class="timeline-year">2009</div>
+      <div class="timeline-title">eBay 인수</div>
+      <div class="timeline-desc">
+        글로벌 이커머스 기업 eBay에 인수되며<br>
+        국제적 성장의 발판을 마련하다.
+      </div>
+    </div>
+
+    <!-- 2021 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot" style="background:var(--sage);box-shadow:0 0 0 3px var(--sage)"></div>
+      <div class="timeline-year">2021</div>
+      <div class="timeline-title">새 시대의 시작</div>
+      <div class="timeline-desc">
+        신세계 그룹 편입. 변화의 바람이 불기 시작하다.<br>
+        그러나 근본적 혁신은 아직 시작되지 않았다.
+      </div>
+    </div>
+
+    <!-- 2026 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot coral"></div>
+      <div class="timeline-year">2026</div>
+      <div class="timeline-title">퇴마 선포</div>
+      <div class="timeline-desc">
+        "G마켓의 악귀를 몰아내자!"<br>
+        퇴마콘서트와 함께 리브랜딩 프로젝트 시작.
+      </div>
+      <div class="timeline-image">
+        <img src="../reference/퇴마콘2.png" alt="퇴마콘서트 이미지">
+      </div>
+    </div>
+
+    <!-- 2027 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot green"></div>
+      <div class="timeline-year">2027</div>
+      <div class="timeline-title">Garlic 탄생</div>
+      <div class="timeline-desc">
+        마늘 먹고 사람 된 G마켓.<br>
+        Garlic이라는 새 이름으로 다시 태어나다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FOOTER -->
+<section class="cta-section">
+  <div class="cta-emoji reveal-scale">🧄</div>
+  <h2 class="cta-heading reveal">
+    진짜 <em>'나마늘'</em> 위한<br>쇼핑의 시작
+  </h2>
+  <p class="cta-sub reveal reveal-d1">마늘 먹고 사람 된 쇼핑, 지금 만나보세요.</p>
+  <a href="01_home.html" class="cta-btn reveal reveal-d2">
+    지금 만나기 <span class="arrow">&rarr;</span>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-logo">🧄 Garlic</div>
+  <p class="footer-copy">PP1K 피치 &middot; 불사조기사단 &middot; Project Garlic</p>
+  <div class="footer-links">
+    <a href="index.html">디자인 갤러리</a>
+    <a href="03_challenge.html">마늘까기 도전</a>
+    <a href="01_home.html">홈으로</a>
+  </div>
+</footer>
+
+<script>
+// ========== SCROLL REVEAL ==========
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
+  revealObserver.observe(el);
+});
+
+// ========== HEADER SCROLL STATE ==========
+var header = document.getElementById('pageHeader');
+var hero = document.getElementById('hero');
+
+function updateHeader() {
+  var scrollY = window.scrollY || window.pageYOffset;
+  var heroHeight = hero.offsetHeight;
+  if (scrollY > heroHeight - 80) {
+    header.classList.add('scrolled');
+    header.classList.remove('at-hero');
+  } else {
+    header.classList.remove('scrolled');
+    header.classList.add('at-hero');
+  }
+}
+
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+// ========== PARALLAX ==========
+var heroBg = document.querySelector('.hero-bg');
+
+function updateParallax() {
+  var scrollY = window.scrollY || window.pageYOffset;
+  var heroHeight = hero.offsetHeight;
+  if (scrollY < heroHeight) {
+    heroBg.style.transform = 'translateY(' + (scrollY * 0.3) + 'px) scale(1.1)';
+  }
+}
+
+window.addEventListener('scroll', updateParallax, { passive: true });
+
+// ========== SMOOTH SCROLL FOR NAV ==========
+document.querySelectorAll('.header-nav a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

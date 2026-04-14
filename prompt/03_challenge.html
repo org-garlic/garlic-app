@@ -1,0 +1,1308 @@
+<!--
+  ============================================================
+  GARLIC CHALLENGE — 마늘까기 도전
+  ============================================================
+  Concept: Gamified attendance + garlic peeling mini-game + quiz
+  Layout:  Mobile-first app page, bouncy & playful
+  Colors:  Garlic Green #00C73C · Dark Green #1B4332 · Gold #D4A843 · Coral #FF7F6B
+  Fonts:   GmarketSans (all text)
+  Mood:    "오늘도 마늘 한 알! 까고 또 까고!"
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>마늘까기 도전 — Garlic Challenge</title>
+<style>
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --garlic-green: #00C73C;
+  --garlic-green-light: #E8F9ED;
+  --garlic-green-pale: #B8F0CA;
+  --garlic-green-glow: rgba(0, 199, 60, 0.2);
+  --garlic-dark-green: #1B4332;
+  --garlic-gold: #D4A843;
+  --garlic-gold-light: #FFF6E0;
+  --garlic-coral: #FF7F6B;
+  --garlic-coral-light: #FFE8E4;
+  --garlic-bg: #F7F7F7;
+  --white: #FFFFFF;
+  --dark: #1A1A1A;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  --shadow-green: 0 4px 20px rgba(0,199,60,0.25);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --header-h: 56px;
+  --nav-h: 64px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'GmarketSans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--garlic-bg);
+  color: var(--dark);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding-top: var(--header-h);
+  padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 16px);
+}
+
+/* ========== HEADER ========== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--header-h);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.header-logo-icon { font-size: 24px; line-height: 1; }
+
+.header-logo-text {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--garlic-dark-green);
+  letter-spacing: -0.02em;
+}
+
+.header-title {
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--dark);
+}
+
+.header-right { display: flex; align-items: center; gap: 8px; }
+
+.header-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--garlic-green-light);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-bounce);
+  font-size: 16px;
+}
+
+.header-btn:active { transform: scale(0.9); }
+
+/* ========== MAIN ========== */
+main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
+
+/* ========== HERO BANNER ========== */
+.hero-banner {
+  background: linear-gradient(135deg, var(--garlic-dark-green) 0%, #2D6A4F 50%, var(--garlic-green) 100%);
+  padding: 28px 20px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -20%;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(212,168,67,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatGlow 4s ease-in-out infinite alternate;
+}
+
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -20%; left: -10%;
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(0,199,60,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: floatGlow 5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(20px, -15px) scale(1.2); }
+}
+
+.hero-garlic-emoji {
+  font-size: 48px;
+  margin-bottom: 8px;
+  animation: garlicBounce 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes garlicBounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(-5deg); }
+  75% { transform: translateY(-4px) rotate(5deg); }
+}
+
+.hero-title {
+  font-size: 24px; font-weight: 700; color: #fff;
+  margin-bottom: 6px; position: relative; z-index: 1;
+}
+
+.hero-subtitle {
+  font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,0.7); position: relative; z-index: 1;
+}
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 24px;
+  margin-top: 20px; position: relative; z-index: 1;
+}
+
+.hero-stat { text-align: center; }
+
+.hero-stat-num {
+  font-size: 28px; font-weight: 700;
+  color: var(--garlic-gold); line-height: 1.1;
+}
+
+.hero-stat-label {
+  font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.6); margin-top: 2px;
+}
+
+/* ========== SECTION ========== */
+.section { padding: 20px 16px; }
+
+.section-header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 17px; font-weight: 700; color: var(--dark);
+  display: flex; align-items: center; gap: 6px;
+}
+
+.section-title .emoji { font-size: 20px; }
+
+.section-more {
+  font-size: 12px; font-weight: 500;
+  color: var(--gray-400); text-decoration: none;
+}
+
+/* ========== CALENDAR ========== */
+.calendar-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.calendar-month {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 16px;
+}
+
+.calendar-month-title { font-size: 16px; font-weight: 700; color: var(--dark); }
+
+.calendar-nav { display: flex; gap: 4px; }
+
+.calendar-nav button {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  font-size: 12px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-500);
+  transition: all 0.2s;
+  font-family: 'GmarketSans', sans-serif;
+}
+
+.calendar-nav button:hover {
+  background: var(--garlic-green-light);
+  border-color: var(--garlic-green);
+  color: var(--garlic-green);
+}
+
+.calendar-days {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 4px; text-align: center; margin-bottom: 4px;
+}
+
+.calendar-day-label {
+  font-size: 11px; font-weight: 500;
+  color: var(--gray-400); padding: 4px 0;
+}
+
+.calendar-day-label:first-child { color: var(--garlic-coral); }
+.calendar-day-label:last-child { color: #5B8DEF; }
+
+.calendar-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+}
+
+.calendar-cell {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500;
+  color: var(--gray-600);
+  position: relative;
+  transition: all 0.3s var(--ease-bounce);
+  cursor: default;
+}
+
+.calendar-cell.empty { visibility: hidden; }
+
+.calendar-cell.checked {
+  background: var(--garlic-green-light);
+  color: var(--garlic-dark-green);
+}
+
+.calendar-cell.checked::after {
+  content: '\1F9C4';
+  font-size: 14px;
+  position: absolute;
+  top: 0; right: 1px;
+  animation: stampPop 0.4s var(--ease-bounce);
+}
+
+@keyframes stampPop {
+  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+  60% { transform: scale(1.3) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.calendar-cell.today {
+  background: var(--garlic-green);
+  color: #fff; font-weight: 700;
+  box-shadow: var(--shadow-green);
+}
+
+.calendar-cell.future { color: var(--gray-300); }
+.calendar-cell.sunday { color: var(--garlic-coral); }
+.calendar-cell.sunday.checked { color: var(--garlic-coral); }
+.calendar-cell.sunday.today { color: #fff; }
+
+/* Stamp Button */
+.stamp-area { margin-top: 16px; text-align: center; }
+
+.stamp-btn {
+  width: 100%; padding: 16px;
+  border: none; border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--garlic-green), #00A832);
+  color: #fff;
+  font-family: 'GmarketSans', sans-serif;
+  font-size: 16px; font-weight: 700;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: all 0.3s var(--ease-bounce);
+  box-shadow: var(--shadow-green);
+}
+
+.stamp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,199,60,0.35); }
+.stamp-btn:active { transform: scale(0.97); }
+
+.stamp-btn.stamped {
+  background: var(--gray-200); color: var(--gray-400);
+  box-shadow: none; cursor: default;
+}
+
+.stamp-btn .ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transform: scale(0);
+  animation: rippleEffect 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+
+.stamp-result {
+  margin-top: 12px; font-size: 14px; font-weight: 500;
+  color: var(--garlic-green);
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.4s var(--ease-out);
+}
+
+.stamp-result.show { opacity: 1; transform: translateY(0); }
+
+/* Reward Tiers */
+.reward-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+
+.reward-tier {
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px; text-align: center;
+  border: 1.5px solid transparent;
+  transition: all 0.3s;
+}
+
+.reward-tier.active { border-color: var(--garlic-gold); background: var(--garlic-gold-light); }
+.reward-tier.completed { border-color: var(--garlic-green); background: var(--garlic-green-light); }
+
+.reward-emoji { font-size: 24px; margin-bottom: 4px; }
+.reward-count { font-size: 13px; font-weight: 700; color: var(--dark); }
+.reward-name { font-size: 11px; font-weight: 500; color: var(--gray-500); margin-top: 2px; }
+.reward-prize { font-size: 10px; font-weight: 300; color: var(--garlic-coral); margin-top: 4px; }
+
+/* ========== MINI GAME ========== */
+.game-card {
+  background: linear-gradient(145deg, #1B4332 0%, #0F2B1F 100%);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px; text-align: center;
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.game-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(0,199,60,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212,168,67,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.game-badge {
+  display: inline-block;
+  background: rgba(0,199,60,0.15);
+  border: 1px solid rgba(0,199,60,0.3);
+  border-radius: 20px; padding: 4px 14px;
+  font-size: 11px; font-weight: 500;
+  color: var(--garlic-green);
+  margin-bottom: 12px; position: relative; z-index: 1;
+}
+
+.game-title {
+  font-size: 18px; font-weight: 700; color: #fff;
+  margin-bottom: 6px; position: relative; z-index: 1;
+}
+
+.game-desc {
+  font-size: 12px; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 24px; position: relative; z-index: 1;
+}
+
+/* Garlic Tap Area */
+.garlic-tap-area {
+  position: relative;
+  width: 160px; height: 160px;
+  margin: 0 auto 20px;
+  cursor: pointer; z-index: 1;
+}
+
+.garlic-svg-wrap {
+  width: 100%; height: 100%;
+  transition: transform 0.15s var(--ease-bounce);
+  filter: drop-shadow(0 8px 24px rgba(0,199,60,0.3));
+}
+
+.garlic-tap-area:active .garlic-svg-wrap { transform: scale(0.88) rotate(-5deg); }
+
+.garlic-svg-wrap svg { width: 100%; height: 100%; }
+
+.tap-pulse {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,199,60,0.2);
+  animation: tapPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes tapPulse {
+  0% { transform: translate(-50%,-50%) scale(0.8); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(1.4); opacity: 0; }
+}
+
+.tap-counter {
+  font-size: 40px; font-weight: 700;
+  color: var(--garlic-gold); line-height: 1;
+  margin-bottom: 4px; position: relative; z-index: 1;
+  transition: transform 0.15s var(--ease-bounce);
+}
+
+.tap-counter.bump { transform: scale(1.15); }
+
+.tap-label {
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px; position: relative; z-index: 1;
+}
+
+.tap-progress-bar {
+  width: 100%; height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px; overflow: hidden;
+  margin-bottom: 8px; position: relative; z-index: 1;
+}
+
+.tap-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--garlic-green), var(--garlic-gold));
+  border-radius: 4px;
+  transition: width 0.3s var(--ease-out);
+  position: relative;
+}
+
+.tap-progress-fill::after {
+  content: ''; position: absolute;
+  top: 0; right: 0; width: 20px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+  border-radius: 4px;
+}
+
+.tap-progress-label {
+  font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  position: relative; z-index: 1;
+}
+
+.game-limit {
+  margin-top: 16px; font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,0.3); position: relative; z-index: 1;
+}
+
+.float-num {
+  position: absolute;
+  font-size: 18px; font-weight: 700;
+  color: var(--garlic-gold);
+  pointer-events: none;
+  animation: floatUp 0.8s var(--ease-out) forwards;
+  z-index: 10;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
+}
+
+/* Coupon Popup */
+.coupon-popup {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.coupon-popup.show { opacity: 1; pointer-events: auto; }
+
+.coupon-inner {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 36px 28px; text-align: center;
+  max-width: 320px; width: 90%;
+  transform: scale(0.8);
+  transition: transform 0.4s var(--ease-bounce);
+  position: relative; overflow: hidden;
+}
+
+.coupon-popup.show .coupon-inner { transform: scale(1); }
+
+.coupon-inner::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--garlic-green), var(--garlic-gold), var(--garlic-coral));
+}
+
+.coupon-emoji { font-size: 56px; margin-bottom: 12px; }
+.coupon-title { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.coupon-desc { font-size: 14px; font-weight: 300; color: var(--gray-500); margin-bottom: 20px; }
+
+.coupon-close {
+  padding: 12px 32px; border: none;
+  border-radius: var(--radius-md);
+  background: var(--garlic-green); color: #fff;
+  font-family: 'GmarketSans', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-bounce);
+}
+
+.coupon-close:active { transform: scale(0.95); }
+
+/* ========== QUIZ ========== */
+.quiz-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-md);
+  position: relative; overflow: hidden;
+}
+
+.quiz-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--garlic-coral), var(--garlic-gold));
+}
+
+.quiz-header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 16px;
+}
+
+.quiz-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--garlic-coral-light);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 11px; font-weight: 500; color: var(--garlic-coral);
+}
+
+.quiz-streak { font-size: 12px; font-weight: 500; color: var(--garlic-gold); }
+
+.quiz-question {
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: 20px; text-align: center;
+  margin-bottom: 16px;
+}
+
+.quiz-consonants {
+  font-size: 32px; font-weight: 700;
+  color: var(--garlic-dark-green);
+  letter-spacing: 8px; margin-bottom: 8px;
+}
+
+.quiz-hint { font-size: 12px; font-weight: 300; color: var(--gray-400); }
+
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.quiz-option {
+  padding: 14px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  font-family: 'GmarketSans', sans-serif;
+  font-size: 14px; font-weight: 500; color: var(--dark);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-bounce);
+  text-align: center;
+}
+
+.quiz-option:hover { border-color: var(--garlic-green); background: var(--garlic-green-light); }
+.quiz-option:active { transform: scale(0.96); }
+
+.quiz-option.correct {
+  border-color: var(--garlic-green);
+  background: var(--garlic-green-light);
+  color: var(--garlic-dark-green);
+  animation: correctShake 0.4s var(--ease-bounce);
+}
+
+.quiz-option.wrong {
+  border-color: var(--garlic-coral);
+  background: var(--garlic-coral-light);
+  color: var(--garlic-coral);
+  animation: wrongShake 0.4s ease-out;
+}
+
+@keyframes correctShake {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.05); }
+  60% { transform: scale(0.98); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.quiz-result {
+  margin-top: 12px; padding: 12px;
+  border-radius: var(--radius-sm);
+  text-align: center; font-size: 14px; font-weight: 500;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.3s var(--ease-out);
+}
+
+.quiz-result.show { opacity: 1; transform: translateY(0); }
+.quiz-result.correct-bg { background: var(--garlic-green-light); color: var(--garlic-dark-green); }
+.quiz-result.wrong-bg { background: var(--garlic-coral-light); color: var(--garlic-coral); }
+
+/* ========== GARLIC JAR ========== */
+.jar-card {
+  background: linear-gradient(145deg, #FFF8E7, #FFF3D6);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px; text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(212,168,67,0.2);
+}
+
+.jar-wrapper {
+  position: relative;
+  width: 120px; height: 160px;
+  margin: 0 auto 16px;
+}
+
+.jar-svg { width: 100%; height: 100%; }
+
+.jar-count {
+  font-size: 48px; font-weight: 700;
+  color: var(--garlic-dark-green);
+  line-height: 1; margin-bottom: 4px;
+}
+
+.jar-count-label {
+  font-size: 14px; font-weight: 500;
+  color: var(--garlic-gold); margin-bottom: 16px;
+}
+
+.jar-progress {
+  width: 100%; height: 10px;
+  background: rgba(212,168,67,0.15);
+  border-radius: 5px; overflow: hidden; margin-bottom: 8px;
+}
+
+.jar-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--garlic-gold), var(--garlic-coral));
+  border-radius: 5px;
+  transition: width 1s var(--ease-out);
+}
+
+.jar-next-reward { font-size: 12px; font-weight: 300; color: var(--gray-500); }
+.jar-next-reward strong { color: var(--garlic-coral); font-weight: 700; }
+
+/* ========== RANKING ========== */
+.ranking-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.ranking-list { display: flex; flex-direction: column; gap: 8px; }
+
+.ranking-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px; border-radius: var(--radius-sm);
+  background: var(--gray-50); transition: all 0.3s;
+}
+
+.ranking-item:nth-child(1) {
+  background: linear-gradient(135deg, #FFF6E0, #FFF0CC);
+  border: 1px solid rgba(212,168,67,0.2);
+}
+
+.ranking-item:nth-child(2) {
+  background: linear-gradient(135deg, #F5F5F5, #EBEBEB);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.ranking-item:nth-child(3) {
+  background: linear-gradient(135deg, #FFF0E8, #FFE8DC);
+  border: 1px solid rgba(255,127,107,0.15);
+}
+
+.ranking-rank {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+
+.ranking-item:nth-child(1) .ranking-rank { background: var(--garlic-gold); }
+.ranking-item:nth-child(2) .ranking-rank { background: #A0A0A0; }
+.ranking-item:nth-child(3) .ranking-rank { background: #CD8966; }
+.ranking-item:nth-child(4) .ranking-rank,
+.ranking-item:nth-child(5) .ranking-rank { background: var(--gray-300); color: var(--gray-600); }
+
+.ranking-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--garlic-green-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+
+.ranking-info { flex: 1; }
+.ranking-name { font-size: 14px; font-weight: 500; color: var(--dark); }
+.ranking-level { font-size: 11px; font-weight: 300; color: var(--gray-400); }
+
+.ranking-garlic {
+  font-size: 14px; font-weight: 700;
+  color: var(--garlic-dark-green);
+  display: flex; align-items: center; gap: 4px;
+}
+
+.my-ranking {
+  margin-top: 12px; padding: 14px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--garlic-green-light), #D4F5E0);
+  border: 1.5px solid var(--garlic-green);
+  display: flex; align-items: center; gap: 12px;
+}
+
+.my-ranking-badge {
+  background: var(--garlic-green); color: #fff;
+  padding: 2px 10px; border-radius: 12px;
+  font-size: 11px; font-weight: 700;
+}
+
+.my-ranking-text { flex: 1; font-size: 14px; font-weight: 500; color: var(--garlic-dark-green); }
+.my-ranking-count { font-size: 16px; font-weight: 700; color: var(--garlic-green); }
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  padding: 6px 0 calc(6px + var(--safe-bottom));
+}
+
+.nav-item {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 2px; padding: 6px 0;
+  text-decoration: none; color: var(--gray-400);
+  transition: color 0.2s; cursor: pointer;
+}
+
+.nav-item.active { color: var(--garlic-green); }
+.nav-item svg { width: 22px; height: 22px; }
+.nav-label { font-size: 10px; font-weight: 500; }
+.nav-item.active .nav-label { font-weight: 700; }
+
+.nav-item.center-highlight { position: relative; }
+
+.nav-item.center-highlight::before {
+  content: ''; position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 32px; height: 3px;
+  background: var(--garlic-green);
+  border-radius: 0 0 3px 3px;
+}
+
+/* ========== CONFETTI ========== */
+.confetti-container {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 3000; overflow: hidden;
+}
+
+.confetti-piece { position: absolute; width: 10px; height: 10px; opacity: 0; }
+
+@keyframes confettiFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ========== REVEAL ========== */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+@media (min-width: 768px) {
+  main { max-width: 480px; }
+  .header { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="01_home.html" class="header-logo">
+    <span class="header-logo-icon">🧄</span>
+    <span class="header-logo-text">Garlic</span>
+  </a>
+  <div class="header-title">마늘까기 도전</div>
+  <div class="header-right">
+    <button class="header-btn" title="알림">🔔</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- Hero Banner -->
+  <div class="hero-banner">
+    <div class="hero-garlic-emoji">🧄</div>
+    <h1 class="hero-title">마늘까기 도전!</h1>
+    <p class="hero-subtitle">매일 마늘 까고 쿠폰 받자!</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="totalGarlic">42</div>
+        <div class="hero-stat-label">모은 마늘</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">12</div>
+        <div class="hero-stat-label">연속 출석</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">🏆 42위</div>
+        <div class="hero-stat-label">전체 순위</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 출석체크 달력 -->
+  <div class="section reveal">
+    <div class="section-header">
+      <h2 class="section-title"><span class="emoji">📅</span> 출석체크 달력</h2>
+      <span class="section-more">이번 달 12알 모았어요!</span>
+    </div>
+    <div class="calendar-card">
+      <div class="calendar-month">
+        <span class="calendar-month-title">2026년 4월</span>
+        <div class="calendar-nav">
+          <button>◀</button>
+          <button>▶</button>
+        </div>
+      </div>
+      <div class="calendar-days">
+        <span class="calendar-day-label">일</span>
+        <span class="calendar-day-label">월</span>
+        <span class="calendar-day-label">화</span>
+        <span class="calendar-day-label">수</span>
+        <span class="calendar-day-label">목</span>
+        <span class="calendar-day-label">금</span>
+        <span class="calendar-day-label">토</span>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+
+      <div class="stamp-area">
+        <button class="stamp-btn" id="stampBtn" onclick="doStamp()">🧄 오늘의 마늘 찍기!</button>
+        <div class="stamp-result" id="stampResult">+1알 획득! 오늘도 마늘 까기 성공! 🎉</div>
+      </div>
+
+      <div class="reward-tiers">
+        <div class="reward-tier completed">
+          <div class="reward-emoji">🧄</div>
+          <div class="reward-count">10알</div>
+          <div class="reward-name">한쪽</div>
+          <div class="reward-prize">500원 쿠폰</div>
+        </div>
+        <div class="reward-tier active">
+          <div class="reward-emoji">🧄🧄</div>
+          <div class="reward-count">30알</div>
+          <div class="reward-name">한통</div>
+          <div class="reward-prize">3,000원 쿠폰</div>
+        </div>
+        <div class="reward-tier">
+          <div class="reward-emoji">✨</div>
+          <div class="reward-count">100일</div>
+          <div class="reward-name">변신완료</div>
+          <div class="reward-prize">특별보상</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 마늘까기 미니게임 -->
+  <div class="section reveal reveal-d1">
+    <div class="section-header">
+      <h2 class="section-title"><span class="emoji">🎮</span> 마늘까기 도전</h2>
+      <span class="section-more">오늘 남은 횟수: 3회</span>
+    </div>
+    <div class="game-card">
+      <span class="game-badge">Daily Challenge</span>
+      <h3 class="game-title">마늘을 까세요!</h3>
+      <p class="game-desc">30번 터치하면 쿠폰 획득!</p>
+
+      <div class="garlic-tap-area" id="garlicTapArea" onclick="tapGarlic(event)">
+        <div class="tap-pulse"></div>
+        <div class="garlic-svg-wrap">
+          <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="80" cy="90" rx="52" ry="55" fill="#F5F0E8" stroke="#E8DCC8" stroke-width="1.5"/>
+            <path d="M60 65 Q55 45 65 35 Q75 28 80 40 Q72 50 60 65Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
+            <path d="M80 60 Q80 38 90 30 Q100 25 100 40 Q95 50 80 60Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
+            <path d="M100 70 Q108 50 105 38 Q112 32 115 45 Q112 58 100 70Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
+            <path d="M55 80 Q42 65 38 50 Q32 45 35 55 Q38 68 55 80Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
+            <path d="M72 35 Q78 15 80 8 Q82 15 88 35" fill="none" stroke="#8BAA8F" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M65 140 Q70 150 72 155 M78 142 Q80 152 80 158 M92 140 Q88 150 86 155" stroke="#D4CABC" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="68" cy="75" rx="8" ry="12" fill="rgba(255,255,255,0.4)" transform="rotate(-15 68 75)"/>
+            <circle cx="70" cy="88" r="3" fill="#2D2D2D"/>
+            <circle cx="92" cy="88" r="3" fill="#2D2D2D"/>
+            <circle cx="71" cy="87" r="1" fill="#fff"/>
+            <circle cx="93" cy="87" r="1" fill="#fff"/>
+            <path d="M76 98 Q81 103 86 98" stroke="#FF7F6B" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <ellipse cx="63" cy="96" rx="6" ry="3.5" fill="rgba(255,127,107,0.25)"/>
+            <ellipse cx="99" cy="96" rx="6" ry="3.5" fill="rgba(255,127,107,0.25)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="tap-counter" id="tapCounter">0</div>
+      <div class="tap-label">번 터치! (목표: 30번)</div>
+
+      <div class="tap-progress-bar">
+        <div class="tap-progress-fill" id="tapProgressFill" style="width:0%"></div>
+      </div>
+      <div class="tap-progress-label" id="tapProgressLabel">0 / 30</div>
+      <div class="game-limit">오늘 남은 도전 횟수: <strong>3회</strong></div>
+    </div>
+  </div>
+
+  <!-- 갈릭고 퀴즈 -->
+  <div class="section reveal reveal-d2">
+    <div class="section-header">
+      <h2 class="section-title"><span class="emoji">❓</span> 갈릭고 퀴즈</h2>
+      <span class="section-more">매일 새 문제!</span>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-badge">🧠 오늘의 퀴즈</span>
+        <span class="quiz-streak">🔥 3연속 정답!</span>
+      </div>
+      <div class="quiz-question">
+        <div class="quiz-consonants">ㅇ ㅈ ㅎ</div>
+        <div class="quiz-hint">힌트: Garlic의 한국어 이름!</div>
+      </div>
+      <div class="quiz-options" id="quizOptions">
+        <button class="quiz-option" onclick="answerQuiz(this, false)">은진호</button>
+        <button class="quiz-option" onclick="answerQuiz(this, false)">이준혁</button>
+        <button class="quiz-option" onclick="answerQuiz(this, true)">인절하</button>
+        <button class="quiz-option" onclick="answerQuiz(this, false)">오지현</button>
+      </div>
+      <div class="quiz-result" id="quizResult"></div>
+    </div>
+  </div>
+
+  <!-- 나의 마늘 현황 -->
+  <div class="section reveal reveal-d3">
+    <div class="section-header">
+      <h2 class="section-title"><span class="emoji">🫙</span> 나의 마늘 현황</h2>
+    </div>
+    <div class="jar-card">
+      <div class="jar-wrapper">
+        <svg class="jar-svg" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="jarClip">
+              <path d="M25 45 Q20 45 18 50 L12 135 Q10 150 25 152 L95 152 Q110 150 108 135 L102 50 Q100 45 95 45Z"/>
+            </clipPath>
+            <linearGradient id="fillGrad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#00C73C"/>
+              <stop offset="50%" stop-color="#4CAF50"/>
+              <stop offset="100%" stop-color="#81C784"/>
+            </linearGradient>
+          </defs>
+          <path d="M25 45 Q20 45 18 50 L12 135 Q10 150 25 152 L95 152 Q110 150 108 135 L102 50 Q100 45 95 45Z" fill="rgba(255,255,255,0.3)" stroke="#D4CABC" stroke-width="1.5"/>
+          <rect x="12" y="100" width="96" height="52" fill="url(#fillGrad)" clip-path="url(#jarClip)" opacity="0.6" id="jarFillRect">
+            <animate attributeName="y" from="152" to="100" dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1"/>
+          </rect>
+          <text x="35" y="130" font-size="16">🧄</text>
+          <text x="55" y="140" font-size="14">🧄</text>
+          <text x="70" y="125" font-size="16">🧄</text>
+          <text x="45" y="148" font-size="12">🧄</text>
+          <text x="75" y="145" font-size="13">🧄</text>
+          <rect x="22" y="38" width="76" height="10" rx="4" fill="#D4A843" stroke="#B08A2E" stroke-width="1"/>
+          <rect x="30" y="32" width="60" height="8" rx="3" fill="#E8C96A"/>
+          <path d="M28 55 L24 130" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="jar-count" id="jarCount">42</div>
+      <div class="jar-count-label">알 모았어요!</div>
+      <div class="jar-progress">
+        <div class="jar-progress-fill" id="jarProgressFill" style="width: 42%;"></div>
+      </div>
+      <div class="jar-next-reward">다음 보상까지 <strong>58알</strong> 남았어요! (100알 달성 시 특별보상)</div>
+    </div>
+  </div>
+
+  <!-- 오늘의 마늘 부자 랭킹 -->
+  <div class="section reveal">
+    <div class="section-header">
+      <h2 class="section-title"><span class="emoji">🏆</span> 오늘의 마늘 부자</h2>
+      <span class="section-more">전체 보기 ></span>
+    </div>
+    <div class="ranking-card">
+      <div class="ranking-list">
+        <div class="ranking-item">
+          <div class="ranking-rank">1</div>
+          <div class="ranking-avatar">👩‍🌾</div>
+          <div class="ranking-info">
+            <div class="ranking-name">마늘마스터</div>
+            <div class="ranking-level">Lv.38 · 변신완료</div>
+          </div>
+          <div class="ranking-garlic">🧄 1,247</div>
+        </div>
+        <div class="ranking-item">
+          <div class="ranking-rank">2</div>
+          <div class="ranking-avatar">🧑‍🍳</div>
+          <div class="ranking-info">
+            <div class="ranking-name">갈릭러버</div>
+            <div class="ranking-level">Lv.35 · 한통 달성</div>
+          </div>
+          <div class="ranking-garlic">🧄 982</div>
+        </div>
+        <div class="ranking-item">
+          <div class="ranking-rank">3</div>
+          <div class="ranking-avatar">👨‍🎓</div>
+          <div class="ranking-info">
+            <div class="ranking-name">쇼핑요정</div>
+            <div class="ranking-level">Lv.32 · 한통 달성</div>
+          </div>
+          <div class="ranking-garlic">🧄 876</div>
+        </div>
+        <div class="ranking-item">
+          <div class="ranking-rank">4</div>
+          <div class="ranking-avatar">👩‍💻</div>
+          <div class="ranking-info">
+            <div class="ranking-name">딜헌터</div>
+            <div class="ranking-level">Lv.29 · 한쪽 달성</div>
+          </div>
+          <div class="ranking-garlic">🧄 654</div>
+        </div>
+        <div class="ranking-item">
+          <div class="ranking-rank">5</div>
+          <div class="ranking-avatar">🧑‍🎨</div>
+          <div class="ranking-info">
+            <div class="ranking-name">알뜰살뜰</div>
+            <div class="ranking-level">Lv.27 · 한쪽 달성</div>
+          </div>
+          <div class="ranking-garlic">🧄 523</div>
+        </div>
+      </div>
+      <div class="my-ranking">
+        <span class="my-ranking-badge">나</span>
+        <span class="my-ranking-text">42위 · 조금만 더 힘내요!</span>
+        <span class="my-ranking-count">🧄 42</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- COUPON POPUP -->
+<div class="coupon-popup" id="couponPopup">
+  <div class="coupon-inner">
+    <div class="coupon-emoji">🎉</div>
+    <div class="coupon-title">쿠폰 획득!</div>
+    <div class="coupon-desc">마늘까기 성공! 500원 할인 쿠폰이 지급되었어요.</div>
+    <button class="coupon-close" onclick="closeCoupon()">확인</button>
+  </div>
+</div>
+
+<!-- CONFETTI -->
+<div class="confetti-container" id="confettiContainer"></div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span class="nav-label">검색</span>
+  </a>
+  <a href="03_challenge.html" class="nav-item active center-highlight">
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+    <span class="nav-label">마늘까기</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="nav-label">장바구니</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이</span>
+  </a>
+</nav>
+
+<script>
+// ========== CALENDAR ==========
+(function buildCalendar() {
+  const grid = document.getElementById('calendarGrid');
+  const year = 2026, month = 3; // April 2026
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = 14;
+  const checkedDays = [1,2,3,5,6,7,8,9,10,11,12,13];
+  let html = '';
+  for (let i = 0; i < firstDay; i++) {
+    html += '<div class="calendar-cell empty"></div>';
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dayOfWeek = (firstDay + d - 1) % 7;
+    let cls = 'calendar-cell';
+    if (dayOfWeek === 0) cls += ' sunday';
+    if (d === today) cls += ' today';
+    else if (checkedDays.includes(d)) cls += ' checked';
+    else if (d > today) cls += ' future';
+    html += '<div class="' + cls + '">' + d + '</div>';
+  }
+  grid.innerHTML = html;
+})();
+
+// ========== STAMP ==========
+var stamped = false;
+function doStamp() {
+  if (stamped) return;
+  stamped = true;
+  var btn = document.getElementById('stampBtn');
+  var result = document.getElementById('stampResult');
+  btn.classList.add('stamped');
+  btn.textContent = '✅ 오늘 출석 완료!';
+  result.classList.add('show');
+  var cells = document.querySelectorAll('.calendar-cell.today');
+  cells.forEach(function(c) { c.classList.add('checked'); });
+  updateGarlicCount(43);
+  var ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  ripple.style.left = '50%';
+  ripple.style.top = '50%';
+  btn.appendChild(ripple);
+  setTimeout(function() { ripple.remove(); }, 600);
+}
+
+// ========== MINI GAME ==========
+var tapCount = 0;
+var tapGoal = 30;
+
+function tapGarlic(event) {
+  if (tapCount >= tapGoal) return;
+  tapCount++;
+  var counter = document.getElementById('tapCounter');
+  var fill = document.getElementById('tapProgressFill');
+  var label = document.getElementById('tapProgressLabel');
+  counter.textContent = tapCount;
+  counter.classList.add('bump');
+  setTimeout(function() { counter.classList.remove('bump'); }, 150);
+  var pct = (tapCount / tapGoal) * 100;
+  fill.style.width = pct + '%';
+  label.textContent = tapCount + ' / ' + tapGoal;
+  // Float +1
+  var area = document.getElementById('garlicTapArea');
+  var float = document.createElement('div');
+  float.className = 'float-num';
+  float.textContent = '+1';
+  var rect = area.getBoundingClientRect();
+  float.style.left = (event.clientX - rect.left) + 'px';
+  float.style.top = (event.clientY - rect.top - 20) + 'px';
+  area.appendChild(float);
+  setTimeout(function() { float.remove(); }, 800);
+  if (tapCount >= tapGoal) {
+    setTimeout(function() {
+      showCoupon();
+      launchConfetti();
+      updateGarlicCount(parseInt(document.getElementById('jarCount').textContent) + 5);
+    }, 300);
+  }
+}
+
+// ========== QUIZ ==========
+var quizAnswered = false;
+function answerQuiz(btn, isCorrect) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  var result = document.getElementById('quizResult');
+  var allOptions = document.querySelectorAll('.quiz-option');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    result.className = 'quiz-result correct-bg show';
+    result.innerHTML = '정답! 🧄 마늘 2알 획득!';
+    updateGarlicCount(parseInt(document.getElementById('jarCount').textContent) + 2);
+  } else {
+    btn.classList.add('wrong');
+    allOptions[2].classList.add('correct');
+    result.className = 'quiz-result wrong-bg show';
+    result.innerHTML = '아쉬워요! 정답은 "인절하"였어요 😅';
+  }
+  allOptions.forEach(function(o) { o.style.pointerEvents = 'none'; });
+}
+
+// ========== GARLIC COUNT ==========
+function updateGarlicCount(newCount) {
+  document.getElementById('jarCount').textContent = newCount;
+  document.getElementById('totalGarlic').textContent = newCount;
+  var pct = Math.min((newCount / 100) * 100, 100);
+  document.getElementById('jarProgressFill').style.width = pct + '%';
+  var jarCount = document.getElementById('jarCount');
+  jarCount.style.transform = 'scale(1.2)';
+  jarCount.style.transition = 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1)';
+  setTimeout(function() { jarCount.style.transform = 'scale(1)'; }, 300);
+}
+
+// ========== COUPON ==========
+function showCoupon() { document.getElementById('couponPopup').classList.add('show'); }
+function closeCoupon() { document.getElementById('couponPopup').classList.remove('show'); }
+
+// ========== CONFETTI ==========
+function launchConfetti() {
+  var container = document.getElementById('confettiContainer');
+  var colors = ['#00C73C', '#D4A843', '#FF7F6B', '#5B8DEF', '#FFD700', '#FF69B4'];
+  for (var i = 0; i < 50; i++) {
+    var piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.top = '-10px';
+    piece.style.width = (Math.random() * 8 + 4) + 'px';
+    piece.style.height = (Math.random() * 8 + 4) + 'px';
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animation = 'confettiFall ' + (Math.random() * 1.5 + 1) + 's ease-out ' + (Math.random() * 0.5) + 's forwards';
+    container.appendChild(piece);
+  }
+  setTimeout(function() { container.innerHTML = ''; }, 3000);
+}
+
+// ========== SCROLL REVEAL ==========
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+</script>
+
+</body>
+</html>
