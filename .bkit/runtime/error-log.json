@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-04-14T06:44:51.300Z",
+    "errorType": "unknown",
+    "category": "unknown",
+    "severity": "low",
+    "agentId": "a67bdcdda3ef56a80",
+    "agentType": "oh-my-claudecode:designer-high",
+    "message": ""
+  },
+  {
+    "timestamp": "2026-04-14T06:54:44.587Z",
+    "errorType": "unknown",
+    "category": "unknown",
+    "severity": "low",
+    "agentId": "a0d3aa93aa6ac7cba",
+    "agentType": "oh-my-claudecode:designer",
+    "message": ""
+  },
+  {
+    "timestamp": "2026-04-14T07:30:09.413Z",
+    "errorType": "unknown",
+    "category": "unknown",
+    "severity": "low",
+    "agentId": "afe4ba64b3f1979a2",
+    "agentType": "oh-my-claudecode:designer-high",
+    "message": ""
+  },
+  {
+    "timestamp": "2026-04-14T07:34:51.108Z",
+    "errorType": "unknown",
+    "category": "unknown",
+    "severity": "low",
+    "agentId": "a26ffe57d632c99b8",
+    "agentType": "oh-my-claudecode:designer",
+    "message": ""
+  }
+]
