@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Garlic — 특가</title>
+<style>
+/* ========== FONTS ========== */
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');font-weight:700}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');font-weight:500}
+@font-face{font-family:'GmarketSans';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');font-weight:300}
+
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAF6EE;
+  --bg-alt:#FFF8F0;
+  --card:#FFFFFF;
+  --text:#333333;
+  --text-light:#888888;
+  --green:#00C73C;
+  --green-light:#E8F8ED;
+  --gold:#D4A843;
+  --gold-light:#FFF3D6;
+  --coral:#FF7F6B;
+  --border:#EEEEEE;
+  --garlic-green:#00C73C;
+  --garlic-green-light:#E8F8ED;
+  --garlic-green-pale:rgba(0,199,60,0.08);
+  --garlic-bg:#FAF6EE;
+  --garlic-white:#FFFFFF;
+  --garlic-black:#333333;
+  --garlic-gray:#666666;
+  --garlic-gray-light:#888888;
+  --garlic-gray-border:#EEEEEE;
+  --garlic-coral:#FF7F6B;
+  --garlic-gold:#D4A843;
+  --garlic-red:#FF4848;
+  --garlic-purple:#7C4DFF;
+  --garlic-blue:#2196F3;
+  --font:'GmarketSans',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --header-h:52px;
+  --tab-h:44px;
+  --nav-h:56px;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--garlic-bg);
+  color:var(--garlic-black);
+  min-height:100vh;min-height:100dvh;
+  overflow-x:hidden;
+  padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 8px);
+}
+::-webkit-scrollbar{width:0;height:0}
+a{text-decoration:none;color:inherit}
+button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+img{display:block;max-width:100%}
+
+/* ========== HEADER ========== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:calc(var(--header-h) + var(--safe-top));
+  padding-top:var(--safe-top);
+  background:var(--garlic-white);
+  display:flex;align-items:center;
+  padding-left:16px;padding-right:12px;
+  border-bottom:1px solid var(--garlic-gray-border);
+}
+.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.header-search{flex:1;margin:0 10px;position:relative}
+.header-search input{
+  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);
+  border-radius:8px;background:var(--garlic-bg);
+  padding:0 12px 0 34px;font-family:var(--font);font-size:0.78rem;font-weight:300;
+  color:var(--garlic-black);outline:none;transition:border-color 0.2s;
+}
+.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
+.header-search input:focus{border-color:var(--garlic-green)}
+.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
+.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
+.h-btn:active{background:rgba(0,0,0,0.04)}
+.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-nav{
+  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
+  height:var(--tab-h);background:var(--garlic-white);
+  border-bottom:1px solid var(--garlic-gray-border);
+  overflow-x:auto;overflow-y:hidden;
+  display:flex;align-items:stretch;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{
+  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
+  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
+  white-space:nowrap;position:relative;transition:color 0.2s;
+}
+.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item.active::after{
+  content:'';position:absolute;bottom:0;left:16px;right:16px;
+  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+}
+.tab-item:first-child{padding-left:20px}
+
+/* ========== MAIN ========== */
+.main{max-width:640px;margin:0 auto;padding:0}
+
+/* ========== HERO DEAL BANNER ========== */
+.hero-deal{
+  margin:12px 16px;border-radius:16px;overflow:hidden;
+  background:linear-gradient(135deg,#1B4332 0%,#00C73C 50%,var(--garlic-gold) 100%);
+  padding:24px 20px;position:relative;color:#fff;
+}
+.hero-deal::before{
+  content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(255,255,255,0.12) 0%,transparent 70%);
+  border-radius:50%;
+}
+.hero-deal::after{
+  content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;
+  background:radial-gradient(circle,rgba(212,168,67,0.2) 0%,transparent 70%);
+  border-radius:50%;
+}
+.hero-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.2);border-radius:20px;
+  padding:5px 12px;font-size:0.72rem;font-weight:700;
+  margin-bottom:12px;backdrop-filter:blur(4px);
+}
+.hero-title{font-size:1.6rem;font-weight:700;margin-bottom:6px;line-height:1.2}
+.hero-title span{color:var(--garlic-gold);font-size:2rem}
+.hero-sub{font-size:0.78rem;font-weight:300;opacity:0.85;margin-bottom:16px}
+.hero-timer{display:flex;align-items:center;gap:6px;margin-bottom:16px}
+.hero-timer .t-block{
+  background:rgba(0,0,0,0.35);border-radius:8px;padding:6px 10px;
+  font-size:1.2rem;font-weight:700;min-width:42px;text-align:center;
+  backdrop-filter:blur(4px);
+}
+.hero-timer .t-sep{font-weight:700;font-size:1rem;opacity:0.6}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--garlic-white);color:var(--garlic-black);
+  border-radius:24px;padding:12px 24px;
+  font-size:0.85rem;font-weight:700;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  transition:transform 0.15s;
+}
+.hero-cta:active{transform:scale(0.97)}
+
+/* ========== SECTION HEADER ========== */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 16px 10px;
+}
+.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
+.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+
+/* ========== TIME DEALS (horizontal scroll) ========== */
+.time-deals{
+  display:flex;gap:10px;padding:0 16px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.time-deals::-webkit-scrollbar{display:none}
+.time-card{
+  flex-shrink:0;width:150px;background:var(--garlic-white);
+  border-radius:14px;overflow:hidden;position:relative;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.time-card:active{transform:scale(0.98)}
+.time-thumb{
+  width:100%;aspect-ratio:1/1;position:relative;
+}
+.time-badge{
+  position:absolute;top:8px;left:8px;
+  background:var(--garlic-coral);color:#fff;
+  padding:3px 8px;border-radius:10px;
+  font-size:0.62rem;font-weight:700;
+  display:flex;align-items:center;gap:3px;
+}
+.time-info{padding:10px}
+.time-name{font-size:0.72rem;font-weight:500;color:var(--garlic-black);line-height:1.3;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.time-price{display:flex;align-items:baseline;gap:4px}
+.time-discount{font-size:0.85rem;font-weight:700;color:var(--garlic-coral)}
+.time-amount{font-size:0.85rem;font-weight:700;color:var(--garlic-black)}
+.time-original{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through;margin-top:2px}
+
+/* ========== PRODUCT GRID ========== */
+.product-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:0 16px 16px;
+}
+.product-card{
+  background:var(--garlic-white);border-radius:12px;
+  overflow:hidden;transition:transform 0.15s;
+}
+.product-card:active{transform:scale(0.98)}
+.product-thumb{
+  width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;
+}
+.product-thumb .tag{
+  position:absolute;top:8px;left:8px;
+  padding:3px 8px;border-radius:4px;
+  font-size:0.62rem;font-weight:700;line-height:1.4;
+}
+.tag-deal{background:var(--garlic-coral);color:#fff}
+.tag-hot{background:var(--garlic-red);color:#fff}
+.tag-best{background:var(--garlic-green);color:#fff}
+.tag-limit{background:var(--garlic-purple);color:#fff}
+.product-thumb .wish{
+  position:absolute;bottom:8px;right:8px;
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.85);border-radius:50%;
+  backdrop-filter:blur(4px);
+}
+.product-thumb .wish svg{width:16px;height:16px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.8}
+.product-info{padding:10px 10px 14px}
+.product-brand{font-size:0.65rem;font-weight:500;color:var(--garlic-gray-light);margin-bottom:3px}
+.product-name{font-size:0.78rem;font-weight:500;color:var(--garlic-black);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-price{display:flex;align-items:baseline;gap:4px}
+.product-discount{font-size:0.9rem;font-weight:700;color:var(--garlic-coral)}
+.product-amount{font-size:0.9rem;font-weight:700;color:var(--garlic-black)}
+.product-original{font-size:0.7rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through;margin-top:2px}
+.product-meta{display:flex;align-items:center;gap:6px;margin-top:6px}
+.product-meta .stars{font-size:0.65rem;color:var(--garlic-gold)}
+.product-meta .review{font-size:0.62rem;font-weight:300;color:var(--garlic-gray-light)}
+
+/* ========== CATEGORY DEALS ========== */
+.cat-tabs{
+  display:flex;gap:8px;padding:0 16px 12px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{
+  flex-shrink:0;padding:8px 18px;border-radius:20px;
+  font-size:0.78rem;font-weight:500;
+  background:var(--garlic-white);color:var(--garlic-gray);
+  border:1px solid var(--garlic-gray-border);
+  transition:all 0.2s;cursor:pointer;
+}
+.cat-tab.active{
+  background:var(--garlic-black);color:var(--garlic-white);
+  border-color:var(--garlic-black);
+}
+.cat-deal-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  padding:0 16px 16px;
+}
+
+/* ========== RANKING LIST ========== */
+.ranking-list{padding:0 16px 16px}
+.rank-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;background:var(--garlic-white);
+  border-radius:12px;margin-bottom:8px;
+  transition:transform 0.15s;
+}
+.rank-item:active{transform:scale(0.99)}
+.rank-num{
+  font-size:1.1rem;font-weight:700;color:var(--garlic-green);
+  min-width:28px;text-align:center;
+}
+.rank-num.top3{color:var(--garlic-coral)}
+.rank-thumb{
+  width:64px;height:64px;border-radius:10px;
+  flex-shrink:0;overflow:hidden;
+}
+.rank-info{flex:1;min-width:0}
+.rank-name{font-size:0.78rem;font-weight:500;color:var(--garlic-black);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank-price{display:flex;align-items:baseline;gap:4px}
+.rank-discount{font-size:0.82rem;font-weight:700;color:var(--garlic-coral)}
+.rank-amount{font-size:0.82rem;font-weight:700;color:var(--garlic-black)}
+.rank-original{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:1000;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom:var(--safe-bottom);
+  background:var(--garlic-white);
+  border-top:1px solid var(--garlic-gray-border);
+  display:flex;align-items:center;justify-content:space-around;
+  max-width:640px;margin:0 auto;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 0;min-width:56px;
+}
+.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
+.nav-item.active svg{stroke:var(--garlic-green)}
+.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
+.nav-item .cart-badge{position:relative}
+.nav-item .cart-badge .c-dot{
+  position:absolute;top:-4px;right:-8px;
+  background:var(--garlic-red);color:#fff;
+  font-size:0.5rem;font-weight:700;
+  min-width:14px;height:14px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 3px;border:1.5px solid var(--garlic-white);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.5s ease-out both}
+.fade-up-1{animation-delay:0.05s}
+.fade-up-2{animation-delay:0.1s}
+.fade-up-3{animation-delay:0.15s}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){
+  .main{max-width:640px;margin:0 auto}
+  .header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
+}
+@media(min-width:1440px){
+  body{background:#EDE8E0}
+  .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M12 2C8 2 4 6 4 12c0 4 2 7 5 9 1-2 2-5 3-9 1 4 2 7 3 9 3-2 5-5 5-9 0-6-4-10-8-10z" fill="#00C73C"/><path d="M12 2c-1 3-1 6 0 10 1-4 1-7 0-10z" fill="#00A832"/></svg>
+    <span style="font-family:'GmarketSans',sans-serif;font-weight:700;font-size:20px;color:#1B4332;margin-left:4px">Garlic</span>
+  </div>
+  <div class="header-search">
+    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="마늘밭에서 찾기" readonly>
+  </div>
+  <div class="header-actions">
+    <a href="03_challenge.html" class="h-btn" aria-label="알림" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="dot"></span>
+    </a>
+    <a href="04_mypage.html" class="h-btn" aria-label="프로필" style="text-decoration:none;color:inherit">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item" style="text-decoration:none;color:inherit">추천</a>
+  <a href="05_deals.html" class="tab-item active" style="text-decoration:none;color:inherit">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">마늘까기</a>
+  <a href="#" class="tab-item" style="text-decoration:none;color:inherit">적립</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">식품</a>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main">
+
+  <!-- ===== HERO: 마늘 100원 딜 ===== -->
+  <section class="fade-up">
+    <div class="hero-deal">
+      <div class="hero-label">&#9889; GARLIC SUPER DEAL</div>
+      <div class="hero-title">마늘 500g <span>100원!</span></div>
+      <div class="hero-sub">하루 한 번, 갈릭 회원 전용 초특가 한정 수량</div>
+      <div class="hero-timer">
+        <span class="t-block" id="hero-h">01</span>
+        <span class="t-sep">:</span>
+        <span class="t-block" id="hero-m">23</span>
+        <span class="t-sep">:</span>
+        <span class="t-block" id="hero-s">45</span>
+      </div>
+      <button class="hero-cta" onclick="alert('100원 딜 참여 완료!')">100원에 받기 &#8594;</button>
+    </div>
+  </section>
+
+  <!-- ===== 타임특가 ===== -->
+  <div class="section-header fade-up fade-up-1">
+    <h2>&#9201; 타임특가</h2>
+    <button class="more">전체보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="time-deals fade-up fade-up-1" id="timeDeals"></div>
+
+  <!-- ===== 오늘의 특가 ===== -->
+  <div class="section-header fade-up fade-up-2">
+    <h2>&#128293; 오늘의 특가</h2>
+    <button class="more">더보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div class="product-grid fade-up fade-up-2" id="todayGrid"></div>
+
+  <!-- ===== 카테고리별 특가 ===== -->
+  <div class="section-header fade-up fade-up-3" id="categories">
+    <h2>&#128722; 카테고리별 특가</h2>
+  </div>
+  <div class="cat-tabs fade-up fade-up-3">
+    <button class="cat-tab active" onclick="switchCat(this,0)">패션</button>
+    <button class="cat-tab" onclick="switchCat(this,1)">뷰티</button>
+    <button class="cat-tab" onclick="switchCat(this,2)">디지털</button>
+    <button class="cat-tab" onclick="switchCat(this,3)">식품</button>
+    <button class="cat-tab" onclick="switchCat(this,4)">리빙</button>
+  </div>
+  <div class="cat-deal-grid fade-up" id="catGrid"></div>
+
+  <!-- ===== 마늘밭 인기 특가 TOP 5 ===== -->
+  <div class="section-header fade-up">
+    <h2>&#127942; 마늘밭 인기 특가</h2>
+  </div>
+  <div class="ranking-list fade-up" id="rankList"></div>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <a href="01_home.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="nav-label">홈</span>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span class="nav-label">카테고리</span>
+  </a>
+  <a href="#" class="nav-item" style="text-decoration:none">
+    <span class="cart-badge">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="c-dot">3</span>
+    </span>
+    <span class="nav-label">마늘밭</span>
+  </a>
+  <a href="garlic_tamagotchi.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+    <span class="nav-label">마늘키우기</span>
+  </a>
+  <a href="04_mypage.html" class="nav-item" style="text-decoration:none">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">마이갈릭</span>
+  </a>
+</nav>
+
+<script>
+// ===== HERO COUNTDOWN =====
+(function(){
+  let total = 1*3600 + 23*60 + 45;
+  function tick(){
+    if(total<=0) return;
+    total--;
+    const h=Math.floor(total/3600), m=Math.floor((total%3600)/60), s=total%60;
+    document.getElementById('hero-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('hero-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('hero-s').textContent=String(s).padStart(2,'0');
+  }
+  setInterval(tick,1000);
+})();
+
+// ===== TIME DEALS =====
+const timeDeals = [
+  {name:'의성 한지형 마늘 1kg 산지직송',discount:72,price:'5,800',original:'20,800',remain:'02:15:30',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
+  {name:'블랙 갈릭 에센스 50ml 기미케어',discount:65,price:'11,700',original:'33,600',remain:'01:45:12',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
+  {name:'갈릭 무선이어폰 ANC Pro',discount:58,price:'29,900',original:'72,000',remain:'03:02:44',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},
+  {name:'프리미엄 마늘 아로마 디퓨저',discount:60,price:'16,600',original:'41,500',remain:'00:58:21',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},
+];
+
+const tdContainer = document.getElementById('timeDeals');
+timeDeals.forEach(d => {
+  const card = document.createElement('div');
+  card.className = 'time-card';
+  card.innerHTML = `
+    <div class="time-thumb" style="background:${d.bg}"></div>
+    <div class="time-badge" style="animation:pulse 1.5s infinite">&#9201; ${d.remain}</div>
+    <div class="time-info">
+      <div class="time-name">${d.name}</div>
+      <div class="time-price">
+        <span class="time-discount">${d.discount}%</span>
+        <span class="time-amount">${d.price}원</span>
+      </div>
+      <div class="time-original">${d.original}원</div>
+    </div>`;
+  tdContainer.appendChild(card);
+});
+
+// ===== TODAY'S DEALS =====
+const todayDeals = [
+  {brand:'마늘팜',name:'의성 한지형 마늘 2kg 특대 선물세트',discount:68,price:'12,900',original:'40,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(4,201)',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
+  {brand:'갈릭스타일',name:'봄 오버핏 린넨 원피스 [3컬러]',discount:55,price:'21,600',original:'48,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(1,892)',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},
+  {brand:'뷰티마늘',name:'갈릭 콜라겐 앰플 30ml + 패드 60매',discount:72,price:'9,800',original:'35,000',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(7,230)',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
+  {brand:'테크마늘',name:'갈릭 에어팟 맥스 호환 케이스',discount:80,price:'3,900',original:'19,800',tag:'limit',tagText:'한정수량',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(2,105)',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},
+  {brand:'마늘키친',name:'트러플 마늘 올리브오일 1L 대용량',discount:52,price:'18,900',original:'39,800',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9734;',reviews:'(3,456)',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},
+  {brand:'갈릭홈',name:'마늘 추출 천연 섬유탈취제 500ml',discount:63,price:'6,900',original:'18,800',tag:'best',tagText:'BEST',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(5,678)',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},
+  {brand:'마늘피트',name:'갈릭 에어 러닝화 2세대 [남녀공용]',discount:58,price:'36,400',original:'86,800',tag:'hot',tagText:'HOT',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(8,901)',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},
+  {brand:'갈릭팜',name:'제주 흑마늘즙 60포 가족세트',discount:50,price:'28,000',original:'56,000',tag:'deal',tagText:'GARLIC DEAL',stars:'&#9733;&#9733;&#9733;&#9733;&#9733;',reviews:'(6,214)',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},
+];
+
+const todayGrid = document.getElementById('todayGrid');
+todayDeals.forEach((p,i) => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <div class="product-thumb">
+      <div style="width:100%;height:100%;background:${p.bg}"></div>
+      <div class="tag tag-${p.tag}">${p.tagText}</div>
+      <div class="wish"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">${p.brand}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">
+        <span class="product-discount">${p.discount}%</span>
+        <span class="product-amount">${p.price}원</span>
+      </div>
+      <div class="product-original">${p.original}원</div>
+      <div class="product-meta">
+        <span class="stars">${p.stars}</span>
+        <span class="review">${p.reviews}</span>
+      </div>
+    </div>`;
+  todayGrid.appendChild(card);
+});
+
+// ===== CATEGORY DEALS =====
+const catData = [
+  // Fashion
+  [{brand:'갈릭스타일',name:'오버핏 크롭 자켓 [4컬러]',discount:62,price:'18,900',original:'49,800',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},{brand:'마늘패션',name:'와이드 데님팬츠 하이웨스트',discount:55,price:'22,400',original:'49,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},{brand:'갈릭슈즈',name:'청키 스니커즈 화이트 [230-280]',discount:70,price:'23,900',original:'79,800',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},{brand:'마늘백',name:'미니 크로스백 레더 [5컬러]',discount:58,price:'16,800',original:'39,800',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'}],
+  // Beauty
+  [{brand:'뷰티마늘',name:'갈릭 세럼 파운데이션 SPF50',discount:60,price:'11,900',original:'29,800',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},{brand:'마늘뷰티',name:'수분 톤업크림 50ml + 미스트',discount:72,price:'8,400',original:'30,000',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},{brand:'갈릭코스',name:'릴리 퍼퓸 오드뚜왈렛 50ml',discount:55,price:'26,900',original:'59,800',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},{brand:'마늘스킨',name:'블랙갈릭 마스크팩 20매 세트',discount:68,price:'9,600',original:'30,000',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'}],
+  // Digital
+  [{brand:'테크마늘',name:'갈릭 워치 프로 7세대',discount:52,price:'143,000',original:'299,000',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},{brand:'마늘테크',name:'USB-C 65W 3포트 충전기',discount:75,price:'9,900',original:'39,800',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},{brand:'갈릭디지',name:'무선 기계식 키보드 저소음',discount:58,price:'41,900',original:'99,800',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},{brand:'마늘게이밍',name:'듀얼 모니터 암 관절형',discount:63,price:'22,200',original:'59,800',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'}],
+  // Food
+  [{brand:'마늘팜',name:'남해 깐마늘 3kg 대용량',discount:65,price:'13,900',original:'39,800',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},{brand:'갈릭팜',name:'유기농 흑마늘 진액 30포',discount:58,price:'18,900',original:'45,000',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},{brand:'마늘키친',name:'마늘 소시지 세트 1.2kg',discount:50,price:'14,900',original:'29,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},{brand:'갈릭푸드',name:'마늘 올리브유 페스토 3종',discount:72,price:'11,200',original:'40,000',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'}],
+  // Living
+  [{brand:'갈릭홈',name:'마늘 추출 항균 스프레이 세트',discount:60,price:'11,900',original:'29,800',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},{brand:'마늘리빙',name:'프리미엄 마늘 베개 메모리폼',discount:55,price:'31,400',original:'69,800',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},{brand:'갈릭클린',name:'천연 마늘 세탁세제 3L',discount:68,price:'8,900',original:'27,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},{brand:'마늘가든',name:'마늘 재배 키트 미니화분',discount:50,price:'12,400',original:'24,800',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'}],
+];
+
+let currentCat = 0;
+const catGrid = document.getElementById('catGrid');
+
+function renderCat(idx) {
+  catGrid.innerHTML = '';
+  catData[idx].forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-thumb">
+        <div style="width:100%;height:100%;background:${p.bg}"></div>
+        <div class="tag tag-deal">GARLIC DEAL</div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">
+          <span class="product-discount">${p.discount}%</span>
+          <span class="product-amount">${p.price}원</span>
+        </div>
+        <div class="product-original">${p.original}원</div>
+      </div>`;
+    catGrid.appendChild(card);
+  });
+}
+renderCat(0);
+
+function switchCat(el, idx) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentCat = idx;
+  renderCat(idx);
+}
+
+// ===== RANKING =====
+const rankings = [
+  {rank:1,name:'의성 한지형 마늘 2kg 특대 선물세트',discount:68,price:'12,900',original:'40,000',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
+  {rank:2,name:'블랙 갈릭 콜라겐 앰플 30ml',discount:72,price:'9,800',original:'35,000',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
+  {rank:3,name:'갈릭 에어 러닝화 2세대',discount:58,price:'36,400',original:'86,800',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},
+  {rank:4,name:'트러플 마늘 올리브오일 1L',discount:52,price:'18,900',original:'39,800',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},
+  {rank:5,name:'제주 흑마늘즙 60포 가족세트',discount:50,price:'28,000',original:'56,000',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},
+];
+
+const rankList = document.getElementById('rankList');
+rankings.forEach(r => {
+  const item = document.createElement('div');
+  item.className = 'rank-item';
+  item.innerHTML = `
+    <div class="rank-num ${r.rank <= 3 ? 'top3' : ''}">${r.rank}</div>
+    <div class="rank-thumb" style="background:${r.bg}"></div>
+    <div class="rank-info">
+      <div class="rank-name">${r.name}</div>
+      <div class="rank-price">
+        <span class="rank-discount">${r.discount}%</span>
+        <span class="rank-amount">${r.price}원</span>
+        <span class="rank-original">${r.original}원</span>
+      </div>
+    </div>`;
+  rankList.appendChild(item);
+});
+
+// ===== FADE-UP OBSERVER =====
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){e.target.classList.add('fade-up');obs.unobserve(e.target)}
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

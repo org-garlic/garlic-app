@@ -56,7 +56,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 .header-day{display:inline-block;background:var(--garlic-green);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-top:4px}
 
 /* ===== CHARACTER STAGE ===== */
-.stage{padding:72px 24px 20px;text-align:center;position:relative;overflow:hidden}
+.stage{padding:96px 24px 20px;text-align:center;position:relative;overflow:hidden}
 .stage::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:280px;height:60px;background:radial-gradient(ellipse,rgba(0,199,60,.1) 0%,transparent 70%);border-radius:50%}
 .char-name{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--soft-green);padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;color:var(--garlic-dark-green);margin-bottom:16px;box-shadow:var(--card-shadow)}
 .char-name .heart{color:var(--garlic-coral);animation:heartbeat 1.2s ease-in-out infinite}
@@ -168,6 +168,15 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/* ===== TAB NAVIGATION ===== */
+.tab-nav{position:fixed;top:52px;left:0;right:0;z-index:99;display:flex;gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #EEE;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:640px;margin:0 auto}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-item{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;color:#999;position:relative;white-space:nowrap;transition:color .2s}
+.tab-item.active{color:#333;font-weight:700}
+.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:#00C73C;border-radius:1px}
+.tab-item:first-child{padding-left:20px}
+@media(min-width:641px){.tab-nav{left:50%;transform:translateX(-50%)}}
+
 @media(min-width:768px){
   .character{width:260px;height:260px}
   .actions{max-width:440px}
@@ -219,6 +228,18 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
     </a>
   </div>
 </header>
+
+<!-- ===== TAB NAVIGATION ===== -->
+<nav class="tab-nav">
+  <a href="01_home.html" class="tab-item" style="text-decoration:none;color:inherit">추천</a>
+  <a href="05_deals.html" class="tab-item" style="text-decoration:none;color:inherit">특가</a>
+  <a href="garlic_tamagotchi.html" class="tab-item active" style="text-decoration:none;color:inherit">너마늘키우기</a>
+  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">마늘까기</a>
+  <a href="#" class="tab-item" style="text-decoration:none;color:inherit">적립</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">패션</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">뷰티</a>
+  <a href="#categories" class="tab-item" style="text-decoration:none;color:inherit">식품</a>
+</nav>
 
 <!-- ===== CHARACTER STAGE ===== -->
 <section class="stage">
