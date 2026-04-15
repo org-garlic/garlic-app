@@ -9,13 +9,13 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "../reference/G_Logo.png",
+      "src": "../reference/G_Logo_3D_2.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "../reference/G_Logo.png",
+      "src": "../reference/G_Logo_3D_2.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

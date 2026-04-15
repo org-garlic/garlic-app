@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776134106845,
+  "lastScanned": 1776236506065,
   "projectRoot": "/Users/jaeseoh/Documents/workspace/garlic",
   "techStack": {
     "languages": [],
@@ -31,45 +31,118 @@
   },
   "customNotes": [],
   "directoryMap": {
+    "design-guide": {
+      "path": "design-guide",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1776236505874,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
     "docs": {
       "path": "docs",
       "purpose": "Documentation",
-      "fileCount": 0,
-      "lastAccessed": 1776134106816,
-      "keyFiles": []
+      "fileCount": 1,
+      "lastAccessed": 1776236505884,
+      "keyFiles": [
+        "cto-report.html"
+      ]
     },
     "garlic-api": {
       "path": "garlic-api",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776134106817,
+      "lastAccessed": 1776236505886,
       "keyFiles": []
     },
     "garlic-app": {
       "path": "garlic-app",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776134106818,
+      "lastAccessed": 1776236505888,
       "keyFiles": []
+    },
+    "garlic-blog": {
+      "path": "garlic-blog",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1776236505897,
+      "keyFiles": [
+        "event_toemacon.html",
+        "event_uiseong_festival.html",
+        "garlic_global.html",
+        "garlic_ip.html",
+        "garlic_tamagotchi.html"
+      ]
     },
     "prompt": {
       "path": "prompt",
       "purpose": null,
-      "fileCount": 1,
-      "lastAccessed": 1776134106818,
-      "keyFiles": []
+      "fileCount": 35,
+      "lastAccessed": 1776236505903,
+      "keyFiles": [
+        "00_MASTER_PROMPT.md",
+        "01_PHASE2_PROMPT.md",
+        "01_garlic_myscene.html",
+        "01_home.html",
+        "02_about.html"
+      ]
     },
     "reference": {
       "path": "reference",
       "purpose": null,
-      "fileCount": 29,
-      "lastAccessed": 1776134106820,
+      "fileCount": 93,
+      "lastAccessed": 1776236505906,
       "keyFiles": [
         "20260402_회의록.txt",
+        "E-commerce_Survival_Blueprint_(2).pptx",
         "GARLIC_Pitch_박미소.pptx",
-        "GARLIC_프롬프트모음.md",
-        "Gemini_Generated_Image_b8ba2hb8ba2hb8ba.png",
-        "Gemini_Generated_Image_ez04yqez04yqez04.png"
+        "GARLIC_REBORN.pdf",
+        "GARLIC_REBORN.pptx"
+      ]
+    },
+    "test-app": {
+      "path": "test-app",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1776236505912,
+      "keyFiles": [
+        "components.json",
+        "next-env.d.ts",
+        "next.config.mjs",
+        "package.json",
+        "pnpm-lock.yaml"
+      ]
+    },
+    "test-app/app": {
+      "path": "test-app/app",
+      "purpose": "Application code",
+      "fileCount": 3,
+      "lastAccessed": 1776236505923,
+      "keyFiles": [
+        "globals.css",
+        "layout.tsx",
+        "page.tsx"
+      ]
+    },
+    "test-app/components": {
+      "path": "test-app/components",
+      "purpose": "UI components",
+      "fileCount": 2,
+      "lastAccessed": 1776236505923,
+      "keyFiles": [
+        "garlic-app.tsx",
+        "theme-provider.tsx"
+      ]
+    },
+    "test-app/lib": {
+      "path": "test-app/lib",
+      "purpose": "Library code",
+      "fileCount": 1,
+      "lastAccessed": 1776236506019,
+      "keyFiles": [
+        "utils.ts"
       ]
     }
   },

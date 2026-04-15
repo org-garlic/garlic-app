@@ -34,5 +34,23 @@
     "agentId": "a26ffe57d632c99b8",
     "agentType": "oh-my-claudecode:designer",
     "message": ""
+  },
+  {
+    "timestamp": "2026-04-15T06:15:12.870Z",
+    "errorType": "unknown",
+    "category": "unknown",
+    "severity": "low",
+    "agentId": "ab11ff615c0591db0",
+    "agentType": "oh-my-claudecode:designer-high",
+    "message": ""
+  },
+  {
+    "timestamp": "2026-04-15T06:18:16.944Z",
+    "errorType": "unknown",
+    "category": "unknown",
+    "severity": "low",
+    "agentId": null,
+    "agentType": null,
+    "message": ""
   }
 ]
