@@ -500,8 +500,9 @@ img{display:block;max-width:100%}
 
   <!-- DEAL BANNER -->
   <section class="fade-up fade-d1">
-    <div class="deal-banner" style="position:relative;overflow:hidden">
-      <img src="../reference/마늘_3D_일러스트.png" alt="마늘" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:120px;height:120px;object-fit:contain;opacity:.85;filter:drop-shadow(0 4px 12px rgba(0,0,0,.1))">
+    <div class="deal-banner" style="position:relative;overflow:hidden;background:url('../reference/마늘_3D_일러스트.png') right center / contain no-repeat, linear-gradient(135deg,var(--lime),var(--neon));min-height:180px">
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(164,221,0,.95) 0%,rgba(164,221,0,.85) 50%,rgba(182,245,0,.4) 100%)"></div>
+      <div style="position:relative;z-index:1">
       <div class="deal-label">&#x26A1; GARLIC DEAL</div>
       <div class="deal-title">마늘 500g <span>100원!</span></div>
       <div class="deal-sub">하루 한 번, 갈릭 회원 전용 초특가</div>
@@ -513,6 +514,7 @@ img{display:block;max-width:100%}
         <span class="t-block" id="timer-s">17</span>
       </div>
       <button class="deal-cta" onclick="alert('참여 완료! 🧄')">지금 참여하기 &rarr;</button>
+      </div>
     </div>
   </section>
 
