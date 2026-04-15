@@ -24,7 +24,7 @@ body{background:#FFFADC;min-height:100vh;display:flex;align-items:center;justify
   display:inline-block;
   text-shadow:0 4px 12px rgba(0,0,0,.08);
 }
-.letter.drop{animation:letterBounce .8s cubic-bezier(.22,1.5,.36,1) forwards}
+.letter.drop{animation:letterBounce .8s cubic-bezier(.22,1.5,.36,1) forwards;opacity:1}
 .letter.drop:hover{animation:letterWiggle .4s ease-in-out}
 .letter:nth-child(1){color:#98CD00}
 .letter:nth-child(2){color:#A4DD00}
@@ -54,7 +54,7 @@ body{background:#FFFADC;min-height:100vh;display:flex;align-items:center;justify
 }
 
 /* 착지 후 살짝 통통 반복 (물결) */
-.letter.idle{animation:letterIdle 2s ease-in-out infinite}
+.letter.idle{animation:letterIdle 2s ease-in-out infinite;opacity:1 !important;transform:none}
 .letter:nth-child(1).idle{animation-delay:0s}
 .letter:nth-child(2).idle{animation-delay:.15s}
 .letter:nth-child(3).idle{animation-delay:.3s}
