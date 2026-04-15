@@ -2,65 +2,62 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="../reference/G_Logo.png">
-<link rel="icon" type="image/png" href="../reference/G_Logo.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="../reference/G_Logo.png">
-<link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Garlic - 나마늘 위한 마켓</title>
+<link rel="icon" type="image/png" href="../reference/G_Logo.png">
+<link rel="apple-touch-icon" href="../reference/G_Logo.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#6B8E4E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <style>
-/* ========== FONTS ========== */
-
-/* ========== RESET & VARIABLES ========== */
+/* ========== RESET & DESIGN SYSTEM ========== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
 :root{
-  /* 마늘 내추럴 팔레트 */
-  --bg:#F5F1EA;
-  --bg-alt:#EDE8E0;
-  --card:#FFFFFF;
-  --text:#2D2A24;
-  --text-light:#8A8478;
-  --green:#6B8E4E;
-  --green-light:#EDF3E8;
-  --gold:#D4A843;
-  --gold-light:#FFF3D6;
-  --coral:#D4A843;
-  --border:#E8DFD0;
-  --shadow:rgba(45,42,36,0.06);
-  --garlic-green:#6B8E4E;
-  --garlic-green-light:#EDF3E8;
-  --garlic-green-pale:rgba(107,142,78,0.08);
-  --garlic-bg:#F5F1EA;
-  --garlic-white:#FFFFFF;
-  --garlic-black:#2D2A24;
-  --garlic-gray:#6B665E;
-  --garlic-gray-light:#8A8478;
-  --garlic-gray-border:#E8DFD0;
-  --garlic-coral:#D4A843;
-  --garlic-gold:#D4A843;
-  --garlic-red:#C45B3B;
-  --garlic-purple:#8B7355;
-  --garlic-blue:#6B8E4E;
-  --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --bg-primary:#FAF8F4;
+  --bg-surface:#F0ECE4;
+  --bg-muted:#E4DDD2;
+  --primary-50:#EEF4E6;
+  --primary-200:#B8D491;
+  --primary-500:#6B8E4E;
+  --primary-800:#3D5C2A;
+  --secondary-50:#FCF5E8;
+  --secondary-200:#E8D5A8;
+  --secondary-500:#C4A058;
+  --secondary-800:#7A6432;
+  --accent-50:#FDE8E4;
+  --accent-500:#D94B3A;
+  --accent-800:#8C2E22;
+  --neutral-900:#2D2A24;
+  --neutral-600:#6B6560;
+  --neutral-400:#A09888;
+  --success:#6B8E4E;
+  --warning:#C4A058;
+  --danger:#D94B3A;
+  --info:#5B8DB8;
+  --font-primary:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --radius-xl:20px;
+  --radius-pill:100px;
+  --shadow-card:0 1px 4px rgba(45,42,36,.06);
+  --shadow-elevated:0 4px 16px rgba(45,42,36,.08);
+  --max-width:430px;
   --header-h:52px;
   --tab-h:44px;
   --nav-h:56px;
   --safe-top:env(safe-area-inset-top,0px);
   --safe-bottom:env(safe-area-inset-bottom,0px);
 }
+
 html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
 body{
-  font-family:var(--font);
-  background:var(--garlic-bg);
-  color:var(--garlic-black);
+  font-family:var(--font-primary);
+  background:var(--bg-primary);
+  color:var(--neutral-900);
   min-height:100vh;min-height:100dvh;
   overflow-x:hidden;
   padding-top:calc(var(--header-h) + var(--tab-h) + var(--safe-top));
@@ -68,291 +65,389 @@ body{
 }
 ::-webkit-scrollbar{width:0;height:0}
 a{text-decoration:none;color:inherit}
-button{border:none;background:none;cursor:pointer;font-family:var(--font)}
+button{border:none;background:none;cursor:pointer;font-family:var(--font-primary)}
 img{display:block;max-width:100%}
 
-/* ========== HEADER ========== */
+/* ========== LAYOUT SHELL ========== */
+.shell{max-width:var(--max-width);margin:0 auto;position:relative}
+
+/* ========== HEADER (52px) ========== */
 .header{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   height:calc(var(--header-h) + var(--safe-top));
   padding-top:var(--safe-top);
-  background:linear-gradient(135deg,#F5F1EA,#FBF8F3);
-  display:flex;align-items:center;
-  padding-left:16px;padding-right:12px;
-  border-bottom:1.5px solid #E8DFD0;
+  background:var(--bg-primary);
+  border-bottom:.5px solid var(--bg-muted);
 }
-.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.header-logo img{height:28px;width:auto;border-radius:4px}
-.header-search{flex:1;margin:0 10px;position:relative}
-.header-search input{
-  width:100%;height:36px;border:1.5px solid #E8DFD0;
-  border-radius:20px;background:#fff;
-  padding:0 12px 0 34px;font-family:var(--font);font-size:0.78rem;font-weight:300;
-  color:var(--garlic-black);outline:none;transition:all 0.2s;
+.header-inner{
+  max-width:var(--max-width);margin:0 auto;height:var(--header-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;
 }
-.header-search input::placeholder{color:#aaa;font-weight:300}
-.header-search input:focus{border-color:#6B8E4E;box-shadow:0 0 0 3px rgba(107,142,78,.12)}
-.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#8A8478}
-.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
-.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative;transition:background .2s}
-.h-btn:active{background:rgba(107,142,78,.08)}
-.h-btn svg{width:22px;height:22px;stroke:#6B665E;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.h-btn:hover svg{stroke:#6B8E4E}
-.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:#D4A843;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 4px rgba(212,168,67,.4)}
+.header-wordmark{
+  font-size:14px;font-weight:900;letter-spacing:3px;
+  color:var(--neutral-900);line-height:1;
+}
+.header-actions{display:flex;align-items:center;gap:12px}
+.header-actions a{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;
+  position:relative;transition:background .2s;
+}
+.header-actions a:active{background:rgba(107,142,78,.06)}
+.header-actions a svg{width:20px;height:20px;color:var(--neutral-600)}
+.cart-badge{
+  position:absolute;top:4px;right:2px;
+  min-width:16px;height:16px;border-radius:8px;
+  background:var(--accent-500);color:#fff;
+  font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 4px;border:1.5px solid var(--bg-primary);
+}
 
 /* ========== TAB NAVIGATION ========== */
 .tab-nav{
   position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
-  height:var(--tab-h);background:var(--garlic-white);
-  border-bottom:1px solid var(--garlic-gray-border);
+  height:var(--tab-h);background:var(--bg-primary);
+  border-bottom:.5px solid var(--bg-muted);
   overflow-x:auto;overflow-y:hidden;
-  display:flex;align-items:stretch;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
 }
 .tab-nav::-webkit-scrollbar{display:none}
+.tab-inner{
+  max-width:var(--max-width);margin:0 auto;height:100%;
+  display:flex;align-items:stretch;
+}
 .tab-item{
-  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
-  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
-  white-space:nowrap;position:relative;transition:color 0.2s;
+  flex-shrink:0;padding:0 14px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:500;color:var(--neutral-400);
+  white-space:nowrap;position:relative;transition:color .2s;
 }
-.tab-item.active{color:var(--garlic-black);font-weight:700}
+.tab-item:first-child{padding-left:16px}
+.tab-item.active{color:var(--primary-500);font-weight:700}
 .tab-item.active::after{
-  content:'';position:absolute;bottom:0;left:16px;right:16px;
-  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
+  content:'';position:absolute;bottom:0;left:14px;right:14px;
+  height:2px;background:var(--primary-500);border-radius:1px 1px 0 0;
 }
-.tab-item:first-child{padding-left:20px}
 
-/* ========== MAIN ========== */
-.main{max-width:640px;margin:0 auto;padding:0}
+/* ========== MAIN CONTENT ========== */
+.main{max-width:var(--max-width);margin:0 auto;padding:0}
 
-/* ========== MANURI SECTION ========== */
-.manuri-section{
-  padding:16px 16px 12px;background:var(--garlic-white);
-  margin-bottom:8px;
-}
+/* ========== MANURI RECOMMENDATION CARD ========== */
+.manuri-section{padding:12px 16px}
 .manuri-card{
-  display:flex;align-items:flex-start;gap:12px;
-  background:var(--garlic-green-light);border-radius:14px;
+  display:flex;align-items:center;gap:12px;
+  background:#fff;border-radius:var(--radius-lg);
   padding:14px 16px;position:relative;
+  box-shadow:var(--shadow-card);
 }
-.manuri-mascot{
-  width:52px;height:52px;flex-shrink:0;
+.manuri-mascot{width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.manuri-bubble{flex:1}
+.manuri-bubble .msg{font-size:13px;font-weight:500;color:var(--neutral-900);line-height:1.55}
+.manuri-bubble .msg em{font-style:normal;color:var(--primary-500);font-weight:700}
+.manuri-close{
+  position:absolute;top:10px;right:10px;width:22px;height:22px;
   display:flex;align-items:center;justify-content:center;
+  border-radius:50%;opacity:.3;transition:opacity .2s;
 }
-.manuri-bubble{flex:1;position:relative}
-.manuri-bubble .label{
-  font-size:0.68rem;font-weight:700;color:var(--garlic-green);
-  margin-bottom:4px;display:flex;align-items:center;gap:4px;
-}
-.manuri-bubble .msg{font-size:0.82rem;font-weight:500;color:var(--garlic-black);line-height:1.5}
-.manuri-bubble .msg em{font-style:normal;color:var(--garlic-green);font-weight:700}
-.manuri-close{position:absolute;top:10px;right:12px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;opacity:0.3}
+.manuri-close:hover{opacity:.6}
 
 /* ========== DEAL BANNER ========== */
 .deal-banner{
-  margin:0 16px 12px;border-radius:14px;overflow:hidden;
-  background:linear-gradient(135deg,#D4A843,#E8C060);
+  margin:8px 16px 12px;border-radius:var(--radius-lg);overflow:hidden;
+  background:linear-gradient(135deg,var(--secondary-500),#D4A843);
   padding:20px;position:relative;color:#fff;
 }
 .deal-banner::before{
-  content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;
-  background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%);
+  content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;
+  background:radial-gradient(circle,rgba(255,255,255,.12) 0%,transparent 70%);
+  border-radius:50%;
+}
+.deal-banner::after{
+  content:'';position:absolute;bottom:-20px;left:30%;width:100px;height:100px;
+  background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);
   border-radius:50%;
 }
 .deal-label{
   display:inline-flex;align-items:center;gap:4px;
-  background:rgba(255,255,255,0.2);border-radius:20px;
-  padding:4px 10px;font-size:0.68rem;font-weight:700;
+  background:rgba(255,255,255,.18);border-radius:var(--radius-pill);
+  padding:4px 10px;font-size:11px;font-weight:700;
   margin-bottom:10px;backdrop-filter:blur(4px);
 }
-.deal-title{font-size:1.3rem;font-weight:700;margin-bottom:4px;line-height:1.3}
-.deal-title span{color:#fff;font-size:1.6rem}
-.deal-sub{font-size:0.75rem;font-weight:300;opacity:0.85;margin-bottom:14px}
-.deal-timer{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.deal-title{font-size:22px;font-weight:800;margin-bottom:4px;line-height:1.3;letter-spacing:-.3px}
+.deal-title span{font-size:28px}
+.deal-sub{font-size:12px;font-weight:400;opacity:.8;margin-bottom:14px}
+.deal-timer{display:flex;align-items:center;gap:5px;margin-bottom:16px}
 .deal-timer .t-block{
-  background:rgba(0,0,0,0.3);border-radius:6px;padding:4px 8px;
-  font-size:1rem;font-weight:700;min-width:36px;text-align:center;
-  backdrop-filter:blur(4px);
+  background:rgba(0,0,0,.28);border-radius:var(--radius-sm);padding:5px 8px;
+  font-size:16px;font-weight:700;min-width:36px;text-align:center;
+  backdrop-filter:blur(4px);font-variant-numeric:tabular-nums;
 }
-.deal-timer .t-sep{font-weight:700;font-size:0.9rem;opacity:0.7}
+.deal-timer .t-sep{font-weight:700;font-size:14px;opacity:.6}
 .deal-cta{
   display:inline-flex;align-items:center;gap:6px;
-  background:#C4893B;color:#fff;
-  border-radius:24px;padding:10px 22px;
-  font-size:0.82rem;font-weight:700;
-  box-shadow:0 2px 12px rgba(0,0,0,0.15);
-  transition:transform 0.15s;
+  background:#fff;color:var(--secondary-800);
+  border-radius:var(--radius-pill);padding:10px 24px;
+  font-size:14px;font-weight:700;
+  box-shadow:0 2px 12px rgba(0,0,0,.1);
+  transition:transform .15s ease-out;
 }
-.deal-cta:active{transform:scale(0.97)}
+.deal-cta:active{transform:scale(.97)}
+
+/* ========== QUICK MENU ========== */
+.quick-menu{padding:16px}
+.quick-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.quick-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.quick-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--bg-surface);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;transition:transform .2s;
+}
+.quick-item:active .quick-icon{transform:scale(.93)}
+.quick-label{font-size:11px;font-weight:500;color:var(--neutral-600);text-align:center}
 
 /* ========== SECTION HEADER ========== */
 .section-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 16px 10px;
+  padding:20px 16px 10px;
 }
-.section-header h2{font-size:1rem;font-weight:700;color:var(--garlic-black)}
-.section-header .more{font-size:0.75rem;font-weight:500;color:var(--garlic-gray-light);display:flex;align-items:center;gap:2px}
-.section-header .more svg{width:14px;height:14px;stroke:var(--garlic-gray-light)}
+.section-header h2{font-size:16px;font-weight:700;color:var(--neutral-900)}
+.section-header .more{font-size:12px;font-weight:500;color:var(--neutral-400);display:flex;align-items:center;gap:2px}
+.section-header .more svg{width:14px;height:14px}
 
 /* ========== PRODUCT GRID ========== */
 .product-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
   padding:0 16px 16px;
 }
 .product-card{
-  background:var(--garlic-white);border-radius:12px;
-  overflow:hidden;transition:transform 0.15s;
+  background:#fff;border-radius:var(--radius-lg);
+  border:.5px solid var(--bg-muted);
+  overflow:hidden;transition:transform .2s ease-out;
+  box-shadow:var(--shadow-card);
 }
-.product-card:active{transform:scale(0.98)}
+.product-card:active{transform:scale(.98)}
 .product-thumb{
   width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;
+  background:var(--bg-surface);border-radius:var(--radius-md);
+  margin:6px;width:calc(100% - 12px);
 }
-.product-thumb .thumb-bg{
-  width:100%;height:100%;object-fit:cover;
+.product-thumb img{
+  width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md);
+  transition:transform .3s ease-out;
 }
-.product-thumb .tag{
-  position:absolute;top:8px;left:8px;
-  padding:3px 8px;border-radius:4px;
-  font-size:0.62rem;font-weight:700;
-  line-height:1.4;
+.product-card:hover .product-thumb img{transform:scale(1.03)}
+.product-thumb .badges{
+  position:absolute;top:6px;left:6px;display:flex;flex-wrap:wrap;gap:4px;
 }
-.tag-dna{background:var(--garlic-purple);color:#fff}
-.tag-ai{background:var(--garlic-green);color:#fff}
-.tag-manuri{background:var(--garlic-coral);color:#fff}
-.tag-hot{background:var(--garlic-red);color:#fff}
+.product-thumb .badge{
+  padding:3px 7px;border-radius:4px;
+  font-size:10px;font-weight:700;line-height:1.3;
+}
+.badge-dna{background:var(--primary-50);color:var(--primary-800)}
+.badge-recommend{background:var(--secondary-50);color:var(--secondary-800)}
+.badge-discount{background:var(--accent-50);color:var(--accent-800)}
+.badge-hot{background:var(--accent-50);color:var(--accent-800)}
+
 .product-thumb .wish{
-  position:absolute;bottom:8px;right:8px;
+  position:absolute;bottom:6px;right:6px;
   width:28px;height:28px;display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,0.85);border-radius:50%;
-  backdrop-filter:blur(4px);
+  background:rgba(255,255,255,.88);border-radius:50%;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:transform .2s;
 }
-.product-thumb .wish svg{width:16px;height:16px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.8}
-.wish.active svg{fill:#C4893B !important;stroke:#C4893B !important}
-.product-info{padding:10px 10px 14px}
-.product-brand{font-size:0.65rem;font-weight:500;color:var(--garlic-gray-light);margin-bottom:3px}
-.product-name{font-size:0.78rem;font-weight:500;color:var(--garlic-black);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.product-price{display:flex;align-items:baseline;gap:4px}
-.product-discount{font-size:0.9rem;font-weight:700;color:var(--garlic-coral)}
-.product-amount{font-size:0.9rem;font-weight:700;color:var(--garlic-black)}
-.product-original{font-size:0.7rem;font-weight:300;color:var(--garlic-gray-light);text-decoration:line-through;margin-top:2px}
-.product-meta{display:flex;align-items:center;gap:6px;margin-top:6px}
-.product-meta .stars{font-size:0.65rem;color:var(--garlic-gold)}
-.product-meta .review{font-size:0.62rem;font-weight:300;color:var(--garlic-gray-light)}
+.wish:active{transform:scale(.88)}
+.product-thumb .wish svg{width:16px;height:16px;stroke:var(--neutral-400);fill:none;stroke-width:1.8}
+.wish.active svg{fill:var(--accent-500)!important;stroke:var(--accent-500)!important}
 
-/* ========== QUICK MENU ========== */
-.quick-menu{
-  background:var(--garlic-white);padding:16px;margin-bottom:8px;
+.product-info{padding:8px 10px 12px}
+.product-brand{font-size:11px;font-weight:500;color:var(--neutral-400);margin-bottom:3px}
+.product-name{
+  font-size:15px;font-weight:500;color:var(--neutral-900);line-height:1.4;margin-bottom:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.quick-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
-}
-.quick-item{display:flex;flex-direction:column;align-items:center;gap:6px}
-.quick-icon{
-  width:48px;height:48px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;
-}
-.quick-icon.gi-1{background:#FFF3E0}
-.quick-icon.gi-2{background:#E8F5E9}
-.quick-icon.gi-3{background:#FBE9E7}
-.quick-icon.gi-4{background:#E3F2FD}
-.quick-icon.gi-5{background:#F3E5F5}
-.quick-label{font-size:0.65rem;font-weight:500;color:var(--garlic-gray);text-align:center}
+.product-price{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.product-discount{font-size:20px;font-weight:800;color:var(--accent-500)}
+.product-amount{font-size:20px;font-weight:800;color:var(--neutral-900)}
+.product-original{font-size:13px;font-weight:400;color:var(--neutral-400);text-decoration:line-through;margin-top:1px}
+.product-meta{display:flex;align-items:center;gap:5px;margin-top:6px}
+.product-meta .stars{font-size:11px;color:var(--secondary-500)}
+.product-meta .review{font-size:10px;font-weight:400;color:var(--neutral-400)}
 
-/* ========== CATEGORY BANNER ========== */
-.cat-banner{
-  margin:0 16px 12px;border-radius:14px;overflow:hidden;
-  position:relative;height:80px;
-  display:flex;align-items:center;padding:0 20px;
+/* ========== SCROLL STATUS ========== */
+.scroll-status{
+  text-align:center;padding:20px 16px;font-size:13px;
+  color:var(--neutral-400);font-weight:400;
 }
-.cat-banner.cb-fashion{background:linear-gradient(135deg,#FFE0E6 0%,#FFB3C1 100%)}
-.cat-banner.cb-beauty{background:linear-gradient(135deg,#E8F5E9 0%,#A5D6A7 100%)}
-.cat-banner .cb-text{font-size:0.82rem;font-weight:700;color:var(--garlic-black);line-height:1.4}
-.cat-banner .cb-text span{display:block;font-size:0.68rem;font-weight:300;color:var(--garlic-gray);margin-top:2px}
-.cat-banner .cb-emoji{position:absolute;right:20px;font-size:2.4rem;opacity:0.7}
+.scroll-spinner{display:none}
+.scroll-spinner.visible{display:block}
+.scroll-end{display:none}
+.scroll-end.visible{display:block}
 
-/* ========== BOTTOM NAV ========== */
+/* ========== BOTTOM NAVIGATION ========== */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;z-index:1000;
   height:calc(var(--nav-h) + var(--safe-bottom));
   padding-bottom:var(--safe-bottom);
-  background:var(--garlic-white);
-  border-top:1px solid var(--garlic-gray-border);
+  background:var(--bg-primary);
+  border-top:.5px solid var(--bg-muted);
+}
+.bottom-nav-inner{
+  max-width:var(--max-width);margin:0 auto;height:var(--nav-h);
   display:flex;align-items:center;justify-content:space-around;
-  max-width:640px;margin:0 auto;
 }
 .nav-item{
   display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:6px 0;min-width:56px;
+  padding:6px 0;min-width:52px;
+  transition:transform .15s;
 }
-.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
-.nav-item.active svg{stroke:var(--garlic-green)}
-.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
-.nav-item .cart-badge{position:relative}
-.nav-item .cart-badge .c-dot{
-  position:absolute;top:-4px;right:-8px;
-  background:var(--garlic-red);color:#fff;
-  font-size:0.5rem;font-weight:700;
-  min-width:14px;height:14px;border-radius:7px;
+.nav-item:active{transform:scale(.92)}
+.nav-item svg{width:20px;height:20px;color:var(--neutral-400);transition:color .2s}
+.nav-item .nav-label{font-size:10px;font-weight:500;color:var(--neutral-400);transition:color .2s}
+.nav-item.active svg{color:var(--primary-500)}
+.nav-item.active .nav-label{color:var(--primary-500);font-weight:700}
+.nav-item .cart-wrap{position:relative}
+.nav-item .nav-badge{
+  position:absolute;top:-5px;right:-9px;
+  background:var(--accent-500);color:#fff;
+  font-size:9px;font-weight:700;
+  min-width:15px;height:15px;border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  padding:0 3px;border:1.5px solid var(--garlic-white);
+  padding:0 4px;border:1.5px solid var(--bg-primary);
 }
 
 /* ========== ANIMATIONS ========== */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp 0.5s ease-out both}
-.fade-up-1{animation-delay:0.05s}
-.fade-up-2{animation-delay:0.1s}
-.fade-up-3{animation-delay:0.15s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .4s ease-out both}
+.fade-d1{animation-delay:.05s}
+.fade-d2{animation-delay:.1s}
+.fade-d3{animation-delay:.15s}
+.fade-d4{animation-delay:.2s}
 
 /* ========== RESPONSIVE ========== */
 @media(min-width:768px){
-  .main{max-width:640px;margin:0 auto}
-  .header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
+  .header,.tab-nav,.bottom-nav{left:50%;transform:translateX(-50%);max-width:var(--max-width)}
+  .header-inner,.tab-inner,.bottom-nav-inner{max-width:var(--max-width)}
 }
-@media(min-width:1440px){
-  body{background:#EDE8E0}
-  .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
+@media(min-width:1024px){
+  body{background:var(--bg-surface)}
+  .main{box-shadow:0 0 40px rgba(45,42,36,.04)}
+}
+
+/* ========== VOTE POPUP ========== */
+.cp-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(45,42,36,.45);opacity:0;
+  transition:opacity .3s ease-out;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.cp-popup{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:301;
+  background:#fff;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  padding:0 0 calc(env(safe-area-inset-bottom,12px) + 16px);
+  max-width:var(--max-width);margin:0 auto;
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.32,1.15,.54,1);
+  box-shadow:0 -8px 40px rgba(0,0,0,.1);
+}
+.cp-handle{width:36px;height:4px;background:var(--bg-muted);border-radius:2px;margin:12px auto 0}
+
+@media(min-width:768px){
+  .cp-popup{
+    bottom:auto;top:50%;left:50%;right:auto;
+    transform:translate(-50%,-50%) scale(.92);
+    border-radius:var(--radius-xl);max-width:400px;width:90%;
+    padding-bottom:24px;opacity:0;
+    transition:transform .4s cubic-bezier(.32,1.15,.54,1),opacity .3s;
+  }
+  .cp-popup.show{transform:translate(-50%,-50%) scale(1);opacity:1}
+  .cp-handle{display:none}
+}
+
+.cp-hero{
+  background:linear-gradient(160deg,var(--bg-primary) 0%,#fff 40%,var(--primary-50) 100%);
+  padding:32px 24px 20px;text-align:center;position:relative;overflow:hidden;
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+}
+@media(min-width:768px){.cp-hero{border-radius:var(--radius-xl) var(--radius-xl) 0 0}}
+.cp-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(107,142,78,.08) 0%,transparent 70%);border-radius:50%}
+.cp-hero::after{content:'';position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(196,160,88,.06) 0%,transparent 70%);border-radius:50%}
+.cp-fire{font-size:52px;margin-bottom:12px;display:block;position:relative;animation:cpBounce 2s ease-in-out infinite}
+@keyframes cpBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.cp-title{font-size:21px;font-weight:800;color:var(--neutral-900);letter-spacing:-.4px;margin-bottom:6px;line-height:1.35}
+.cp-title em{font-style:normal;color:var(--secondary-500)}
+.cp-sub{font-size:13px;color:var(--neutral-400);position:relative}
+
+.cp-body{padding:20px 24px}
+.cp-card{
+  background:linear-gradient(135deg,var(--secondary-50),#FFFBF5);
+  border:1px solid var(--bg-muted);border-radius:var(--radius-lg);
+  padding:20px;text-align:center;
+}
+.cp-team{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--neutral-900);color:#fff;border-radius:var(--radius-md);
+  padding:10px 20px;font-size:15px;font-weight:700;margin-bottom:12px;
+}
+.cp-team-fire{font-size:18px}
+.cp-desc{font-size:13px;color:var(--neutral-600);line-height:1.7;margin-bottom:14px}
+.cp-desc strong{color:var(--neutral-900);font-weight:700}
+.cp-coupon-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--primary-50);border:1px solid rgba(107,142,78,.15);
+  border-radius:var(--radius-pill);padding:6px 14px;
+  font-size:12px;color:var(--primary-500);font-weight:600;
+}
+
+.cp-actions{padding:16px 24px 0;display:flex;flex-direction:column;gap:8px}
+.cp-btn-vote{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--secondary-500),#B8933E);
+  color:#fff;border:none;border-radius:var(--radius-lg);
+  font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font-primary);
+  transition:all .2s;box-shadow:0 4px 20px rgba(196,160,88,.3);letter-spacing:-.3px;
+}
+.cp-btn-vote:active{transform:scale(.97)}
+.cp-btn-skip{
+  width:100%;padding:10px;background:none;border:none;
+  color:var(--neutral-400);font-size:12px;cursor:pointer;
+  font-family:var(--font-primary);
 }
 </style>
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 </head>
 <body>
 
 <!-- ===== HEADER ===== -->
 <header class="header">
-  <div class="header-logo">
-    
-    <img src="../reference/G_Logo.png" alt="Garlic" height="28" style="border-radius:2px">
-  </div>
-  <div class="header-search">
-    <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" placeholder="마늘밭에서 찾기" readonly onclick="location.href='11_search.html'">
-  </div>
-  <div class="header-actions">
-    <a href="10_notifications.html" class="h-btn" aria-label="알림" style="text-decoration:none;color:inherit">
-      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      <span class="dot"></span>
-    </a>
-    <a href="04_mypage.html" class="h-btn" aria-label="프로필" style="text-decoration:none;color:inherit">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </a>
+  <div class="header-inner">
+    <div class="header-wordmark">GARLIC</div>
+    <div class="header-actions">
+      <a href="11_search.html" aria-label="검색">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+      <a href="13_cart.html" aria-label="장바구니">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-badge">3</span>
+      </a>
+    </div>
   </div>
 </header>
 
 <!-- ===== TAB NAVIGATION ===== -->
 <nav class="tab-nav">
-  <a href="01_home.html" class="tab-item active" style="text-decoration:none;color:inherit">🏠 추천</a>
-  <a href="14_events.html" class="tab-item" style="text-decoration:none;color:inherit" >이벤트 🎪</a>
-  <a href="05_deals.html" class="tab-item" style="text-decoration:none;color:inherit">⚡ 특가</a>
-  <a href="garlic_tamagotchi.html" class="tab-item" style="text-decoration:none;color:inherit">🌱 너마늘키우기</a>
-  <a href="03_challenge.html" class="tab-item" style="text-decoration:none;color:inherit">🎯 마늘까기</a>
-  <a href="06_rewards.html" class="tab-item" style="text-decoration:none;color:inherit">💰 적립</a>
-  <a href="07_fashion.html" class="tab-item" style="text-decoration:none;color:inherit">👗 패션</a>
-  <a href="08_beauty.html" class="tab-item" style="text-decoration:none;color:inherit">💄 뷰티</a>
-  <a href="09_food.html" class="tab-item" style="text-decoration:none;color:inherit">🧄 식품</a>
+  <div class="tab-inner">
+    <a href="01_home.html" class="tab-item active">&#x1F3E0;추천</a>
+    <a href="14_events.html" class="tab-item">&#x1F3AA;이벤트</a>
+    <a href="05_deals.html" class="tab-item">&#x26A1;특가</a>
+    <a href="garlic_tamagotchi.html" class="tab-item">&#x1F331;너마늘키우기</a>
+    <a href="03_challenge.html" class="tab-item">&#x1F3AF;마늘까기</a>
+    <a href="06_rewards.html" class="tab-item">&#x1F4B0;적립</a>
+    <a href="07_fashion.html" class="tab-item">&#x1F457;패션</a>
+    <a href="08_beauty.html" class="tab-item">&#x1F484;뷰티</a>
+    <a href="09_food.html" class="tab-item">&#x1F9C4;식품</a>
+  </div>
 </nav>
 
 <!-- ===== MAIN CONTENT ===== -->
@@ -362,37 +457,33 @@ img{display:block;max-width:100%}
   <section class="manuri-section fade-up">
     <div class="manuri-card">
       <div class="manuri-mascot">
-        <svg width="52" height="52" viewBox="0 0 80 80">
-          <ellipse cx="40" cy="48" rx="22" ry="24" fill="#F5F0E8" stroke="#E0D8C8" stroke-width="1.5"/>
-          <path d="M32 34 Q40 28 48 34" fill="none" stroke="#E0D8C8" stroke-width="1"/>
-          <path d="M28 42 Q40 32 52 42" fill="none" stroke="#E0D8C8" stroke-width="1"/>
-          <path d="M38 24 Q36 16 40 10 Q44 16 42 24" fill="#8BC34A" stroke="#689F38" stroke-width="1"/>
-          <circle cx="34" cy="44" r="3" fill="#222"/>
-          <circle cx="46" cy="44" r="3" fill="#222"/>
+        <svg width="48" height="48" viewBox="0 0 80 80">
+          <ellipse cx="40" cy="48" rx="22" ry="24" fill="#FAF8F4" stroke="#E4DDD2" stroke-width="1.5"/>
+          <path d="M32 34 Q40 28 48 34" fill="none" stroke="#E4DDD2" stroke-width="1"/>
+          <path d="M28 42 Q40 32 52 42" fill="none" stroke="#E4DDD2" stroke-width="1"/>
+          <path d="M38 24 Q36 16 40 10 Q44 16 42 24" fill="#B8D491" stroke="#6B8E4E" stroke-width="1"/>
+          <circle cx="34" cy="44" r="3" fill="#2D2A24"/>
+          <circle cx="46" cy="44" r="3" fill="#2D2A24"/>
           <circle cx="35" cy="43" r="1" fill="#fff"/>
           <circle cx="47" cy="43" r="1" fill="#fff"/>
-          <path d="M36 50 Q40 54 44 50" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="30" cy="48" r="3.5" fill="#FFB3B3" opacity="0.5"/>
-          <circle cx="50" cy="48" r="3.5" fill="#FFB3B3" opacity="0.5"/>
-          <g transform="translate(56,30) scale(0.5)">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C4893B"/>
-          </g>
+          <path d="M36 50 Q40 54 44 50" fill="none" stroke="#2D2A24" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="30" cy="48" r="3.5" fill="#FFCEC8" opacity="0.45"/>
+          <circle cx="50" cy="48" r="3.5" fill="#FFCEC8" opacity="0.45"/>
         </svg>
       </div>
       <div class="manuri-bubble">
-        <div class="label">🧄 마누리의 추천 한마디</div>
-        <div class="msg">오늘 이거 어때요? <em>지은마늘</em>이 좋아할 것 같아! 🧄</div>
+        <div class="msg">오늘 이거 어때요? <em>지은마늘</em>이 좋아할 것 같아! &#x1F9C4;</div>
       </div>
-      <button class="manuri-close" aria-label="닫기">
-        <svg width="12" height="12" viewBox="0 0 12 12" stroke="#222" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>
+      <button class="manuri-close" onclick="this.closest('.manuri-card').style.display='none'" aria-label="닫기">
+        <svg width="12" height="12" viewBox="0 0 12 12" stroke="#2D2A24" stroke-width="1.5" stroke-linecap="round" fill="none"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>
       </button>
     </div>
   </section>
 
   <!-- DEAL BANNER -->
-  <section id="deal" class="fade-up fade-up-1">
+  <section class="fade-up fade-d1">
     <div class="deal-banner">
-      <div class="deal-label">⚡ GARLIC DEAL</div>
+      <div class="deal-label">&#x26A1; GARLIC DEAL</div>
       <div class="deal-title">마늘 500g <span>100원!</span></div>
       <div class="deal-sub">하루 한 번, 갈릭 회원 전용 초특가</div>
       <div class="deal-timer">
@@ -402,90 +493,110 @@ img{display:block;max-width:100%}
         <span class="t-sep">:</span>
         <span class="t-block" id="timer-s">17</span>
       </div>
-      <button class="deal-cta" onclick="alert('참여 완료! 🧄')">지금 참여하기 →</button>
+      <button class="deal-cta" onclick="alert('참여 완료! 🧄')">지금 참여하기 &rarr;</button>
     </div>
   </section>
 
   <!-- QUICK MENU -->
-  <section class="quick-menu fade-up fade-up-2">
+  <section class="quick-menu fade-up fade-d2">
     <div class="quick-grid">
-      <a href="#deal" class="quick-item" style="text-decoration:none;color:inherit">
-        <div class="quick-icon gi-1">🔥</div>
+      <a href="#deal" class="quick-item">
+        <div class="quick-icon">&#x1F525;</div>
         <div class="quick-label">오늘의딜</div>
       </a>
-      <a href="garlic_tamagotchi.html" class="quick-item" style="text-decoration:none;color:inherit">
-        <div class="quick-icon gi-2">🧄</div>
+      <a href="garlic_tamagotchi.html" class="quick-item">
+        <div class="quick-icon">&#x1F9C4;</div>
         <div class="quick-label">마늘키우기</div>
       </a>
-      <a href="03_challenge.html" class="quick-item" style="text-decoration:none;color:inherit">
-        <div class="quick-icon gi-3">🎯</div>
+      <a href="03_challenge.html" class="quick-item">
+        <div class="quick-icon">&#x1F3AF;</div>
         <div class="quick-label">출석체크</div>
       </a>
-      <a href="04_mypage.html" class="quick-item" style="text-decoration:none;color:inherit">
-        <div class="quick-icon gi-4">🎁</div>
+      <a href="04_mypage.html" class="quick-item">
+        <div class="quick-icon">&#x1F381;</div>
         <div class="quick-label">쿠폰함</div>
       </a>
-      <a href="04_mypage.html" class="quick-item" style="text-decoration:none;color:inherit">
-        <div class="quick-icon gi-5">👑</div>
+      <a href="04_mypage.html" class="quick-item">
+        <div class="quick-icon">&#x1F451;</div>
         <div class="quick-label">갈릭등급</div>
       </a>
     </div>
   </section>
 
-  <!-- CATEGORY BANNERS -->
-  <div id="categories" class="cat-banner cb-fashion fade-up fade-up-2">
-    <div class="cb-text">봄 패션 특가전<span>최대 70% OFF</span></div>
-    <div class="cb-emoji">👗</div>
-  </div>
-  <div class="cat-banner cb-beauty fade-up fade-up-3">
-    <div class="cb-text">마늘 뷰티 큐레이션<span>AI가 고른 나만의 루틴</span></div>
-    <div class="cb-emoji">✨</div>
-  </div>
-
   <!-- PRODUCT FEED -->
-  <div id="feed" class="section-header fade-up fade-up-3">
+  <div class="section-header fade-up fade-d3">
     <h2>지은마늘님을 위한 추천</h2>
-    <button class="more">더보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button class="more">더보기 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
   <div class="product-grid" id="productGrid"></div>
+  <div class="scroll-status scroll-spinner" id="scrollSpinner">로딩 중...</div>
+  <div class="scroll-status scroll-end" id="scrollEnd">더 이상 상품이 없습니다</div>
 
 </main>
 
-<!-- ===== BOTTOM NAV ===== -->
+<!-- ===== BOTTOM NAVIGATION ===== -->
 <nav class="bottom-nav">
-  <a href="01_home.html" class="nav-item active" style="text-decoration:none">
-    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span class="nav-label">홈</span>
-  </a>
-  <a href="12_category.html" class="nav-item" style="text-decoration:none">
-    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    <span class="nav-label">카테고리</span>
-  </a>
-  <a href="13_cart.html" class="nav-item" style="text-decoration:none">
-    <span class="cart-badge">
-      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span class="c-dot">3</span>
-    </span>
-    <span class="nav-label">마늘밭</span>
-  </a>
-  <a href="garlic_tamagotchi.html" class="nav-item" style="text-decoration:none">
-    <svg viewBox="0 0 24 24"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
-    <span class="nav-label">마늘키우기</span>
-  </a>
-  <a href="04_mypage.html" class="nav-item" style="text-decoration:none">
-    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    <span class="nav-label">마이갈릭</span>
-  </a>
+  <div class="bottom-nav-inner">
+    <a href="01_home.html" class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">홈</span>
+    </a>
+    <a href="12_category.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span class="nav-label">카테고리</span>
+    </a>
+    <a href="13_cart.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c-4.97 0-9-2.69-9-6v-4c0-3.31 4.03-6 9-6s9 2.69 9 6v4c0 3.31-4.03 6-9 6z"/><path d="M12 6V2"/><path d="M10 2h4"/></svg>
+      <span class="nav-label">갈릭</span>
+    </a>
+    <a href="04_mypage.html" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="nav-label">MY</span>
+    </a>
+    <a href="13_cart.html" class="nav-item">
+      <span class="cart-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="nav-badge">3</span>
+      </span>
+      <span class="nav-label">장바구니</span>
+    </a>
+  </div>
 </nav>
+
+<!-- ===== VOTE POPUP ===== -->
+<div class="cp-overlay" id="cpOverlay" onclick="closeCoupon()"></div>
+<div class="cp-popup" id="cpPopup">
+  <div class="cp-handle"></div>
+  <div class="cp-hero">
+    <span class="cp-fire">&#x1F525;</span>
+    <div class="cp-title"><em>불사조기사단</em>에<br>투표해주세요!</div>
+    <div class="cp-sub">PP1K 사내 아이디어 경진대회</div>
+  </div>
+  <div class="cp-body">
+    <div class="cp-card">
+      <div class="cp-team"><span class="cp-team-fire">&#x1F525;</span> 불사조기사단 <span class="cp-team-fire">&#x1F9C4;</span></div>
+      <div class="cp-desc">
+        G마켓을 <strong>Garlic</strong>으로 리브랜딩하는<br>
+        대한민국 이커머스의 새로운 도전!<br>
+        <strong>"마늘 먹고 사람 될게요"</strong>
+      </div>
+      <div class="cp-coupon-tag">&#x1F9C4; 투표하면 30% 쿠폰 증정</div>
+    </div>
+  </div>
+  <div class="cp-actions">
+    <button class="cp-btn-vote" onclick="voteEffect()">불사조기사단 투표하기 &#x1F525;</button>
+    <button class="cp-btn-skip" onclick="closeCoupon()">다음에 할게요</button>
+  </div>
+</div>
 
 <script>
 // ===== COUNTDOWN TIMER =====
 (function(){
-  let total = 2*3600 + 34*60 + 17;
+  var total=2*3600+34*60+17;
   function tick(){
-    if(total<=0) return;
+    if(total<=0)return;
     total--;
-    const h=Math.floor(total/3600), m=Math.floor((total%3600)/60), s=total%60;
+    var h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;
     document.getElementById('timer-h').textContent=String(h).padStart(2,'0');
     document.getElementById('timer-m').textContent=String(m).padStart(2,'0');
     document.getElementById('timer-s').textContent=String(s).padStart(2,'0');
@@ -494,242 +605,142 @@ img{display:block;max-width:100%}
 })();
 
 // ===== PRODUCT DATA =====
-const products = [
-  {brand:'마늘팜',name:'의성 한지형 마늘 1kg 산지직송',discount:52,price:'9,900',original:'20,800',tag:'dna',tagText:'갈릭 DNA 92% 매칭',stars:'★★★★★',reviews:'(2,847)',bg:'linear-gradient(135deg,#FFF8E1,#FFECB3)'},
-  {brand:'갈릭스타일',name:'봄 오버핏 린넨 셔츠 [5컬러]',discount:38,price:'29,800',original:'48,000',tag:'ai',tagText:'AI 추천',stars:'★★★★☆',reviews:'(1,203)',bg:'linear-gradient(135deg,#E8EAF6,#C5CAE9)'},
-  {brand:'뷰티마늘',name:'블랙 갈릭 에센스 50ml 기미케어',discount:45,price:'18,500',original:'33,600',tag:'manuri',tagText:'마누리 추천 ❤️',stars:'★★★★★',reviews:'(4,521)',bg:'linear-gradient(135deg,#FCE4EC,#F8BBD0)'},
-  {brand:'테크마늘',name:'갈릭 무선이어폰 ANC Pro 2세대',discount:31,price:'49,900',original:'72,000',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(8,102)',bg:'linear-gradient(135deg,#E0F2F1,#B2DFDB)'},
-  {brand:'마늘키친',name:'트러플 마늘 올리브오일 500ml',discount:28,price:'15,800',original:'22,000',tag:'dna',tagText:'갈릭 DNA 88% 매칭',stars:'★★★★☆',reviews:'(956)',bg:'linear-gradient(135deg,#FFF3E0,#FFE0B2)'},
-  {brand:'갈릭홈',name:'프리미엄 마늘 아로마 디퓨저',discount:40,price:'24,900',original:'41,500',tag:'ai',tagText:'AI 추천',stars:'★★★★★',reviews:'(3,217)',bg:'linear-gradient(135deg,#F3E5F5,#E1BEE7)'},
-  {brand:'마늘피트',name:'갈릭 에어 러닝화 [남녀공용]',discount:55,price:'39,000',original:'86,800',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(6,440)',bg:'linear-gradient(135deg,#E8F5E9,#C8E6C9)'},
-  {brand:'갈릭팜',name:'제주 흑마늘즙 30포 선물세트',discount:35,price:'32,000',original:'49,200',tag:'manuri',tagText:'마누리 추천 ❤️',stars:'★★★★★',reviews:'(5,678)',bg:'linear-gradient(135deg,#ECEFF1,#CFD8DC)'},
+var products=[
+  {brand:'마늘팜',name:'의성 한지형 마늘 1kg 산지직송',discount:52,price:'9,900',original:'20,800',badge:'dna',badgeText:'갈릭DNA 91%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(2,847)'},
+  {brand:'갈릭스타일',name:'봄 오버핏 린넨 셔츠 [5컬러]',discount:38,price:'29,800',original:'48,000',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(1,203)'},
+  {brand:'뷰티마늘',name:'블랙 갈릭 에센스 50ml 기미케어',discount:45,price:'18,500',original:'33,600',badge:'dna',badgeText:'갈릭DNA 88%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(4,521)'},
+  {brand:'테크마늘',name:'갈릭 무선이어폰 ANC Pro 2세대',discount:31,price:'49,900',original:'72,000',badge:'discount',badgeText:'52%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(8,102)'},
+  {brand:'마늘키친',name:'트러플 마늘 올리브오일 500ml',discount:28,price:'15,800',original:'22,000',badge:'dna',badgeText:'갈릭DNA 85%',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(956)'},
+  {brand:'갈릭홈',name:'프리미엄 마늘 아로마 디퓨저',discount:40,price:'24,900',original:'41,500',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,217)'},
+  {brand:'마늘피트',name:'갈릭 에어 러닝화 [남녀공용]',discount:55,price:'39,000',original:'86,800',badge:'discount',badgeText:'55%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(6,440)'},
+  {brand:'갈릭팜',name:'제주 흑마늘즙 30포 선물세트',discount:35,price:'32,000',original:'49,200',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(5,678)'}
 ];
 
-const grid = document.getElementById('productGrid');
+var extraProducts=[
+  {brand:'마늘팜',name:'남해 햇마늘 500g 특상품',discount:42,price:'7,900',original:'13,600',badge:'discount',badgeText:'42%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(1,320)'},
+  {brand:'갈릭스타일',name:'여름 슬림 데님 팬츠 [3컬러]',discount:33,price:'24,900',original:'37,000',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(890)'},
+  {brand:'뷰티마늘',name:'갈릭 수분 크림 100ml 민감성',discount:48,price:'16,500',original:'31,700',badge:'dna',badgeText:'갈릭DNA 93%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,105)'},
+  {brand:'테크마늘',name:'갈릭 스마트워치 SE 3세대',discount:29,price:'89,000',original:'125,000',badge:'discount',badgeText:'29%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(5,670)'},
+  {brand:'마늘키친',name:'프리미엄 마늘 간장 300ml',discount:22,price:'8,900',original:'11,400',badge:'dna',badgeText:'갈릭DNA 85%',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(742)'},
+  {brand:'갈릭홈',name:'마늘 향기 캔들 3종 세트',discount:35,price:'19,900',original:'30,600',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(2,088)'},
+  {brand:'마늘피트',name:'갈릭 요가매트 6mm 논슬립',discount:44,price:'22,000',original:'39,200',badge:'discount',badgeText:'44%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(4,210)'},
+  {brand:'갈릭팜',name:'통마늘 발효액 500ml 건강즙',discount:38,price:'28,000',original:'45,000',badge:'dna',badgeText:'갈릭DNA 90%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,987)'}
+];
 
-function makeCard(p, i, imgIndex) {
-  const card = document.createElement('div');
-  card.className = 'product-card fade-up';
-  card.style.animationDelay = (0.05 * i) + 's';
-  card.style.cursor = 'pointer';
-  card.onclick = function(){ location.href='product_detail.html?name='+encodeURIComponent(p.name)+'&brand='+encodeURIComponent(p.brand)+'&price='+p.price.replace(/,/g,'')+'&discount='+p.discount+'&original='+p.original.replace(/,/g,'')+'&img='+encodeURIComponent('https://picsum.photos/300/300?random='+imgIndex)+'&match=92&tag='+p.tag; };
-  card.innerHTML = `
-    <div class="product-thumb">
-      <img src="https://picsum.photos/300/300?random=${imgIndex}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <span class="tag tag-${p.tag}">${p.tagText}</span>
-      <button class="wish" aria-label="찜하기"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-    </div>
-    <div class="product-info">
-      <div class="product-brand">${p.brand}</div>
-      <div class="product-name">${p.name}</div>
-      <div class="product-price">
-        <span class="product-discount">${p.discount}%</span>
-        <span class="product-amount">${p.price}원</span>
-      </div>
-      <div class="product-original">${p.original}원</div>
-      <div class="product-meta">
-        <span class="stars">${p.stars}</span>
-        <span class="review">${p.reviews}</span>
-      </div>
-    </div>
-  `;
+var grid=document.getElementById('productGrid');
+var imgCounter=1;
+
+function makeCard(p,i,imgIdx){
+  var card=document.createElement('div');
+  card.className='product-card fade-up';
+  card.style.animationDelay=(0.04*i)+'s';
+  card.style.cursor='pointer';
+  card.onclick=function(){
+    location.href='product_detail.html?name='+encodeURIComponent(p.name)+'&brand='+encodeURIComponent(p.brand)+'&price='+p.price.replace(/,/g,'')+'&discount='+p.discount+'&original='+p.original.replace(/,/g,'')+'&img='+encodeURIComponent('https://picsum.photos/300/300?random='+imgIdx)+'&match=92&tag='+p.badge;
+  };
+  card.innerHTML=
+    '<div class="product-thumb">'+
+      '<img src="https://picsum.photos/300/300?random='+imgIdx+'" alt="'+p.name+'" loading="lazy">'+
+      '<div class="badges">'+
+        '<span class="badge badge-'+p.badge+'">'+p.badgeText+'</span>'+
+      '</div>'+
+      '<button class="wish" aria-label="찜하기" onclick="event.stopPropagation();toggleWish(this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>'+
+    '</div>'+
+    '<div class="product-info">'+
+      '<div class="product-brand">'+p.brand+'</div>'+
+      '<div class="product-name">'+p.name+'</div>'+
+      '<div class="product-price">'+
+        '<span class="product-discount">'+p.discount+'%</span>'+
+        '<span class="product-amount">'+p.price+'원</span>'+
+      '</div>'+
+      '<div class="product-original">'+p.original+'원</div>'+
+      '<div class="product-meta">'+
+        '<span class="stars">'+p.stars+'</span>'+
+        '<span class="review">'+p.reviews+'</span>'+
+      '</div>'+
+    '</div>';
   return card;
 }
 
-var imgCounter = 1;
-products.forEach((p, i) => {
-  grid.appendChild(makeCard(p, i, imgCounter++));
-});
+products.forEach(function(p,i){grid.appendChild(makeCard(p,i,imgCounter++))});
 
-// ===== INFINITE SCROLL =====
-var page = 1;
-var maxPages = 4;
-var loading = false;
-
-// spinner element
-var spinner = document.createElement('div');
-spinner.id = 'scroll-spinner';
-spinner.style.cssText = 'display:none;text-align:center;padding:16px;font-size:0.82rem;color:#8A8478;font-family:var(--font)';
-spinner.textContent = '로딩 중...';
-grid.parentNode.insertBefore(spinner, grid.nextSibling);
-
-var endMsg = document.createElement('div');
-endMsg.id = 'scroll-end';
-endMsg.style.cssText = 'display:none;text-align:center;padding:16px;font-size:0.82rem;color:#bbb;font-family:var(--font)';
-endMsg.textContent = '더 이상 상품이 없습니다';
-spinner.parentNode.insertBefore(endMsg, spinner.nextSibling);
-
-const extraProducts = [
-  {brand:'마늘팜',name:'남해 햇마늘 500g 특상품',discount:42,price:'7,900',original:'13,600',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(1,320)'},
-  {brand:'갈릭스타일',name:'여름 슬림 데님 팬츠 [3컬러]',discount:33,price:'24,900',original:'37,000',tag:'ai',tagText:'AI 추천',stars:'★★★★☆',reviews:'(890)'},
-  {brand:'뷰티마늘',name:'갈릭 수분 크림 100ml 민감성',discount:48,price:'16,500',original:'31,700',tag:'manuri',tagText:'마누리 추천 ❤️',stars:'★★★★★',reviews:'(3,105)'},
-  {brand:'테크마늘',name:'갈릭 스마트워치 SE 3세대',discount:29,price:'89,000',original:'125,000',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(5,670)'},
-  {brand:'마늘키친',name:'프리미엄 마늘 간장 300ml',discount:22,price:'8,900',original:'11,400',tag:'dna',tagText:'갈릭 DNA 85% 매칭',stars:'★★★★☆',reviews:'(742)'},
-  {brand:'갈릭홈',name:'마늘 향기 캔들 3종 세트',discount:35,price:'19,900',original:'30,600',tag:'ai',tagText:'AI 추천',stars:'★★★★★',reviews:'(2,088)'},
-  {brand:'마늘피트',name:'갈릭 요가매트 6mm 논슬립',discount:44,price:'22,000',original:'39,200',tag:'hot',tagText:'HOT',stars:'★★★★★',reviews:'(4,210)'},
-  {brand:'갈릭팜',name:'통마늘 발효액 500ml 건강즙',discount:38,price:'28,000',original:'45,000',tag:'manuri',tagText:'마누리 추천 ❤️',stars:'★★★★★',reviews:'(3,987)'},
-];
-
-function loadMore() {
-  loading = true;
-  spinner.style.display = 'block';
-  setTimeout(function() {
-    var start = (page - 1) * 8;
-    for (var j = 0; j < 8; j++) {
-      var p = extraProducts[j % extraProducts.length];
-      var cardEl = makeCard(p, start + j, imgCounter++);
-      grid.appendChild(cardEl);
-    }
-    page++;
-    loading = false;
-    spinner.style.display = 'none';
-    if (page >= maxPages) {
-      endMsg.style.display = 'block';
-    }
-  }, 800);
+// ===== WISH BUTTON =====
+function toggleWish(btn){
+  btn.classList.toggle('active');
+  var svg=btn.querySelector('svg');
+  if(btn.classList.contains('active')){
+    svg.style.fill='var(--accent-500)';svg.style.stroke='var(--accent-500)';
+  }else{
+    svg.style.fill='none';svg.style.stroke='var(--neutral-400)';
+  }
 }
 
-window.addEventListener('scroll', function() {
-  if (loading || page >= maxPages) return;
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-    loadMore();
-  }
+// ===== INFINITE SCROLL =====
+var page=1,maxPages=4,loading=false;
+var spinner=document.getElementById('scrollSpinner');
+var endMsg=document.getElementById('scrollEnd');
+
+function loadMore(){
+  loading=true;
+  spinner.classList.add('visible');
+  setTimeout(function(){
+    for(var j=0;j<8;j++){
+      var p=extraProducts[j%extraProducts.length];
+      grid.appendChild(makeCard(p,(page-1)*8+j,imgCounter++));
+    }
+    page++;loading=false;
+    spinner.classList.remove('visible');
+    if(page>=maxPages)endMsg.classList.add('visible');
+  },600);
+}
+
+window.addEventListener('scroll',function(){
+  if(loading||page>=maxPages)return;
+  if(window.innerHeight+window.scrollY>=document.body.offsetHeight-300)loadMore();
 });
 
 // ===== TAB INTERACTION =====
-document.querySelectorAll('.tab-item').forEach(tab => {
-  tab.addEventListener('click', function(){
-    document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.tab-item').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.tab-item').forEach(function(t){t.classList.remove('active')});
     this.classList.add('active');
   });
 });
 
-// ===== WISH BUTTON =====
-document.querySelectorAll('.wish').forEach(function(btn) {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    this.classList.toggle('active');
-    if (this.classList.contains('active')) {
-      this.querySelector('svg').style.fill = '#C4893B';
-      this.querySelector('svg').style.stroke = '#C4893B';
-    } else {
-      this.querySelector('svg').style.fill = 'none';
-      this.querySelector('svg').style.stroke = '#999';
-    }
-  });
-});
-</script>
-
-<!-- 투표 팝업 (PC: 모달 / 모바일: 바텀시트) -->
-<style>
-.cp-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(45,42,36,.4);opacity:0;transition:opacity .35s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-
-/* 모바일: 바텀시트 */
-.cp-popup{display:none;position:fixed;bottom:0;left:0;right:0;z-index:301;background:#fff;border-radius:28px 28px 0 0;padding:0 0 calc(env(safe-area-inset-bottom,12px) + 16px);max-width:640px;margin:0 auto;transform:translateY(100%);transition:transform .45s cubic-bezier(.32,1.15,.54,1);box-shadow:0 -12px 48px rgba(0,0,0,.1)}
-.cp-handle{width:36px;height:4px;background:#E8DFD0;border-radius:2px;margin:12px auto 0}
-
-/* PC: 센터 모달 */
-@media(min-width:768px){
-  .cp-popup{bottom:auto;top:50%;left:50%;right:auto;transform:translate(-50%,-50%) scale(.9);border-radius:24px;max-width:420px;width:90%;padding-bottom:24px;opacity:0;transition:transform .4s cubic-bezier(.32,1.15,.54,1),opacity .3s}
-  .cp-popup.show{transform:translate(-50%,-50%) scale(1);opacity:1}
-  .cp-handle{display:none}
-}
-
-.cp-hero{background:linear-gradient(160deg,#F5F1EA 0%,#FFF 40%,#EDF3E8 100%);padding:32px 24px 20px;text-align:center;position:relative;overflow:hidden;border-radius:28px 28px 0 0}
-@media(min-width:768px){.cp-hero{border-radius:24px 24px 0 0}}
-.cp-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(107,142,78,.1) 0%,transparent 70%);border-radius:50%}
-.cp-hero::after{content:'';position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%);border-radius:50%}
-.cp-fire{font-size:56px;margin-bottom:12px;display:block;position:relative;animation:cpBounce 2s ease-in-out infinite}
-@keyframes cpBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.cp-title{font-size:22px;font-weight:800;color:#2D2A24;letter-spacing:-.5px;margin-bottom:6px;position:relative;line-height:1.3}
-.cp-title em{font-style:normal;color:#D4A843}
-.cp-sub{font-size:13px;color:#8A8478;position:relative}
-
-.cp-body{padding:20px 24px}
-.cp-card{background:linear-gradient(135deg,#FFFBF5,#FFF8EE);border:1.5px solid #E8DFD0;border-radius:16px;padding:20px;text-align:center;position:relative}
-.cp-team{display:inline-flex;align-items:center;gap:8px;background:#2D2A24;color:#fff;border-radius:12px;padding:10px 20px;font-size:15px;font-weight:700;margin-bottom:12px}
-.cp-team-fire{font-size:20px}
-.cp-desc{font-size:13px;color:#6B665E;line-height:1.7;margin-bottom:16px}
-.cp-desc strong{color:#2D2A24;font-weight:700}
-.cp-coupon-tag{display:inline-flex;align-items:center;gap:6px;background:#EDF3E8;border:1px solid rgba(107,142,78,.2);border-radius:20px;padding:6px 14px;font-size:12px;color:#6B8E4E;font-weight:600}
-
-.cp-actions{padding:16px 24px 0;display:flex;flex-direction:column;gap:8px}
-.cp-btn-vote{width:100%;padding:16px;background:linear-gradient(135deg,#D4A843,#C4983B);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Pretendard';transition:all .2s;box-shadow:0 4px 20px rgba(212,168,67,.35);letter-spacing:-.3px}
-.cp-btn-vote:active{transform:scale(.97)}
-.cp-btn-skip{width:100%;padding:10px;background:none;border:none;color:#BBB;font-size:12px;cursor:pointer;font-family:'Pretendard'}
-</style>
-
-<div class="cp-overlay" id="cpOverlay" onclick="closeCoupon()"></div>
-<div class="cp-popup" id="cpPopup">
-  <div class="cp-handle"></div>
-  <div class="cp-hero">
-    <span class="cp-fire">🔥</span>
-    <div class="cp-title"><em>불사조기사단</em>에<br>투표해주세요!</div>
-    <div class="cp-sub">PP1K 사내 아이디어 경진대회</div>
-  </div>
-  <div class="cp-body">
-    <div class="cp-card">
-      <div class="cp-team"><span class="cp-team-fire">🔥</span> 불사조기사단 <span class="cp-team-fire">🧄</span></div>
-      <div class="cp-desc">
-        G마켓을 <strong>Garlic</strong>으로 리브랜딩하는<br>
-        대한민국 이커머스의 새로운 도전!<br>
-        <strong>"마늘 먹고 사람 될게요"</strong>
-      </div>
-      <div class="cp-coupon-tag">🧄 투표하면 30% 쿠폰 증정</div>
-    </div>
-  </div>
-  <div class="cp-actions">
-    <button class="cp-btn-vote" onclick="voteEffect()">불사조기사단 투표하기 🔥</button>
-    <button class="cp-btn-skip" onclick="closeCoupon()">다음에 할게요</button>
-  </div>
-</div>
-
-<script>
+// ===== VOTE POPUP =====
 function showCoupon(){
   var overlay=document.getElementById('cpOverlay');
   var popup=document.getElementById('cpPopup');
-  overlay.style.display='block';
-  popup.style.display='block';
+  overlay.style.display='block';popup.style.display='block';
   setTimeout(function(){
     overlay.style.opacity='1';
-    if(window.innerWidth>=768){
-      popup.classList.add('show');
-    }else{
-      popup.style.transform='translateY(0)';
-    }
+    if(window.innerWidth>=768){popup.classList.add('show')}
+    else{popup.style.transform='translateY(0)'}
   },50);
 }
 function closeCoupon(){
   var overlay=document.getElementById('cpOverlay');
   var popup=document.getElementById('cpPopup');
   overlay.style.opacity='0';
-  if(window.innerWidth>=768){
-    popup.classList.remove('show');
-  }else{
-    popup.style.transform='translateY(100%)';
-  }
-  setTimeout(function(){
-    overlay.style.display='none';
-    popup.style.display='none';
-  },400);
+  if(window.innerWidth>=768){popup.classList.remove('show')}
+  else{popup.style.transform='translateY(100%)'}
+  setTimeout(function(){overlay.style.display='none';popup.style.display='none'},400);
 }
 setTimeout(showCoupon,2000);
 
 function voteEffect(){
   var btn=document.querySelector('.cp-btn-vote');
-  btn.textContent='🎉 투표 완료! 감사합니다!';
-  btn.style.background='linear-gradient(135deg,#C45B3B,#D4A843)';
+  btn.textContent='\uD83C\uDF89 투표 완료! 감사합니다!';
+  btn.style.background='linear-gradient(135deg,var(--accent-500),var(--secondary-500))';
   btn.style.pointerEvents='none';
 
-  // 화면 전체 파티클
   var container=document.createElement('div');
   container.style.cssText='position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden';
   document.body.appendChild(container);
 
-  var emojis=['🔥','🧄','✨','🎉','⭐','💛','🏆','❤️‍🔥','🌟','🎊'];
-  var colors=['#D4A843','#C45B3B','#6B8E4E','#FF6B3D','#FFD700','#FF4500'];
+  var emojis=['\uD83D\uDD25','\uD83E\uDDC4','\u2728','\uD83C\uDF89','\u2B50','\uD83D\uDC9B','\uD83C\uDFC6','\u2764\uFE0F\u200D\uD83D\uDD25','\uD83C\uDF1F','\uD83C\uDF8A'];
+  var colors=['#C4A058','#D94B3A','#6B8E4E','#E8D5A8','#FFD700','#D94B3A'];
 
-  // 이모지 폭발
   for(var i=0;i<40;i++){
     var p=document.createElement('div');
     var isEmoji=Math.random()>.4;
@@ -744,28 +755,24 @@ function voteEffect(){
     container.appendChild(p);
   }
 
-  // 중앙 카드 (어두운 배경 + 골드 텍스트)
   var card=document.createElement('div');
-  card.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);background:rgba(45,42,36,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:24px;padding:32px 40px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.3);animation:voteBurst 1s .2s cubic-bezier(.17,.89,.32,1.28) forwards';
-  card.innerHTML='<div style="font-size:56px;margin-bottom:12px">🔥</div>'+
-    '<div style="font-family:Pretendard;font-size:24px;font-weight:800;color:#D4A843;margin-bottom:6px;letter-spacing:-.5px">투표 완료!</div>'+
-    '<div style="font-family:Pretendard;font-size:15px;font-weight:600;color:#F5F1EA;margin-bottom:4px">불사조기사단 화이팅!</div>'+
-    '<div style="font-family:Pretendard;font-size:12px;color:rgba(245,241,234,.5)">30% 쿠폰이 지급되었어요 🧄</div>';
+  card.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);background:rgba(45,42,36,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px;padding:32px 40px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);border:1px solid rgba(196,160,88,.25);animation:voteBurst 1s .2s cubic-bezier(.17,.89,.32,1.28) forwards';
+  card.innerHTML='<div style="font-size:52px;margin-bottom:12px">\uD83D\uDD25</div>'+
+    '<div style="font-family:Pretendard;font-size:22px;font-weight:800;color:#C4A058;margin-bottom:6px;letter-spacing:-.4px">투표 완료!</div>'+
+    '<div style="font-family:Pretendard;font-size:14px;font-weight:600;color:#FAF8F4;margin-bottom:4px">불사조기사단 화이팅!</div>'+
+    '<div style="font-family:Pretendard;font-size:12px;color:rgba(250,248,244,.5)">30% 쿠폰이 지급되었어요 \uD83E\uDDC4</div>';
   container.appendChild(card);
 
-  // CSS 애니메이션 주입
   if(!document.getElementById('voteStyles')){
-    var s=document.createElement('style');
-    s.id='voteStyles';
-    s.textContent='@keyframes voteRise{0%{transform:translateY(0) rotate(0) scale(0);opacity:0}15%{opacity:1;transform:scale(1)}70%{opacity:1}100%{transform:translateY(-110vh) rotate('+(300+Math.random()*400)+'deg) scale(.5);opacity:0}}'+
-      '@keyframes voteBurst{0%{transform:translate(-50%,-50%) scale(0);opacity:0}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}';
+    var s=document.createElement('style');s.id='voteStyles';
+    s.textContent='@keyframes voteRise{0%{transform:translateY(0) rotate(0) scale(0);opacity:0}15%{opacity:1;transform:scale(1)}70%{opacity:1}100%{transform:translateY(-110vh) rotate('+Math.floor(300+Math.random()*400)+'deg) scale(.5);opacity:0}}'+
+      '@keyframes voteBurst{0%{transform:translate(-50%,-50%) scale(0);opacity:0}50%{transform:translate(-50%,-50%) scale(1.2);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}';
     document.head.appendChild(s);
   }
 
   setTimeout(function(){
-    container.style.transition='opacity .5s';
-    container.style.opacity='0';
-    setTimeout(function(){container.remove();closeCoupon();},600);
+    container.style.transition='opacity .5s';container.style.opacity='0';
+    setTimeout(function(){container.remove();closeCoupon()},600);
   },2800);
 }
 </script>
