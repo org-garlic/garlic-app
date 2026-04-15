@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
+<meta name="theme-color" content="#64E2B7">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
@@ -16,27 +16,28 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 :root{
-  --bg-primary:#FAF8F4;
-  --bg-surface:#F0ECE4;
-  --bg-muted:#E4DDD2;
-  --primary-50:#EEF4E6;
-  --primary-200:#B8D491;
-  --primary-500:#6B8E4E;
-  --primary-800:#3D5C2A;
-  --secondary-50:#FCF5E8;
-  --secondary-200:#E8D5A8;
-  --secondary-500:#C4A058;
-  --secondary-800:#7A6432;
-  --accent-50:#FDE8E4;
-  --accent-500:#D94B3A;
-  --accent-800:#8C2E22;
+  /* 🎨 Retro Kids — beige·mint·pink·maroon */
+  --bg-primary:#FBF3C1;
+  --bg-surface:#FFF8D6;
+  --bg-muted:#F0E8A8;
+  --primary-50:#E0FFF0;
+  --primary-200:#A0F0D0;
+  --primary-500:#64E2B7;
+  --primary-800:#2A8C6A;
+  --secondary-50:#FCE4F8;
+  --secondary-200:#E8A8E0;
+  --secondary-500:#DC8BE0;
+  --secondary-800:#8B4A8E;
+  --accent-50:#FFE0F0;
+  --accent-500:#D50B8B;
+  --accent-800:#8C0058;
   --neutral-900:#2D2A24;
   --neutral-600:#6B6560;
   --neutral-400:#A09888;
-  --success:#6B8E4E;
-  --warning:#C4A058;
-  --danger:#D94B3A;
-  --info:#5B8DB8;
+  --success:#64E2B7;
+  --warning:#DC8BE0;
+  --danger:#D50B8B;
+  --info:#64E2B7;
   --font-primary:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;
   --radius-sm:6px;
   --radius-md:10px;
@@ -156,7 +157,7 @@ img{display:block;max-width:100%}
 /* ========== DEAL BANNER ========== */
 .deal-banner{
   margin:8px 16px 12px;border-radius:var(--radius-lg);overflow:hidden;
-  background:linear-gradient(135deg,var(--secondary-500),#D4A843);
+  background:linear-gradient(135deg,var(--secondary-500),#DC8BE0);
   padding:20px;position:relative;color:#fff;
 }
 .deal-banner::before{
@@ -461,7 +462,7 @@ img{display:block;max-width:100%}
           <ellipse cx="40" cy="48" rx="22" ry="24" fill="#FAF8F4" stroke="#E4DDD2" stroke-width="1.5"/>
           <path d="M32 34 Q40 28 48 34" fill="none" stroke="#E4DDD2" stroke-width="1"/>
           <path d="M28 42 Q40 32 52 42" fill="none" stroke="#E4DDD2" stroke-width="1"/>
-          <path d="M38 24 Q36 16 40 10 Q44 16 42 24" fill="#B8D491" stroke="#6B8E4E" stroke-width="1"/>
+          <path d="M38 24 Q36 16 40 10 Q44 16 42 24" fill="#B8D491" stroke="#64E2B7" stroke-width="1"/>
           <circle cx="34" cy="44" r="3" fill="#2D2A24"/>
           <circle cx="46" cy="44" r="3" fill="#2D2A24"/>
           <circle cx="35" cy="43" r="1" fill="#fff"/>
@@ -740,7 +741,7 @@ function voteEffect(){
   document.body.appendChild(container);
 
   var emojis=['\uD83D\uDD25','\uD83E\uDDC4','\u2728','\uD83C\uDF89','\u2B50','\uD83D\uDC9B','\uD83C\uDFC6','\u2764\uFE0F\u200D\uD83D\uDD25','\uD83C\uDF1F','\uD83C\uDF8A'];
-  var colors=['#C4A058','#D94B3A','#6B8E4E','#E8D5A8','#FFD700','#D94B3A'];
+  var colors=['#DC8BE0','#D50B8B','#64E2B7','#E8D5A8','#FFD700','#D50B8B'];
 
   for(var i=0;i<40;i++){
     var p=document.createElement('div');
@@ -759,7 +760,7 @@ function voteEffect(){
   var card=document.createElement('div');
   card.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);background:rgba(45,42,36,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px;padding:32px 40px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);border:1px solid rgba(196,160,88,.25);animation:voteBurst 1s .2s cubic-bezier(.17,.89,.32,1.28) forwards';
   card.innerHTML='<div style="font-size:52px;margin-bottom:12px">\uD83D\uDD25</div>'+
-    '<div style="font-family:Pretendard;font-size:22px;font-weight:800;color:#C4A058;margin-bottom:6px;letter-spacing:-.4px">투표 완료!</div>'+
+    '<div style="font-family:Pretendard;font-size:22px;font-weight:800;color:#DC8BE0;margin-bottom:6px;letter-spacing:-.4px">투표 완료!</div>'+
     '<div style="font-family:Pretendard;font-size:14px;font-weight:600;color:#FAF8F4;margin-bottom:4px">불사조기사단 화이팅!</div>'+
     '<div style="font-family:Pretendard;font-size:12px;color:rgba(250,248,244,.5)">30% 쿠폰이 지급되었어요 \uD83E\uDDC4</div>';
   container.appendChild(card);
