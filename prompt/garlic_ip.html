@@ -11,14 +11,15 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
+<meta name="theme-color" content="#98CD00">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
+<meta name="theme-color" content="#98CD00">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
@@ -30,29 +31,29 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#F5F1EA;
-  --bg-alt:#F5F1EA;
+  --bg:#FAFAFA;
+  --bg-alt:#FAFAFA;
   --card:#FFFFFF;
-  --garlic-green:#6B8E4E;
-  --garlic-dark-green:#1B4332;
-  --garlic-gold:#D4A843;
-  --garlic-coral:#C4893B;
-  --garlic-neon:#6B8E4E;
+  --garlic-green:#98CD00;
+  --garlic-dark-green:#3D4A1E;
+  --garlic-gold:#FFB8D0;
+  --garlic-coral:#FF6B9D;
+  --garlic-neon:#98CD00;
   --green-light:#E8F8ED;
   --gold-light:#FFF3D6;
-  --garlic-bg:#F0ECE4;
+  --garlic-bg:#F5F5F0;
   --cream:#FFFAF3;
   --warm:#FFF5E6;
-  --text:#333333;
+  --text:#3D4A1E;
   --text-mid:#444;
-  --text-light:#888888;
-  --border:#E8DFD0;
+  --text-light:#A0AD78;
+  --border:#F0E8A0;
   --card-shadow:0 2px 16px rgba(0,0,0,.05);
   --card-shadow-hover:0 8px 30px rgba(0,0,0,.1);
 }
 
 html{scroll-behavior:smooth}
-body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.7}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.7}
 .serif{font-family:'Noto Serif KR',serif}
 
 /* ===== HERO ===== */
@@ -94,7 +95,7 @@ body{padding-bottom:84px}
 .att-text strong{font-size:14px;display:block;margin-bottom:2px}
 .att-text span{font-size:12px;color:var(--text-light)}
 
-.att-cta{display:inline-block;background:var(--garlic-green);color:#fff;padding:14px 32px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;margin-top:24px;transition:all .3s;border:none;cursor:pointer;font-family:'Pretendard'}
+.att-cta{display:inline-block;background:var(--garlic-green);color:#fff;padding:14px 32px;border-radius:30px;font-size:14px;font-weight:700;text-decoration:none;margin-top:24px;transition:all .3s;border:none;cursor:pointer;font-family:'Noto Sans KR'}
 .att-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,199,60,.25)}
 
 /* ===== EVOLUTION STAGES ===== */
@@ -164,13 +165,13 @@ body{padding-bottom:84px}
 }
 
 /* ===== APP HEADER ===== */
-.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #E8DFD0;max-width:640px;margin:0 auto}
+.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #F0E8A0;max-width:640px;margin:0 auto}
 @media(min-width:641px){.app-header{left:50%;transform:translateX(-50%)}}
 .ah-logo{display:flex;align-items:center;flex-shrink:0}
 .ah-search{flex:1;position:relative}
-.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #E8DFD0;border-radius:8px;background:#F0ECE4;font-size:13px;font-family:'Pretendard',sans-serif;color:#2D2A24;outline:none;cursor:pointer}
-.ah-search input::placeholder{color:#8A8478;font-weight:300}
-.ah-search input:focus{border-color:#6B8E4E}
+.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #F0E8A0;border-radius:8px;background:#F5F5F0;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#3D4A1E;outline:none;cursor:pointer}
+.ah-search input::placeholder{color:#A0AD78;font-weight:300}
+.ah-search input:focus{border-color:#98CD00}
 .ah-s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#999}
 .ah-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
 .ah-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;position:relative;transition:background .2s}
@@ -178,11 +179,11 @@ body{padding-bottom:84px}
 .ah-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:#FF4444;border-radius:50%;border:1.5px solid #fff}
 
 /* ===== BOTTOM NAV ===== */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #E8DFD0;padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #F0E8A0;padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
 @media(min-width:641px){.bottom-nav{left:50%;transform:translateX(-50%)}}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#8A8478;font-size:10px;font-weight:500}
-.bnav-item svg{stroke:#8A8478}
-.bnav-label{font-family:'Pretendard',sans-serif}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#A0AD78;font-size:10px;font-weight:500}
+.bnav-item svg{stroke:#A0AD78}
+.bnav-label{font-family:'Noto Sans KR',sans-serif}
 </style>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 </head>
@@ -300,12 +301,12 @@ body{padding-bottom:84px}
         <svg viewBox="0 0 120 120" fill="none">
           <!-- 꼬마마늘 -->
           <ellipse cx="60" cy="68" rx="30" ry="36" fill="#F5ECD7"/>
-          <path d="M52 36c-3-12 8-20 8-20s11 8 8 20" fill="#6B8E4E"/>
+          <path d="M52 36c-3-12 8-20 8-20s11 8 8 20" fill="#98CD00"/>
           <circle cx="50" cy="64" r="4" fill="#2D2D2D"/><circle cx="51" cy="63" r="1.5" fill="#fff"/>
           <circle cx="70" cy="64" r="4" fill="#2D2D2D"/><circle cx="71" cy="63" r="1.5" fill="#fff"/>
-          <path d="M54 74c3 4 10 4 13 0" stroke="#C4893B" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="42" cy="70" rx="6" ry="3" fill="#C4893B" opacity=".2"/>
-          <ellipse cx="78" cy="70" rx="6" ry="3" fill="#C4893B" opacity=".2"/>
+          <path d="M54 74c3 4 10 4 13 0" stroke="#FF6B9D" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="42" cy="70" rx="6" ry="3" fill="#FF6B9D" opacity=".2"/>
+          <ellipse cx="78" cy="70" rx="6" ry="3" fill="#FF6B9D" opacity=".2"/>
         </svg>
         <div class="evo-name">꼬마마늘</div>
         <div class="evo-range">Day 1-33</div>
@@ -315,15 +316,15 @@ body{padding-bottom:84px}
         <svg viewBox="0 0 120 120" fill="none">
           <!-- 갈릭프렌즈 -->
           <ellipse cx="60" cy="68" rx="34" ry="40" fill="#F5ECD7"/>
-          <path d="M48 32c-4-16 12-26 12-26s16 10 12 26" fill="#6B8E4E"/>
+          <path d="M48 32c-4-16 12-26 12-26s16 10 12 26" fill="#98CD00"/>
           <ellipse cx="84" cy="46" rx="7" ry="3.5" fill="#66BB6A" transform="rotate(-30 84 46)"/>
           <ellipse cx="48" cy="62" rx="6" ry="7" fill="#2D2D2D"/>
           <ellipse cx="50" cy="61" rx="2.5" ry="2.5" fill="#fff"/>
           <ellipse cx="72" cy="62" rx="6" ry="7" fill="#2D2D2D"/>
           <ellipse cx="74" cy="61" rx="2.5" ry="2.5" fill="#fff"/>
-          <path d="M52 76c5 6 16 6 21 0" stroke="#C4893B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="38" cy="72" rx="8" ry="4" fill="#C4893B" opacity=".2"/>
-          <ellipse cx="82" cy="72" rx="8" ry="4" fill="#C4893B" opacity=".2"/>
+          <path d="M52 76c5 6 16 6 21 0" stroke="#FF6B9D" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="38" cy="72" rx="8" ry="4" fill="#FF6B9D" opacity=".2"/>
+          <ellipse cx="82" cy="72" rx="8" ry="4" fill="#FF6B9D" opacity=".2"/>
         </svg>
         <div class="evo-name">갈릭프렌즈</div>
         <div class="evo-range">Day 34-66</div>
@@ -333,24 +334,24 @@ body{padding-bottom:84px}
         <svg viewBox="0 0 120 120" fill="none">
           <!-- 마늘요정 -->
           <ellipse cx="60" cy="68" rx="32" ry="38" fill="#F5ECD7"/>
-          <path d="M48 34c-4-16 12-26 12-26s16 10 12 26" fill="#6B8E4E"/>
+          <path d="M48 34c-4-16 12-26 12-26s16 10 12 26" fill="#98CD00"/>
           <!-- Wings -->
           <path d="M28 58c-12-6-18-22-10-26 5 10 16 16 26 14" fill="#E3F2FD" opacity=".7"/>
           <path d="M92 58c12-6 18-22 10-26-5 10-16 16-26 14" fill="#E3F2FD" opacity=".7"/>
           <!-- Crown -->
-          <path d="M42 36l5-12 6 8 6-10 6 10 6-8 5 12z" fill="#D4A843"/>
-          <circle cx="60" cy="24" r="2.5" fill="#C4893B"/>
+          <path d="M42 36l5-12 6 8 6-10 6 10 6-8 5 12z" fill="#FFB8D0"/>
+          <circle cx="60" cy="24" r="2.5" fill="#FF6B9D"/>
           <!-- Face -->
           <ellipse cx="48" cy="62" rx="5" ry="6" fill="#2D2D2D"/>
           <ellipse cx="50" cy="61" rx="2" ry="2" fill="#fff"/>
           <ellipse cx="72" cy="62" rx="5" ry="6" fill="#2D2D2D"/>
           <ellipse cx="74" cy="61" rx="2" ry="2" fill="#fff"/>
-          <path d="M52 76c5 6 16 6 21 0" stroke="#C4893B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="38" cy="71" rx="8" ry="3.5" fill="#C4893B" opacity=".2"/>
-          <ellipse cx="82" cy="71" rx="8" ry="3.5" fill="#C4893B" opacity=".2"/>
+          <path d="M52 76c5 6 16 6 21 0" stroke="#FF6B9D" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="38" cy="71" rx="8" ry="3.5" fill="#FF6B9D" opacity=".2"/>
+          <ellipse cx="82" cy="71" rx="8" ry="3.5" fill="#FF6B9D" opacity=".2"/>
           <!-- Sparkles -->
-          <circle cx="18" cy="48" r="2.5" fill="#D4A843" opacity=".5"><animate attributeName="opacity" values=".5;0;.5" dur="1.5s" repeatCount="indefinite"/></circle>
-          <circle cx="102" cy="42" r="2" fill="#D4A843" opacity=".4"><animate attributeName="opacity" values=".4;0;.4" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="18" cy="48" r="2.5" fill="#FFB8D0" opacity=".5"><animate attributeName="opacity" values=".5;0;.5" dur="1.5s" repeatCount="indefinite"/></circle>
+          <circle cx="102" cy="42" r="2" fill="#FFB8D0" opacity=".4"><animate attributeName="opacity" values=".4;0;.4" dur="2s" repeatCount="indefinite"/></circle>
         </svg>
         <div class="evo-name">마늘요정</div>
         <div class="evo-range">Day 67-100</div>
@@ -400,12 +401,12 @@ body{padding-bottom:84px}
         <svg viewBox="0 0 80 80" fill="none">
           <!-- 마누리 (마늘) -->
           <ellipse cx="40" cy="45" rx="22" ry="26" fill="#F5ECD7"/>
-          <path d="M34 22c-2-10 6-16 6-16s8 6 6 16" fill="#6B8E4E"/>
+          <path d="M34 22c-2-10 6-16 6-16s8 6 6 16" fill="#98CD00"/>
           <circle cx="33" cy="42" r="3" fill="#2D2D2D"/><circle cx="34" cy="41" r="1.2" fill="#fff"/>
           <circle cx="47" cy="42" r="3" fill="#2D2D2D"/><circle cx="48" cy="41" r="1.2" fill="#fff"/>
-          <path d="M36 50c2 3 7 3 9 0" stroke="#C4893B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="27" cy="47" rx="4" ry="2" fill="#C4893B" opacity=".2"/>
-          <ellipse cx="53" cy="47" rx="4" ry="2" fill="#C4893B" opacity=".2"/>
+          <path d="M36 50c2 3 7 3 9 0" stroke="#FF6B9D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="27" cy="47" rx="4" ry="2" fill="#FF6B9D" opacity=".2"/>
+          <ellipse cx="53" cy="47" rx="4" ry="2" fill="#FF6B9D" opacity=".2"/>
         </svg>
         <div class="char-name">마누리</div>
         <div class="char-type">마늘 캐릭터</div>
@@ -422,7 +423,7 @@ body{padding-bottom:84px}
           <circle cx="34" cy="40" r="3" fill="#2D2D2D"/><circle cx="35" cy="39" r="1.2" fill="#fff"/>
           <circle cx="46" cy="40" r="3" fill="#2D2D2D"/><circle cx="47" cy="39" r="1.2" fill="#fff"/>
           <ellipse cx="40" cy="48" rx="3" ry="2" fill="#2D2D2D"/>
-          <path d="M36 52c2 2 6 2 8 0" stroke="#C4893B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M36 52c2 2 6 2 8 0" stroke="#FF6B9D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         </svg>
         <div class="char-name">곰두리</div>
         <div class="char-type">곰 캐릭터</div>
@@ -441,7 +442,7 @@ body{padding-bottom:84px}
           <path d="M40 30v5" stroke="#E65100" stroke-width="2" stroke-linecap="round"/>
           <circle cx="34" cy="42" r="3" fill="#2D2D2D"/><circle cx="35" cy="41" r="1.2" fill="#fff"/>
           <circle cx="46" cy="42" r="3" fill="#2D2D2D"/><circle cx="47" cy="41" r="1.2" fill="#fff"/>
-          <path d="M36 50c2 2 6 2 8 0" stroke="#C4893B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M36 50c2 2 6 2 8 0" stroke="#FF6B9D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         </svg>
         <div class="char-name">호두리</div>
         <div class="char-type">호랑이 캐릭터</div>
@@ -454,9 +455,9 @@ body{padding-bottom:84px}
           <path d="M38 24c-1-6 2-12 2-12" stroke="#4CAF50" stroke-width="1" fill="none"/>
           <circle cx="34" cy="42" r="3" fill="#2D2D2D"/><circle cx="35" cy="41" r="1.2" fill="#fff"/>
           <circle cx="46" cy="42" r="3" fill="#2D2D2D"/><circle cx="47" cy="41" r="1.2" fill="#fff"/>
-          <path d="M36 50c2 2 6 2 8 0" stroke="#C4893B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <ellipse cx="28" cy="47" rx="4" ry="2" fill="#C4893B" opacity=".15"/>
-          <ellipse cx="52" cy="47" rx="4" ry="2" fill="#C4893B" opacity=".15"/>
+          <path d="M36 50c2 2 6 2 8 0" stroke="#FF6B9D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="28" cy="47" rx="4" ry="2" fill="#FF6B9D" opacity=".15"/>
+          <ellipse cx="52" cy="47" rx="4" ry="2" fill="#FF6B9D" opacity=".15"/>
         </svg>
         <div class="char-name">쑥이</div>
         <div class="char-type">쑥 캐릭터</div>

@@ -2,8 +2,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
+<meta name="theme-color" content="#98CD00">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
@@ -15,31 +16,31 @@
 /* ========== RESET & VARIABLES ========== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#F5F1EA;
-  --bg-alt:#F5F1EA;
+  --bg:#FAFAFA;
+  --bg-alt:#FAFAFA;
   --card:#FFFFFF;
-  --text:#333333;
-  --text-light:#888888;
-  --green:#6B8E4E;
+  --text:#3D4A1E;
+  --text-light:#A0AD78;
+  --green:#98CD00;
   --green-light:#E8F8ED;
-  --gold:#D4A843;
+  --gold:#FFB8D0;
   --gold-light:#FFF3D6;
-  --coral:#C4893B;
-  --border:#E8DFD0;
+  --coral:#FF6B9D;
+  --border:#F0E8A0;
   --shadow:rgba(0,0,0,0.06);
-  --garlic-green:#6B8E4E;
+  --garlic-green:#98CD00;
   --garlic-green-light:#E8F8ED;
   --garlic-green-pale:rgba(0,199,60,0.08);
-  --garlic-bg:#F5F1EA;
+  --garlic-bg:#FAFAFA;
   --garlic-white:#FFFFFF;
-  --garlic-black:#333333;
+  --garlic-black:#3D4A1E;
   --garlic-gray:#666666;
-  --garlic-gray-light:#888888;
-  --garlic-gray-border:#E8DFD0;
-  --garlic-coral:#C4893B;
-  --garlic-gold:#D4A843;
+  --garlic-gray-light:#A0AD78;
+  --garlic-gray-border:#F0E8A0;
+  --garlic-coral:#FF6B9D;
+  --garlic-gold:#FFB8D0;
   --garlic-red:#FF4848;
-  --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  --font:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
   --header-h:52px;
   --tab-h:44px;
   --nav-h:56px;
@@ -381,14 +382,14 @@ img{display:block;max-width:100%}
 .past-badge{
   flex-shrink:0;padding:3px 9px;border-radius:20px;
   font-size:0.62rem;font-weight:700;
-  background:#E8DFD0;color:var(--garlic-gray-light);
+  background:#F0E8A0;color:var(--garlic-gray-light);
 }
 
 /* ========== FESTIVAL BANNER ========== */
 .festival-banner{
   margin:8px 16px 8px;
   border-radius:18px;overflow:hidden;
-  background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#D4A843 100%);
+  background:linear-gradient(135deg,#3D4A1E 0%,#2D6A4F 40%,#FFB8D0 100%);
   padding:24px 20px;position:relative;
   display:flex;align-items:center;justify-content:space-between;
   gap:12px;
@@ -545,7 +546,7 @@ img{display:block;max-width:100%}
       <!-- Slide 1: 퇴마콘서트 -->
       <div class="hero-slide">
         <a href="event_toemacon.html" class="hero-card" style="display:flex">
-          <img class="hero-card-bg" src="../reference/퇴마콘1.png" alt="퇴마콘서트" onerror="this.style.display='none';this.nextElementSibling.previousElementSibling.style.background='linear-gradient(135deg,#1a0a2e,#3d1a5c,#C4893B)'">
+          <img class="hero-card-bg" src="../reference/퇴마콘1.png" alt="퇴마콘서트" onerror="this.style.display='none';this.nextElementSibling.previousElementSibling.style.background='linear-gradient(135deg,#1a0a2e,#3d1a5c,#FF6B9D)'">
           <div class="hero-card-overlay"></div>
           <div class="hero-card-content">
             <div class="hero-card-text">
@@ -561,7 +562,7 @@ img{display:block;max-width:100%}
       <!-- Slide 2: 100일 프로모션 -->
       <div class="hero-slide">
         <a href="garlic_tamagotchi.html" class="hero-card" style="display:flex">
-          <div class="hero-card-bg" style="background:linear-gradient(135deg,#7B4F10 0%,#D4A843 50%,#F0CC6A 100%)"></div>
+          <div class="hero-card-bg" style="background:linear-gradient(135deg,#7B4F10 0%,#FFB8D0 50%,#F0CC6A 100%)"></div>
           <div class="hero-card-overlay"></div>
           <div class="hero-card-content">
             <div class="hero-card-text">
@@ -588,7 +589,7 @@ img{display:block;max-width:100%}
       <!-- Slide 3: 갈릭데이 예고 -->
       <div class="hero-slide">
         <a href="#" class="hero-card" style="display:flex">
-          <div class="hero-card-bg" style="background:linear-gradient(135deg,#004d1f 0%,#6B8E4E 60%,#A8FFB8 100%)"></div>
+          <div class="hero-card-bg" style="background:linear-gradient(135deg,#004d1f 0%,#98CD00 60%,#A8FFB8 100%)"></div>
           <div class="hero-card-overlay"></div>
           <div class="hero-card-content">
             <div class="hero-card-text">
@@ -634,7 +635,7 @@ img{display:block;max-width:100%}
 
     <!-- Card 2: 마늘 100원 딜 -->
     <a href="05_deals.html" class="event-card reveal reveal-delay-2">
-      <div class="event-thumb" style="background:linear-gradient(135deg,#C4893B,#FF4848)">
+      <div class="event-thumb" style="background:linear-gradient(135deg,#FF6B9D,#FF4848)">
         <span class="thumb-emoji">💸</span>
         <span class="participant-badge">⚡ 9,203명 참여 중</span>
       </div>
@@ -647,7 +648,7 @@ img{display:block;max-width:100%}
 
     <!-- Card 3: 100일 챌린지 -->
     <a href="03_challenge.html" class="event-card reveal reveal-delay-3">
-      <div class="event-thumb" style="background:linear-gradient(135deg,#6B8E4E,#009E30)">
+      <div class="event-thumb" style="background:linear-gradient(135deg,#98CD00,#009E30)">
         <span class="thumb-emoji">🌱</span>
         <span class="participant-badge">🌿 14,872명 참여 중</span>
       </div>
@@ -660,7 +661,7 @@ img{display:block;max-width:100%}
 
     <!-- Card 4: 너마늘 쿠폰 -->
     <a href="06_rewards.html" class="event-card reveal reveal-delay-4">
-      <div class="event-thumb" style="background:linear-gradient(135deg,#D4A843,#F0CC6A)">
+      <div class="event-thumb" style="background:linear-gradient(135deg,#FFB8D0,#F0CC6A)">
         <span class="thumb-emoji">🎟️</span>
         <span class="participant-badge">🎉 5,561명 참여 중</span>
       </div>
@@ -710,14 +711,14 @@ img{display:block;max-width:100%}
       <div class="friend-avatar" style="background:linear-gradient(135deg,#FFE0E6,#FFB3C1)">
         <svg viewBox="0 0 80 80" width="64" height="64" fill="none">
           <ellipse cx="40" cy="46" rx="20" ry="24" fill="#F5ECD7"/>
-          <path d="M33 20c-2-8 7-14 7-14s9 6 7 14" fill="#6B8E4E"/>
+          <path d="M33 20c-2-8 7-14 7-14s9 6 7 14" fill="#98CD00"/>
           <circle cx="33" cy="43" r="3" fill="#2D2D2D"/><circle cx="34" cy="42" r="1.2" fill="#fff"/>
           <circle cx="47" cy="43" r="3" fill="#2D2D2D"/><circle cx="48" cy="42" r="1.2" fill="#fff"/>
-          <path d="M36 51c1.5 2.5 6.5 2.5 8 0" stroke="#C4893B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <ellipse cx="28" cy="47" rx="4" ry="2" fill="#C4893B" opacity=".2"/>
-          <ellipse cx="52" cy="47" rx="4" ry="2" fill="#C4893B" opacity=".2"/>
-          <polygon points="40,8 33,22 47,22" fill="#C4893B" opacity=".85"/>
-          <circle cx="40" cy="7" r="2" fill="#D4A843"/>
+          <path d="M36 51c1.5 2.5 6.5 2.5 8 0" stroke="#FF6B9D" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <ellipse cx="28" cy="47" rx="4" ry="2" fill="#FF6B9D" opacity=".2"/>
+          <ellipse cx="52" cy="47" rx="4" ry="2" fill="#FF6B9D" opacity=".2"/>
+          <polygon points="40,8 33,22 47,22" fill="#FF6B9D" opacity=".85"/>
+          <circle cx="40" cy="7" r="2" fill="#FFB8D0"/>
         </svg>
       </div>
       <div class="friend-name">마누리<br>생일파티 이벤트</div>
@@ -737,9 +738,9 @@ img{display:block;max-width:100%}
           <ellipse cx="40" cy="34" rx="9" ry="7" fill="#D7CCC8"/>
           <circle cx="34" cy="28" r="2.5" fill="#2D2D2D"/><circle cx="35" cy="27" r="1" fill="#fff"/>
           <circle cx="46" cy="28" r="2.5" fill="#2D2D2D"/><circle cx="47" cy="27" r="1" fill="#fff"/>
-          <ellipse cx="40" cy="32" rx="2" ry="1.5" fill="#C4893B"/>
+          <ellipse cx="40" cy="32" rx="2" ry="1.5" fill="#FF6B9D"/>
           <path d="M36 35c1.5 2 6.5 2 8 0" stroke="#555" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <rect x="50" y="10" width="22" height="16" rx="6" fill="#6B8E4E"/>
+          <rect x="50" y="10" width="22" height="16" rx="6" fill="#98CD00"/>
           <text x="61" y="22" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Q?</text>
         </svg>
       </div>
@@ -771,18 +772,18 @@ img{display:block;max-width:100%}
       <div class="friend-avatar" style="background:linear-gradient(135deg,#FFF3D6,#FFE08A)">
         <svg viewBox="0 0 80 80" width="64" height="64" fill="none">
           <ellipse cx="40" cy="50" rx="20" ry="22" fill="#F5ECD7"/>
-          <path d="M32 22c-3-10 8-18 8-18s11 8 8 18" fill="#6B8E4E"/>
+          <path d="M32 22c-3-10 8-18 8-18s11 8 8 18" fill="#98CD00"/>
           <circle cx="33" cy="46" r="3.2" fill="#2D2D2D"/><circle cx="34" cy="45" r="1.3" fill="#fff"/>
           <circle cx="47" cy="46" r="3.2" fill="#2D2D2D"/><circle cx="48" cy="45" r="1.3" fill="#fff"/>
-          <path d="M36 54c1.8 3 7.2 3 9 0" stroke="#C4893B" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <polygon points="26,30 32,20 40,26 48,20 54,30" fill="#D4A843"/>
+          <path d="M36 54c1.8 3 7.2 3 9 0" stroke="#FF6B9D" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <polygon points="26,30 32,20 40,26 48,20 54,30" fill="#FFB8D0"/>
           <circle cx="40" cy="25" r="2.5" fill="#FF4848"/>
-          <circle cx="32" cy="19" r="2" fill="#6B8E4E"/>
-          <circle cx="48" cy="19" r="2" fill="#6B8E4E"/>
+          <circle cx="32" cy="19" r="2" fill="#98CD00"/>
+          <circle cx="48" cy="19" r="2" fill="#98CD00"/>
         </svg>
       </div>
       <div class="friend-name">마늘왕 배틀<br>랭킹 이벤트</div>
-      <button class="friend-btn" onclick="showToast('이벤트에 참여했어요! 🧄')" style="background:#D4A843">참여</button>
+      <button class="friend-btn" onclick="showToast('이벤트에 참여했어요! 🧄')" style="background:#FFB8D0">참여</button>
     </div>
 
   </div>

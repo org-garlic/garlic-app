@@ -4,7 +4,7 @@
   ============================================================
   Concept: Gamified attendance + garlic peeling mini-game + quiz
   Layout:  Mobile-first app page, bouncy & playful
-  Colors:  Garlic Green #6B8E4E · Dark Green #1B4332 · Gold #D4A843 · Coral #C4893B
+  Colors:  Garlic Green #98CD00 · Dark Green #3D4A1E · Gold #FFB8D0 · Coral #FF6B9D
   Fonts:   Pretendard (all text)
   Mood:    "오늘도 마늘 한 알! 까고 또 까고!"
   ============================================================
@@ -14,53 +14,54 @@
 <head>
 <meta charset="UTF-8">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
+<meta name="theme-color" content="#A4DD00">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6B8E4E">
+<meta name="theme-color" content="#A4DD00">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Garlic - 나마늘 위한 마켓 | 마늘까기</title>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #F5F1EA;
-  --bg-alt: #F5F1EA;
+  --bg: #FAFAFA;
+  --bg-alt: #FAFAFA;
   --card: #FFFFFF;
-  --text: #333333;
-  --text-light: #888888;
-  --green: #6B8E4E;
+  --text: #3D4A1E;
+  --text-light: #A0AD78;
+  --green: #98CD00;
   --green-light: #E8F8ED;
-  --gold: #D4A843;
+  --gold: #FFB8D0;
   --gold-light: #FFF3D6;
-  --coral: #C4893B;
-  --border: #E8DFD0;
+  --coral: #FF6B9D;
+  --border: #F0E8A0;
   --shadow-color: rgba(0,0,0,0.06);
-  --garlic-green: #6B8E4E;
+  --garlic-green: #98CD00;
   --garlic-green-light: #E8F8ED;
   --garlic-green-pale: #B8F0CA;
   --garlic-green-glow: rgba(0, 199, 60, 0.2);
-  --garlic-dark-green: #1B4332;
-  --garlic-gold: #D4A843;
+  --garlic-dark-green: #3D4A1E;
+  --garlic-gold: #FFB8D0;
   --garlic-gold-light: #FFF3D6;
-  --garlic-coral: #C4893B;
+  --garlic-coral: #FF6B9D;
   --garlic-coral-light: #FFE8E4;
-  --garlic-bg: #F5F1EA;
+  --garlic-bg: #FAFAFA;
   --white: #FFFFFF;
-  --dark: #333333;
-  --gray-50: #F5F1EA;
-  --gray-100: #F5F1EA;
-  --gray-200: #E8DFD0;
+  --dark: #3D4A1E;
+  --gray-50: #FAFAFA;
+  --gray-100: #FAFAFA;
+  --gray-200: #F0E8A0;
   --gray-300: #D1D5DB;
-  --gray-400: #888888;
+  --gray-400: #A0AD78;
   --gray-500: #6B7280;
   --gray-600: #4B5563;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
@@ -86,7 +87,7 @@ html {
 }
 
 body {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -129,16 +130,16 @@ body {
   padding: 8px 12px 8px 34px;
   border: 1px solid #EEE;
   border-radius: 8px;
-  background: #F0ECE4;
+  background: #F5F5F0;
   font-size: 13px;
-  font-family: 'Pretendard', sans-serif;
-  color: #333;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #3D4A1E;
   outline: none;
   cursor: pointer;
 }
 
-.header-search input::placeholder { color: #999; font-weight: 300; }
-.header-search input:focus { border-color: #6B8E4E; }
+.header-search input::placeholder { color: #A0AD78; font-weight: 300; }
+.header-search input:focus { border-color: #98CD00; }
 
 .header-search .s-icon {
   position: absolute;
@@ -147,7 +148,7 @@ body {
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  color: #999;
+  color: #A0AD78;
 }
 
 .header-right { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
@@ -289,7 +290,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   display: flex; align-items: center; justify-content: center;
   color: var(--gray-500);
   transition: all 0.2s;
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .calendar-nav button:hover {
@@ -367,7 +368,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   border: none; border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--garlic-green), #00A832);
   color: #fff;
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px; font-weight: 700;
   cursor: pointer; position: relative; overflow: hidden;
   transition: all 0.3s var(--ease-bounce);
@@ -594,7 +595,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   padding: 12px 32px; border: none;
   border-radius: var(--radius-md);
   background: var(--garlic-green); color: #fff;
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px; font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s var(--ease-bounce);
@@ -653,7 +654,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   border: 2px solid var(--gray-200);
   border-radius: var(--radius-md);
   background: var(--white);
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px; font-weight: 500; color: var(--dark);
   cursor: pointer;
   transition: all 0.25s var(--ease-bounce);
@@ -890,11 +891,11 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   main { max-width: 480px; }
   .header { justify-content: center; }
 }
-.tab-nav{position:fixed;top:52px;left:0;right:0;z-index:99;display:flex;gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #E8DFD0;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:640px;margin:0 auto}
+.tab-nav{position:fixed;top:52px;left:0;right:0;z-index:99;display:flex;gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #F0E8A0;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:640px;margin:0 auto}
 .tab-nav::-webkit-scrollbar{display:none}
-.tab-item{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;color:#8A8478;position:relative;white-space:nowrap;transition:color .2s}
-.tab-item.active{color:#2D2A24;font-weight:700}
-.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:#6B8E4E;border-radius:1px}
+.tab-item{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;color:#A0AD78;position:relative;white-space:nowrap;transition:color .2s}
+.tab-item.active{color:#3D4A1E;font-weight:700}
+.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:#98CD00;border-radius:1px}
 .tab-item:first-child{padding-left:20px}
 </style>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
@@ -913,11 +914,11 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   </div>
   <div class="header-right">
     <a href="10_notifications.html" class="header-btn" style="position:relative;text-decoration:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D4A1E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span class="header-dot"></span>
     </a>
     <a href="04_mypage.html" class="header-btn" style="text-decoration:none">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D4A1E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </a>
   </div>
 </header>
@@ -1026,7 +1027,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
         <div class="tap-pulse"></div>
         <div class="garlic-svg-wrap">
           <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="80" cy="90" rx="52" ry="55" fill="#F5F0E8" stroke="#E8DCC8" stroke-width="1.5"/>
+            <ellipse cx="80" cy="90" rx="52" ry="55" fill="#FAFAFA" stroke="#E8DCC8" stroke-width="1.5"/>
             <path d="M60 65 Q55 45 65 35 Q75 28 80 40 Q72 50 60 65Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
             <path d="M80 60 Q80 38 90 30 Q100 25 100 40 Q95 50 80 60Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
             <path d="M100 70 Q108 50 105 38 Q112 32 115 45 Q112 58 100 70Z" fill="#FDFBF7" stroke="#E8DCC8" stroke-width="1"/>
@@ -1038,7 +1039,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
             <circle cx="92" cy="88" r="3" fill="#2D2D2D"/>
             <circle cx="71" cy="87" r="1" fill="#fff"/>
             <circle cx="93" cy="87" r="1" fill="#fff"/>
-            <path d="M76 98 Q81 103 86 98" stroke="#C4893B" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M76 98 Q81 103 86 98" stroke="#FF6B9D" stroke-width="2" stroke-linecap="round" fill="none"/>
             <ellipse cx="63" cy="96" rx="6" ry="3.5" fill="rgba(255,127,107,0.25)"/>
             <ellipse cx="99" cy="96" rx="6" ry="3.5" fill="rgba(255,127,107,0.25)"/>
           </svg>
@@ -1094,7 +1095,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
               <path d="M25 45 Q20 45 18 50 L12 135 Q10 150 25 152 L95 152 Q110 150 108 135 L102 50 Q100 45 95 45Z"/>
             </clipPath>
             <linearGradient id="fillGrad" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#6B8E4E"/>
+              <stop offset="0%" stop-color="#98CD00"/>
               <stop offset="50%" stop-color="#4CAF50"/>
               <stop offset="100%" stop-color="#81C784"/>
             </linearGradient>
@@ -1108,7 +1109,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
           <text x="70" y="125" font-size="16">🧄</text>
           <text x="45" y="148" font-size="12">🧄</text>
           <text x="75" y="145" font-size="13">🧄</text>
-          <rect x="22" y="38" width="76" height="10" rx="4" fill="#D4A843" stroke="#B08A2E" stroke-width="1"/>
+          <rect x="22" y="38" width="76" height="10" rx="4" fill="#FFB8D0" stroke="#B08A2E" stroke-width="1"/>
           <rect x="30" y="32" width="60" height="8" rx="3" fill="#E8C96A"/>
           <path d="M28 55 L24 130" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
         </svg>
@@ -1316,19 +1317,19 @@ function answerQuiz(btn, isCorrect) {
     result.className = 'quiz-result correct-bg show';
     result.innerHTML = '<div style="text-align:center;padding:16px 0">' +
       '<svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom:8px">' +
-        '<circle cx="50" cy="50" r="45" fill="#E8F8ED" stroke="#6B8E4E" stroke-width="2"/>' +
+        '<circle cx="50" cy="50" r="45" fill="#E8F8ED" stroke="#98CD00" stroke-width="2"/>' +
         '<ellipse cx="50" cy="55" rx="18" ry="22" fill="#F5ECD7"/>' +
-        '<path d="M44 38c-1-8 6-14 6-14s7 6 6 14" fill="#6B8E4E"/>' +
-        '<circle cx="44" cy="50" r="2.5" fill="#333"/><circle cx="56" cy="50" r="2.5" fill="#333"/>' +
+        '<path d="M44 38c-1-8 6-14 6-14s7 6 6 14" fill="#98CD00"/>' +
+        '<circle cx="44" cy="50" r="2.5" fill="#3D4A1E"/><circle cx="56" cy="50" r="2.5" fill="#3D4A1E"/>' +
         '<circle cx="45" cy="49" r="1" fill="#fff"/><circle cx="57" cy="49" r="1" fill="#fff"/>' +
-        '<path d="M46 58c2 2.5 6 2.5 8 0" stroke="#C4893B" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+        '<path d="M46 58c2 2.5 6 2.5 8 0" stroke="#FF6B9D" stroke-width="2" fill="none" stroke-linecap="round"/>' +
         '<circle cx="38" cy="54" r="3" fill="#FFD4CC" opacity=".5"/>' +
         '<circle cx="62" cy="54" r="3" fill="#FFD4CC" opacity=".5"/>' +
-        '<text x="50" y="90" text-anchor="middle" font-size="10" fill="#6B8E4E" font-weight="700">정답!</text>' +
+        '<text x="50" y="90" text-anchor="middle" font-size="10" fill="#98CD00" font-weight="700">정답!</text>' +
       '</svg>' +
-      '<div style="font-size:18px;font-weight:700;color:#6B8E4E;margin-bottom:4px">🎉 정답이에요!</div>' +
-      '<div style="font-size:14px;color:#333">마늘 2알 획득! "나마늘 위한 마켓"</div>' +
-      '<div style="font-size:12px;color:#8A8478;margin-top:4px">마누리가 기뻐하고 있어요 🧄</div>' +
+      '<div style="font-size:18px;font-weight:700;color:#98CD00;margin-bottom:4px">🎉 정답이에요!</div>' +
+      '<div style="font-size:14px;color:#3D4A1E">마늘 2알 획득! "나마늘 위한 마켓"</div>' +
+      '<div style="font-size:12px;color:#A0AD78;margin-top:4px">마누리가 기뻐하고 있어요 🧄</div>' +
     '</div>';
     updateGarlicCount(parseInt(document.getElementById('jarCount').textContent) + 2);
   } else {
@@ -1337,8 +1338,8 @@ function answerQuiz(btn, isCorrect) {
     result.className = 'quiz-result wrong-bg show';
     result.innerHTML = '<div style="text-align:center;padding:12px 0">' +
       '<div style="font-size:16px;margin-bottom:4px">아쉬워요! 😅</div>' +
-      '<div style="font-size:14px;color:#333">정답은 <b>"나마늘 위한 마켓"</b>이었어요</div>' +
-      '<div style="font-size:12px;color:#8A8478;margin-top:4px">내일 다시 도전해보세요!</div>' +
+      '<div style="font-size:14px;color:#3D4A1E">정답은 <b>"나마늘 위한 마켓"</b>이었어요</div>' +
+      '<div style="font-size:12px;color:#A0AD78;margin-top:4px">내일 다시 도전해보세요!</div>' +
     '</div>';
   }
   allOptions.forEach(function(o) { o.style.pointerEvents = 'none'; });
@@ -1363,7 +1364,7 @@ function closeCoupon() { document.getElementById('couponPopup').classList.remove
 // ========== CONFETTI ==========
 function launchConfetti() {
   var container = document.getElementById('confettiContainer');
-  var colors = ['#6B8E4E', '#D4A843', '#C4893B', '#5B8DEF', '#FFD700', '#FF69B4'];
+  var colors = ['#98CD00', '#FFB8D0', '#FF6B9D', '#5B8DEF', '#FFD700', '#FF69B4'];
   for (var i = 0; i < 50; i++) {
     var piece = document.createElement('div');
     piece.className = 'confetti-piece';
