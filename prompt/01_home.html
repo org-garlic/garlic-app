@@ -965,7 +965,9 @@ function closeCoupon(){
   else{popup.style.transform='translateY(100%)'}
   setTimeout(function(){overlay.style.display='none';popup.style.display='none'},400);
 }
-setTimeout(showCoupon,2000);
+// Splash ends ~5.5s, then wait 2s more
+var splashDelay=localStorage.getItem('garlic_splash_seen')&&(Date.now()-parseInt(localStorage.getItem('garlic_splash_seen')))<24*60*60*1000?2000:7500;
+setTimeout(showCoupon,splashDelay);
 
 function voteEffect(){
   var btn=document.querySelector('.cp-btn-vote');
