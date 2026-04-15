@@ -25,7 +25,7 @@
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
 }
 html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{
+body{max-width:430px;margin-left:auto;margin-right:auto;
   font-family:var(--font);background:var(--garlic-bg);color:var(--garlic-black);
   min-height:100vh;min-height:100dvh;overflow-x:hidden;
   padding-top:calc(var(--header-h) + var(--safe-top));
@@ -64,7 +64,7 @@ button{border:none;background:none;cursor:pointer;font-family:var(--font)}
 .icon-event{background:#EEF3FF}
 .icon-review{background:var(--gold-light)}
 .icon-garden{background:var(--garlic-green-light)}
-.notif-body{flex:1;min-width:0}
+.notif-body{max-width:430px;margin-left:auto;margin-right:auto;flex:1;min-width:0}
 .notif-title{font-size:0.82rem;font-weight:700;color:var(--garlic-black);margin-bottom:3px;line-height:1.3}
 .notif-desc{font-size:0.75rem;font-weight:300;color:var(--garlic-gray-light);line-height:1.5}
 .notif-time{font-size:0.65rem;font-weight:300;color:var(--garlic-gray-light);margin-top:5px}
