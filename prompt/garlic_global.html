@@ -1002,5 +1002,9 @@ bars.forEach(b => barIO.observe(b));
   </div>
 </nav>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js")}</script>
+<script>
+/* Tab-nav PC drag scroll */
+(function(){var el=document.querySelector(".tab-nav");if(!el)return;var isDown=false,startX,scrollLeft;el.style.cursor="grab";el.addEventListener("mousedown",function(e){isDown=true;el.style.cursor="grabbing";startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft});el.addEventListener("mouseleave",function(){isDown=false;el.style.cursor="grab"});el.addEventListener("mouseup",function(){isDown=false;el.style.cursor="grab"});el.addEventListener("mousemove",function(e){if(!isDown)return;e.preventDefault();var x=e.pageX-el.offsetLeft;el.scrollLeft=scrollLeft-(x-startX)})})();
+</script>
 </body>
 </html>
