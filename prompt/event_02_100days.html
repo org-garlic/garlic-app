@@ -104,6 +104,12 @@ body{font-family:'Pretendard',sans-serif;background:var(--parchment);color:var(-
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(min-width:768px){.mem-cards{grid-template-columns:repeat(3,1fr)}.sale-grid{grid-template-columns:repeat(4,1fr)}.countdown{gap:18px}.cd-box{min-width:85px;padding:18px 14px}}
 </style>
+<style>
+/* Mobile-first constraint */
+body{max-width:430px;margin-left:auto;margin-right:auto;position:relative}
+.blog-header,.header,.fixed-header,[class*="header"]{max-width:430px;left:50%!important;transform:translateX(-50%)}
+.bottom-nav,.fixed-bottom,[class*="bottom-nav"]{max-width:430px;left:50%!important;transform:translateX(-50%)}
+</style>
 </head>
 <body>
 

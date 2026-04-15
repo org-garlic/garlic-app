@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Garlic Button Design Guide</title>
+<link rel="icon" type="image/png" href="../reference/G_Logo_3D_2.png">
+<style>
+@font-face {
+  font-family: 'GmarketSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GmarketSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GmarketSans';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* ─── CSS Variables ─── */
+:root {
+  --garlic-green:      #6B8E4E;
+  --garlic-dark-green: #1B4332;
+  --garlic-gold:       #D4A843;
+  --garlic-coral:      #C4893B;
+  --bg:                #F5F1EA;
+  --card:              #FFFFFF;
+  --text:              #333333;
+  --text-light:        #888888;
+  --border:            #E8DFD0;
+
+  --shadow-green:  0 8px 24px rgba(107,142,78,0.28);
+  --shadow-gold:   0 8px 24px rgba(212,168,67,0.35);
+  --shadow-card:   0 2px 12px rgba(51,51,51,0.07);
+  --radius-btn:    24px;
+  --transition:    all 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'GmarketSans', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Layout ─── */
+.page {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+/* ─── Header ─── */
+.header {
+  background: var(--garlic-dark-green);
+  padding: 48px 24px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(107,142,78,0.35) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; left: -20px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(212,168,67,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.header-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--garlic-gold);
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.header-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.header-title span {
+  color: var(--garlic-gold);
+}
+.header-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  position: relative;
+  z-index: 1;
+}
+.header-badge-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ─── Section ─── */
+.section {
+  padding: 32px 20px 0;
+}
+.section + .section {
+  padding-top: 36px;
+}
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.sec-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--garlic-green);
+  background: rgba(107,142,78,0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+.sec-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--garlic-dark-green);
+  letter-spacing: 0.5px;
+}
+
+/* ─── Cards ─── */
+.card {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+}
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* ─── Color Swatches ─── */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.swatch {
+  border-radius: 14px;
+  padding: 14px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border: 1px solid rgba(0,0,0,0.05);
+  min-height: 76px;
+  transition: var(--transition);
+  cursor: default;
+}
+.swatch:hover { transform: translateY(-2px); }
+.swatch-name {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.swatch-hex {
+  font-size: 10px;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  opacity: 0.6;
+}
+.swatch-role {
+  font-size: 9px;
+  opacity: 0.5;
+  margin-top: 2px;
+}
+
+/* ─── Divider ─── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+  opacity: 0.5;
+}
+
+/* ─── Sub label ─── */
+.sub-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 16px 0 10px;
+}
+.sub-label:first-of-type { margin-top: 0; }
+
+/* ─── Button type rows ─── */
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* ────────────────────────────────────────────
+   BUTTON SYSTEM — THE CORE
+──────────────────────────────────────────── */
+
+/* Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: 'GmarketSans', sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-btn);
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--garlic-green);
+  outline-offset: 2px;
+}
+
+/* --- Primary --- */
+.btn-primary {
+  background: var(--garlic-green);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-green);
+  background: #7aa35c;
+}
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+/* --- Secondary --- */
+.btn-secondary {
+  background: transparent;
+  color: var(--garlic-green);
+  font-weight: 600;
+  border: 1.5px solid var(--garlic-green);
+}
+.btn-secondary:hover {
+  background: rgba(107,142,78,0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(107,142,78,0.12);
+}
+.btn-secondary:active {
+  transform: scale(0.97);
+  background: rgba(107,142,78,0.12);
+}
+
+/* --- Special (Gold) --- */
+.btn-special {
+  background: var(--garlic-gold);
+  color: var(--garlic-dark-green);
+  font-weight: 700;
+}
+.btn-special:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+  background: #dbb24e;
+}
+.btn-special:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+/* --- Sizes --- */
+.btn-sm {
+  padding: 10px 20px;
+  font-size: 13px;
+  height: 36px;
+}
+.btn-md {
+  padding: 14px 28px;
+  font-size: 14px;
+  height: 44px;
+}
+.btn-lg {
+  padding: 16px 36px;
+  font-size: 16px;
+  height: 52px;
+}
+
+/* --- Disabled --- */
+.btn:disabled,
+.btn-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- Full Width --- */
+.btn-full {
+  width: 100%;
+}
+
+/* --- Icon Button (circular) --- */
+.btn-icon {
+  border-radius: 50%;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn-icon-sm  { width: 40px; height: 40px; }
+.btn-icon-md  { width: 44px; height: 44px; }
+.btn-icon-lg  { width: 48px; height: 48px; }
+
+/* ─── Size comparison table ─── */
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.size-table th {
+  text-align: left;
+  padding: 8px 10px;
+  font-weight: 700;
+  color: var(--text-light);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.size-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(232,223,208,0.5);
+  vertical-align: middle;
+}
+.size-table tr:last-child td { border-bottom: none; }
+.size-table td:first-child {
+  color: var(--text-light);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  width: 40px;
+}
+code {
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 10px;
+  background: rgba(107,142,78,0.1);
+  color: var(--garlic-dark-green);
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+/* ─── States grid ─── */
+.states-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.state-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px;
+  border-radius: 14px;
+  background: var(--bg);
+}
+.state-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* hover-demo class for visual "hover" state simulation in static doc */
+.btn-hover-demo.btn-primary {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-green);
+  background: #7aa35c;
+}
+.btn-hover-demo.btn-secondary {
+  background: rgba(107,142,78,0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(107,142,78,0.12);
+}
+.btn-hover-demo.btn-special {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+  background: #dbb24e;
+}
+
+/* ─── Icon SVGs ─── */
+.icon-svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ─── CSS Copy Section ─── */
+.copy-section {
+  padding: 0 20px;
+  margin-top: 36px;
+}
+.copy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.copy-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--garlic-dark-green);
+}
+.copy-btn {
+  font-family: 'GmarketSans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--garlic-green);
+  background: rgba(107,142,78,0.1);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+}
+.copy-btn:hover {
+  background: rgba(107,142,78,0.18);
+}
+.copy-btn.copied {
+  color: var(--card);
+  background: var(--garlic-green);
+}
+.code-block {
+  background: var(--garlic-dark-green);
+  border-radius: 16px;
+  padding: 20px;
+  overflow-x: auto;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 10.5px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.code-block .kw  { color: #D4A843; }
+.code-block .val { color: #7ac27a; }
+.code-block .cm  { color: rgba(255,255,255,0.3); font-style: italic; }
+.code-block .sel { color: #9dd8ff; }
+
+/* ─── Usage Guidelines ─── */
+.guideline-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.guideline-item {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  align-items: flex-start;
+}
+.guideline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.guideline-text {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text);
+}
+.guideline-text strong {
+  font-weight: 700;
+}
+
+/* ─── Footer ─── */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.footer strong {
+  font-weight: 700;
+  color: var(--garlic-green);
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║             HEADER               ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <header class="header">
+    <div class="header-eyebrow">GARLIC DESIGN SYSTEM</div>
+    <div class="header-title">Button<br><span>Design Guide</span></div>
+    <div class="header-sub">버튼 컴포넌트 통합 디자인 가이드 v1.0</div>
+    <div class="header-badge-row">
+      <span class="header-badge" style="background:rgba(107,142,78,0.25);color:#a8d17e">Primary</span>
+      <span class="header-badge" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15)">Secondary</span>
+      <span class="header-badge" style="background:rgba(212,168,67,0.3);color:#e8c77a">Special</span>
+    </div>
+  </header>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║          1. COLOR PALETTE         ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">01</span>
+      <span class="sec-title">버튼 컬러 팔레트</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Brand Colors</div>
+      <div class="swatch-grid">
+        <div class="swatch" style="background:#6B8E4E">
+          <span class="swatch-name" style="color:#fff">Garlic Green</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.8)">#6B8E4E</span>
+          <span class="swatch-role" style="color:rgba(255,255,255,0.6)">Primary CTA</span>
+        </div>
+        <div class="swatch" style="background:#1B4332">
+          <span class="swatch-name" style="color:#fff">Dark Green</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.8)">#1B4332</span>
+          <span class="swatch-role" style="color:rgba(255,255,255,0.6)">Special Text</span>
+        </div>
+        <div class="swatch" style="background:#D4A843">
+          <span class="swatch-name" style="color:#1B4332">Garlic Gold</span>
+          <span class="swatch-hex" style="color:rgba(27,67,50,0.7)">#D4A843</span>
+          <span class="swatch-role" style="color:rgba(27,67,50,0.55)">이벤트/프로모</span>
+        </div>
+        <div class="swatch" style="background:#C4893B">
+          <span class="swatch-name" style="color:#fff">Coral</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.8)">#C4893B</span>
+          <span class="swatch-role" style="color:rgba(255,255,255,0.6)">보조 액센트</span>
+        </div>
+        <div class="swatch" style="background:#F5F1EA;border:1px solid #E8DFD0">
+          <span class="swatch-name" style="color:#333">Background</span>
+          <span class="swatch-hex" style="color:#888">#F5F1EA</span>
+          <span class="swatch-role" style="color:#aaa">앱 배경</span>
+        </div>
+        <div class="swatch" style="background:#E8DFD0">
+          <span class="swatch-name" style="color:#333">Border</span>
+          <span class="swatch-hex" style="color:#666">#E8DFD0</span>
+          <span class="swatch-role" style="color:#888">테두리</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║         2. BUTTON TYPES           ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">02</span>
+      <span class="sec-title">버튼 타입 — 3종</span>
+    </div>
+
+    <!-- Primary -->
+    <div class="card">
+      <div class="card-title">Primary — 메인 액션 CTA</div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm">작은 버튼</button>
+        <button class="btn btn-primary btn-md">기본 버튼</button>
+        <button class="btn btn-primary btn-lg">큰 버튼</button>
+      </div>
+      <div class="divider"></div>
+      <div style="font-size:11px;color:var(--text-light);line-height:1.7">
+        <div>배경: <code>#6B8E4E</code> &nbsp; 텍스트: <code>#FFFFFF</code></div>
+        <div>radius: <code>24px</code> &nbsp; weight: <code>700</code></div>
+        <div>hover: <code>translateY(-2px)</code> + 그린 그림자</div>
+      </div>
+    </div>
+
+    <!-- Secondary -->
+    <div class="card">
+      <div class="card-title">Secondary — 보조 액션 아웃라인</div>
+      <div class="btn-row">
+        <button class="btn btn-secondary btn-sm">작은 버튼</button>
+        <button class="btn btn-secondary btn-md">기본 버튼</button>
+        <button class="btn btn-secondary btn-lg">큰 버튼</button>
+      </div>
+      <div class="divider"></div>
+      <div style="font-size:11px;color:var(--text-light);line-height:1.7">
+        <div>배경: <code>transparent</code> &nbsp; 테두리: <code>1.5px solid #6B8E4E</code></div>
+        <div>텍스트: <code>#6B8E4E</code> &nbsp; weight: <code>600</code></div>
+        <div>hover: <code>bg rgba(107,142,78,0.08)</code> + <code>translateY(-1px)</code></div>
+      </div>
+    </div>
+
+    <!-- Special -->
+    <div class="card">
+      <div class="card-title">Special — 이벤트/프로모션 골드</div>
+      <div class="btn-row">
+        <button class="btn btn-special btn-sm">작은 버튼</button>
+        <button class="btn btn-special btn-md">기본 버튼</button>
+        <button class="btn btn-special btn-lg">큰 버튼</button>
+      </div>
+      <div class="divider"></div>
+      <div style="font-size:11px;color:var(--text-light);line-height:1.7">
+        <div>배경: <code>#D4A843</code> &nbsp; 텍스트: <code>#1B4332</code></div>
+        <div>radius: <code>24px</code> &nbsp; weight: <code>700</code></div>
+        <div>hover: <code>translateY(-2px)</code> + 골드 그림자</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║           3. SIZES               ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">03</span>
+      <span class="sec-title">사이즈 비교</span>
+    </div>
+
+    <div class="card">
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>예시</th>
+            <th>Padding / Height</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SM</td>
+            <td><button class="btn btn-primary btn-sm">Small</button></td>
+            <td style="font-size:11px;color:var(--text-light)">10px 20px / ~36px</td>
+          </tr>
+          <tr>
+            <td>MD</td>
+            <td><button class="btn btn-primary btn-md">Medium</button></td>
+            <td style="font-size:11px;color:var(--text-light)">14px 28px / ~44px</td>
+          </tr>
+          <tr>
+            <td>LG</td>
+            <td><button class="btn btn-primary btn-lg">Large</button></td>
+            <td style="font-size:11px;color:var(--text-light)">16px 36px / ~52px</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">전체 타입 × 사이즈 매트릭스</div>
+      <div class="sub-label">SM (36px)</div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-sm">Primary</button>
+        <button class="btn btn-secondary btn-sm">Secondary</button>
+        <button class="btn btn-special btn-sm">Special</button>
+      </div>
+      <div class="sub-label">MD (44px)</div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-md">Primary</button>
+        <button class="btn btn-secondary btn-md">Secondary</button>
+        <button class="btn btn-special btn-md">Special</button>
+      </div>
+      <div class="sub-label">LG (52px)</div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-lg">Primary</button>
+        <button class="btn btn-secondary btn-lg">Secondary</button>
+        <button class="btn btn-special btn-lg">Special</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║           4. STATES              ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">04</span>
+      <span class="sec-title">버튼 상태</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Primary 상태 예시</div>
+      <div class="states-grid">
+        <div class="state-cell">
+          <button class="btn btn-primary btn-md">Default</button>
+          <span class="state-label">Default</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-primary btn-md btn-hover-demo">Hover</button>
+          <span class="state-label">Hover</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-primary btn-md" style="transform:scale(0.97)">Pressed</button>
+          <span class="state-label">Active</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-primary btn-md btn-disabled" disabled>Disabled</button>
+          <span class="state-label">Disabled</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Secondary 상태 예시</div>
+      <div class="states-grid">
+        <div class="state-cell">
+          <button class="btn btn-secondary btn-md">Default</button>
+          <span class="state-label">Default</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-secondary btn-md btn-hover-demo">Hover</button>
+          <span class="state-label">Hover</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-secondary btn-md" style="transform:scale(0.97)">Pressed</button>
+          <span class="state-label">Active</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-secondary btn-md btn-disabled" disabled>Disabled</button>
+          <span class="state-label">Disabled</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Special 상태 예시</div>
+      <div class="states-grid">
+        <div class="state-cell">
+          <button class="btn btn-special btn-md">Default</button>
+          <span class="state-label">Default</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-special btn-md btn-hover-demo">Hover</button>
+          <span class="state-label">Hover</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-special btn-md" style="transform:scale(0.97)">Pressed</button>
+          <span class="state-label">Active</span>
+        </div>
+        <div class="state-cell">
+          <button class="btn btn-special btn-md btn-disabled" disabled>Disabled</button>
+          <span class="state-label">Disabled</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║        5. FULL-WIDTH             ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">05</span>
+      <span class="sec-title">풀 와이드 버튼</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Full-Width — 폼 하단, 모달 CTA</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-primary btn-lg btn-full">지금 주문하기</button>
+        <button class="btn btn-secondary btn-lg btn-full">장바구니 담기</button>
+        <button class="btn btn-special btn-lg btn-full">특가 이벤트 참여</button>
+        <button class="btn btn-primary btn-md btn-full btn-disabled" disabled>재고 없음</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">모바일 하단 고정 CTA 패턴</div>
+      <div style="background:var(--bg);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;color:var(--text-light);margin-bottom:4px">총 39,000원</div>
+        <button class="btn btn-primary btn-lg btn-full">결제하기</button>
+        <button class="btn btn-secondary btn-md btn-full">계속 쇼핑하기</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║         6. ICON BUTTONS          ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">06</span>
+      <span class="sec-title">아이콘 버튼 (원형)</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Circular Icon Buttons — 40 / 44 / 48px</div>
+      <div class="sub-label">Primary</div>
+      <div class="btn-row" style="align-items:center;gap:12px">
+        <!-- 40px -->
+        <button class="btn btn-primary btn-icon btn-icon-sm" aria-label="좋아요">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </button>
+        <!-- 44px -->
+        <button class="btn btn-primary btn-icon btn-icon-md" aria-label="검색">
+          <svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        <!-- 48px -->
+        <button class="btn btn-primary btn-icon btn-icon-lg" aria-label="장바구니">
+          <svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </button>
+        <div style="font-size:10px;color:var(--text-light);display:flex;flex-direction:column;gap:4px;margin-left:4px">
+          <span>40px</span>
+          <span>44px</span>
+          <span>48px</span>
+        </div>
+      </div>
+      <div class="sub-label">Secondary</div>
+      <div class="btn-row" style="align-items:center;gap:12px">
+        <button class="btn btn-secondary btn-icon btn-icon-sm" aria-label="공유">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </button>
+        <button class="btn btn-secondary btn-icon btn-icon-md" aria-label="북마크">
+          <svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+        <button class="btn btn-secondary btn-icon btn-icon-lg" aria-label="알림">
+          <svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+        </button>
+      </div>
+      <div class="sub-label">Special</div>
+      <div class="btn-row" style="align-items:center;gap:12px">
+        <button class="btn btn-special btn-icon btn-icon-sm" aria-label="이벤트">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </button>
+        <button class="btn btn-special btn-icon btn-icon-md" aria-label="선물">
+          <svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+          </svg>
+        </button>
+        <button class="btn btn-special btn-icon btn-icon-lg" aria-label="쿠폰">
+          <svg class="icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 12v10H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║       7. BUTTON WITH ICON        ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">07</span>
+      <span class="sec-title">아이콘 + 텍스트 버튼</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Leading Icon (왼쪽)</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="btn-row">
+          <button class="btn btn-primary btn-md">
+            <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            장바구니
+          </button>
+          <button class="btn btn-secondary btn-md">
+            <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            찜하기
+          </button>
+        </div>
+        <button class="btn btn-special btn-lg btn-full">
+          <svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          특가 이벤트 참여하기
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Trailing Icon (오른쪽)</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="btn-row">
+          <button class="btn btn-primary btn-md">
+            더 보기
+            <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+          <button class="btn btn-secondary btn-md">
+            공유하기
+            <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full">
+          지금 주문하기
+          <svg class="icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║       8. USAGE GUIDELINES        ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">08</span>
+      <span class="sec-title">사용 가이드라인</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">언제 어떤 버튼을?</div>
+      <ul class="guideline-list">
+        <li class="guideline-item" style="background:rgba(107,142,78,0.07)">
+          <div class="guideline-dot" style="background:var(--garlic-green)"></div>
+          <div class="guideline-text"><strong>Primary (그린)</strong> — 화면당 하나의 주요 행동에만 사용. 결제, 구매, 등록 등 전환이 목적인 CTA에 적합.</div>
+        </li>
+        <li class="guideline-item" style="background:rgba(107,142,78,0.04)">
+          <div class="guideline-dot" style="background:#E8DFD0"></div>
+          <div class="guideline-text"><strong>Secondary (아웃라인)</strong> — 취소, 뒤로가기, 더 보기 등 보조 액션. Primary와 함께 사용할 때 위계를 명확하게 만들어 줌.</div>
+        </li>
+        <li class="guideline-item" style="background:rgba(212,168,67,0.08)">
+          <div class="guideline-dot" style="background:var(--garlic-gold)"></div>
+          <div class="guideline-text"><strong>Special (골드)</strong> — 이벤트, 프로모션, 시간 한정 특가 등 감성을 자극해야 하는 상황에 사용. 남용 금지.</div>
+        </li>
+        <li class="guideline-item" style="background:rgba(51,51,51,0.04)">
+          <div class="guideline-dot" style="background:var(--text-light)"></div>
+          <div class="guideline-text"><strong>Disabled</strong> — 선택이 불완전하거나 불가한 경우. opacity 0.45 + pointer-events none으로 처리.</div>
+        </li>
+        <li class="guideline-item" style="background:rgba(107,142,78,0.04)">
+          <div class="guideline-dot" style="background:var(--garlic-green)"></div>
+          <div class="guideline-text"><strong>Full-Width</strong> — 모바일 하단 고정 CTA, 모달 내 액션, 긴 폼 제출 버튼에 사용. 결제 단계처럼 사용자가 집중해야 할 때 효과적.</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║       9. CSS VARIABLES REF       ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="section">
+    <div class="sec-label">
+      <span class="sec-num">09</span>
+      <span class="sec-title">CSS Variables 레퍼런스</span>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Custom Properties</div>
+      <div class="code-block">
+<span class="sel">:root</span> {
+  <span class="cm">/* Brand Colors */</span>
+  <span class="kw">--garlic-green</span>:      <span class="val">#6B8E4E</span>;
+  <span class="kw">--garlic-dark-green</span>: <span class="val">#1B4332</span>;
+  <span class="kw">--garlic-gold</span>:       <span class="val">#D4A843</span>;
+  <span class="kw">--garlic-coral</span>:      <span class="val">#C4893B</span>;
+
+  <span class="cm">/* Layout */</span>
+  <span class="kw">--bg</span>:     <span class="val">#F5F1EA</span>;
+  <span class="kw">--card</span>:   <span class="val">#FFFFFF</span>;
+  <span class="kw">--text</span>:   <span class="val">#333333</span>;
+  <span class="kw">--border</span>: <span class="val">#E8DFD0</span>;
+
+  <span class="cm">/* Shadows */</span>
+  <span class="kw">--shadow-green</span>:
+    <span class="val">0 8px 24px rgba(107,142,78,0.28)</span>;
+  <span class="kw">--shadow-gold</span>:
+    <span class="val">0 8px 24px rgba(212,168,67,0.35)</span>;
+
+  <span class="cm">/* Button Tokens */</span>
+  <span class="kw">--radius-btn</span>:  <span class="val">24px</span>;
+  <span class="kw">--transition</span>:  <span class="val">all 0.2s cubic-bezier(0.4,0,0.2,1)</span>;
+}</div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║         COPY CSS SECTION         ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <div class="copy-section">
+    <div class="sec-label" style="padding:0">
+      <span class="sec-num">CSS</span>
+      <span class="sec-title">Copy & Paste — 프로젝트에 바로 사용</span>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <button class="copy-btn" id="copyBtn" onclick="copyCSS()">CSS 복사하기</button>
+    </div>
+
+    <div class="code-block" id="cssCode" style="max-height:360px;overflow-y:auto">
+<span class="cm">/* ─── Garlic Button System ─── */</span>
+<span class="cm">/* Font: GmarketSans CDN 로드 필요 */</span>
+
+<span class="sel">:root</span> {
+  <span class="kw">--garlic-green</span>:      <span class="val">#6B8E4E</span>;
+  <span class="kw">--garlic-dark-green</span>: <span class="val">#1B4332</span>;
+  <span class="kw">--garlic-gold</span>:       <span class="val">#D4A843</span>;
+  <span class="kw">--shadow-green</span>:      <span class="val">0 8px 24px rgba(107,142,78,0.28)</span>;
+  <span class="kw">--shadow-gold</span>:       <span class="val">0 8px 24px rgba(212,168,67,0.35)</span>;
+  <span class="kw">--radius-btn</span>:        <span class="val">24px</span>;
+  <span class="kw">--transition</span>:        <span class="val">all 0.2s cubic-bezier(0.4,0,0.2,1)</span>;
+}
+
+<span class="sel">.btn</span> {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: <span class="val">6px</span>;
+  font-family: <span class="val">'GmarketSans'</span>, sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: var(<span class="kw">--radius-btn</span>);
+  letter-spacing: <span class="val">0.3px</span>;
+  transition: var(<span class="kw">--transition</span>);
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+<span class="sel">.btn:focus-visible</span> {
+  outline: <span class="val">2px solid var(--garlic-green)</span>;
+  outline-offset: <span class="val">2px</span>;
+}
+
+<span class="cm">/* Sizes */</span>
+<span class="sel">.btn-sm</span> { padding: <span class="val">10px 20px</span>; font-size: <span class="val">13px</span>; height: <span class="val">36px</span>; }
+<span class="sel">.btn-md</span> { padding: <span class="val">14px 28px</span>; font-size: <span class="val">14px</span>; height: <span class="val">44px</span>; }
+<span class="sel">.btn-lg</span> { padding: <span class="val">16px 36px</span>; font-size: <span class="val">16px</span>; height: <span class="val">52px</span>; }
+
+<span class="cm">/* Primary */</span>
+<span class="sel">.btn-primary</span> {
+  background: var(<span class="kw">--garlic-green</span>);
+  color: <span class="val">#FFFFFF</span>;
+  font-weight: <span class="val">700</span>;
+}
+<span class="sel">.btn-primary:hover</span> {
+  transform: <span class="val">translateY(-2px)</span>;
+  box-shadow: var(<span class="kw">--shadow-green</span>);
+  background: <span class="val">#7aa35c</span>;
+}
+<span class="sel">.btn-primary:active</span> { transform: <span class="val">scale(0.97)</span>; box-shadow: none; }
+
+<span class="cm">/* Secondary */</span>
+<span class="sel">.btn-secondary</span> {
+  background: transparent;
+  color: var(<span class="kw">--garlic-green</span>);
+  font-weight: <span class="val">600</span>;
+  border: <span class="val">1.5px solid var(--garlic-green)</span>;
+}
+<span class="sel">.btn-secondary:hover</span> {
+  background: <span class="val">rgba(107,142,78,0.08)</span>;
+  transform: <span class="val">translateY(-1px)</span>;
+}
+<span class="sel">.btn-secondary:active</span> { transform: <span class="val">scale(0.97)</span>; }
+
+<span class="cm">/* Special */</span>
+<span class="sel">.btn-special</span> {
+  background: var(<span class="kw">--garlic-gold</span>);
+  color: var(<span class="kw">--garlic-dark-green</span>);
+  font-weight: <span class="val">700</span>;
+}
+<span class="sel">.btn-special:hover</span> {
+  transform: <span class="val">translateY(-2px)</span>;
+  box-shadow: var(<span class="kw">--shadow-gold</span>);
+  background: <span class="val">#dbb24e</span>;
+}
+<span class="sel">.btn-special:active</span> { transform: <span class="val">scale(0.97)</span>; box-shadow: none; }
+
+<span class="cm">/* Variants */</span>
+<span class="sel">.btn:disabled, .btn-disabled</span> {
+  opacity: <span class="val">0.45</span>;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+<span class="sel">.btn-full</span> { width: <span class="val">100%</span>; }
+
+<span class="cm">/* Icon Button */</span>
+<span class="sel">.btn-icon</span>      { border-radius: <span class="val">50%</span>; padding: <span class="val">0</span>; }
+<span class="sel">.btn-icon-sm</span>   { width: <span class="val">40px</span>; height: <span class="val">40px</span>; }
+<span class="sel">.btn-icon-md</span>   { width: <span class="val">44px</span>; height: <span class="val">44px</span>; }
+<span class="sel">.btn-icon-lg</span>   { width: <span class="val">48px</span>; height: <span class="val">48px</span>; }
+    </div>
+  </div>
+
+
+  <!-- ─── Footer ─── -->
+  <div class="footer">
+    <strong>GARLIC</strong> Button Design System v1.0<br>
+    GmarketSans · Mobile-first 430px · 2026
+  </div>
+
+</div>
+
+<script>
+function copyCSS() {
+  const css = `/* ─── Garlic Button System ─── */
+/* Font CDN 추가 필요:
+   GmarketSansBold:   https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff
+   GmarketSansMedium: https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff
+   GmarketSansLight:  https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff
+*/
+
+:root {
+  --garlic-green:      #6B8E4E;
+  --garlic-dark-green: #1B4332;
+  --garlic-gold:       #D4A843;
+  --shadow-green:      0 8px 24px rgba(107,142,78,0.28);
+  --shadow-gold:       0 8px 24px rgba(212,168,67,0.35);
+  --radius-btn:        24px;
+  --transition:        all 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: 'GmarketSans', sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-btn);
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--garlic-green);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.btn-sm { padding: 10px 20px; font-size: 13px; height: 36px; }
+.btn-md { padding: 14px 28px; font-size: 14px; height: 44px; }
+.btn-lg { padding: 16px 36px; font-size: 16px; height: 52px; }
+
+/* Primary */
+.btn-primary {
+  background: var(--garlic-green);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-green);
+  background: #7aa35c;
+}
+.btn-primary:active { transform: scale(0.97); box-shadow: none; }
+
+/* Secondary */
+.btn-secondary {
+  background: transparent;
+  color: var(--garlic-green);
+  font-weight: 600;
+  border: 1.5px solid var(--garlic-green);
+}
+.btn-secondary:hover {
+  background: rgba(107,142,78,0.08);
+  transform: translateY(-1px);
+}
+.btn-secondary:active { transform: scale(0.97); }
+
+/* Special (Gold) */
+.btn-special {
+  background: var(--garlic-gold);
+  color: var(--garlic-dark-green);
+  font-weight: 700;
+}
+.btn-special:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+  background: #dbb24e;
+}
+.btn-special:active { transform: scale(0.97); box-shadow: none; }
+
+/* Disabled */
+.btn:disabled, .btn-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Full Width */
+.btn-full { width: 100%; }
+
+/* Icon Button (circular) */
+.btn-icon    { border-radius: 50%; padding: 0; }
+.btn-icon-sm { width: 40px; height: 40px; }
+.btn-icon-md { width: 44px; height: 44px; }
+.btn-icon-lg { width: 48px; height: 48px; }`;
+
+  navigator.clipboard.writeText(css).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '복사 완료!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'CSS 복사하기';
+      btn.classList.remove('copied');
+    }, 2200);
+  }).catch(() => {
+    alert('복사 실패. 위 코드를 직접 선택해 복사해 주세요.');
+  });
+}
+</script>
+
+</body>
+</html>

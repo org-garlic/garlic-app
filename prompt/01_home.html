@@ -435,6 +435,12 @@ img{display:block;max-width:100%}
   font-family:var(--font-body);
 }
 </style>
+<style>
+/* Mobile-first constraint */
+body{max-width:430px;margin-left:auto;margin-right:auto;position:relative}
+.blog-header,.header,.fixed-header,[class*="header"]{max-width:430px;left:50%!important;transform:translateX(-50%)}
+.bottom-nav,.fixed-bottom,[class*="bottom-nav"]{max-width:430px;left:50%!important;transform:translateX(-50%)}
+</style>
 </head>
 <body>
 
@@ -617,22 +623,22 @@ img{display:block;max-width:100%}
 // ===== PRODUCT DATA =====
 var products=[
   {brand:'마늘팜',name:'의성 한지형 마늘 1kg 산지직송',discount:52,price:'9,900',original:'20,800',badge:'dna',badgeText:'갈릭DNA 91%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(2,847)'},
-  {brand:'갈릭스타일',name:'봄 오버핏 린넨 셔츠 [5컬러]',discount:38,price:'29,800',original:'48,000',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(1,203)'},
+  {brand:'갈릭스타일',name:'봄 오버핏 린넨 셔츠 [5컬러]',discount:38,price:'29,800',original:'48,000',badge:'recommend',badgeText:'마누리 추천',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(1,203)'},
   {brand:'뷰티마늘',name:'블랙 갈릭 에센스 50ml 기미케어',discount:45,price:'18,500',original:'33,600',badge:'dna',badgeText:'갈릭DNA 88%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(4,521)'},
   {brand:'테크마늘',name:'갈릭 무선이어폰 ANC Pro 2세대',discount:31,price:'49,900',original:'72,000',badge:'discount',badgeText:'52%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(8,102)'},
   {brand:'마늘키친',name:'트러플 마늘 올리브오일 500ml',discount:28,price:'15,800',original:'22,000',badge:'dna',badgeText:'갈릭DNA 85%',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(956)'},
-  {brand:'갈릭홈',name:'프리미엄 마늘 아로마 디퓨저',discount:40,price:'24,900',original:'41,500',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,217)'},
+  {brand:'갈릭홈',name:'프리미엄 마늘 아로마 디퓨저',discount:40,price:'24,900',original:'41,500',badge:'recommend',badgeText:'마누리 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,217)'},
   {brand:'마늘피트',name:'갈릭 에어 러닝화 [남녀공용]',discount:55,price:'39,000',original:'86,800',badge:'discount',badgeText:'55%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(6,440)'},
-  {brand:'갈릭팜',name:'제주 흑마늘즙 30포 선물세트',discount:35,price:'32,000',original:'49,200',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(5,678)'}
+  {brand:'갈릭팜',name:'제주 흑마늘즙 30포 선물세트',discount:35,price:'32,000',original:'49,200',badge:'recommend',badgeText:'마누리 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(5,678)'}
 ];
 
 var extraProducts=[
   {brand:'마늘팜',name:'남해 햇마늘 500g 특상품',discount:42,price:'7,900',original:'13,600',badge:'discount',badgeText:'42%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(1,320)'},
-  {brand:'갈릭스타일',name:'여름 슬림 데님 팬츠 [3컬러]',discount:33,price:'24,900',original:'37,000',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(890)'},
+  {brand:'갈릭스타일',name:'여름 슬림 데님 팬츠 [3컬러]',discount:33,price:'24,900',original:'37,000',badge:'recommend',badgeText:'마누리 추천',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(890)'},
   {brand:'뷰티마늘',name:'갈릭 수분 크림 100ml 민감성',discount:48,price:'16,500',original:'31,700',badge:'dna',badgeText:'갈릭DNA 93%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,105)'},
   {brand:'테크마늘',name:'갈릭 스마트워치 SE 3세대',discount:29,price:'89,000',original:'125,000',badge:'discount',badgeText:'29%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(5,670)'},
   {brand:'마늘키친',name:'프리미엄 마늘 간장 300ml',discount:22,price:'8,900',original:'11,400',badge:'dna',badgeText:'갈릭DNA 85%',stars:'\u2605\u2605\u2605\u2605\u2606',reviews:'(742)'},
-  {brand:'갈릭홈',name:'마늘 향기 캔들 3종 세트',discount:35,price:'19,900',original:'30,600',badge:'recommend',badgeText:'마늘러 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(2,088)'},
+  {brand:'갈릭홈',name:'마늘 향기 캔들 3종 세트',discount:35,price:'19,900',original:'30,600',badge:'recommend',badgeText:'마누리 추천',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(2,088)'},
   {brand:'마늘피트',name:'갈릭 요가매트 6mm 논슬립',discount:44,price:'22,000',original:'39,200',badge:'discount',badgeText:'44%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(4,210)'},
   {brand:'갈릭팜',name:'통마늘 발효액 500ml 건강즙',discount:38,price:'28,000',original:'45,000',badge:'dna',badgeText:'갈릭DNA 90%',stars:'\u2605\u2605\u2605\u2605\u2605',reviews:'(3,987)'}
 ];

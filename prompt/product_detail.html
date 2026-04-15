@@ -211,6 +211,12 @@ img{display:block;max-width:100%}
 @media(min-width:768px){.main{max-width:640px;margin:0 auto}.header,.bottom-bar{max-width:640px;left:50%;transform:translateX(-50%)}}
 @media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
 </style>
+<style>
+/* Mobile-first constraint */
+body{max-width:430px;margin-left:auto;margin-right:auto;position:relative}
+.blog-header,.header,.fixed-header,[class*="header"]{max-width:430px;left:50%!important;transform:translateX(-50%)}
+.bottom-nav,.fixed-bottom,[class*="bottom-nav"]{max-width:430px;left:50%!important;transform:translateX(-50%)}
+</style>
 </head>
 <body>
 
