@@ -438,6 +438,87 @@ img{display:block;max-width:100%}
 </head>
 <body>
 
+<!-- ===== SPLASH INTRO (24h cookie) ===== -->
+<div id="splash" style="display:none;position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#1B4332 0%,#2D5A3F 40%,#1B4332 100%);flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+  <!-- Skip -->
+  <button id="splash-skip" onclick="closeSplash()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);font-size:11px;font-weight:600;padding:6px 14px;border-radius:20px;cursor:pointer;z-index:10;font-family:inherit;transition:all .2s">건너뛰기</button>
+
+  <!-- Glow BG -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(140,198,26,.2) 0%,transparent 70%);filter:blur(40px);animation:splashGlow 3s ease-in-out infinite"></div>
+
+  <!-- Phase 1: Gmarket Logo + Strike -->
+  <div id="sp-phase1" style="position:absolute;display:flex;flex-direction:column;align-items:center;opacity:0">
+    <img src="https://pics.gmarket.co.kr/pc/single/kr/common/image__logo.png" alt="Gmarket" style="width:180px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9">
+    <div id="sp-strike" style="position:absolute;top:48%;left:-5%;right:-5%;height:3px;background:#FF4444;border-radius:2px;transform:scaleX(0);transform-origin:left;box-shadow:0 0 12px rgba(255,68,68,.5)"></div>
+    <p style="margin-top:24px;color:rgba(255,255,255,.4);font-size:12px;letter-spacing:4px;font-weight:500">SINCE 2000</p>
+  </div>
+
+  <!-- Phase 2: GARLIC Logo -->
+  <div id="sp-phase2" style="position:absolute;display:flex;flex-direction:column;align-items:center;opacity:0">
+    <div style="display:flex;align-items:center;font-family:'Bagel Fat One',cursive;font-size:56px;color:#B6F500;letter-spacing:-2px;text-shadow:0 0 40px rgba(182,245,0,.3)">
+      <span style="position:relative">G<span id="sp-sprout" style="position:absolute;top:-8px;right:-14px;font-size:24px;opacity:0;transform:scale(0) rotate(-30deg);transition:all .4s cubic-bezier(0.34,1.56,0.64,1)">🌱</span></span>ARLIC
+    </div>
+    <p id="sp-tagline" style="margin-top:16px;color:rgba(255,255,255,.7);font-size:14px;font-weight:500;opacity:0;transform:translateY(10px);transition:all .6s ease">진짜 <em style="color:#B6F500;font-style:normal;font-weight:700">'나마늘'</em> 위한 쇼핑의 시작</p>
+  </div>
+
+  <!-- Progress Bar -->
+  <div style="position:absolute;bottom:60px;width:120px;height:3px;border-radius:2px;background:rgba(255,255,255,.1);overflow:hidden">
+    <div id="sp-progress" style="width:0%;height:100%;background:linear-gradient(90deg,#B6F500,#8CC61A);border-radius:2px;transition:width .1s linear"></div>
+  </div>
+  <p style="position:absolute;bottom:40px;color:rgba(255,255,255,.25);font-size:10px;letter-spacing:2px">LOADING</p>
+</div>
+
+<style>
+@keyframes splashGlow{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
+</style>
+
+<script>
+(function(){
+  var KEY='garlic_splash_seen', HOURS=24;
+  var last=localStorage.getItem(KEY);
+  if(last && (Date.now()-parseInt(last)) < HOURS*60*60*1000) return;
+
+  var splash=document.getElementById('splash');
+  splash.style.display='flex';
+
+  var p1=document.getElementById('sp-phase1');
+  var p2=document.getElementById('sp-phase2');
+  var strike=document.getElementById('sp-strike');
+  var sprout=document.getElementById('sp-sprout');
+  var tagline=document.getElementById('sp-tagline');
+  var progress=document.getElementById('sp-progress');
+  var total=3500, start=Date.now();
+
+  var pTimer=setInterval(function(){
+    var pct=Math.min(((Date.now()-start)/total)*100,100);
+    progress.style.width=pct+'%';
+    if(pct>=100) clearInterval(pTimer);
+  },30);
+
+  // Phase 1: Gmarket (0~1.2s)
+  setTimeout(function(){p1.style.transition='opacity .4s';p1.style.opacity='1'},100);
+  setTimeout(function(){strike.style.transition='transform .4s ease-out';strike.style.transform='scaleX(1)'},700);
+  setTimeout(function(){p1.style.transition='opacity .3s';p1.style.opacity='0'},1200);
+
+  // Phase 2: GARLIC (1.5~3s)
+  setTimeout(function(){p2.style.transition='opacity .5s';p2.style.opacity='1'},1500);
+  setTimeout(function(){sprout.style.opacity='1';sprout.style.transform='scale(1) rotate(15deg)'},1900);
+  setTimeout(function(){tagline.style.opacity='1';tagline.style.transform='translateY(0)'},2200);
+
+  // Phase 3: Close (3~3.5s)
+  setTimeout(function(){closeSplash()},3500);
+})();
+
+function closeSplash(){
+  var splash=document.getElementById('splash');
+  if(!splash||splash.style.opacity==='0') return;
+  localStorage.setItem('garlic_splash_seen', Date.now().toString());
+  splash.style.transition='opacity .5s ease-out';
+  splash.style.opacity='0';
+  setTimeout(function(){splash.style.display='none'},500);
+}
+</script>
+
 <!-- ===== HEADER ===== -->
 <header class="header">
   <div class="header-inner">
