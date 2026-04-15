@@ -71,13 +71,13 @@ img{display:block;max-width:100%}
 /* ========== HERO DEAL BANNER ========== */
 .hero-deal{
   margin:12px 16px;border-radius:16px;overflow:hidden;
-  background:linear-gradient(135deg,#FFB8D0,#E8C060);
-  padding:24px 20px;position:relative;color:#fff;
+  background:url('../reference/garlic_day_bg.png') center / cover;
+  padding:24px 20px;position:relative;color:#3D4A1E;min-height:180px;
 }
 .hero-deal::before{
-  content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;
-  background:radial-gradient(circle,rgba(255,255,255,0.12) 0%,transparent 70%);
-  border-radius:50%;
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(164,221,0,.3) 0%,rgba(182,245,0,.1) 100%);
+  pointer-events:none;
 }
 .hero-deal::after{
   content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;
