@@ -12,13 +12,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00C73C">
+<meta name="theme-color" content="#6B8E4E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00C73C">
+<meta name="theme-color" content="#6B8E4E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
@@ -30,20 +30,20 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#FAF6EE;
-  --bg-alt:#FFF8F0;
+  --bg:#F5F1EA;
+  --bg-alt:#F5F1EA;
   --card:#FFFFFF;
   --text:#333333;
   --text-light:#888888;
-  --garlic-green:#00C73C;
+  --garlic-green:#6B8E4E;
   --garlic-dark-green:#1B4332;
   --garlic-gold:#D4A843;
-  --garlic-coral:#FF7F6B;
-  --garlic-neon:#00FF88;
-  --garlic-bg:#F7F7F7;
+  --garlic-coral:#C4893B;
+  --garlic-neon:#6B8E4E;
+  --garlic-bg:#F0ECE4;
   --green-light:#E8F8ED;
   --gold-light:#FFF3D6;
-  --border:#EEEEEE;
+  --border:#E8DFD0;
   --black:#0a0a0a;
   --dark:#111;
   --cream:#F5F0E8;
@@ -64,7 +64,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 
 .hero-badge{display:inline-block;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.85);font-size:11px;font-weight:500;letter-spacing:3px;padding:6px 18px;border-radius:30px;margin-bottom:24px;text-transform:uppercase;animation:fadeUp .8s .3s both}
 .hero-title{font-family:'Noto Serif KR',serif;font-size:clamp(36px,9vw,72px);font-weight:900;line-height:1.15;margin-bottom:12px;animation:fadeUp .8s .5s both;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.5)}
-.hero-title .accent{color:#FAF6EE;text-shadow:0 0 30px rgba(250,246,238,.6)}
+.hero-title .accent{color:#F5F1EA;text-shadow:0 0 30px rgba(250,246,238,.6)}
 .hero-title .gold{font-size:.55em;color:#E8C060;text-shadow:0 0 20px rgba(232,192,96,.5);letter-spacing:4px}
 .hero-sub{font-size:clamp(13px,2.5vw,17px);color:rgba(255,255,255,.65);max-width:480px;margin:0 auto 36px;line-height:1.8;font-weight:300;animation:fadeUp .8s .7s both}
 .hero-cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--garlic-green),var(--garlic-neon));color:var(--black);padding:16px 40px;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .3s;box-shadow:0 0 30px rgba(0,255,136,.2);animation:fadeUp .8s .9s both}
@@ -209,13 +209,13 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 }
 
 /* ===== APP HEADER ===== */
-.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:640px;margin:0 auto}
+.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #E8DFD0;max-width:640px;margin:0 auto}
 @media(min-width:641px){.app-header{left:50%;transform:translateX(-50%)}}
 .ah-logo{display:flex;align-items:center;flex-shrink:0}
 .ah-search{flex:1;position:relative}
-.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #EEE;border-radius:8px;background:#F7F7F7;font-size:13px;font-family:'Pretendard',sans-serif;color:#333;outline:none;cursor:pointer}
-.ah-search input::placeholder{color:#999;font-weight:300}
-.ah-search input:focus{border-color:#7ED957}
+.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #E8DFD0;border-radius:8px;background:#F0ECE4;font-size:13px;font-family:'Pretendard',sans-serif;color:#2D2A24;outline:none;cursor:pointer}
+.ah-search input::placeholder{color:#8A8478;font-weight:300}
+.ah-search input:focus{border-color:#6B8E4E}
 .ah-s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#999}
 .ah-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
 .ah-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;position:relative;transition:background .2s}
@@ -223,10 +223,10 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .ah-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:#FF4444;border-radius:50%;border:1.5px solid #fff}
 
 /* ===== BOTTOM NAV ===== */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #EEE;padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #E8DFD0;padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
 @media(min-width:641px){.bottom-nav{left:50%;transform:translateX(-50%)}}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#999;font-size:10px;font-weight:500}
-.bnav-item svg{stroke:#999}
+.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#8A8478;font-size:10px;font-weight:500}
+.bnav-item svg{stroke:#8A8478}
 .bnav-label{font-family:'Pretendard',sans-serif}
 </style>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">

@@ -4,7 +4,7 @@
   ============================================================
   Concept: Gamified attendance + garlic peeling mini-game + quiz
   Layout:  Mobile-first app page, bouncy & playful
-  Colors:  Garlic Green #00C73C · Dark Green #1B4332 · Gold #D4A843 · Coral #FF7F6B
+  Colors:  Garlic Green #6B8E4E · Dark Green #1B4332 · Gold #D4A843 · Coral #C4893B
   Fonts:   Pretendard (all text)
   Mood:    "오늘도 마늘 한 알! 까고 또 까고!"
   ============================================================
@@ -14,13 +14,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00C73C">
+<meta name="theme-color" content="#6B8E4E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00C73C">
+<meta name="theme-color" content="#6B8E4E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
@@ -32,33 +32,33 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #FAF6EE;
-  --bg-alt: #FFF8F0;
+  --bg: #F5F1EA;
+  --bg-alt: #F5F1EA;
   --card: #FFFFFF;
   --text: #333333;
   --text-light: #888888;
-  --green: #00C73C;
+  --green: #6B8E4E;
   --green-light: #E8F8ED;
   --gold: #D4A843;
   --gold-light: #FFF3D6;
-  --coral: #FF7F6B;
-  --border: #EEEEEE;
+  --coral: #C4893B;
+  --border: #E8DFD0;
   --shadow-color: rgba(0,0,0,0.06);
-  --garlic-green: #00C73C;
+  --garlic-green: #6B8E4E;
   --garlic-green-light: #E8F8ED;
   --garlic-green-pale: #B8F0CA;
   --garlic-green-glow: rgba(0, 199, 60, 0.2);
   --garlic-dark-green: #1B4332;
   --garlic-gold: #D4A843;
   --garlic-gold-light: #FFF3D6;
-  --garlic-coral: #FF7F6B;
+  --garlic-coral: #C4893B;
   --garlic-coral-light: #FFE8E4;
-  --garlic-bg: #FAF6EE;
+  --garlic-bg: #F5F1EA;
   --white: #FFFFFF;
   --dark: #333333;
-  --gray-50: #FFF8F0;
-  --gray-100: #FAF6EE;
-  --gray-200: #EEEEEE;
+  --gray-50: #F5F1EA;
+  --gray-100: #F5F1EA;
+  --gray-200: #E8DFD0;
   --gray-300: #D1D5DB;
   --gray-400: #888888;
   --gray-500: #6B7280;
@@ -129,7 +129,7 @@ body {
   padding: 8px 12px 8px 34px;
   border: 1px solid #EEE;
   border-radius: 8px;
-  background: #F7F7F7;
+  background: #F0ECE4;
   font-size: 13px;
   font-family: 'Pretendard', sans-serif;
   color: #333;
@@ -138,7 +138,7 @@ body {
 }
 
 .header-search input::placeholder { color: #999; font-weight: 300; }
-.header-search input:focus { border-color: #00C73C; }
+.header-search input:focus { border-color: #6B8E4E; }
 
 .header-search .s-icon {
   position: absolute;
@@ -890,11 +890,11 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
   main { max-width: 480px; }
   .header { justify-content: center; }
 }
-.tab-nav{position:fixed;top:52px;left:0;right:0;z-index:99;display:flex;gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #EEE;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:640px;margin:0 auto}
+.tab-nav{position:fixed;top:52px;left:0;right:0;z-index:99;display:flex;gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #E8DFD0;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:640px;margin:0 auto}
 .tab-nav::-webkit-scrollbar{display:none}
-.tab-item{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;color:#999;position:relative;white-space:nowrap;transition:color .2s}
-.tab-item.active{color:#333;font-weight:700}
-.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:#7ED957;border-radius:1px}
+.tab-item{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;color:#8A8478;position:relative;white-space:nowrap;transition:color .2s}
+.tab-item.active{color:#2D2A24;font-weight:700}
+.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:#6B8E4E;border-radius:1px}
 .tab-item:first-child{padding-left:20px}
 </style>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
@@ -1038,7 +1038,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
             <circle cx="92" cy="88" r="3" fill="#2D2D2D"/>
             <circle cx="71" cy="87" r="1" fill="#fff"/>
             <circle cx="93" cy="87" r="1" fill="#fff"/>
-            <path d="M76 98 Q81 103 86 98" stroke="#FF7F6B" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M76 98 Q81 103 86 98" stroke="#C4893B" stroke-width="2" stroke-linecap="round" fill="none"/>
             <ellipse cx="63" cy="96" rx="6" ry="3.5" fill="rgba(255,127,107,0.25)"/>
             <ellipse cx="99" cy="96" rx="6" ry="3.5" fill="rgba(255,127,107,0.25)"/>
           </svg>
@@ -1094,7 +1094,7 @@ main { max-width: 480px; margin: 0 auto; padding: 0 0 24px; }
               <path d="M25 45 Q20 45 18 50 L12 135 Q10 150 25 152 L95 152 Q110 150 108 135 L102 50 Q100 45 95 45Z"/>
             </clipPath>
             <linearGradient id="fillGrad" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#00C73C"/>
+              <stop offset="0%" stop-color="#6B8E4E"/>
               <stop offset="50%" stop-color="#4CAF50"/>
               <stop offset="100%" stop-color="#81C784"/>
             </linearGradient>
@@ -1316,19 +1316,19 @@ function answerQuiz(btn, isCorrect) {
     result.className = 'quiz-result correct-bg show';
     result.innerHTML = '<div style="text-align:center;padding:16px 0">' +
       '<svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom:8px">' +
-        '<circle cx="50" cy="50" r="45" fill="#E8F8ED" stroke="#00C73C" stroke-width="2"/>' +
+        '<circle cx="50" cy="50" r="45" fill="#E8F8ED" stroke="#6B8E4E" stroke-width="2"/>' +
         '<ellipse cx="50" cy="55" rx="18" ry="22" fill="#F5ECD7"/>' +
-        '<path d="M44 38c-1-8 6-14 6-14s7 6 6 14" fill="#00C73C"/>' +
+        '<path d="M44 38c-1-8 6-14 6-14s7 6 6 14" fill="#6B8E4E"/>' +
         '<circle cx="44" cy="50" r="2.5" fill="#333"/><circle cx="56" cy="50" r="2.5" fill="#333"/>' +
         '<circle cx="45" cy="49" r="1" fill="#fff"/><circle cx="57" cy="49" r="1" fill="#fff"/>' +
-        '<path d="M46 58c2 2.5 6 2.5 8 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+        '<path d="M46 58c2 2.5 6 2.5 8 0" stroke="#C4893B" stroke-width="2" fill="none" stroke-linecap="round"/>' +
         '<circle cx="38" cy="54" r="3" fill="#FFD4CC" opacity=".5"/>' +
         '<circle cx="62" cy="54" r="3" fill="#FFD4CC" opacity=".5"/>' +
-        '<text x="50" y="90" text-anchor="middle" font-size="10" fill="#00C73C" font-weight="700">정답!</text>' +
+        '<text x="50" y="90" text-anchor="middle" font-size="10" fill="#6B8E4E" font-weight="700">정답!</text>' +
       '</svg>' +
-      '<div style="font-size:18px;font-weight:700;color:#00C73C;margin-bottom:4px">🎉 정답이에요!</div>' +
+      '<div style="font-size:18px;font-weight:700;color:#6B8E4E;margin-bottom:4px">🎉 정답이에요!</div>' +
       '<div style="font-size:14px;color:#333">마늘 2알 획득! "나마늘 위한 마켓"</div>' +
-      '<div style="font-size:12px;color:#888;margin-top:4px">마누리가 기뻐하고 있어요 🧄</div>' +
+      '<div style="font-size:12px;color:#8A8478;margin-top:4px">마누리가 기뻐하고 있어요 🧄</div>' +
     '</div>';
     updateGarlicCount(parseInt(document.getElementById('jarCount').textContent) + 2);
   } else {
@@ -1338,7 +1338,7 @@ function answerQuiz(btn, isCorrect) {
     result.innerHTML = '<div style="text-align:center;padding:12px 0">' +
       '<div style="font-size:16px;margin-bottom:4px">아쉬워요! 😅</div>' +
       '<div style="font-size:14px;color:#333">정답은 <b>"나마늘 위한 마켓"</b>이었어요</div>' +
-      '<div style="font-size:12px;color:#888;margin-top:4px">내일 다시 도전해보세요!</div>' +
+      '<div style="font-size:12px;color:#8A8478;margin-top:4px">내일 다시 도전해보세요!</div>' +
     '</div>';
   }
   allOptions.forEach(function(o) { o.style.pointerEvents = 'none'; });
@@ -1363,7 +1363,7 @@ function closeCoupon() { document.getElementById('couponPopup').classList.remove
 // ========== CONFETTI ==========
 function launchConfetti() {
   var container = document.getElementById('confettiContainer');
-  var colors = ['#00C73C', '#D4A843', '#FF7F6B', '#5B8DEF', '#FFD700', '#FF69B4'];
+  var colors = ['#6B8E4E', '#D4A843', '#C4893B', '#5B8DEF', '#FFD700', '#FF69B4'];
   for (var i = 0; i < 50; i++) {
     var piece = document.createElement('div');
     piece.className = 'confetti-piece';

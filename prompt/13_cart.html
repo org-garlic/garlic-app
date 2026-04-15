@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00C73C">
+<meta name="theme-color" content="#6B8E4E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00C73C">
+<meta name="theme-color" content="#6B8E4E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
@@ -19,7 +19,7 @@
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#FAF6EE;--card:#fff;--green:#00C73C;--green-light:#E8F8ED;--coral:#FF7F6B;--gold:#D4A843;--gold-light:#FFF3D6;--text:#333;--text-light:#888;--border:#EEE}
+:root{--bg:#F5F1EA;--card:#fff;--green:#6B8E4E;--green-light:#E8F8ED;--coral:#C4893B;--gold:#D4A843;--gold-light:#FFF3D6;--text:#333;--text-light:#888;--border:#EEE}
 body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;padding-top:52px;padding-bottom:140px}
 
 /* Header */
@@ -27,8 +27,8 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 @media(min-width:641px){.header{left:50%;transform:translateX(-50%)}}
 .h-logo{display:flex;align-items:center;flex-shrink:0;text-decoration:none}
 .h-search{flex:1;position:relative}
-.h-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--border);border-radius:8px;background:#F7F7F7;font-size:13px;font-family:'Pretendard';color:var(--text);outline:none;cursor:pointer}
-.h-search input::placeholder{color:#999;font-weight:300}
+.h-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid var(--border);border-radius:8px;background:#F0ECE4;font-size:13px;font-family:'Pretendard';color:var(--text);outline:none;cursor:pointer}
+.h-search input::placeholder{color:#8A8478;font-weight:300}
 .h-search .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#999}
 .h-actions{display:flex;gap:2px;flex-shrink:0}
 .h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;position:relative}
@@ -58,13 +58,13 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .ci-option{font-size:11px;color:var(--text-light);margin-bottom:6px}
 .ci-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-bottom:6px}
 .ci-badge.dna{background:rgba(124,92,252,.1);color:#7C5CFC}
-.ci-badge.free{background:var(--green-light);color:#7ED957}
+.ci-badge.free{background:var(--green-light);color:#6B8E4E}
 .ci-badge.rec{background:rgba(255,127,107,.1);color:var(--coral)}
 .ci-price{display:flex;align-items:baseline;gap:6px}
 .ci-discount{font-size:15px;font-weight:700;color:var(--coral)}
 .ci-final{font-size:16px;font-weight:700;color:var(--text)}
 .ci-original{font-size:12px;color:#bbb;text-decoration:line-through}
-.ci-delete{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,.04);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#999;transition:background .2s}
+.ci-delete{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,.04);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#8A8478;transition:background .2s}
 .ci-delete:hover{background:rgba(0,0,0,.08)}
 .ci-qty{display:flex;align-items:center;gap:0;margin-top:10px}
 .ci-qty button{width:30px;height:30px;border:1px solid var(--border);background:var(--card);border-radius:8px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);transition:background .2s}
@@ -114,10 +114,10 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 /* Bottom Nav */
 .bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
 @media(min-width:641px){.bnav{left:50%;transform:translateX(-50%)}}
-.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#999;font-size:10px;font-weight:500;text-decoration:none}
-.bn svg{stroke:#999}
-.bn.active{color:#7ED957}
-.bn.active svg{stroke:#7ED957}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#8A8478;font-size:10px;font-weight:500;text-decoration:none}
+.bn svg{stroke:#8A8478}
+.bn.active{color:#6B8E4E}
+.bn.active svg{stroke:#6B8E4E}
 </style>
 </head>
 <body>
@@ -218,7 +218,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 
 <!-- Empty State -->
 <div class="empty" id="emptyState">
-  <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="var(--green-light)"/><ellipse cx="60" cy="65" rx="22" ry="26" fill="#F5ECD7"/><path d="M52 42c-2-12 8-20 8-20s10 8 8 20" fill="#00C73C"/><circle cx="52" cy="60" r="3.5" fill="#333"/><circle cx="68" cy="60" r="3.5" fill="#333"/><path d="M54 72c3 3 9 3 12 0" stroke="#FF7F6B" stroke-width="2" fill="none" stroke-linecap="round" transform="rotate(180 60 72)"/><circle cx="46" cy="66" r="3" fill="#FFD4CC" opacity=".4"/><circle cx="74" cy="66" r="3" fill="#FFD4CC" opacity=".4"/></svg>
+  <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="var(--green-light)"/><ellipse cx="60" cy="65" rx="22" ry="26" fill="#F5ECD7"/><path d="M52 42c-2-12 8-20 8-20s10 8 8 20" fill="#6B8E4E"/><circle cx="52" cy="60" r="3.5" fill="#333"/><circle cx="68" cy="60" r="3.5" fill="#333"/><path d="M54 72c3 3 9 3 12 0" stroke="#C4893B" stroke-width="2" fill="none" stroke-linecap="round" transform="rotate(180 60 72)"/><circle cx="46" cy="66" r="3" fill="#FFD4CC" opacity=".4"/><circle cx="74" cy="66" r="3" fill="#FFD4CC" opacity=".4"/></svg>
   <div class="empty-title">마늘밭이 비어있어요 😢</div>
   <div class="empty-sub">마늘을 심으러 갈까요?</div>
   <a href="01_home.html" class="empty-cta">쇼핑하러 가기 →</a>
