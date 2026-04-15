@@ -105,10 +105,11 @@ img{display:block;max-width:100%}
   padding:32px 24px;position:relative;color:#fff;min-height:220px;
 }
 .fashion-hero::before{
-  content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;
-  background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%);
-  border-radius:50%;pointer-events:none;
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(30,20,15,.5) 0%,rgba(30,20,15,.3) 100%);
+  pointer-events:none;z-index:1;
 }
+.fashion-hero>*{position:relative;z-index:2}
 .fashion-hero::after{
   content:'';position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;
   background:radial-gradient(circle,rgba(255,183,197,0.4) 0%,transparent 70%);
