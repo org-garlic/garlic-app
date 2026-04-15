@@ -19,11 +19,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#A4DD00">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garlic - 나마늘 위한 마켓 | 소개</title>
@@ -130,65 +125,6 @@ body::before {
   transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
 }
 .reveal-scale.visible { opacity: 1; transform: scale(1); }
-
-/* ========== HEADER ========== */
-.header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(245, 240, 232, 0);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  transition: all 0.5s var(--ease-out-expo);
-  padding: 16px 24px;
-}
-
-.header.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid var(--border);
-}
-
-.header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-logo {
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none;
-}
-
-.header-logo-emoji { font-size: 24px; }
-
-.header-logo-text {
-  font-family: var(--font-serif);
-  font-size: 20px; font-weight: 700;
-  color: var(--garlic-dark-green);
-  letter-spacing: -0.02em;
-  transition: color 0.3s;
-}
-
-.header.at-hero .header-logo-text { color: #fff; }
-
-.header-nav {
-  display: flex; align-items: center; gap: 24px;
-}
-
-.header-nav a {
-  font-size: 13px; font-weight: 500;
-  color: var(--charcoal);
-  opacity: 0.6;
-  transition: opacity 0.3s, color 0.3s;
-}
-
-.header-nav a:hover { opacity: 1; }
-.header.at-hero .header-nav a { color: #fff; }
 
 /* ========== HERO ========== */
 .hero {
@@ -857,7 +793,6 @@ body::before {
   .about-section { padding: 120px 24px; }
 }
 
-body{padding-top:96px !important;padding-bottom:72px !important}
 
 /* ===== GARLIC NAV SYSTEM ===== */
 .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding-top:env(safe-area-inset-top,0px);background:rgba(255,250,220,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}

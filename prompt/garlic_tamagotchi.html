@@ -18,11 +18,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#98CD00">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Garlic - 나마늘 위한 마켓 | 마늘키우기</title>
@@ -58,12 +53,6 @@
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
 .serif{font-family:'Noto Serif KR',serif}
-
-/* ===== HEADER ===== */
-.header{background:rgba(250,246,238,.92);padding:20px 24px;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.header-top{display:flex;align-items:center;justify-content:center;gap:8px}
-.header h1{font-size:22px;font-weight:700;color:var(--garlic-dark-green)}
-.header-day{display:inline-block;background:var(--garlic-green);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-top:4px}
 
 /* ===== CHARACTER STAGE ===== */
 .stage{padding:110px 24px 20px;text-align:center;position:relative;overflow:hidden}
@@ -177,45 +166,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 /* ===== UTILITIES ===== */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
 .reveal.visible{opacity:1;transform:translateY(0)}
-
-/* ===== TAB NAVIGATION ===== */
-.tab-nav{position:fixed;top:52px;left:0;right:0;z-index:99;display:flex;gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #F0E8A0;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:640px;margin:0 auto}
-.tab-nav::-webkit-scrollbar{display:none}
-.tab-item{flex-shrink:0;padding:12px 16px;font-size:13px;font-weight:500;color:#A0AD78;position:relative;white-space:nowrap;transition:color .2s}
-.tab-item.active{color:#3D4A1E;font-weight:700}
-.tab-item.active::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:#98CD00;border-radius:1px}
-.tab-item:first-child{padding-left:20px}
-@media(min-width:641px){.tab-nav{left:50%;transform:translateX(-50%)}}
-
-@media(min-width:768px){
-  .character{width:260px;height:260px}
-  .actions{max-width:440px}
-  .evo-card svg{width:100px;height:100px}
-  .evo-card{min-width:130px}
-}
-
-/* ===== APP HEADER ===== */
-.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #F0E8A0;max-width:640px;margin:0 auto}
-@media(min-width:641px){.app-header{left:50%;transform:translateX(-50%)}}
-.ah-logo{display:flex;align-items:center;flex-shrink:0}
-.ah-search{flex:1;position:relative}
-.ah-search input{width:100%;padding:8px 12px 8px 34px;border:1px solid #F0E8A0;border-radius:8px;background:#F5F5F0;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:#3D4A1E;outline:none;cursor:pointer}
-.ah-search input::placeholder{color:#A0AD78;font-weight:300}
-.ah-search input:focus{border-color:#98CD00}
-.ah-s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#999}
-.ah-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
-.ah-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;position:relative;transition:background .2s}
-.ah-btn:active{background:rgba(0,0,0,.04)}
-.ah-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:#FF4444;border-radius:50%;border:1.5px solid #fff}
-
-/* ===== BOTTOM NAV ===== */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid #F0E8A0;padding:8px 0 calc(env(safe-area-inset-bottom,12px) + 8px);max-width:640px;margin:0 auto}
-@media(min-width:641px){.bottom-nav{left:50%;transform:translateX(-50%)}}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;color:#A0AD78;font-size:10px;font-weight:500}
-.bnav-item svg{stroke:#A0AD78}
-.bnav-label{font-family:'Noto Sans KR',sans-serif}
-
-body{padding-top:96px !important;padding-bottom:72px !important}
 
 /* ===== GARLIC NAV SYSTEM ===== */
 .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding-top:env(safe-area-inset-top,0px);background:rgba(255,250,220,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}

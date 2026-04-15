@@ -8,11 +8,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#A4DD00">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Garlic - 나마늘 위한 마켓 | 패션</title>
@@ -46,49 +41,6 @@ body{
 a{text-decoration:none;color:inherit}
 button{border:none;background:none;cursor:pointer;font-family:var(--font)}
 img{display:block;max-width:100%}
-
-/* ========== HEADER ========== */
-.header{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top);
-  background:var(--garlic-white);display:flex;align-items:center;
-  padding-left:16px;padding-right:12px;border-bottom:1px solid var(--garlic-gray-border);
-}
-.header-logo{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.header-search{flex:1;margin:0 10px;position:relative}
-.header-search input{
-  width:100%;height:36px;border:1.5px solid var(--garlic-gray-border);border-radius:8px;
-  background:var(--garlic-bg);padding:0 12px 0 34px;font-family:var(--font);
-  font-size:0.78rem;font-weight:300;color:var(--garlic-black);outline:none;transition:border-color 0.2s;
-}
-.header-search input::placeholder{color:var(--garlic-gray-light);font-weight:300}
-.header-search input:focus{border-color:var(--garlic-green)}
-.header-search .s-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--garlic-gray-light)}
-.header-actions{display:flex;align-items:center;gap:2px;flex-shrink:0}
-.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;position:relative}
-.h-btn:active{background:rgba(0,0,0,0.04)}
-.h-btn svg{width:22px;height:22px;stroke:var(--garlic-black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.h-btn .dot{position:absolute;top:6px;right:7px;width:7px;height:7px;background:var(--garlic-red);border-radius:50%;border:1.5px solid var(--garlic-white)}
-
-/* ========== TAB NAVIGATION ========== */
-.tab-nav{
-  position:fixed;top:calc(var(--header-h) + var(--safe-top));left:0;right:0;z-index:999;
-  height:var(--tab-h);background:var(--garlic-white);border-bottom:1px solid var(--garlic-gray-border);
-  overflow-x:auto;overflow-y:hidden;display:flex;align-items:stretch;
-  -webkit-overflow-scrolling:touch;scrollbar-width:none;
-}
-.tab-nav::-webkit-scrollbar{display:none}
-.tab-item{
-  flex-shrink:0;padding:0 16px;display:flex;align-items:center;justify-content:center;
-  font-size:0.82rem;font-weight:500;color:var(--garlic-gray);
-  white-space:nowrap;position:relative;transition:color 0.2s;
-}
-.tab-item.active{color:var(--garlic-black);font-weight:700}
-.tab-item.active::after{
-  content:'';position:absolute;bottom:0;left:16px;right:16px;
-  height:2.5px;background:var(--garlic-black);border-radius:2px 2px 0 0;
-}
-.tab-item:first-child{padding-left:20px}
 
 /* ========== MAIN ========== */
 .main{max-width:640px;margin:0 auto;padding:0}
@@ -205,35 +157,11 @@ img{display:block;max-width:100%}
 .brand-name{font-size:0.68rem;font-weight:700;color:var(--garlic-black);text-align:center}
 .brand-tag{font-size:0.6rem;font-weight:300;color:var(--garlic-gray-light);text-align:center}
 
-/* ========== BOTTOM NAV ========== */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:1000;
-  height:calc(var(--nav-h) + var(--safe-bottom));padding-bottom:var(--safe-bottom);
-  background:var(--garlic-white);border-top:1px solid var(--garlic-gray-border);
-  display:flex;align-items:center;justify-content:space-around;max-width:640px;margin:0 auto;
-}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;min-width:56px}
-.nav-item svg{width:22px;height:22px;stroke:var(--garlic-gray-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--garlic-gray-light)}
-.nav-item.active svg{stroke:var(--garlic-green)}
-.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
-.nav-item .cart-badge{position:relative}
-.nav-item .cart-badge .c-dot{
-  position:absolute;top:-4px;right:-8px;background:var(--garlic-red);color:#fff;
-  font-size:0.5rem;font-weight:700;min-width:14px;height:14px;border-radius:7px;
-  display:flex;align-items:center;justify-content:center;padding:0 3px;border:1.5px solid var(--garlic-white);
-}
-
 /* ========== ANIMATIONS ========== */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fadeUp 0.5s ease-out both}
 .fade-up-1{animation-delay:0.05s}.fade-up-2{animation-delay:0.1s}.fade-up-3{animation-delay:0.15s}
 
-/* ========== RESPONSIVE ========== */
-@media(min-width:768px){.main{max-width:640px;margin:0 auto}.header,.tab-nav,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}}
-@media(min-width:1440px){body{background:#EDE8E0}.main{box-shadow:0 0 40px rgba(0,0,0,0.06)}}
-
-body{padding-top:96px !important;padding-bottom:72px !important}
 
 /* ===== GARLIC NAV SYSTEM ===== */
 .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding-top:env(safe-area-inset-top,0px);background:rgba(255,250,220,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}

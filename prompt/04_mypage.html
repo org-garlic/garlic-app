@@ -8,11 +8,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="../reference/G_Logo.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#A4DD00">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="../reference/G_Logo.png">
 <link rel="icon" type="image/png" href="reference/G_Logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Garlic - 나마늘 위한 마켓 | 마이갈릭</title>
@@ -73,24 +68,6 @@ body{
 a{text-decoration:none;color:inherit}
 button{border:none;background:none;cursor:pointer;font-family:var(--font);color:var(--text)}
 img{display:block;max-width:100%}
-
-/* ========== HEADER ========== */
-.header{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:calc(var(--header-h) + var(--safe-top));
-  padding-top:var(--safe-top);
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding-left:20px;padding-right:16px;
-}
-.header-title{font-size:1.05rem;font-weight:700;color:var(--text)}
-.header-actions{display:flex;gap:4px}
-.h-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%}
-.h-btn:active{background:rgba(0,0,0,0.04)}
-.h-btn svg{width:20px;height:20px;stroke:var(--text);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
 /* ========== MAIN ========== */
 .main{max-width:640px;margin:0 auto;padding:0 16px}
@@ -289,27 +266,6 @@ img{display:block;max-width:100%}
 .status-delivered{background:var(--green-light);color:var(--garlic-green);border:1px solid rgba(0,199,60,0.25)}
 .status-confirmed{background:#F5F5F5;color:var(--text-light);border:1px solid var(--border)}
 
-/* ========== BOTTOM NAV ========== */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:1000;
-  height:calc(var(--nav-h) + var(--safe-bottom));
-  padding-bottom:var(--safe-bottom);
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-around;
-  max-width:640px;margin:0 auto;
-}
-.nav-item{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:6px 0;min-width:56px;text-decoration:none;
-}
-.nav-item svg{width:22px;height:22px;stroke:var(--text-light);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.nav-item .nav-label{font-size:0.6rem;font-weight:500;color:var(--text-light)}
-.nav-item.active svg{stroke:var(--garlic-green)}
-.nav-item.active .nav-label{color:var(--garlic-green);font-weight:700}
-
 /* ========== ANIMATIONS ========== */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes drawIn{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
@@ -319,14 +275,12 @@ img{display:block;max-width:100%}
 /* ========== RESPONSIVE ========== */
 @media(min-width:768px){
   .main{max-width:640px;margin:0 auto}
-  .header,.bottom-nav{max-width:640px;left:50%;transform:translateX(-50%)}
 }
 @media(min-width:1440px){
   body{background:#EDE8E0}
   .main{box-shadow:0 0 40px rgba(0,0,0,0.06)}
 }
 
-body{padding-top:96px !important;padding-bottom:72px !important}
 
 /* ===== GARLIC NAV SYSTEM ===== */
 .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;padding-top:env(safe-area-inset-top,0px);background:rgba(255,250,220,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
