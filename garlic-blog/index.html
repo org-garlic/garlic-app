@@ -32,7 +32,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 .serif{font-family:'Noto Serif KR',serif}
 
 /* ===== BLOG HEADER ===== */
-.blog-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 20px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:960px;margin:0 auto}
+.blog-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 20px;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #EEE;max-width:430px;margin:0 auto}
 @media(min-width:961px){.blog-header{left:50%;transform:translateX(-50%)}}
 .bh-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
 .bh-nav{display:flex;gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -51,7 +51,7 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 .hero p{font-size:clamp(13px,2.5vw,16px);color:var(--text-light);max-width:440px;margin:0 auto;font-weight:300;line-height:1.8}
 
 /* ===== BLOG GRID ===== */
-.blog-grid-section{padding:60px 24px 40px;max-width:960px;margin:0 auto}
+.blog-grid-section{padding:60px 24px 40px;max-width:430px;margin:0 auto}
 .blog-grid-section h2{font-family:'Noto Serif KR',serif;font-size:clamp(20px,4vw,28px);font-weight:900;color:var(--garlic-dark-green);margin-bottom:32px;text-align:center}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 @media(min-width:700px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
@@ -88,12 +88,6 @@ body{font-family:'GmarketSans',sans-serif;background:var(--bg);color:var(--text)
 /* ===== REVEAL ===== */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-</style>
-<style>
-/* Mobile-first constraint */
-body{max-width:430px;margin-left:auto;margin-right:auto}
-
-
 </style>
 </head>
 <body>
