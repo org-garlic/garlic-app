@@ -744,17 +744,14 @@ function voteEffect(){
     container.appendChild(p);
   }
 
-  // 중앙 큰 불꽃
-  var big=document.createElement('div');
-  big.textContent='🔥';
-  big.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);font-size:80px;animation:voteBurst 1s .2s cubic-bezier(.17,.89,.32,1.28) forwards';
-  container.appendChild(big);
-
-  // 텍스트 등장
-  var txt=document.createElement('div');
-  txt.textContent='불사조기사단 화이팅!';
-  txt.style.cssText='position:absolute;left:50%;top:58%;transform:translate(-50%,0) scale(0);font-family:Pretendard;font-size:22px;font-weight:800;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);animation:voteBurst .8s .6s cubic-bezier(.17,.89,.32,1.28) forwards;white-space:nowrap';
-  container.appendChild(txt);
+  // 중앙 카드 (어두운 배경 + 골드 텍스트)
+  var card=document.createElement('div');
+  card.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);background:rgba(45,42,36,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:24px;padding:32px 40px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.3);animation:voteBurst 1s .2s cubic-bezier(.17,.89,.32,1.28) forwards';
+  card.innerHTML='<div style="font-size:56px;margin-bottom:12px">🔥</div>'+
+    '<div style="font-family:Pretendard;font-size:24px;font-weight:800;color:#D4A843;margin-bottom:6px;letter-spacing:-.5px">투표 완료!</div>'+
+    '<div style="font-family:Pretendard;font-size:15px;font-weight:600;color:#F5F1EA;margin-bottom:4px">불사조기사단 화이팅!</div>'+
+    '<div style="font-family:Pretendard;font-size:12px;color:rgba(245,241,234,.5)">30% 쿠폰이 지급되었어요 🧄</div>';
+  container.appendChild(card);
 
   // CSS 애니메이션 주입
   if(!document.getElementById('voteStyles')){
