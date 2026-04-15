@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GARLIC Ego-Sync 구현 계획서 — Engineering Plan</title>
+<link rel="icon" type="image/png" href="../reference/G_Logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFADC;
+  --card: #FFFDEE;
+  --card-border: #F0E8A0;
+  --surface: #F4FFD8;
+  --lime: #A4DD00;
+  --lime-dark: #98CD00;
+  --lime-neon: #B6F500;
+  --pink: #FF6B9D;
+  --pink-soft: #FFF0F5;
+  --text: #3D4A1E;
+  --text-sub: #6B7A33;
+  --text-muted: #A0AD78;
+  --olive: #5A7020;
+  --border-light: #E8E4C0;
+  --glow: #E8FFB0;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+.wrap { max-width: 840px; margin: 0 auto; padding: 48px 28px 80px; }
+
+/* Header */
+.doc-header { margin-bottom: 56px; position: relative; }
+.doc-header::after { content: ''; position: absolute; bottom: -20px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, var(--lime), var(--pink), transparent); }
+.brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.brand-mark { font-family: 'Bagel Fat One', cursive; font-size: 32px; color: var(--lime-dark); }
+.doc-badge { display: inline-flex; align-items: center; padding: 4px 14px; border-radius: 100px; font-size: 11px; font-weight: 500; background: var(--pink-soft); color: var(--pink); border: 1px solid rgba(255,107,157,.2); letter-spacing: .5px; }
+.doc-badge.eng { background: var(--surface); color: var(--olive); border-color: rgba(152,205,0,.3); }
+.doc-title { font-size: clamp(24px, 4vw, 34px); font-weight: 900; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
+.doc-title em { font-style: normal; color: var(--lime-dark); }
+.doc-sub { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+.doc-date { font-size: 12px; color: var(--text-muted); margin-top: 8px; letter-spacing: .3px; }
+
+/* Sections */
+.section { margin-bottom: 60px; }
+.sec-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 20px; padding-bottom: 10px; border-bottom: .5px solid var(--border-light); }
+.sec-num { color: var(--lime-dark); margin-right: 8px; font-weight: 700; }
+.sec-heading { font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 16px; line-height: 1.4; }
+.body-text { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin-bottom: 12px; }
+
+/* Cards */
+.card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; margin: 16px 0; }
+
+/* Key Cards */
+.key-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 20px 0; }
+.key-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 22px 18px; position: relative; overflow: hidden; }
+.key-card .kc-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.key-card .kc-q { font-size: 11px; font-weight: 700; color: var(--lime-dark); margin-bottom: 5px; letter-spacing: .5px; text-transform: uppercase; }
+.key-card .kc-a { font-size: 15px; font-weight: 900; color: var(--text); line-height: 1.4; }
+.key-card .kc-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.key-card.pink { border-left: 3px solid var(--pink); }
+.key-card.lime { border-left: 3px solid var(--lime); }
+.key-card.gold { border-left: 3px solid #E8C840; }
+.key-card.olive { border-left: 3px solid var(--olive); }
+
+/* Stat boxes */
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 20px 0; }
+.stat-box { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 20px 16px; text-align: center; }
+.stat-box .sv { font-size: 26px; font-weight: 900; color: var(--lime-dark); line-height: 1.2; }
+.stat-box .sv.pink { color: var(--pink); }
+.stat-box .sv.gold { color: #D4A820; }
+.stat-box .sl { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: 12px; border: 1px solid var(--card-border); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { text-align: left; padding: 12px 14px; font-weight: 700; color: var(--text-sub); background: var(--surface); font-size: 12px; white-space: nowrap; }
+tbody td { padding: 11px 14px; border-top: 1px solid var(--card-border); color: var(--text); vertical-align: top; line-height: 1.6; }
+tbody tr:hover { background: rgba(164,221,0,.04); }
+tr.highlight td { background: rgba(164,221,0,.08); font-weight: 600; }
+tr.pink-row td { background: rgba(255,107,157,.04); }
+td.tag-lime { color: var(--lime-dark); font-weight: 700; font-size: 11px; letter-spacing: .5px; white-space: nowrap; }
+td.tag-pink { color: var(--pink); font-weight: 700; font-size: 11px; white-space: nowrap; }
+td.tag-gold { color: #C49A10; font-weight: 700; font-size: 11px; white-space: nowrap; }
+td.mono { font-family: 'Courier New', monospace; font-size: 12px; color: var(--olive); }
+td.num { font-weight: 700; color: var(--lime-dark); white-space: nowrap; }
+td.num-pink { font-weight: 700; color: var(--pink); white-space: nowrap; }
+
+/* Architecture Diagram */
+.arch-diagram { margin: 24px 0; }
+.arch-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; justify-content: center; }
+.arch-box { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 18px; text-align: center; min-width: 110px; flex: 1; max-width: 190px; }
+.arch-box .ab-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.arch-box .ab-sub { font-size: 10px; color: var(--text-muted); line-height: 1.5; }
+.arch-box.primary { background: var(--lime); border-color: var(--lime-dark); }
+.arch-box.primary .ab-title { color: #fff; }
+.arch-box.primary .ab-sub { color: rgba(255,255,255,.75); }
+.arch-box.accent { background: var(--pink-soft); border-color: rgba(255,107,157,.3); }
+.arch-box.accent .ab-title { color: var(--pink); }
+.arch-box.dark { background: var(--text); border-color: var(--text); }
+.arch-box.dark .ab-title { color: var(--lime-neon); }
+.arch-box.dark .ab-sub { color: rgba(255,255,255,.5); }
+.arch-box.data { background: #FFFBE8; border-color: #E8C840; }
+.arch-box.data .ab-title { color: #B8960A; }
+.arch-arrow { display: flex; justify-content: center; margin: 4px 0; font-size: 18px; color: var(--text-muted); }
+
+/* Inline highlight */
+.hl-lime { background: linear-gradient(transparent 55%, rgba(164,221,0,.3) 55%); padding: 0 2px; }
+
+/* Code block */
+.code-block { background: #2A3510; border-radius: 14px; padding: 20px 24px; margin: 16px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.8; color: #C8E890; }
+.code-block .cb-key { color: var(--lime-neon); }
+.code-block .cb-str { color: #FFD080; }
+.code-block .cb-num { color: #FF9F7A; }
+.code-block .cb-comment { color: rgba(200,232,144,.4); }
+
+/* Phase cards */
+.phase-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 24px 0; }
+.phase-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 16px; padding: 22px 18px; }
+.phase-card .pc-num { font-family: 'Bagel Fat One', cursive; font-size: 28px; color: var(--lime-dark); line-height: 1; margin-bottom: 6px; }
+.phase-card .pc-q { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.phase-card .pc-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.4; }
+.phase-card ul { padding-left: 14px; font-size: 12px; color: var(--text-sub); line-height: 1.9; }
+.phase-card.active { border-color: var(--lime); background: var(--glow); }
+.phase-card.active .pc-num { color: var(--olive); }
+
+/* KPI grid */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 20px 0; }
+.kpi-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px; }
+.kpi-item .ki-label { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.kpi-item .ki-val { font-size: 22px; font-weight: 900; color: var(--lime-dark); line-height: 1.2; }
+.kpi-item .ki-val.pink { color: var(--pink); }
+.kpi-item .ki-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* Escalation flow */
+.esc-flow { display: flex; gap: 0; margin: 20px 0; flex-wrap: wrap; }
+.esc-step { flex: 1; min-width: 160px; background: var(--card); border: 1px solid var(--card-border); padding: 18px 16px; position: relative; }
+.esc-step:first-child { border-radius: 12px 0 0 12px; }
+.esc-step:last-child { border-radius: 0 12px 12px 0; }
+.esc-step::after { content: '\203A'; position: absolute; right: -11px; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--text-muted); z-index: 2; font-weight: 700; }
+.esc-step:last-child::after { display: none; }
+.esc-step .es-lvl { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.esc-step .es-lvl.l1 { color: var(--lime-dark); }
+.esc-step .es-lvl.l2 { color: #E8A030; }
+.esc-step .es-lvl.l3 { color: var(--pink); }
+.esc-step .es-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.esc-step .es-desc { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+
+/* Chips */
+.chip { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; margin: 2px 2px 2px 0; }
+.chip.lime { background: rgba(164,221,0,.15); color: var(--olive); }
+.chip.pink { background: rgba(255,107,157,.12); color: var(--pink); }
+.chip.gold { background: rgba(232,200,64,.15); color: #A88010; }
+.chip.dark { background: rgba(61,74,30,.08); color: var(--text-sub); }
+
+/* Hire priority list */
+.hire-list { display: flex; flex-direction: column; gap: 12px; }
+.hire-item { display: flex; align-items: flex-start; gap: 16px; }
+.hire-badge { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; color: #fff; flex-shrink: 0; margin-top: 2px; }
+.hire-badge.h1 { background: var(--lime-dark); }
+.hire-badge.h2 { background: #D4A820; }
+.hire-badge.h3 { background: var(--pink); }
+.hire-title { font-size: 14px; font-weight: 700; color: var(--text); }
+.hire-desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+/* Footer */
+.doc-footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-conf { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--pink); text-transform: uppercase; }
+.footer-info { font-size: 11px; color: var(--text-muted); text-align: right; line-height: 1.7; }
+
+/* Three-col card layout */
+.three-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.col-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.col-body { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+
+/* Print */
+@media print {
+  body { background: #fff; }
+  .wrap { padding: 24px 20px; }
+  .doc-footer { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div class="brand-row">
+      <span class="brand-mark">GARLIC</span>
+      <span class="doc-badge eng">Engineering Plan</span>
+      <span class="doc-badge">INTERNAL / CONFIDENTIAL</span>
+    </div>
+    <h1 class="doc-title">Ego-Sync <em>구현 계획서</em></h1>
+    <p class="doc-sub">유저별 UI 초개인화 시스템 — 갈릭 DNA 엔진 &amp; Qwen AI Studio 통합 로드맵</p>
+    <p class="doc-date">작성일 2026.04.14 &nbsp;&middot;&nbsp; 버전 1.0 &nbsp;&middot;&nbsp; PP1K 불사조기사단 Engineering Division</p>
+  </header>
+
+  <!-- 1. 프로젝트 개요 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">01</span>프로젝트 개요</p>
+    <h2 class="sec-heading">Ego-Sync — 유저가 앱을 여는 순간, 앱이 유저가 된다</h2>
+    <p class="body-text">
+      갈릭마켓의 핵심 차별화 전략은 <span class="hl-lime">유저별 완전 개인화 UI</span>입니다. 동일한 앱이라도 각 유저의 DNA 프로필에 따라 레이아웃·컴포넌트 배치·CTA 문구·색조까지 달라집니다. Ego-Sync는 이 초개인화를 구현하는 풀스택 AI 시스템입니다.
+    </p>
+
+    <div class="key-cards">
+      <div class="key-card lime">
+        <span class="kc-icon">🎯</span>
+        <div class="kc-q">핵심 목표</div>
+        <div class="kc-a">유저별 UI 초개인화</div>
+        <div class="kc-sub">DNA 프로필 기반 동적 레이아웃</div>
+      </div>
+      <div class="key-card pink">
+        <span class="kc-icon">🗓</span>
+        <div class="kc-q">프로젝트 기간</div>
+        <div class="kc-a">2027 Q1 – Q4</div>
+        <div class="kc-sub">4분기 전사 프로젝트</div>
+      </div>
+      <div class="key-card gold">
+        <span class="kc-icon">👥</span>
+        <div class="kc-q">투입 인력</div>
+        <div class="kc-a">28명</div>
+        <div class="kc-sub">6개 팀 크로스펑셔널</div>
+      </div>
+      <div class="key-card olive">
+        <span class="kc-icon">🤖</span>
+        <div class="kc-q">핵심 기술</div>
+        <div class="kc-a">Qwen AI Studio</div>
+        <div class="kc-sub">갈릭 DNA 엔진 + 벡터 DB</div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box"><div class="sv">8</div><div class="sl">AI 엔지니어</div></div>
+      <div class="stat-box"><div class="sv">6</div><div class="sl">프론트엔드</div></div>
+      <div class="stat-box"><div class="sv">5</div><div class="sl">백엔드</div></div>
+      <div class="stat-box"><div class="sv">4</div><div class="sl">데이터</div></div>
+      <div class="stat-box"><div class="sv pink">3</div><div class="sl">QA</div></div>
+      <div class="stat-box"><div class="sv pink">2</div><div class="sl">PM</div></div>
+    </div>
+
+    <p class="body-text" style="margin-top:4px;font-size:12px;">프로젝트 범위: 갈릭 DNA 엔진 구축 · Qwen AI Studio 통합 · 동적 UI 컴포넌트 시스템 · A/B 자동화 최적화</p>
+
+    <div class="tbl-wrap" style="margin-top:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th>팀</th>
+            <th>인원</th>
+            <th>주요 역할</th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>AI / ML</strong></td>
+            <td class="num">8명</td>
+            <td>DNA 엔진, Qwen 통합, 파인튜닝</td>
+            <td class="tag-lime">리드</td>
+            <td class="tag-lime">리드</td>
+            <td class="tag-lime">지원</td>
+            <td class="tag-lime">최적화</td>
+          </tr>
+          <tr>
+            <td><strong>Frontend</strong></td>
+            <td class="num">6명</td>
+            <td>동적 UI 컴포넌트, 레이아웃 엔진</td>
+            <td style="color:var(--text-muted);font-size:12px;">준비</td>
+            <td class="tag-gold">지원</td>
+            <td class="tag-lime">리드</td>
+            <td class="tag-lime">리드</td>
+          </tr>
+          <tr>
+            <td><strong>Backend</strong></td>
+            <td class="num">5명</td>
+            <td>API Gateway, 캐시, 실시간 파이프</td>
+            <td class="tag-gold">지원</td>
+            <td class="tag-lime">리드</td>
+            <td class="tag-gold">지원</td>
+            <td class="tag-gold">지원</td>
+          </tr>
+          <tr>
+            <td><strong>Data</strong></td>
+            <td class="num">4명</td>
+            <td>데이터 파이프라인, 벡터 DB, ETL</td>
+            <td class="tag-lime">리드</td>
+            <td class="tag-gold">지원</td>
+            <td class="tag-gold">지원</td>
+            <td class="tag-gold">지원</td>
+          </tr>
+          <tr class="pink-row">
+            <td><strong>QA</strong></td>
+            <td class="num pink">3명</td>
+            <td>품질 검증, 성능 테스트, 모니터링</td>
+            <td style="color:var(--text-muted);font-size:12px;">준비</td>
+            <td class="tag-pink">검증</td>
+            <td class="tag-pink">검증</td>
+            <td class="tag-pink">검증</td>
+          </tr>
+          <tr class="pink-row">
+            <td><strong>PM</strong></td>
+            <td class="num pink">2명</td>
+            <td>로드맵, 스프린트, 스테이크홀더</td>
+            <td class="tag-pink">전체</td>
+            <td class="tag-pink">전체</td>
+            <td class="tag-pink">전체</td>
+            <td class="tag-pink">전체</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. 기술 아키텍처 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">02</span>기술 아키텍처</p>
+    <h2 class="sec-heading">시스템 다이어그램 — End-to-End 흐름</h2>
+
+    <div class="arch-diagram">
+      <div class="arch-row">
+        <div class="arch-box primary">
+          <div class="ab-title">App Layer</div>
+          <div class="ab-sub">iOS / Android / Web</div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box dark">
+          <div class="ab-title">API Gateway</div>
+          <div class="ab-sub">Rate Limit · Auth · Routing</div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box primary">
+          <div class="ab-title">Ego-Sync Engine</div>
+          <div class="ab-sub">갈릭 DNA · 레이아웃 결정 · Redis 캐시</div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-row">
+        <div class="arch-box accent">
+          <div class="ab-title">Qwen AI Studio</div>
+          <div class="ab-sub">Max · Plus · VL · Turbo</div>
+        </div>
+      </div>
+      <div class="arch-arrow" style="margin-top:16px; color:var(--text-sub); font-size:13px; font-weight:600;">↑ &nbsp; 데이터 레이어 &nbsp; ↑</div>
+      <div class="arch-row" style="margin-top:8px;">
+        <div class="arch-box data">
+          <div class="ab-title">구매 이력</div>
+          <div class="ab-sub">PAI 배치 학습</div>
+        </div>
+        <div class="arch-box data">
+          <div class="ab-title">실시간 행동</div>
+          <div class="ab-sub">Flink → Redis</div>
+        </div>
+        <div class="arch-box data">
+          <div class="ab-title">벡터 DB</div>
+          <div class="ab-sub">AnalyticDB · 1M 임베딩</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;color:var(--text);margin:28px 0 12px;">API 스펙</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>Input</th>
+            <th>Output</th>
+            <th>Latency Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">/v1/ego-sync</td>
+            <td class="tag-lime">POST</td>
+            <td>user_id, session_ctx, device_info</td>
+            <td>layout_json, component_variants, cta_copy</td>
+            <td class="num">p95 &lt; 500ms</td>
+          </tr>
+          <tr>
+            <td class="mono">/v1/recommend</td>
+            <td class="tag-lime">POST</td>
+            <td>user_id, category, limit, cursor</td>
+            <td>product_list[], score[], match_badge</td>
+            <td class="num">p95 &lt; 300ms</td>
+          </tr>
+          <tr>
+            <td class="mono">/v1/dna-profile</td>
+            <td class="tag-gold">GET</td>
+            <td>user_id, refresh?=false</td>
+            <td>dna_vector[6], confidence, updated_at</td>
+            <td class="num">p95 &lt; 100ms</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. 갈릭 DNA 엔진 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">03</span>갈릭 DNA 엔진</p>
+    <h2 class="sec-heading">6축 사용자 프로파일링</h2>
+    <p class="body-text">유저의 구매·탐색·리뷰 데이터를 6개 축으로 압축한 DNA 벡터를 생성합니다. 각 축의 가중치는 카테고리 전략에 따라 조정되며, 매일 배치 + 세션 내 실시간 보정이 결합됩니다.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>축 (Axis)</th>
+            <th>카테고리</th>
+            <th>주요 데이터소스</th>
+            <th>가중치</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td class="tag-lime">AXIS 1</td>
+            <td><strong>패션 / 뷰티</strong></td>
+            <td>구매 이력, 위시리스트, 리뷰 감성</td>
+            <td class="num">0.25</td>
+          </tr>
+          <tr>
+            <td class="tag-lime">AXIS 2</td>
+            <td><strong>디지털 / 가전</strong></td>
+            <td>검색 쿼리, 비교 클릭, 구매 전환</td>
+            <td class="num">0.20</td>
+          </tr>
+          <tr>
+            <td class="tag-lime">AXIS 3</td>
+            <td><strong>식품 / 신선</strong></td>
+            <td>정기구독, 반복구매, 배송지 패턴</td>
+            <td class="num">0.20</td>
+          </tr>
+          <tr>
+            <td class="tag-gold">AXIS 4</td>
+            <td><strong>리빙 / 인테리어</strong></td>
+            <td>PIN 저장, 장바구니 이탈, 시즌 구매</td>
+            <td class="num">0.15</td>
+          </tr>
+          <tr>
+            <td class="tag-gold">AXIS 5</td>
+            <td><strong>스포츠 / 아웃도어</strong></td>
+            <td>브랜드 선호, 사이즈 필터, 재구매율</td>
+            <td class="num">0.12</td>
+          </tr>
+          <tr class="pink-row">
+            <td class="tag-pink">AXIS 6</td>
+            <td><strong>취미 / 기타</strong></td>
+            <td>롱테일 클릭, 이벤트 참여, 소셜 공유</td>
+            <td class="num">0.08</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="three-col">
+        <div>
+          <div class="col-label" style="color:var(--lime-dark);">배치 학습</div>
+          <div class="col-body">
+            플랫폼: <strong>Alibaba PAI</strong><br>
+            스케줄: 매일 새벽 3AM<br>
+            학습 데이터: 2026년 전체 로그<br>
+            모델: Collaborative Filtering + Embedding
+          </div>
+        </div>
+        <div>
+          <div class="col-label" style="color:var(--pink);">실시간 보정</div>
+          <div class="col-body">
+            스트리밍: <strong>Alibaba Flink</strong><br>
+            캐시: Redis Cluster<br>
+            갱신 주기: 세션 내 이벤트 발생 시<br>
+            반영 항목: 클릭·카트·검색
+          </div>
+        </div>
+        <div>
+          <div class="col-label" style="color:var(--text-muted);">벡터 DB</div>
+          <div class="col-body">
+            엔진: <strong>AnalyticDB for PG</strong><br>
+            유사도: cosine similarity<br>
+            임베딩 상품 수: <strong>100만 개</strong><br>
+            차원: 768d
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Qwen 모델 운영 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">04</span>Qwen 모델 운영</p>
+    <h2 class="sec-heading">멀티 모델 전략 — 용도별 최적 모델 선택</h2>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>용도</th>
+            <th>레이턴시 목표</th>
+            <th>호출 빈도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>Qwen-Max</strong></td>
+            <td>UI 레이아웃 결정 · DNA 해석</td>
+            <td class="num">p95 &lt; 2s</td>
+            <td>세션 시작 시 1회</td>
+          </tr>
+          <tr>
+            <td><strong>Qwen-Plus</strong></td>
+            <td>상품 추천 스코어링 · 매칭도 계산</td>
+            <td class="num">p95 &lt; 500ms</td>
+            <td>피드 로드마다</td>
+          </tr>
+          <tr>
+            <td><strong>Qwen-VL</strong></td>
+            <td>상품 이미지 분류 · 스타일 태깅</td>
+            <td class="num">배치 처리</td>
+            <td>야간 배치, 신규 상품</td>
+          </tr>
+          <tr class="pink-row">
+            <td><strong>Qwen-Turbo</strong></td>
+            <td>검색 자동완성 · 실시간 제안</td>
+            <td class="num pink">p95 &lt; 100ms</td>
+            <td>키 입력마다</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stat-row" style="margin-top:24px;">
+      <div class="stat-box">
+        <div class="sv">8억</div>
+        <div class="sl">연간 Qwen API 비용<br>(MAU 1,000만 기준)</div>
+      </div>
+      <div class="stat-box">
+        <div class="sv pink">200ms</div>
+        <div class="sl">레이턴시 목표 p50</div>
+      </div>
+      <div class="stat-box">
+        <div class="sv">500ms</div>
+        <div class="sl">레이턴시 목표 p95</div>
+      </div>
+      <div class="stat-box">
+        <div class="sv gold">1s</div>
+        <div class="sl">레이턴시 목표 p99</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px;">
+      <div class="col-label" style="color:var(--text-muted);margin-bottom:12px;">파인튜닝 데이터셋</div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;">
+        <div>
+          <div style="font-size:22px;font-weight:900;color:var(--lime-dark);">1억 건</div>
+          <div style="font-size:12px;color:var(--text-muted);">구매 로그 (2024–2026)</div>
+        </div>
+        <div>
+          <div style="font-size:22px;font-weight:900;color:var(--lime-dark);">5천만 건</div>
+          <div style="font-size:12px;color:var(--text-muted);">유저 리뷰 텍스트</div>
+        </div>
+        <div>
+          <div style="font-size:22px;font-weight:900;color:var(--pink);">QLoRA</div>
+          <div style="font-size:12px;color:var(--text-muted);">파인튜닝 방식 (PEFT)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. UI 컴포넌트 시스템 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">05</span>UI 컴포넌트 시스템</p>
+    <h2 class="sec-heading">7개 동적 컴포넌트 — DNA 기반 변형 선택</h2>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>컴포넌트 ID</th>
+            <th>역할</th>
+            <th>변형 수</th>
+            <th>변형 기준</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td class="mono">hero_deal</td>
+            <td>메인 배너 · 타임딜 히어로</td>
+            <td class="num">5 var</td>
+            <td>카테고리 축 최고값 기반 스타일</td>
+          </tr>
+          <tr>
+            <td class="mono">product_feed</td>
+            <td>상품 피드 카드 레이아웃</td>
+            <td class="num">3 var</td>
+            <td>탐색형 vs 구매확정형 행동 패턴</td>
+          </tr>
+          <tr>
+            <td class="mono">category_nav</td>
+            <td>카테고리 내비게이션 탭</td>
+            <td class="num">4 var</td>
+            <td>선호 카테고리 순위 재정렬</td>
+          </tr>
+          <tr>
+            <td class="mono">manuri_recommend</td>
+            <td>마누리 캐릭터 추천 섹션</td>
+            <td class="num">3 var</td>
+            <td>DNA 일치도 상위 3개 큐레이션</td>
+          </tr>
+          <tr>
+            <td class="mono">time_deal</td>
+            <td>특가 타이머 모듈</td>
+            <td class="num">2 var</td>
+            <td>긴급형 vs 정보형 CTA 스타일</td>
+          </tr>
+          <tr>
+            <td class="mono">seller_story</td>
+            <td>셀러 스토리 · 브랜드 콘텐츠</td>
+            <td class="num">3 var</td>
+            <td>가격민감 vs 브랜드선호 유저 분기</td>
+          </tr>
+          <tr class="pink-row">
+            <td class="mono">garlic_dna</td>
+            <td>내 DNA 배지 · 퍼스널리티 카드</td>
+            <td class="num pink">2 var</td>
+            <td>신규 유저 vs 활성 유저 노출 depth</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;color:var(--text);margin:28px 0 12px;">Dynamic Layout JSON 예시</h3>
+    <div class="code-block"><span class="cb-comment">// /v1/ego-sync 응답 예시 — 패션 선호 유저 (AXIS 1 최고)</span>
+{
+  <span class="cb-key">"user_id"</span>: <span class="cb-str">"u_8f2k9a"</span>,
+  <span class="cb-key">"dna_dominant"</span>: <span class="cb-str">"fashion_beauty"</span>,
+  <span class="cb-key">"layout"</span>: {
+    <span class="cb-key">"slots"</span>: [
+      { <span class="cb-key">"id"</span>: <span class="cb-str">"hero_deal"</span>,        <span class="cb-key">"variant"</span>: <span class="cb-str">"fashion_editorial"</span>, <span class="cb-key">"pos"</span>: <span class="cb-num">0</span> },
+      { <span class="cb-key">"id"</span>: <span class="cb-str">"category_nav"</span>,     <span class="cb-key">"variant"</span>: <span class="cb-str">"beauty_first"</span>,      <span class="cb-key">"pos"</span>: <span class="cb-num">1</span> },
+      { <span class="cb-key">"id"</span>: <span class="cb-str">"product_feed"</span>,     <span class="cb-key">"variant"</span>: <span class="cb-str">"visual_grid"</span>,        <span class="cb-key">"pos"</span>: <span class="cb-num">2</span> },
+      { <span class="cb-key">"id"</span>: <span class="cb-str">"manuri_recommend"</span>, <span class="cb-key">"variant"</span>: <span class="cb-str">"style_curator"</span>,     <span class="cb-key">"pos"</span>: <span class="cb-num">3</span> }
+    ],
+    <span class="cb-key">"cta_tone"</span>: <span class="cb-str">"discovery"</span>,
+    <span class="cb-key">"color_theme"</span>: <span class="cb-str">"warm_pastel"</span>
+  },
+  <span class="cb-key">"ab_bucket"</span>: <span class="cb-str">"mab_arm_3"</span>,
+  <span class="cb-key">"ttl_sec"</span>: <span class="cb-num">1800</span>
+}</div>
+
+    <div class="card" style="margin-top:16px;">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">A/B 자동화 최적화</div>
+      <div style="font-size:13px;color:var(--text-sub);line-height:1.8;">
+        알고리즘: <strong>Multi-Armed Bandit (Thompson Sampling)</strong> &nbsp;&middot;&nbsp;
+        탐색/활용 비율: 20% / 80% &nbsp;&middot;&nbsp;
+        자동 승자 선정: CTR 통계적 유의성 p&lt;0.05 달성 시 &nbsp;&middot;&nbsp;
+        최소 실험 기간: 72시간
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 스프린트 계획 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">06</span>스프린트 계획</p>
+    <h2 class="sec-heading">4 Phase 로드맵 — 분기별 목표</h2>
+
+    <div class="phase-cards">
+      <div class="phase-card active">
+        <div class="pc-num">Q1</div>
+        <div class="pc-q">Phase 1 · 2027</div>
+        <div class="pc-title">DNA 엔진 MVP &amp; 데이터 파이프</div>
+        <ul>
+          <li>갈릭 DNA 6축 정의 확정</li>
+          <li>AnalyticDB 벡터 DB 구축</li>
+          <li>구매 이력 ETL 파이프라인</li>
+          <li>Flink 실시간 스트림 PoC</li>
+          <li>DNA API v0.1 내부 릴리스</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="pc-num">Q2</div>
+        <div class="pc-q">Phase 2 · 2027</div>
+        <div class="pc-title">Qwen 통합 &amp; 추천 API</div>
+        <ul>
+          <li>Qwen-Max / Plus API 연동</li>
+          <li>상품 추천 API v1.0</li>
+          <li>매칭도 뱃지 FE 출시</li>
+          <li>QLoRA 파인튜닝 1차</li>
+          <li>내부 QA 베타 (임직원)</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="pc-num">Q3</div>
+        <div class="pc-q">Phase 3 · 2027</div>
+        <div class="pc-title">동적 UI &amp; CTA 개인화</div>
+        <ul>
+          <li>7개 컴포넌트 변형 개발</li>
+          <li>레이아웃 재조합 엔진</li>
+          <li>CTA 문구 개인화 적용</li>
+          <li>A/B 프레임워크 구축</li>
+          <li>클로즈드 베타 (1만 명)</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="pc-num">Q4</div>
+        <div class="pc-q">Phase 4 · 2027</div>
+        <div class="pc-title">A/B 자동화 &amp; 풀 Ego-Sync</div>
+        <ul>
+          <li>MAB 자동 최적화 가동</li>
+          <li>전체 유저 Ego-Sync 롤아웃</li>
+          <li>Qwen-Turbo 자동완성 출시</li>
+          <li>성능 최적화 p99 &lt; 1s</li>
+          <li>2028 로드맵 회고 &amp; 기획</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;color:var(--text);margin:28px 0 12px;">마일스톤 상세 일정</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>마일스톤</th>
+            <th>목표 일자</th>
+            <th>담당 Owner</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DNA 6축 스펙 확정 &amp; 데이터 계약</td>
+            <td>2027.01.31</td>
+            <td>AI팀장 · Data리드</td>
+            <td><span class="chip lime">예정</span></td>
+          </tr>
+          <tr>
+            <td>AnalyticDB 벡터 DB 구축 완료</td>
+            <td>2027.02.28</td>
+            <td>데이터엔지니어</td>
+            <td><span class="chip lime">예정</span></td>
+          </tr>
+          <tr>
+            <td>DNA API v0.1 내부 릴리스</td>
+            <td>2027.03.31</td>
+            <td>AI팀장 · BE리드</td>
+            <td><span class="chip lime">예정</span></td>
+          </tr>
+          <tr>
+            <td>Qwen-Max 통합 &amp; 추천 API v1.0</td>
+            <td>2027.05.31</td>
+            <td>ML엔지니어 ×2</td>
+            <td><span class="chip dark">미착수</span></td>
+          </tr>
+          <tr>
+            <td>매칭도 뱃지 FE 출시</td>
+            <td>2027.06.30</td>
+            <td>FE리드</td>
+            <td><span class="chip dark">미착수</span></td>
+          </tr>
+          <tr>
+            <td>7개 컴포넌트 변형 개발 완료</td>
+            <td>2027.08.31</td>
+            <td>FE×4 · AI 지원</td>
+            <td><span class="chip dark">미착수</span></td>
+          </tr>
+          <tr>
+            <td>클로즈드 베타 1만 명 개통</td>
+            <td>2027.09.30</td>
+            <td>PM · QA팀</td>
+            <td><span class="chip dark">미착수</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>전체 유저 Ego-Sync 풀 롤아웃</td>
+            <td>2027.11.30</td>
+            <td>PM · 전팀</td>
+            <td><span class="chip pink">목표</span></td>
+          </tr>
+          <tr>
+            <td>성능 최적화 &amp; 2028 로드맵 수립</td>
+            <td>2027.12.31</td>
+            <td>CTO · AI팀장</td>
+            <td><span class="chip dark">미착수</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7. 인프라 & 비용 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">07</span>인프라 &amp; 비용</p>
+    <h2 class="sec-heading">Alibaba Cloud 서비스 구성 &amp; 비용 프로젝션</h2>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>서비스</th>
+            <th>용도</th>
+            <th>사양</th>
+            <th>연간 비용 (예상)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>AnalyticDB for PG</strong></td>
+            <td>벡터 DB · 임베딩 검색</td>
+            <td>64C / 256G · 10TB SSD</td>
+            <td class="num">₩15억</td>
+          </tr>
+          <tr>
+            <td><strong>PAI (DLC + DSW)</strong></td>
+            <td>DNA 엔진 배치 학습</td>
+            <td>A100 × 8 GPU 클러스터</td>
+            <td class="num">₩10억</td>
+          </tr>
+          <tr>
+            <td><strong>Realtime Compute (Flink)</strong></td>
+            <td>실시간 행동 스트리밍</td>
+            <td>32 CU · 고가용성</td>
+            <td class="num">₩8억</td>
+          </tr>
+          <tr>
+            <td><strong>ECS + SLB</strong></td>
+            <td>API Gateway · 앱 서버</td>
+            <td>ecs.g8i.4xlarge × 10</td>
+            <td class="num">₩5억</td>
+          </tr>
+          <tr class="pink-row">
+            <td><strong>Qwen API</strong></td>
+            <td>Max / Plus / VL / Turbo 호출</td>
+            <td>MAU 1,000만 기준</td>
+            <td class="num pink">₩8억/년</td>
+          </tr>
+          <tr>
+            <td><strong>Redis Enterprise</strong></td>
+            <td>실시간 DNA 캐시</td>
+            <td>256GB · 클러스터 3노드</td>
+            <td class="num">₩2억</td>
+          </tr>
+          <tr>
+            <td><strong>OSS + CDN</strong></td>
+            <td>정적 에셋 · 이미지 서빙</td>
+            <td>50TB / 월 전송</td>
+            <td class="num">₩1억</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stat-row" style="margin-top:20px;">
+      <div class="stat-box">
+        <div class="sv">49억</div>
+        <div class="sl">연간 총 인프라 비용 (예상)</div>
+      </div>
+      <div class="stat-box">
+        <div class="sv pink">1,000만</div>
+        <div class="sl">MAU 기준</div>
+      </div>
+      <div class="stat-box">
+        <div class="sv">490원</div>
+        <div class="sl">유저 1인당 연간 인프라비</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px;">
+      <div class="col-label" style="color:var(--text-muted);margin-bottom:12px;">월별 트래픽 &amp; 비용 프로젝션</div>
+      <div class="tbl-wrap" style="margin:0;border:none;border-radius:0;">
+        <table>
+          <thead>
+            <tr>
+              <th>분기</th>
+              <th>MAU (예상)</th>
+              <th>일 API 호출</th>
+              <th>월 인프라비</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2027 Q1</td>
+              <td>100만</td>
+              <td>500만 건</td>
+              <td class="num">~1.2억</td>
+              <td style="color:var(--text-muted);font-size:12px;">MVP, 내부 트래픽</td>
+            </tr>
+            <tr>
+              <td>2027 Q2</td>
+              <td>300만</td>
+              <td>1,500만 건</td>
+              <td class="num">~2.5억</td>
+              <td style="color:var(--text-muted);font-size:12px;">Qwen 통합 후 급증</td>
+            </tr>
+            <tr>
+              <td>2027 Q3</td>
+              <td>600만</td>
+              <td>3,000만 건</td>
+              <td class="num">~3.5억</td>
+              <td style="color:var(--text-muted);font-size:12px;">클로즈드 베타 확장</td>
+            </tr>
+            <tr class="highlight">
+              <td>2027 Q4</td>
+              <td>1,000만</td>
+              <td>5,000만 건</td>
+              <td class="num">~4.9억</td>
+              <td style="color:var(--text-muted);font-size:12px;">풀 롤아웃 안정화</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 품질 & 모니터링 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">08</span>품질 &amp; 모니터링</p>
+    <h2 class="sec-heading">KPI 대시보드 &amp; 장애 대응 체계</h2>
+
+    <div class="kpi-grid">
+      <div class="kpi-item">
+        <div class="ki-label">추천 CTR</div>
+        <div class="ki-val">+35%</div>
+        <div class="ki-desc">현재 대비 목표 향상폭 (Ego-Sync 적용 시)</div>
+      </div>
+      <div class="kpi-item">
+        <div class="ki-label">DNA 정확도</div>
+        <div class="ki-val">≥ 90%</div>
+        <div class="ki-desc">구매 예측 Top-5 적중률 목표</div>
+      </div>
+      <div class="kpi-item">
+        <div class="ki-label">레이턴시 p95</div>
+        <div class="ki-val pink">&lt; 500ms</div>
+        <div class="ki-desc">ego-sync API 엔드투엔드 기준</div>
+      </div>
+      <div class="kpi-item">
+        <div class="ki-label">A/B 자동 승률</div>
+        <div class="ki-val">≥ 70%</div>
+        <div class="ki-desc">MAB 자동 결정이 인간 판단 대비 성과</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;">모델 드리프트 감지 (Model Drift Detection)</div>
+      <div style="font-size:13px;color:var(--text-sub);line-height:1.8;">
+        감지 주기: <strong>매주 월요일 자동 실행</strong> &nbsp;&middot;&nbsp;
+        기준 지표: 추천 CTR 기저선 대비 -10% 이상 시 알림 &nbsp;&middot;&nbsp;
+        드리프트 임계값: cosine similarity 평균 &lt; 0.82 &nbsp;&middot;&nbsp;
+        자동 대응: DNA 재학습 스케줄 조기 트리거 &nbsp;&middot;&nbsp;
+        에스컬레이션: 2주 연속 드리프트 시 ML팀장 온콜
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;color:var(--text);margin:28px 0 14px;">장애 대응 — 3단계 에스컬레이션</h3>
+    <div class="esc-flow">
+      <div class="esc-step">
+        <div class="es-lvl l1">L1 — AUTO</div>
+        <div class="es-title">자동 롤백</div>
+        <div class="es-desc">에러율 &gt;5% 감지 시 이전 레이아웃으로 자동 폴백 (30초 내)</div>
+      </div>
+      <div class="esc-step">
+        <div class="es-lvl l2">L2 — ONCALL</div>
+        <div class="es-title">온콜 대응</div>
+        <div class="es-desc">L1 실패 또는 서비스 중단 15분 초과 시 담당 엔지니어 PagerDuty</div>
+      </div>
+      <div class="esc-step">
+        <div class="es-lvl l3">L3 — ESCALATE</div>
+        <div class="es-title">에스컬레이션</div>
+        <div class="es-desc">1시간 미복구 또는 전체 서비스 영향 시 CTO + AI팀장 즉시 호출</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. 팀 구성 -->
+  <section class="section">
+    <p class="sec-label"><span class="sec-num">09</span>팀 구성</p>
+    <h2 class="sec-heading">R&amp;R 매트릭스 &amp; 채용 우선순위</h2>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>역할</th>
+            <th>인원</th>
+            <th>주요 책임 (R&amp;R)</th>
+            <th>필수 스킬</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>AI 팀장</strong></td>
+            <td class="num">1명</td>
+            <td>DNA 엔진 아키텍처, Qwen 전략, 파인튜닝 감독</td>
+            <td><span class="chip lime">LLM</span><span class="chip lime">RecSys</span><span class="chip dark">팀 리드</span></td>
+          </tr>
+          <tr>
+            <td><strong>ML 엔지니어</strong></td>
+            <td class="num">4명</td>
+            <td>모델 학습·파인튜닝·추론 최적화, 벡터 임베딩</td>
+            <td><span class="chip lime">PyTorch</span><span class="chip lime">QLoRA</span><span class="chip dark">Alibaba PAI</span></td>
+          </tr>
+          <tr>
+            <td><strong>데이터 엔지니어</strong></td>
+            <td class="num">3명</td>
+            <td>ETL 파이프라인, Flink 스트리밍, 데이터 품질</td>
+            <td><span class="chip gold">Flink</span><span class="chip gold">Spark</span><span class="chip dark">AnalyticDB</span></td>
+          </tr>
+          <tr>
+            <td><strong>FE 리드</strong></td>
+            <td class="num">1명</td>
+            <td>동적 UI 아키텍처, 컴포넌트 설계, 성능 감독</td>
+            <td><span class="chip lime">React Native</span><span class="chip dark">Design System</span></td>
+          </tr>
+          <tr>
+            <td><strong>FE 엔지니어</strong></td>
+            <td class="num">5명</td>
+            <td>컴포넌트 변형 구현, 레이아웃 엔진, A/B FE</td>
+            <td><span class="chip lime">React</span><span class="chip lime">TypeScript</span><span class="chip dark">Animation</span></td>
+          </tr>
+          <tr>
+            <td><strong>BE 리드</strong></td>
+            <td class="num">1명</td>
+            <td>API Gateway 설계, 캐시 전략, 시스템 신뢰성</td>
+            <td><span class="chip gold">Go / Node</span><span class="chip gold">Redis</span><span class="chip dark">SRE</span></td>
+          </tr>
+          <tr>
+            <td><strong>BE 엔지니어</strong></td>
+            <td class="num">4명</td>
+            <td>ego-sync / recommend / dna API 구현 및 운영</td>
+            <td><span class="chip gold">MSA</span><span class="chip gold">gRPC</span><span class="chip dark">Kubernetes</span></td>
+          </tr>
+          <tr class="pink-row">
+            <td><strong>QA 엔지니어</strong></td>
+            <td class="num pink">3명</td>
+            <td>성능·정확도 테스트, 모니터링 대시보드, 버그 검증</td>
+            <td><span class="chip pink">Load Testing</span><span class="chip pink">Grafana</span></td>
+          </tr>
+          <tr class="pink-row">
+            <td><strong>PM</strong></td>
+            <td class="num pink">2명</td>
+            <td>스프린트 계획, 스테이크홀더 커뮤니케이션, 지표 추적</td>
+            <td><span class="chip pink">JIRA</span><span class="chip pink">Agile</span><span class="chip dark">데이터 리터러시</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:16px;">채용 우선순위</div>
+      <div class="hire-list">
+        <div class="hire-item">
+          <div class="hire-badge h1">1</div>
+          <div>
+            <div class="hire-title">ML 엔지니어 (LLM 파인튜닝 전문)</div>
+            <div class="hire-desc">QLoRA · PEFT · Qwen 계열 경험 필수. 2027 Q1 착수 전 온보딩 완료 목표.</div>
+          </div>
+        </div>
+        <div class="hire-item">
+          <div class="hire-badge h2">2</div>
+          <div>
+            <div class="hire-title">데이터 엔지니어 (실시간 스트리밍)</div>
+            <div class="hire-desc">Flink · Spark · AnalyticDB 경험자. Q1 데이터 파이프라인 구축 담당.</div>
+          </div>
+        </div>
+        <div class="hire-item">
+          <div class="hire-badge h3">3</div>
+          <div>
+            <div class="hire-title">FE 엔지니어 (동적 UI / 애니메이션)</div>
+            <div class="hire-desc">React Native 고급. 동적 레이아웃 엔진 구현 경험 우대. Q3 착수 전 합류.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <div class="footer-conf">CONFIDENTIAL</div>
+    <div class="footer-info">
+      PP1K 불사조기사단 &nbsp;&middot;&nbsp; Engineering Division<br>
+      GARLIC Ego-Sync 구현 계획서 v1.0 &nbsp;&middot;&nbsp; 2026.04
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
