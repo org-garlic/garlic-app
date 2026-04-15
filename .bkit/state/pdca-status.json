@@ -1,9 +1,25 @@
 {
   "version": "3.0",
-  "lastUpdated": "2026-04-14T02:33:47.600Z",
-  "activeFeatures": [],
-  "primaryFeature": null,
-  "features": {},
+  "lastUpdated": "2026-04-14T09:40:30.004Z",
+  "activeFeatures": [
+    "prompt"
+  ],
+  "primaryFeature": "prompt",
+  "features": {
+    "prompt": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-14T09:40:22.227Z",
+        "lastUpdated": "2026-04-14T09:40:30.004Z"
+      },
+      "lastFile": "/Users/jaeseoh/Documents/workspace/garlic/prompt/sw.js"
+    }
+  },
   "pipeline": {
     "currentPhase": 1,
     "level": "Dynamic",
@@ -12,9 +28,22 @@
   "session": {
     "startedAt": "2026-04-14T01:46:56.193Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-14T02:33:47.600Z"
+    "lastActivity": "2026-04-14T09:40:30.004Z"
   },
-  "history": [],
+  "history": [
+    {
+      "timestamp": "2026-04-14T09:40:22.228Z",
+      "feature": "prompt",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-14T09:40:30.004Z",
+      "feature": "prompt",
+      "phase": "do",
+      "action": "updated"
+    }
+  ],
   "stateMachine": {
     "defaultWorkflow": "default",
     "activeWorkflows": {},
