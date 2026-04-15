@@ -620,73 +620,100 @@ document.querySelectorAll('.wish').forEach(function(btn) {
 });
 </script>
 
-<!-- 쿠폰 바텀시트 -->
+<!-- 투표 팝업 (PC: 모달 / 모바일: 바텀시트) -->
 <style>
-.cp-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.35);opacity:0;transition:opacity .35s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.cp-sheet{display:none;position:fixed;bottom:0;left:0;right:0;z-index:301;background:#fff;border-radius:28px 28px 0 0;padding:0 0 calc(env(safe-area-inset-bottom,12px) + 16px);max-width:640px;margin:0 auto;transform:translateY(100%);transition:transform .45s cubic-bezier(.32,1.15,.54,1);box-shadow:0 -12px 48px rgba(0,0,0,.1)}
-.cp-handle{width:36px;height:4px;background:#E0E0E0;border-radius:2px;margin:12px auto 0}
-.cp-hero{background:linear-gradient(160deg,#F5F1EA 0%,#FFF 50%,#F0FFF4 100%);padding:28px 24px 20px;text-align:center;position:relative;overflow:hidden}
-.cp-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(126,217,87,.12) 0%,transparent 70%);border-radius:50%}
-.cp-hero::after{content:'';position:absolute;bottom:-30px;left:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%);border-radius:50%}
-.cp-icon{width:64px;height:64px;background:linear-gradient(135deg,#6B8E4E,#5EC43B);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px;box-shadow:0 8px 24px rgba(126,217,87,.25);position:relative}
-.cp-title{font-size:18px;font-weight:700;color:#222;letter-spacing:-.3px;margin-bottom:4px;position:relative}
+.cp-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(45,42,36,.4);opacity:0;transition:opacity .35s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
+/* 모바일: 바텀시트 */
+.cp-popup{display:none;position:fixed;bottom:0;left:0;right:0;z-index:301;background:#fff;border-radius:28px 28px 0 0;padding:0 0 calc(env(safe-area-inset-bottom,12px) + 16px);max-width:640px;margin:0 auto;transform:translateY(100%);transition:transform .45s cubic-bezier(.32,1.15,.54,1);box-shadow:0 -12px 48px rgba(0,0,0,.1)}
+.cp-handle{width:36px;height:4px;background:#E8DFD0;border-radius:2px;margin:12px auto 0}
+
+/* PC: 센터 모달 */
+@media(min-width:768px){
+  .cp-popup{bottom:auto;top:50%;left:50%;right:auto;transform:translate(-50%,-50%) scale(.9);border-radius:24px;max-width:420px;width:90%;padding-bottom:24px;opacity:0;transition:transform .4s cubic-bezier(.32,1.15,.54,1),opacity .3s}
+  .cp-popup.show{transform:translate(-50%,-50%) scale(1);opacity:1}
+  .cp-handle{display:none}
+}
+
+.cp-hero{background:linear-gradient(160deg,#F5F1EA 0%,#FFF 40%,#EDF3E8 100%);padding:32px 24px 20px;text-align:center;position:relative;overflow:hidden;border-radius:28px 28px 0 0}
+@media(min-width:768px){.cp-hero{border-radius:24px 24px 0 0}}
+.cp-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(107,142,78,.1) 0%,transparent 70%);border-radius:50%}
+.cp-hero::after{content:'';position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(212,168,67,.08) 0%,transparent 70%);border-radius:50%}
+.cp-fire{font-size:56px;margin-bottom:12px;display:block;position:relative;animation:cpBounce 2s ease-in-out infinite}
+@keyframes cpBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.cp-title{font-size:22px;font-weight:800;color:#2D2A24;letter-spacing:-.5px;margin-bottom:6px;position:relative;line-height:1.3}
+.cp-title em{font-style:normal;color:#D4A843}
 .cp-sub{font-size:13px;color:#8A8478;position:relative}
-.cp-coupon{margin:16px 24px;background:#FAFAFA;border-radius:16px;padding:20px;position:relative;border:1px solid #F0F0F0}
-.cp-coupon::before,.cp-coupon::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:50%;transform:translateY(-50%);border:1px solid #F0F0F0}
-.cp-coupon::before{left:-9px;border-right:none}
-.cp-coupon::after{right:-9px;border-left:none}
-.cp-amount{font-size:36px;font-weight:800;color:#FF6B5A;text-align:center;line-height:1}
-.cp-amount span{font-size:14px;font-weight:500;color:#8A8478;display:block;margin-top:6px}
-.cp-divider{width:100%;height:1px;background:repeating-linear-gradient(90deg,#E0E0E0 0px,#E0E0E0 4px,transparent 4px,transparent 8px);margin:16px 0}
-.cp-vote{text-align:center}
-.cp-vote-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#FFF9F0,#FFF5EB);border:1px solid #F0E0D0;border-radius:20px;padding:8px 16px;font-size:12px;color:#D4A843;font-weight:600}
-.cp-vote-text{font-size:14px;font-weight:600;color:#444;margin-top:10px}
-.cp-vote-text em{font-style:normal;color:#6B8E4E}
+
+.cp-body{padding:20px 24px}
+.cp-card{background:linear-gradient(135deg,#FFFBF5,#FFF8EE);border:1.5px solid #E8DFD0;border-radius:16px;padding:20px;text-align:center;position:relative}
+.cp-team{display:inline-flex;align-items:center;gap:8px;background:#2D2A24;color:#fff;border-radius:12px;padding:10px 20px;font-size:15px;font-weight:700;margin-bottom:12px}
+.cp-team-fire{font-size:20px}
+.cp-desc{font-size:13px;color:#6B665E;line-height:1.7;margin-bottom:16px}
+.cp-desc strong{color:#2D2A24;font-weight:700}
+.cp-coupon-tag{display:inline-flex;align-items:center;gap:6px;background:#EDF3E8;border:1px solid rgba(107,142,78,.2);border-radius:20px;padding:6px 14px;font-size:12px;color:#6B8E4E;font-weight:600}
+
 .cp-actions{padding:16px 24px 0;display:flex;flex-direction:column;gap:8px}
-.cp-btn-primary{width:100%;padding:15px;background:linear-gradient(135deg,#6B8E4E,#6BC648);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Pretendard';transition:all .2s;box-shadow:0 4px 16px rgba(126,217,87,.3)}
-.cp-btn-primary:active{transform:scale(.97)}
+.cp-btn-vote{width:100%;padding:16px;background:linear-gradient(135deg,#D4A843,#C4983B);color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Pretendard';transition:all .2s;box-shadow:0 4px 20px rgba(212,168,67,.35);letter-spacing:-.3px}
+.cp-btn-vote:active{transform:scale(.97)}
 .cp-btn-skip{width:100%;padding:10px;background:none;border:none;color:#BBB;font-size:12px;cursor:pointer;font-family:'Pretendard'}
-@keyframes cpPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 </style>
-<div class="cp-overlay" id="couponOverlay" onclick="closeCoupon()"></div>
-<div class="cp-sheet" id="couponSheet">
+
+<div class="cp-overlay" id="cpOverlay" onclick="closeCoupon()"></div>
+<div class="cp-popup" id="cpPopup">
   <div class="cp-handle"></div>
   <div class="cp-hero">
-    <div class="cp-icon">🧄</div>
-    <div class="cp-title">나마늘을 위한 깜짝 선물</div>
-    <div class="cp-sub">Garlic이 준비한 특별 쿠폰이에요</div>
+    <span class="cp-fire">🔥</span>
+    <div class="cp-title"><em>불사조기사단</em>에<br>투표해주세요!</div>
+    <div class="cp-sub">PP1K 사내 아이디어 경진대회</div>
   </div>
-  <div class="cp-coupon">
-    <div class="cp-amount">30%<span>전 카테고리 · 최대 5만원 할인</span></div>
-    <div class="cp-divider"></div>
-    <div class="cp-vote">
-      <div class="cp-vote-badge">🔥 PP1K 사내 경진대회</div>
-      <div class="cp-vote-text"><em>불사조기사단</em>에 투표해주세요!</div>
+  <div class="cp-body">
+    <div class="cp-card">
+      <div class="cp-team"><span class="cp-team-fire">🔥</span> 불사조기사단 <span class="cp-team-fire">🧄</span></div>
+      <div class="cp-desc">
+        G마켓을 <strong>Garlic</strong>으로 리브랜딩하는<br>
+        대한민국 이커머스의 새로운 도전!<br>
+        <strong>"마늘 먹고 사람 될게요"</strong>
+      </div>
+      <div class="cp-coupon-tag">🧄 투표하면 30% 쿠폰 증정</div>
     </div>
   </div>
   <div class="cp-actions">
-    <button class="cp-btn-primary" onclick="closeCoupon()">쿠폰 받기</button>
-    <button class="cp-btn-skip" onclick="closeCoupon()">다음에 받을게요</button>
+    <button class="cp-btn-vote" onclick="closeCoupon()">불사조기사단 투표하기 🔥</button>
+    <button class="cp-btn-skip" onclick="closeCoupon()">다음에 할게요</button>
   </div>
 </div>
+
 <script>
 function showCoupon(){
-  document.getElementById('couponOverlay').style.display='block';
-  document.getElementById('couponSheet').style.display='block';
+  var overlay=document.getElementById('cpOverlay');
+  var popup=document.getElementById('cpPopup');
+  overlay.style.display='block';
+  popup.style.display='block';
   setTimeout(function(){
-    document.getElementById('couponOverlay').style.opacity='1';
-    document.getElementById('couponSheet').style.transform='translateY(0)';
+    overlay.style.opacity='1';
+    if(window.innerWidth>=768){
+      popup.classList.add('show');
+    }else{
+      popup.style.transform='translateY(0)';
+    }
   },50);
 }
 function closeCoupon(){
-  document.getElementById('couponOverlay').style.opacity='0';
-  document.getElementById('couponSheet').style.transform='translateY(100%)';
+  var overlay=document.getElementById('cpOverlay');
+  var popup=document.getElementById('cpPopup');
+  overlay.style.opacity='0';
+  if(window.innerWidth>=768){
+    popup.classList.remove('show');
+  }else{
+    popup.style.transform='translateY(100%)';
+  }
   setTimeout(function(){
-    document.getElementById('couponOverlay').style.display='none';
-    document.getElementById('couponSheet').style.display='none';
+    overlay.style.display='none';
+    popup.style.display='none';
   },400);
 }
-if(Math.random()<0.1){setTimeout(showCoupon,2500);}
+setTimeout(showCoupon,2000);
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js")}</script>
 </body>
