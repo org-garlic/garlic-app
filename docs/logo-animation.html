@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GARLIC — Logo Animation</title>
+<link rel="icon" type="image/png" href="../reference/G_Logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFFADC;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+
+.stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px}
+
+.g-icon{position:relative;width:120px;height:120px;animation:gFloat 3s ease-in-out infinite}
+@keyframes gFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.word{display:flex;gap:2px;height:60px;position:relative}
+.letter{
+  font-family:'Bagel Fat One',cursive;
+  font-size:56px;
+  line-height:1;
+  opacity:0;
+  transform:translateY(-40px) scale(0);
+  display:inline-block;
+}
+.letter.drop{animation:letterDrop .6s cubic-bezier(.34,1.56,.64,1) forwards}
+.letter:nth-child(1){color:#98CD00}
+.letter:nth-child(2){color:#A4DD00}
+.letter:nth-child(3){color:#B6F500}
+.letter:nth-child(4){color:#A4DD00}
+.letter:nth-child(5){color:#98CD00}
+.letter:nth-child(6){color:#FF6B9D}
+
+@keyframes letterDrop{
+  0%{opacity:0;transform:translateY(-60px) scale(0) rotate(-20deg)}
+  40%{opacity:1;transform:translateY(8px) scale(1.15) rotate(3deg)}
+  60%{transform:translateY(-4px) scale(.95) rotate(-1deg)}
+  80%{transform:translateY(2px) scale(1.02) rotate(0)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+.letter.drop::after{
+  content:'';position:absolute;bottom:-4px;left:50%;
+  width:0;height:2px;background:currentColor;border-radius:1px;
+  transform:translateX(-50%);animation:landLine .3s .5s ease-out forwards;opacity:.3;
+}
+@keyframes landLine{0%{width:0;opacity:.5}100%{width:80%;opacity:0}}
+
+.slogan{font-family:'Bagel Fat One',cursive;font-size:14px;color:#A0AD78;letter-spacing:2px;opacity:0;transform:translateY(10px)}
+.slogan.show{animation:sloganIn .8s ease-out forwards}
+@keyframes sloganIn{to{opacity:1;transform:translateY(0)}}
+
+.particles{position:absolute;inset:0;pointer-events:none;z-index:-1}
+.particle{position:absolute;border-radius:50%;opacity:0}
+.particle.burst{animation:particleBurst .8s ease-out forwards}
+@keyframes particleBurst{0%{opacity:.8;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0)}}
+
+.sparkle{position:absolute;width:6px;height:6px;opacity:0}
+.sparkle.pop{animation:sparklePop .6s ease-out forwards}
+@keyframes sparklePop{0%{opacity:0;transform:scale(0) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(90deg)}100%{opacity:0;transform:scale(0) rotate(180deg)}}
+
+.hint{position:fixed;bottom:32px;font-family:'Bagel Fat One',cursive;font-size:12px;color:#D0D8B8;letter-spacing:1px;animation:hintPulse 2s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{opacity:.4}50%{opacity:.8}}
+</style>
+</head>
+<body onclick="replay()">
+
+<div class="stage" id="stage">
+  <div class="g-icon" id="gIcon">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <defs><linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#B6F500"/><stop offset="100%" stop-color="#98CD00"/></linearGradient><filter id="gs"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#98CD00" flood-opacity=".25"/></filter></defs>
+      <path d="M60 108c-26 0-42-18-42-44 0-26 18-46 44-46 14 0 24 4 30 10l-12 14c-4-4-10-6-17-6-16 0-26 14-26 28 0 16 10 26 26 26 8 0 14-2 18-6V68H64v-16h30v38c-8 10-20 18-34 18z" fill="url(#gg)" filter="url(#gs)"/>
+      <path d="M58 22c-2-10 4-18 4-18s6 8 4 18" fill="#B6F500"/>
+      <path d="M64 22c2-10-4-18-4-18s-6 8-4 18" fill="#98CD00"/>
+    </svg>
+  </div>
+  <div class="word" id="word">
+    <span class="letter">G</span>
+    <span class="letter">A</span>
+    <span class="letter">R</span>
+    <span class="letter">L</span>
+    <span class="letter">I</span>
+    <span class="letter">C</span>
+  </div>
+  <div class="slogan" id="slogan">나마늘 위한 마켓</div>
+  <div class="particles" id="particles"></div>
+</div>
+
+<div class="hint">화면을 클릭하면 다시 재생됩니다</div>
+
+<script>
+var letters=document.querySelectorAll('.letter');
+var slogan=document.getElementById('slogan');
+var particles=document.getElementById('particles');
+var gIcon=document.getElementById('gIcon');
+var colors=['#B6F500','#A4DD00','#98CD00','#FF6B9D','#FFB8D0','#E8FFB0'];
+
+function play(){
+  letters.forEach(function(l){l.classList.remove('drop');l.style.opacity='0';l.style.transform='translateY(-40px) scale(0)'});
+  slogan.classList.remove('show');
+  particles.innerHTML='';
+  gIcon.style.animation='none';gIcon.offsetHeight;gIcon.style.animation='gFloat 3s ease-in-out infinite';
+
+  letters.forEach(function(l,i){
+    setTimeout(function(){
+      l.classList.add('drop');
+      setTimeout(function(){spawnParticles(l,6)},350);
+      setTimeout(function(){spawnSparkles(l,3)},400);
+    },300+i*120);
+  });
+  setTimeout(function(){slogan.classList.add('show')},300+6*120+400);
+}
+
+function spawnParticles(el,count){
+  var rect=el.getBoundingClientRect();
+  var sr=document.getElementById('stage').getBoundingClientRect();
+  for(var i=0;i<count;i++){
+    var p=document.createElement('div');p.className='particle';
+    var size=3+Math.random()*5;
+    var tx=(Math.random()-.5)*60;var ty=-(10+Math.random()*30);
+    p.style.cssText='width:'+size+'px;height:'+size+'px;background:'+colors[Math.floor(Math.random()*colors.length)]+';left:'+(rect.left-sr.left+rect.width/2)+'px;top:'+(rect.top-sr.top+rect.height-4)+'px;--tx:'+tx+'px;--ty:'+ty+'px';
+    particles.appendChild(p);
+    requestAnimationFrame(function(){p.classList.add('burst')});
+    (function(el){setTimeout(function(){el.remove()},900)})(p);
+  }
+}
+
+function spawnSparkles(el,count){
+  var rect=el.getBoundingClientRect();
+  var sr=document.getElementById('stage').getBoundingClientRect();
+  for(var i=0;i<count;i++){
+    var s=document.createElement('div');s.className='sparkle';
+    var x=rect.left-sr.left+Math.random()*rect.width;
+    var y=rect.top-sr.top+Math.random()*rect.height*.6;
+    s.style.cssText='left:'+x+'px;top:'+y+'px';
+    s.innerHTML='<svg width="8" height="8" viewBox="0 0 8 8"><path d="M4 0L4.8 3.2 8 4 4.8 4.8 4 8 3.2 4.8 0 4 3.2 3.2z" fill="'+colors[Math.floor(Math.random()*colors.length)]+'"/></svg>';
+    particles.appendChild(s);
+    (function(el,d){setTimeout(function(){el.classList.add('pop');setTimeout(function(){el.remove()},700)},d)})(s,i*100);
+  }
+}
+
+function replay(){play()}
+setTimeout(play,500);
+</script>
+</body>
+</html>
