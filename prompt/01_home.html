@@ -730,7 +730,8 @@ setTimeout(showCoupon,2000);
 
 function voteEffect(){
   var btn=document.querySelector('.cp-btn-vote');
-  btn.textContent='\uD83C\uDF89 투표 완료! 감사합니다!';
+  btn.textContent='🎉 투표 완료!';
+  btn.style.whiteSpace='nowrap';
   btn.style.background='linear-gradient(135deg,var(--accent-500),var(--secondary-500))';
   btn.style.pointerEvents='none';
 
